@@ -1,23 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Posts on Example Site</title>
+        <title>Posts on 木木龙的个人博客</title>
         <link>https://example.com/post/</link>
-        <description>Recent content in Posts on Example Site</description>
+        <description>Recent content in Posts on 木木龙的个人博客</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Fri, 03 Mar 2023 23:28:46 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>My_first_blog</title>
-        <link>https://example.com/p/my_first_blog/</link>
-        <pubDate>Fri, 03 Mar 2023 23:28:46 +0800</pubDate>
-        
-        <guid>https://example.com/p/my_first_blog/</guid>
-        <description>&lt;h1 id=&#34;hello-world&#34;&gt;Hello World&lt;/h1&gt;
-&lt;p&gt;这是我的第一篇&lt;strong&gt;博客&lt;/strong&gt;
-&lt;a class=&#34;link&#34; href=&#34;github.com&#34; &gt;GitHub&lt;/a&gt;&lt;/p&gt;
-</description>
-        </item>
-        <item>
+        <lastBuildDate>Mon, 11 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Markdown Syntax Guide</title>
         <link>https://example.com/p/markdown-syntax-guide/</link>
         <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
