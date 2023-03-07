@@ -28,7 +28,7 @@
         <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
         
         <guid>https://example.com/categories/test/</guid>
-        <description>&lt;img src="https://example.com/categories/test/hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg" alt="Featured image of post Test" /&gt;</description>
+        <description>&lt;img src="https://example.com/categories/test/TestCategory.jpg" alt="Featured image of post Test" /&gt;</description>
         </item>
         <item>
         <title>Test with whitespaces</title>
