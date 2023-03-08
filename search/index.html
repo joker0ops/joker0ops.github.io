@@ -14,7 +14,35 @@
 <meta name="twitter:title" content="搜索">
 <meta name="twitter:description" content=""><link rel="alternate" type="application/json" href="https://joker0ops.github.io/search/index.json">
     <link rel="shortcut icon" href="/favicon3.ico" />
-<link rel="preload" href="https://joker0ops.github.io/search/index.json" as="fetch" crossorigin="anonymous">
+
+<script charset="utf-8"  src="https://cdn.jsdelivr.net/npm/live2d-widget@3.1.4/lib/L2Dwidget.min.js"></script>
+<script>
+    L2Dwidget.init({
+        model: {
+            scale: 1,
+            hHeadPos: 0.5,
+            vHeadPos: 0.618,
+            jsonPath: 'https://cdn.jsdelivr.net/gh/cn-night-ray/live2d-widget-models@latest/packages/live2d-widget-model-shizuku/assets/shizuku.model.json',       
+        },
+        display: {
+            superSample: 1,     
+            width: 240,         
+            height: 600,        
+            position: 'right',   
+            hOffset: 70,         
+            vOffset: -110,         
+        },
+        mobile: {
+            show: true,         
+            scale: 1,           
+            motion: true,       
+        },
+        react: {
+            opacityDefault: 1,  
+            opacityOnHover: 1,  
+        },
+     });
+</script><link rel="preload" href="https://joker0ops.github.io/search/index.json" as="fetch" crossorigin="anonymous">
     </head>
     <body class="template-search">
     <script>
@@ -327,7 +355,7 @@
     function t(){
         var t=e("script"),o=t.length,i=t[o-1];
         return{
-            l:o,z:n(i,"zIndex",-1),o:n(i,"opacity",.7),c:n(i,"color","0,0,255"),n:n(i,"count",200)
+            l:o,z:n(i,"zIndex",-1),o:n(i,"opacity",.7),c:n(i,"color","0,0,0"),n:n(i,"count",289)
         }
     }
     function o(){
