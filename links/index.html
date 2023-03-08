@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us" dir="ltr">
+<html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='To use this feature, add links section to frontmatter.
 This page&amp;rsquo;s frontmatter:
@@ -135,7 +135,7 @@ This page&amp;rsquo;s frontmatter:
         
         
         <li >
-            <a href='/%E5%85%B3%E4%BA%8E%E6%88%91/' >
+            <a href='/%E4%BB%8B%E7%BB%8D/' >
                 
                 
                 
@@ -148,7 +148,7 @@ This page&amp;rsquo;s frontmatter:
 
 
                 
-                <span>关于我</span>
+                <span>介绍</span>
             </a>
         </li>
         
@@ -417,7 +417,7 @@ This page&amp;rsquo;s frontmatter:
     <section class="copyright">
         &copy; 
         
-            2020 - 
+            2022 - 
         
         2023 木木龙的个人博客
     </section>
@@ -524,6 +524,25 @@ This page&amp;rsquo;s frontmatter:
 
         document.head.appendChild(customFont);
     }());
+</script>
+
+<script
+    src="https://cdn.jsdelivr.net/gh/zhixuan2333/gh-blog@v0.1.0/js/nprogress.min.js"
+    integrity="sha384-bHDlAEUFxsRI7JfULv3DTpL2IXbbgn4JHQJibgo5iiXSK6Iu8muwqHANhun74Cqg"
+    crossorigin="anonymous"
+></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/zhixuan2333/gh-blog@v0.1.0/css/nprogress.css"
+    integrity="sha384-KJyhr2syt5+4M9Pz5dipCvTrtvOmLk/olWVdfhAp858UCa64Ia5GFpTN7+G4BWpE"
+    crossorigin="anonymous"
+/>
+<script>
+    NProgress.start();
+    document.addEventListener("readystatechange", () => {
+        if (document.readyState === "interactive") NProgress.inc(0.8);
+        if (document.readyState === "complete") NProgress.done();
+    });
 </script>
 
     </body>
