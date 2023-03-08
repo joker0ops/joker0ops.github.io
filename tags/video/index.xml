@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>video on 木木龙的个人博客</title>
-        <link>https://example.com/tags/video/</link>
+        <link>https://joker0ops.github.io/tags/video/</link>
         <description>Recent content in video on 木木龙的个人博客</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Sun, 10 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/tags/video/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 10 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://joker0ops.github.io/tags/video/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Rich Content</title>
-        <link>https://example.com/p/rich-content/</link>
+        <link>https://joker0ops.github.io/p/rich-content/</link>
         <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/p/rich-content/</guid>
-        <description>&lt;img src="https://example.com/p/rich-content/matt.jpg" alt="Featured image of post Rich Content" /&gt;&lt;p&gt;Hugo ships with several &lt;a class=&#34;link&#34; href=&#34;https://gohugo.io/content-management/shortcodes/#use-hugo-s-built-in-shortcodes&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+        <guid>https://joker0ops.github.io/p/rich-content/</guid>
+        <description>&lt;img src="https://joker0ops.github.io/p/rich-content/matt.jpg" alt="Featured image of post Rich Content" /&gt;&lt;p&gt;Hugo ships with several &lt;a class=&#34;link&#34; href=&#34;https://gohugo.io/content-management/shortcodes/#use-hugo-s-built-in-shortcodes&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Built-in Shortcodes&lt;/a&gt; for rich content, along with a &lt;a class=&#34;link&#34; href=&#34;https://gohugo.io/about/hugo-and-gdpr/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Privacy Config&lt;/a&gt; and a set of Simple Shortcodes that enable static and no-JS versions of various social media embeds.&lt;/p&gt;
 &lt;h2 id=&#34;bilibilibi-shortcode&#34;&gt;bilibilibi Shortcode&lt;/h2&gt;

@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Categories on 木木龙的个人博客</title>
-        <link>https://example.com/categories/</link>
+        <link>https://joker0ops.github.io/categories/</link>
         <description>Recent content in Categories on 木木龙的个人博客</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Mon, 11 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 11 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://joker0ops.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>语法</title>
-        <link>https://example.com/categories/%E8%AF%AD%E6%B3%95/</link>
+        <link>https://joker0ops.github.io/categories/%E8%AF%AD%E6%B3%95/</link>
         <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/categories/%E8%AF%AD%E6%B3%95/</guid>
+        <guid>https://joker0ops.github.io/categories/%E8%AF%AD%E6%B3%95/</guid>
         <description></description>
         </item>
         <item>
         <title>主题</title>
-        <link>https://example.com/categories/%E4%B8%BB%E9%A2%98/</link>
+        <link>https://joker0ops.github.io/categories/%E4%B8%BB%E9%A2%98/</link>
         <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/categories/%E4%B8%BB%E9%A2%98/</guid>
+        <guid>https://joker0ops.github.io/categories/%E4%B8%BB%E9%A2%98/</guid>
         <description></description>
         </item>
         
