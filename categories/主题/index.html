@@ -13,7 +13,7 @@
 <meta property='og:type' content='website'><meta property='og:updated_time' content=' 2020-10-09T00:00:00&#43;00:00 '/>
 <meta name="twitter:title" content="Category: 主题 - 木木龙的个人博客">
 <meta name="twitter:description" content="这是一个博客"><link rel="alternate" type="application/rss&#43;xml" href="https://joker0ops.github.io/categories/%E4%B8%BB%E9%A2%98/index.xml">
-    <link rel="shortcut icon" href="/favicon3.ico" />
+    <link rel="shortcut icon" href="/favicon.ico" />
 
 <script charset="utf-8"  src="https://cdn.jsdelivr.net/npm/live2d-widget@3.1.4/lib/L2Dwidget.min.js"></script>
 <script>
@@ -33,16 +33,36 @@
             vOffset: -110,         
         },
         mobile: {
-            show: true,         
+            show: false,         
             scale: 1,           
             motion: true,       
         },
         react: {
-            opacityDefault: 1,  
-            opacityOnHover: 1,  
+            opacityDefault: 1.0,  
+            opacityOnHover: 0.3  
         },
      });
 </script>
+
+
+
+
+
+
+<script id="c_n_script" src="https://blog-static.cnblogs.com/files/hxun/canvas-nest.js" color="0,0,0" opacity="4" count="50" zindex="-2"></script>
+<script src="https://files.cnblogs.com/files/ogurayui/waifu-tips.js" defer=""></script>
+
+<script type="text/javascript" charset="utf-8" async="" src="https://cdn.jsdelivr.net/npm/live2d-widget@3.0.4/lib/L2Dwidget.min.js" defer=""></script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" defer=""></script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-ui-dist@1.12.1/jquery-ui.min.js" defer=""></script>
+<link rel="stylesheet" type="text/css" href="https://live2d-cdn.fghrsh.net/assets/1.4.2/waifu.css">
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js" defer=""></script>
+<script src="https://live2d-cdn.fghrsh.net/assets/1.4.2/waifu-tips.min.js" defer=""></script>
+<script src="https://live2d-cdn.fghrsh.net/assets/1.4.2/live2d.min.js" defer=""></script>
+
+
     </head>
     <body class="">
     <script>
@@ -565,5 +585,22 @@
     u=s.concat([y]),
     setTimeout(function(){i()},100)
 }();</script>
+
+
+<style type="text/css">
+    .fireworks {
+        position: fixed;
+        pointer-events: none;
+        top: 0;
+        left: 0;
+        height: 100%;
+    }
+</style>
+<canvas class="fireworks"></canvas>
+<script src="./js/anime.min.js"></script>
+<script src="./js/fireworks.js"></script>
+<script>
+    fireworks.setCanvasSize();
+</script>
     </body>
 </html>
