@@ -10,46 +10,14 @@
 <meta property='og:description' content='这是一个博客'>
 <meta property='og:url' content='https://joker0ops.github.io/tags/markdown/'>
 <meta property='og:site_name' content='木木龙的个人博客'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2023-03-25T10:32:54&#43;08:00 '/>
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2023-03-25T18:07:32&#43;08:00 '/>
 <meta name="twitter:title" content="Tag: markdown - 木木龙的个人博客">
 <meta name="twitter:description" content="这是一个博客"><link rel="alternate" type="application/rss&#43;xml" href="https://joker0ops.github.io/tags/markdown/index.xml">
     <link rel="shortcut icon" href="/favicon.ico" />
 
-<script charset="utf-8"  src="https://cdn.jsdelivr.net/npm/live2d-widget@3.1.4/lib/L2Dwidget.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/waifu.min.css" />
 
-<style>
-    #live2d-widget{
-        opacity: 0.7 !important
-    }
-</style>
 
-<script>
-    L2Dwidget.init({
-        model: {
-            scale: 1,
-            hHeadPos: 0.5,
-            vHeadPos: 0.618,
-            jsonPath: 'https://cdn.jsdelivr.net/gh/cn-night-ray/live2d-widget-models@latest/packages/live2d-widget-model-shizuku/assets/shizuku.model.json',       
-        },
-        display: {
-            superSample: 1,     
-            width: 240,         
-            height: 600,        
-            position: 'right',   
-            hOffset: 70,         
-            vOffset: -110,         
-        },
-        mobile: {
-            show: false,         
-            scale: 1,           
-            motion: true,       
-        },
-        react: {
-            opacityDefault: 0.7,  
-            opacityOnHover: 0.2  
-        },
-     });
-</script>
     </head>
     <body class="">
     <script>
@@ -321,6 +289,18 @@
                 技术
             </a>
         
+            <a href="/categories/c/" class="font_size_1">
+                C
+            </a>
+        
+            <a href="/categories/%E5%A4%8D%E8%AF%95/" class="font_size_1">
+                复试
+            </a>
+        
+            <a href="/categories/%E9%93%B6%E8%A1%8C%E6%8B%9B%E8%80%83/" class="font_size_1">
+                银行招考
+            </a>
+        
     </div>
 </section>
 
@@ -358,6 +338,10 @@
                 Git
             </a>
         
+            <a href="/tags/c/" class="font_size_1">
+                C
+            </a>
+        
             <a href="/tags/shortcodes/" class="font_size_1">
                 shortcodes
             </a>
@@ -380,6 +364,10 @@
         
             <a href="/tags/%E6%95%B0%E5%AD%A6%E8%A1%A8%E8%BE%BE/" class="font_size_1">
                 数学表达
+            </a>
+        
+            <a href="/tags/%E7%AE%97%E6%B3%95/" class="font_size_1">
+                算法
             </a>
         
             <a href="/tags/%E8%A1%A8%E6%83%85/" class="font_size_1">
@@ -640,5 +628,49 @@
     }
 </style>
 
+
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/jquery-ui.min.js"></script>
+    
+    <div class="waifu">
+        <div class="waifu-tips"></div>
+        <canvas id="live2d" class="live2d"></canvas>
+        <div class="waifu-tool">
+            <span class="fui-home"></span>
+            <span class="fui-chat"></span>
+            <span class="fui-eye"></span>
+            <span class="fui-user"></span>
+            <span class="fui-photo"></span>
+            <span class="fui-info-circle"></span>
+            <span class="fui-cross"></span>
+        </div>
+    </div>
+        
+    <script src="/js/waifu-tips.min.js"></script>
+    <script src="/js/live2d.min.js"></script>
+    <script type="text/javascript">
+         
+        live2d_settings['modelId'] = 1;                  
+        live2d_settings['modelTexturesId'] = 87;         
+        live2d_settings['modelStorage'] = true;         
+        live2d_settings['canCloseLive2d'] = true;       
+        live2d_settings['canTurnToHomePage'] = true;    
+        live2d_settings['waifuSize'] = '280x250';        
+        live2d_settings['waifuTipsSize'] = '250x70';    
+        live2d_settings['waifuFontSize'] = '12px';       
+        live2d_settings['waifuToolFont'] = '14px';       
+        live2d_settings['waifuToolLine'] = '20px';       
+        live2d_settings['waifuToolTop'] = '0px';       
+        live2d_settings['waifuMinWidth']        = '768px';      
+        live2d_settings['waifuEdgeSide']        = 'right:80';     
+        live2d_settings['waifuDraggable'] = 'axis-x';    
+        live2d_settings['waifuDraggableRevert'] = false;         
+        live2d_settings['homePageUrl'] = 'https://joker0ops.github.io';       
+         
+        initModel("/json/waifu-tips.json")
+    </script>
     </body>
 </html>

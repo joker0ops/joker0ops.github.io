@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>C on 木木龙的个人博客</title>
+        <link>https://joker0ops.github.io/categories/c/</link>
+        <description>Recent content in C on 木木龙的个人博客</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <lastBuildDate>Sat, 25 Mar 2023 18:07:32 +0800</lastBuildDate><atom:link href="https://joker0ops.github.io/categories/c/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>程序设计与算法</title>
+        <link>https://joker0ops.github.io/p/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%95/</link>
+        <pubDate>Sat, 25 Mar 2023 18:07:32 +0800</pubDate>
+        
+        <guid>https://joker0ops.github.io/p/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%95/</guid>
+        <description>&lt;h1 id=&#34;01-程序设计与算法&#34;&gt;01. 程序设计与算法&lt;/h1&gt;
+&lt;h2 id=&#34;程序初探&#34;&gt;程序初探&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/p/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%95/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%951.png&#34;
+	width=&#34;1478&#34;
+	height=&#34;792&#34;
+	srcset=&#34;https://joker0ops.github.io/p/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%95/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%951_hu1f07a8d1e2ed09298ba2d015697d0e3d_169717_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%95/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%951_hu1f07a8d1e2ed09298ba2d015697d0e3d_169717_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Alt&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;186&#34;
+		data-flex-basis=&#34;447px&#34;
+	
+&gt;
+&lt;img src=&#34;https://joker0ops.github.io/p/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%95/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%952.png&#34;
+	width=&#34;1334&#34;
+	height=&#34;658&#34;
+	srcset=&#34;https://joker0ops.github.io/p/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%95/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%952_hubdb20c8f131b5bd0399e8487cb748d68_113830_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%95/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%952_hubdb20c8f131b5bd0399e8487cb748d68_113830_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Alt&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;202&#34;
+		data-flex-basis=&#34;486px&#34;
+	
+&gt;
+&lt;img src=&#34;https://joker0ops.github.io/p/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%95/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%953.png&#34;
+	width=&#34;921&#34;
+	height=&#34;525&#34;
+	srcset=&#34;https://joker0ops.github.io/p/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%95/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%953_hub01c506aa88a1c83268b2ac7c93bf617_80649_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%95/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%953_hub01c506aa88a1c83268b2ac7c93bf617_80649_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Alt&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;175&#34;
+		data-flex-basis=&#34;421px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;c语言程序的结构&#34;&gt;C语言程序的结构&lt;/h2&gt;
+&lt;h2 id=&#34;c语言程序的执行步骤&#34;&gt;C语言程序的执行步骤&lt;/h2&gt;
+&lt;h2 id=&#34;程序设计的任务&#34;&gt;程序设计的任务&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;问题分析&lt;/li&gt;
+&lt;li&gt;算法设计&lt;/li&gt;
+&lt;li&gt;编写程序&lt;/li&gt;
+&lt;li&gt;对源程序进行编辑、编译和链接得到可执行程序&lt;/li&gt;
+&lt;li&gt;运行程序并分析结构&lt;/li&gt;
+&lt;li&gt;编写程序文档&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
