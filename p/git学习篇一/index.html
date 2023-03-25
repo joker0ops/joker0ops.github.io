@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Git基本介绍和用法'>
+<title>Git学习篇一</title>
+
+<link rel='canonical' href='https://joker0ops.github.io/p/git%E5%AD%A6%E4%B9%A0%E7%AF%87%E4%B8%80/'>
+
+<link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='Git学习篇一'>
+<meta property='og:description' content='Git基本介绍和用法'>
+<meta property='og:url' content='https://joker0ops.github.io/p/git%E5%AD%A6%E4%B9%A0%E7%AF%87%E4%B8%80/'>
+<meta property='og:site_name' content='木木龙的个人博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Git' /><meta property='article:published_time' content='2023-03-25T10:32:40&#43;08:00'/><meta property='article:modified_time' content='2023-03-25T10:32:40&#43;08:00'/><meta property='og:image' content='https://joker0ops.github.io/img/1.jpg' />
+<meta name="twitter:title" content="Git学习篇一">
+<meta name="twitter:description" content="Git基本介绍和用法"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://joker0ops.github.io/img/1.jpg' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+<script charset="utf-8"  src="https://cdn.jsdelivr.net/npm/live2d-widget@3.1.4/lib/L2Dwidget.min.js"></script>
+
+<style>
+    #live2d-widget{
+        opacity: 0.7 !important
+    }
+</style>
+
+<script>
+    L2Dwidget.init({
+        model: {
+            scale: 1,
+            hHeadPos: 0.5,
+            vHeadPos: 0.618,
+            jsonPath: 'https://cdn.jsdelivr.net/gh/cn-night-ray/live2d-widget-models@latest/packages/live2d-widget-model-shizuku/assets/shizuku.model.json',       
+        },
+        display: {
+            superSample: 1,     
+            width: 240,         
+            height: 600,        
+            position: 'right',   
+            hOffset: 70,         
+            vOffset: -110,         
+        },
+        mobile: {
+            show: false,         
+            scale: 1,           
+            motion: true,       
+        },
+        react: {
+            opacityDefault: 0.7,  
+            opacityOnHover: 0.2  
+        },
+     });
+</script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "light");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar1_hue8bedaf8d20427a66ccb1bd11d58f13a_1599613_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">💘</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">木木龙的个人博客</a></h1>
+            <h2 class="site-description">Nothing but enthusiasm brightens up the endless years.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://gitee.com/joker0ops'
+                        target="_blank"
+                        title="Gitee"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1678116812474" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1957" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M512 1024C229.222 1024 0 794.778 0 512S229.222 0 512 0s512 229.222 512 512-229.222 512-512 512z m259.149-568.883h-290.74a25.293 25.293 0 0 0-25.292 25.293l-0.026 63.206c0 13.952 11.315 25.293 25.267 25.293h177.024c13.978 0 25.293 11.315 25.293 25.267v12.646a75.853 75.853 0 0 1-75.853 75.853h-240.23a25.293 25.293 0 0 1-25.267-25.293V417.203a75.853 75.853 0 0 1 75.827-75.853h353.946a25.293 25.293 0 0 0 25.267-25.292l0.077-63.207a25.293 25.293 0 0 0-25.268-25.293H417.152a189.62 189.62 0 0 0-189.62 189.645V771.15c0 13.977 11.316 25.293 25.294 25.293h372.94a170.65 170.65 0 0 0 170.65-170.65V480.384a25.293 25.293 0 0 0-25.293-25.267z" fill="#d81e06" p-id="1958"></path></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/joker0ops'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1678116953686" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5911" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M512 0C229.283787 0 0.142041 234.942803 0.142041 524.867683c0 231.829001 146.647305 428.553077 350.068189 497.952484 25.592898 4.819996 34.976961-11.38884 34.976961-25.294314 0-12.45521-0.469203-45.470049-0.725133-89.276559-142.381822 31.735193-172.453477-70.380469-172.453477-70.380469-23.246882-60.569859-56.816233-76.693384-56.816234-76.693385-46.493765-32.58829 3.540351-31.948468 3.540351-31.948467 51.356415 3.71097 78.356923 54.086324 78.356923 54.086324 45.683323 80.19108 119.817417 57.072162 148.993321 43.593236 4.649376-33.91059 17.915029-57.029508 32.50298-70.167195-113.675122-13.222997-233.151301-58.223843-233.1513-259.341366 0-57.285437 19.919806-104.163095 52.678715-140.846248-5.246544-13.265652-22.820334-66.626844 4.990615-138.884127 0 0 42.996069-14.076094 140.760939 53.787741 40.863327-11.644769 84.627183-17.445825 128.177764-17.6591 43.465272 0.213274 87.271782 6.014331 128.135109 17.6591 97.679561-67.906489 140.59032-53.787741 140.59032-53.787741 27.938914 72.257282 10.407779 125.618474 5.118579 138.884127 32.844219 36.683154 52.593405 83.560812 52.593405 140.846248 0 201.586726-119.646798 245.990404-233.663158 258.957473 18.341577 16.208835 34.721032 48.199958 34.721032 97.210357 0 70.167195-0.639822 126.7275-0.639823 143.960051 0 14.033439 9.213443 30.370239 35.190235 25.209005 203.250265-69.527373 349.769606-266.123484 349.769605-497.867175C1023.857959 234.942803 794.673558 0 512 0" fill="#13227a" p-id="5912"></path></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E4%BB%8B%E7%BB%8D/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>介绍</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#git">Git</a></li>
+    <li><a href="#git介绍">Git介绍</a></li>
+    <li><a href="#git的历史">Git的历史</a></li>
+    <li><a href="#git的工作机制和代码托管中心">Git的工作机制和代码托管中心</a></li>
+    <li><a href="#git常用命令">Git常用命令</a></li>
+    <li><a href="#注意">注意：</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/git%E5%AD%A6%E4%B9%A0%E7%AF%87%E4%B8%80/">
+                
+                    <img src="/img/1.jpg" loading="lazy" alt="Featured image of post Git学习篇一" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%8A%80%E6%9C%AF/" >
+                技术
+            </a>
+        
+            <a href="/categories/git/" >
+                Git
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/git%E5%AD%A6%E4%B9%A0%E7%AF%87%E4%B8%80/">Git学习篇一</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            Git基本介绍和用法
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Mar 25, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 3 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="01-git介绍">01. Git介绍</h1>
+<h2 id="git">Git</h2>
+<ul>
+<li>Git是一个免费开源的分布式版本控制系统，可以快速高效地处理从小型到大型的各种项目</li>
+<li>GitHub是Git的一个官方的代码托管中心，具有代码推送(PUSH)，代码拉取(PULL)，代码克隆(CLONE)，ssh免密登录等功能
+码云是国内GitHub，可以连接GitHub仓库</li>
+<li>GitLab是一个基于局域网的代码托管中心</li>
+</ul>
+<h2 id="git介绍">Git介绍</h2>
+<p>方便公司内部的团队协作，通过版本控制记录文件内容变化，记录文件修改的历史纪录
+版本控制工具分类：</p>
+<ol>
+<li>集中式版本控制工具：如CVS、SVN等，都有一个单一的集中管理的服务器，保存所有文件的修订版本，而协同工作的人们都通过客户端连接到这台服务器，取出最新的文件或者提交更新。可以看出该类工具存在中央服务器的单点故障问题。</li>
+<li>分布式版本控制工具：每个人在本地库中把代码仓库完整地克隆下来，每个人都可以在自己本地进行代码的版本控制，这样任何一处协同工作用的文件发生故障，事后都可以用其他客户端的本地仓库进行恢复。因为每个客户端的一次文件提取操作，实际上都是一次对整个仓库的完整备份。</li>
+</ol>
+<h2 id="git的历史">Git的历史</h2>
+<p>由Linux的创始人林纳斯使用C语言开发，一个月后Linux代码统一由Git管理</p>
+<h2 id="git的工作机制和代码托管中心">Git的工作机制和代码托管中心</h2>
+<p>在项目开发中，代码存放的目录称为工作区，工作区中的代码可以通过git add命令临时存储到本地仓库的暂存区（此时还可以修改或删除），暂存区中的文件可以通过git commit命令导入本地库形成历史版本，此时该历史版本已经生成且不可修改，用户可以登录本地库切换各个历史版本进行查看。
+代码托管中心是基于网络服务器的远程代码仓库，一般称为远程库，可以通过push操作将本地库中的代码导入到远程库，远程库分类：</p>
+<ul>
+<li>局域网：GitLab</li>
+<li>互联网：GitHub，Gitee</li>
+</ul>
+<h2 id="git常用命令">Git常用命令</h2>
+<p>git config &ndash;global user.name 用户名	设置用户签名<br>
+git config &ndash;global user.email  邮箱	    设置用户签名<br>
+git init 				                                                初始化本地仓库<br>
+git status				                                            查看本地库状态<br>
+git add 文件名				                                  添加到暂存区<br>
+git commit -m &ldquo;日志信息&rdquo; 文件名		     提交到本地库<br>
+git reflog/git log			                                 查看历史记录<br>
+git reset &ndash;hard 版本号			                      版本穿梭<br></p>
+<p>Git在首次安装时必须设置一下用户签名，用来区分文件的提交者，这里设置的用户签名和邮箱与将来登录GitHub和其他代码托管中心的账号没有任何关系。用户签名设置好之后会在Git的配置文件～/.gitconfig中显示。</p>
+<p>Git在设置好本地用户签名后，如需管理某一个项目，需要在项目目录下使用git init命令初始化形成一个本地库（在项目目录下生成.git目录）</p>
+<p>git status可以查看当前目录本地库的状态，标红的文件代表未添加到暂存区（未被追踪），标绿的代表已经添加到暂存区（已追踪）</p>
+<p>git add 文件名将文件添加到暂存区后，可以通过git rm &ndash;cached <file>将对文件的追踪从暂存区中删除</p>
+<p>提交本地库示例：git commit -m &ldquo;First submit&rdquo; Hello.txt，提交本地库之后可以使用git查看命令查看本地库的提交历史记录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP$ git log</span>
+</span></span><span class="line"><span class="cl"><span class="nx">commit</span> <span class="mi">6</span><span class="nx">c16e7171e29f124258b5c5bc421124056d98a72</span> <span class="p">(</span><span class="nx">HEAD</span> <span class="o">-&gt;</span> <span class="nx">master</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Author</span><span class="o">:</span> <span class="nx">Joker</span> <span class="o">&lt;</span><span class="mi">3099215660</span><span class="err">@</span><span class="nx">qq</span><span class="p">.</span><span class="nx">com</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Date</span><span class="o">:</span>   <span class="nx">Tue</span> <span class="nx">Jan</span> <span class="mi">3</span> <span class="mi">11</span><span class="o">:</span><span class="mi">34</span><span class="o">:</span><span class="mi">30</span> <span class="mi">2023</span> <span class="o">+</span><span class="mi">0800</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">My</span> <span class="nx">first</span> <span class="nx">submit</span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP$ git reflog</span>
+</span></span><span class="line"><span class="cl"><span class="mi">6</span><span class="nx">c16e71</span> <span class="p">(</span><span class="nx">HEAD</span> <span class="o">-&gt;</span> <span class="nx">master</span><span class="p">)</span> <span class="nx">HEAD</span><span class="err">@</span><span class="p">{</span><span class="mi">0</span><span class="p">}</span><span class="o">:</span> <span class="nx">commit</span> <span class="p">(</span><span class="nx">initial</span><span class="p">)</span><span class="o">:</span> <span class="nx">My</span> <span class="nx">first</span> <span class="nx">submit</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>下面的6c16e71是精简版版本号，上面commit后面是完整版版本号，HEAD -&gt; master代表当前工作指针指向master分支，当前分支指向版本号为6c16e71的文件。</p>
+<p>文件修改后，对文件的追踪会再次消失，需要我们再次提交到暂存区或本地库</p>
+<p>多次提交后，可以通过git reset &ndash;hard 版本号来切换版本（输入完命令，选中版本号，点击鼠标滚轮可以直接粘贴）</p>
+<h2 id="注意">注意：</h2>
+<p>.git文件夹的HEAD文件中通过refs/heads/master可以看到当前指针指向master分支
+通过.get/refs/heads文件夹中的master文件可以看到当前位于master分支的哪一个版本</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/git/">Git</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/git%E5%AD%A6%E4%B9%A0%E7%AF%87%E4%B8%89/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/img/3.png" loading="lazy" data-key="" data-hash="/img/3.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Git学习篇三</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/git%E5%AD%A6%E4%B9%A0%E7%AF%87%E4%BA%8C/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/img/2.png" loading="lazy" data-key="" data-hash="/img/2.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Git学习篇二</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="joker0ops/comments"
+        issue-term="pathname"
+        
+        label="none"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2022 - 
+        
+        2023 木木龙的个人博客
+    </section>
+    
+    <section class="powerby">
+        
+            热爱可抵岁月漫长，温柔可挡艰难时光 <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+
+<script
+    src="https://cdn.jsdelivr.net/gh/zhixuan2333/gh-blog@v0.1.0/js/nprogress.min.js"
+    integrity="sha384-bHDlAEUFxsRI7JfULv3DTpL2IXbbgn4JHQJibgo5iiXSK6Iu8muwqHANhun74Cqg"
+    crossorigin="anonymous"
+></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/zhixuan2333/gh-blog@v0.1.0/css/nprogress.css"
+    integrity="sha384-KJyhr2syt5+4M9Pz5dipCvTrtvOmLk/olWVdfhAp858UCa64Ia5GFpTN7+G4BWpE"
+    crossorigin="anonymous"
+/>
+<script>
+    NProgress.start();
+    document.addEventListener("readystatechange", () => {
+        if (document.readyState === "interactive") NProgress.inc(0.8);
+        if (document.readyState === "complete") NProgress.done();
+    });
+</script>
+
+
+<script>
+!function(){
+    function n(n,e,t){
+        return n.getAttribute(e)||t
+    }
+    function e(n){
+        return document.getElementsByTagName(n)
+    }
+    function t(){
+        var t=e("script"),o=t.length,i=t[o-1];
+        return{
+            l:o,z:n(i,"zIndex",-1),o:n(i,"opacity",.7),c:n(i,"color","0,0,0"),n:n(i,"count",289)
+        }
+    }
+    function o(){
+        a=m.width=window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth,
+        c=m.height=window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight
+    }
+    function i(){
+        r.clearRect(0,0,a,c);
+        var n,e,t,o,m,l;
+        s.forEach(function(i,x){
+        for(i.x+=i.xa,i.y+=i.ya,i.xa*=i.x>a||i.x<0?-1:1,i.ya*=i.y>c||i.y<0?-1:1,r.fillRect(i.x-.5,i.y-.5,1,1),e=x+1;e<u.length;e++)n=u[e],null!==n.x&&null!==n.y&&(o=i.x-n.x,m=i.y-n.y,l=o*o+m*m,l<n.max&&(n===y&&l>=n.max/2&&(i.x-=.03*o,i.y-=.03*m),t=(n.max-l)/n.max,r.beginPath(),r.lineWidth=t/2,r.strokeStyle="rgba("+d.c+","+(t+.2)+")",r.moveTo(i.x,i.y),r.lineTo(n.x,n.y),r.stroke()))}),
+        x(i)
+    }
+    var a,c,u,m=document.createElement("canvas"),
+    d=t(),l="c_n"+d.l,r=m.getContext("2d"),
+    x=window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||
+    function(n){
+    window.setTimeout(n,1e3/45)
+    },
+    w=Math.random,y={x:null,y:null,max:2e4};m.id=l,m.style.cssText="position:fixed;top:0;left:0;z-index:"+d.z+";opacity:"+d.o,e("body")[0].appendChild(m),o(),window.onresize=o,
+    window.onmousemove=function(n){
+        n=n||window.event,y.x=n.clientX,y.y=n.clientY
+    },
+    window.onmouseout=function(){
+        y.x=null,y.y=null
+    };
+    for(var s=[],f=0;d.n>f;f++){
+        var h=w()*a,g=w()*c,v=2*w()-1,p=2*w()-1;s.push({x:h,y:g,xa:v,ya:p,max:6e3})
+    }
+    u=s.concat([y]),
+    setTimeout(function(){i()},100)
+}();</script>
+
+
+<style type="text/css">
+    .fireworks {
+        position: fixed;
+        pointer-events: none;
+        top: 0;
+        left: 0;
+        height: 100%;
+    }
+</style>
+<canvas class="fireworks"></canvas>
+<script src="/js/anime.min.js"></script>
+<script src="/js/fireworks.js"></script>
+<script>
+    fireworks.setCanvasSize();
+</script>
+    </body>
+</html>

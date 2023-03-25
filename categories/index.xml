@@ -6,7 +6,23 @@
         <description>Recent content in Categories on 木木龙的个人博客</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Mon, 11 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://joker0ops.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 25 Mar 2023 10:32:54 +0800</lastBuildDate><atom:link href="https://joker0ops.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Git</title>
+        <link>https://joker0ops.github.io/categories/git/</link>
+        <pubDate>Sat, 25 Mar 2023 10:32:54 +0800</pubDate>
+        
+        <guid>https://joker0ops.github.io/categories/git/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>技术</title>
+        <link>https://joker0ops.github.io/categories/%E6%8A%80%E6%9C%AF/</link>
+        <pubDate>Sat, 25 Mar 2023 10:32:54 +0800</pubDate>
+        
+        <guid>https://joker0ops.github.io/categories/%E6%8A%80%E6%9C%AF/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>语法</title>
         <link>https://joker0ops.github.io/categories/%E8%AF%AD%E6%B3%95/</link>
         <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>

@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Git分支操作'>
+<title>Git学习篇二</title>
+
+<link rel='canonical' href='https://joker0ops.github.io/p/git%E5%AD%A6%E4%B9%A0%E7%AF%87%E4%BA%8C/'>
+
+<link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='Git学习篇二'>
+<meta property='og:description' content='Git分支操作'>
+<meta property='og:url' content='https://joker0ops.github.io/p/git%E5%AD%A6%E4%B9%A0%E7%AF%87%E4%BA%8C/'>
+<meta property='og:site_name' content='木木龙的个人博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Git' /><meta property='article:published_time' content='2023-03-25T10:32:47&#43;08:00'/><meta property='article:modified_time' content='2023-03-25T10:32:47&#43;08:00'/><meta property='og:image' content='https://joker0ops.github.io/img/2.png' />
+<meta name="twitter:title" content="Git学习篇二">
+<meta name="twitter:description" content="Git分支操作"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://joker0ops.github.io/img/2.png' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+<script charset="utf-8"  src="https://cdn.jsdelivr.net/npm/live2d-widget@3.1.4/lib/L2Dwidget.min.js"></script>
+
+<style>
+    #live2d-widget{
+        opacity: 0.7 !important
+    }
+</style>
+
+<script>
+    L2Dwidget.init({
+        model: {
+            scale: 1,
+            hHeadPos: 0.5,
+            vHeadPos: 0.618,
+            jsonPath: 'https://cdn.jsdelivr.net/gh/cn-night-ray/live2d-widget-models@latest/packages/live2d-widget-model-shizuku/assets/shizuku.model.json',       
+        },
+        display: {
+            superSample: 1,     
+            width: 240,         
+            height: 600,        
+            position: 'right',   
+            hOffset: 70,         
+            vOffset: -110,         
+        },
+        mobile: {
+            show: false,         
+            scale: 1,           
+            motion: true,       
+        },
+        react: {
+            opacityDefault: 0.7,  
+            opacityOnHover: 0.2  
+        },
+     });
+</script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "light");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar1_hue8bedaf8d20427a66ccb1bd11d58f13a_1599613_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">💘</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">木木龙的个人博客</a></h1>
+            <h2 class="site-description">Nothing but enthusiasm brightens up the endless years.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://gitee.com/joker0ops'
+                        target="_blank"
+                        title="Gitee"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1678116812474" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1957" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M512 1024C229.222 1024 0 794.778 0 512S229.222 0 512 0s512 229.222 512 512-229.222 512-512 512z m259.149-568.883h-290.74a25.293 25.293 0 0 0-25.292 25.293l-0.026 63.206c0 13.952 11.315 25.293 25.267 25.293h177.024c13.978 0 25.293 11.315 25.293 25.267v12.646a75.853 75.853 0 0 1-75.853 75.853h-240.23a25.293 25.293 0 0 1-25.267-25.293V417.203a75.853 75.853 0 0 1 75.827-75.853h353.946a25.293 25.293 0 0 0 25.267-25.292l0.077-63.207a25.293 25.293 0 0 0-25.268-25.293H417.152a189.62 189.62 0 0 0-189.62 189.645V771.15c0 13.977 11.316 25.293 25.294 25.293h372.94a170.65 170.65 0 0 0 170.65-170.65V480.384a25.293 25.293 0 0 0-25.293-25.267z" fill="#d81e06" p-id="1958"></path></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/joker0ops'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1678116953686" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5911" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M512 0C229.283787 0 0.142041 234.942803 0.142041 524.867683c0 231.829001 146.647305 428.553077 350.068189 497.952484 25.592898 4.819996 34.976961-11.38884 34.976961-25.294314 0-12.45521-0.469203-45.470049-0.725133-89.276559-142.381822 31.735193-172.453477-70.380469-172.453477-70.380469-23.246882-60.569859-56.816233-76.693384-56.816234-76.693385-46.493765-32.58829 3.540351-31.948468 3.540351-31.948467 51.356415 3.71097 78.356923 54.086324 78.356923 54.086324 45.683323 80.19108 119.817417 57.072162 148.993321 43.593236 4.649376-33.91059 17.915029-57.029508 32.50298-70.167195-113.675122-13.222997-233.151301-58.223843-233.1513-259.341366 0-57.285437 19.919806-104.163095 52.678715-140.846248-5.246544-13.265652-22.820334-66.626844 4.990615-138.884127 0 0 42.996069-14.076094 140.760939 53.787741 40.863327-11.644769 84.627183-17.445825 128.177764-17.6591 43.465272 0.213274 87.271782 6.014331 128.135109 17.6591 97.679561-67.906489 140.59032-53.787741 140.59032-53.787741 27.938914 72.257282 10.407779 125.618474 5.118579 138.884127 32.844219 36.683154 52.593405 83.560812 52.593405 140.846248 0 201.586726-119.646798 245.990404-233.663158 258.957473 18.341577 16.208835 34.721032 48.199958 34.721032 97.210357 0 70.167195-0.639822 126.7275-0.639823 143.960051 0 14.033439 9.213443 30.370239 35.190235 25.209005 203.250265-69.527373 349.769606-266.123484 349.769605-497.867175C1023.857959 234.942803 794.673558 0 512 0" fill="#13227a" p-id="5912"></path></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E4%BB%8B%E7%BB%8D/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>介绍</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#分支的概念">分支的概念</a></li>
+    <li><a href="#分支操作">分支操作</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/git%E5%AD%A6%E4%B9%A0%E7%AF%87%E4%BA%8C/">
+                
+                    <img src="/img/2.png" loading="lazy" alt="Featured image of post Git学习篇二" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%8A%80%E6%9C%AF/" >
+                技术
+            </a>
+        
+            <a href="/categories/git/" >
+                Git
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/git%E5%AD%A6%E4%B9%A0%E7%AF%87%E4%BA%8C/">Git学习篇二</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            Git分支操作
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Mar 25, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 4 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="02-git分支">02. Git分支</h1>
+<h2 id="分支的概念">分支的概念</h2>
+<p>有时在版本控制的过程中，我们需要同时推进多个任务，因此我们可以为每个任务创建单独的分支。这使得程序员可以将自己的工作从开发主线上分离出来，在开发自己的分支时不会影响主线分支的运行（分支底层也是指针应用）</p>
+<p><img src="/%e5%88%86%e6%94%af.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Alt"
+	
+	
+>
+<strong>图片介绍</strong></p>
+<ol>
+<li>每个圆点代表分支中的一个版本</li>
+<li>从图中可以看到，紧急修复分支、背景颜色更改分支、游戏分支都是从主分支中产生出来并且不会影响到主分支的进行，当次要分支结束任务后会合并到主分支</li>
+<li>在整个的开发过程中，主分支和其他分支都是同步进行的</li>
+</ol>
+<p><strong>分支的优点</strong></p>
+<ol>
+<li>可以同时并行开发多个功能，提高开发效率</li>
+<li>各个分支在开发的过程中，如果一个分支开发失败，不会对其他分支产生任何影响。失败的分支删除重新开始即可。</li>
+</ol>
+<h2 id="分支操作">分支操作</h2>
+<p><strong>查看分支</strong></p>
+<ol>
+<li>基本语法
+<br/>git branch -v</li>
+<li>案例实操</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP$ git branch -v</span>
+</span></span><span class="line"><span class="cl"><span class="o">*</span> <span class="nx">master</span> <span class="mi">8</span><span class="nx">af7820</span> <span class="nx">Second</span> <span class="nx">submit</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 代表该分支有两个版本
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>创建分支</strong></p>
+<ol>
+<li>基本语法
+<br/>git branch 分支名</li>
+<li>案例实操</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP$ git branch hotfix</span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP$ git branch -v</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">hotfix</span> <span class="mi">8</span><span class="nx">af7820</span> <span class="nx">Second</span> <span class="nx">submit</span>
+</span></span><span class="line"><span class="cl"><span class="o">*</span> <span class="nx">master</span> <span class="mi">8</span><span class="nx">af7820</span> <span class="nx">Second</span> <span class="nx">submit</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 创建了紧急修复分支且当前使用的是master分支
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>切换分支</strong></p>
+<ol>
+<li>基本语法
+<br/>git checkout 分支名</li>
+<li>案例实操</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP$ git checkout hotfix</span>
+</span></span><span class="line"><span class="cl"><span class="nx">切换到分支</span> <span class="s1">&#39;hotfix&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP$ git branch -v</span>
+</span></span><span class="line"><span class="cl"><span class="o">*</span> <span class="nx">hotfix</span> <span class="mi">8</span><span class="nx">af7820</span> <span class="nx">Second</span> <span class="nx">submit</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">master</span> <span class="mi">8</span><span class="nx">af7820</span> <span class="nx">Second</span> <span class="nx">submit</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>分支修改</strong></p>
+<ol>
+<li>基本语法
+<br/>切换分支后直接按照之前的流程修改提交即可
+<br/></li>
+<li>案例实操</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP$ git checkout hotfix </span>
+</span></span><span class="line"><span class="cl"><span class="nx">切换到分支</span> <span class="s1">&#39;hotfix&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP$ ls</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span><span class="p">.</span><span class="nx">txt</span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP$ vim Hello.txt </span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP$ git status</span>
+</span></span><span class="line"><span class="cl"><span class="nx">位于分支</span> <span class="nx">hotfix</span>
+</span></span><span class="line"><span class="cl"><span class="nx">尚未暂存以备提交的变更</span><span class="err">：</span>
+</span></span><span class="line"><span class="cl">  <span class="err">（</span><span class="nx">使用</span> <span class="s2">&#34;git add &lt;文件&gt;...&#34;</span> <span class="nx">更新要提交的内容</span><span class="err">）</span>
+</span></span><span class="line"><span class="cl">  <span class="err">（</span><span class="nx">使用</span> <span class="s2">&#34;git checkout -- &lt;文件&gt;...&#34;</span> <span class="nx">丢弃工作区的改动</span><span class="err">）</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">修改</span><span class="err">：</span>     <span class="nx">Hello</span><span class="p">.</span><span class="nx">txt</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">修改尚未加入提交</span><span class="err">（</span><span class="nx">使用</span> <span class="s2">&#34;git add&#34;</span> <span class="nx">和</span><span class="o">/</span><span class="nx">或</span> <span class="s2">&#34;git commit -a&#34;</span><span class="err">）</span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP$ git add Hello.txt </span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP$ git commit -m &#34;The hotfix-submit&#34; Hello.txt </span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">hotfix</span> <span class="mi">1</span><span class="nx">a7c417</span><span class="p">]</span> <span class="nx">The</span> <span class="nx">hotfix</span><span class="o">-</span><span class="nx">submit</span>
+</span></span><span class="line"><span class="cl"> <span class="mi">1</span> <span class="nx">file</span> <span class="nx">changed</span><span class="p">,</span> <span class="mi">1</span> <span class="nx">insertion</span><span class="p">(</span><span class="o">+</span><span class="p">),</span> <span class="mi">1</span> <span class="nx">deletion</span><span class="p">(</span><span class="o">-</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP$ cat Hello.txt</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span> <span class="nx">hotfix</span> <span class="nx">vim</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="mi">222</span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP$ git branch -v</span>
+</span></span><span class="line"><span class="cl"><span class="o">*</span> <span class="nx">hotfix</span> <span class="mi">1</span><span class="nx">a7c417</span> <span class="nx">The</span> <span class="nx">hotfix</span><span class="o">-</span><span class="nx">submit</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">master</span> <span class="mi">8</span><span class="nx">af7820</span> <span class="nx">Second</span> <span class="nx">submit</span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP$ git checkout master</span>
+</span></span><span class="line"><span class="cl"><span class="nx">切换到分支</span> <span class="s1">&#39;master&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP$ cat Hello.txt</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="mi">222</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 可以看出在hotfix分支上修改的文件在master分支中并没有发生变化
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>分支合并</strong></p>
+<ol>
+<li>基本语法
+<br/>(1) 正常合并：将分支B合并到分支A-&gt;切换到分支A，使用git merge B将分支B合并到分支A，进行正常合并需要保证分支B当前版本从分支A分离出来后的后续版本，并且分支A在分离节点后不再进行修改。
+<br/><img src="/%e6%ad%a3%e5%b8%b8%e5%90%88%e5%b9%b6.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Alt"
+	
+	
+>
+<br/>(2)冲突合并：分支B从分离版本分离出来后，分支A和分支B都进行了版本迭代，此时需要用户自行选择两个版本之间需要保留的部分。
+<br/><img src="/%e5%86%b2%e7%aa%81%e5%90%88%e5%b9%b6.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Alt"
+	
+	
+></li>
+<li>案例实操
+<br/>(1)正常合并</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP(*hotfix) $ git checkout master</span>
+</span></span><span class="line"><span class="cl"><span class="nx">切换到分支</span> <span class="s1">&#39;master&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP(*master) $ git merge hotfix </span>
+</span></span><span class="line"><span class="cl"><span class="nx">更新</span> <span class="mi">8</span><span class="nx">af7820</span><span class="p">..</span><span class="mi">1</span><span class="nx">a7c417</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Fast</span><span class="o">-</span><span class="nx">forward</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">Hello</span><span class="p">.</span><span class="nx">txt</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">+-</span>
+</span></span><span class="line"><span class="cl"> <span class="mi">1</span> <span class="nx">file</span> <span class="nx">changed</span><span class="p">,</span> <span class="mi">1</span> <span class="nx">insertion</span><span class="p">(</span><span class="o">+</span><span class="p">),</span> <span class="mi">1</span> <span class="nx">deletion</span><span class="p">(</span><span class="o">-</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> <span class="c1">// 表示一个文件被修改，一行新增一行删除
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP(*master) $ cat Hello.txt </span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span> <span class="nx">hotfix</span> <span class="nx">vim</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="mi">222</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>   (2)冲突合并</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP(*master) $ cat Hello.txt </span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span> <span class="nx">hotfix</span> <span class="nx">vim</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="mi">222</span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP(*master) $ git checkout hotfix </span>
+</span></span><span class="line"><span class="cl"><span class="nx">切换到分支</span> <span class="s1">&#39;hotfix&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP(*hotfix) $ cat Hello.txt </span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span> <span class="nx">hotfix</span> <span class="nx">vim</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="mi">222</span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP(*hotfix) $ vim Hello.txt </span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP(*hotfix) $ git status</span>
+</span></span><span class="line"><span class="cl"><span class="nx">位于分支</span> <span class="nx">hotfix</span>
+</span></span><span class="line"><span class="cl"><span class="nx">尚未暂存以备提交的变更</span><span class="err">：</span>
+</span></span><span class="line"><span class="cl">  <span class="err">（</span><span class="nx">使用</span> <span class="s2">&#34;git add &lt;文件&gt;...&#34;</span> <span class="nx">更新要提交的内容</span><span class="err">）</span>
+</span></span><span class="line"><span class="cl">  <span class="err">（</span><span class="nx">使用</span> <span class="s2">&#34;git checkout -- &lt;文件&gt;...&#34;</span> <span class="nx">丢弃工作区的改动</span><span class="err">）</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">修改</span><span class="err">：</span>     <span class="nx">Hello</span><span class="p">.</span><span class="nx">txt</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">修改尚未加入提交</span><span class="err">（</span><span class="nx">使用</span> <span class="s2">&#34;git add&#34;</span> <span class="nx">和</span><span class="o">/</span><span class="nx">或</span> <span class="s2">&#34;git commit -a&#34;</span><span class="err">）</span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP(*hotfix) $ git commit -m &#34;hotfix_submit2&#34; Hello.txt </span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">hotfix</span> <span class="nx">b25e7aa</span><span class="p">]</span> <span class="nx">hotfix_submit2</span>
+</span></span><span class="line"><span class="cl"> <span class="mi">1</span> <span class="nx">file</span> <span class="nx">changed</span><span class="p">,</span> <span class="mi">1</span> <span class="nx">insertion</span><span class="p">(</span><span class="o">+</span><span class="p">),</span> <span class="mi">1</span> <span class="nx">deletion</span><span class="p">(</span><span class="o">-</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP(*hotfix) $ git checkout master </span>
+</span></span><span class="line"><span class="cl"><span class="nx">切换到分支</span> <span class="s1">&#39;master&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP(*master) $ vim Hello.txt </span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP(*master) $ git status</span>
+</span></span><span class="line"><span class="cl"><span class="nx">位于分支</span> <span class="nx">master</span>
+</span></span><span class="line"><span class="cl"><span class="nx">尚未暂存以备提交的变更</span><span class="err">：</span>
+</span></span><span class="line"><span class="cl">  <span class="err">（</span><span class="nx">使用</span> <span class="s2">&#34;git add &lt;文件&gt;...&#34;</span> <span class="nx">更新要提交的内容</span><span class="err">）</span>
+</span></span><span class="line"><span class="cl">  <span class="err">（</span><span class="nx">使用</span> <span class="s2">&#34;git checkout -- &lt;文件&gt;...&#34;</span> <span class="nx">丢弃工作区的改动</span><span class="err">）</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">修改</span><span class="err">：</span>     <span class="nx">Hello</span><span class="p">.</span><span class="nx">txt</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">修改尚未加入提交</span><span class="err">（</span><span class="nx">使用</span> <span class="s2">&#34;git add&#34;</span> <span class="nx">和</span><span class="o">/</span><span class="nx">或</span> <span class="s2">&#34;git commit -a&#34;</span><span class="err">）</span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP(*master) $ git add Hello.txt </span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP(*master) $ git commit -m &#34;master_submit&#34; Hello.txt </span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">master</span> <span class="mi">63</span><span class="nx">b7f47</span><span class="p">]</span> <span class="nx">master_submit</span>
+</span></span><span class="line"><span class="cl"> <span class="mi">1</span> <span class="nx">file</span> <span class="nx">changed</span><span class="p">,</span> <span class="mi">1</span> <span class="nx">insertion</span><span class="p">(</span><span class="o">+</span><span class="p">),</span> <span class="mi">1</span> <span class="nx">deletion</span><span class="p">(</span><span class="o">-</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP(*master) $ git merge hotfix</span>
+</span></span><span class="line"><span class="cl"><span class="nx">自动合并</span> <span class="nx">Hello</span><span class="p">.</span><span class="nx">txt</span>
+</span></span><span class="line"><span class="cl"><span class="nx">冲突</span><span class="err">（</span><span class="nx">内容</span><span class="err">）：</span><span class="nx">合并冲突于</span> <span class="nx">Hello</span><span class="p">.</span><span class="nx">txt</span>
+</span></span><span class="line"><span class="cl"><span class="nx">自动合并失败</span><span class="err">，</span><span class="nx">修正冲突然后提交修正的结果</span><span class="err">。</span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP(*master) $ git status</span>
+</span></span><span class="line"><span class="cl"><span class="nx">位于分支</span> <span class="nx">master</span>
+</span></span><span class="line"><span class="cl"><span class="nx">您有尚未合并的路径</span><span class="err">。</span>
+</span></span><span class="line"><span class="cl">  <span class="err">（</span><span class="nx">解决冲突并运行</span> <span class="s2">&#34;git commit&#34;</span><span class="err">）</span>
+</span></span><span class="line"><span class="cl">  <span class="err">（</span><span class="nx">使用</span> <span class="s2">&#34;git merge --abort&#34;</span> <span class="nx">终止合并</span><span class="err">）</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">未合并的路径</span><span class="err">：</span>
+</span></span><span class="line"><span class="cl">  <span class="err">（</span><span class="nx">使用</span> <span class="s2">&#34;git add &lt;文件&gt;...&#34;</span> <span class="nx">标记解决方案</span><span class="err">）</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">双方修改</span><span class="err">：</span>   <span class="nx">Hello</span><span class="p">.</span><span class="nx">txt</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">修改尚未加入提交</span><span class="err">（</span><span class="nx">使用</span> <span class="s2">&#34;git add&#34;</span> <span class="nx">和</span><span class="o">/</span><span class="nx">或</span> <span class="s2">&#34;git commit -a&#34;</span><span class="err">）</span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP(*master) $ cat Hello.txt </span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span> <span class="nx">HEAD</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span> <span class="nx">hotfix</span> <span class="nx">vim</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span> <span class="nx">master</span> <span class="nx">vim</span>
+</span></span><span class="line"><span class="cl"><span class="o">=======</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span> <span class="nx">hotfix</span> <span class="nx">vim2</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> <span class="nx">hotfix</span>
+</span></span><span class="line"><span class="cl"><span class="mi">222</span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP(*master) $ vim Hello.txt </span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP(*master) $ git add Hello.txt </span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP(*master) $ git commit -m &#34;merge hot_fix&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">master</span> <span class="nx">e06d4d5</span><span class="p">]</span> <span class="nx">merge</span> <span class="nx">hot_fix</span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP(*master) $ git status</span>
+</span></span><span class="line"><span class="cl"><span class="nx">位于分支</span> <span class="nx">master</span>
+</span></span><span class="line"><span class="cl"><span class="nx">无文件要提交</span><span class="err">，</span><span class="nx">干净的工作区</span>
+</span></span><span class="line"><span class="cl"><span class="nx">joker</span><span class="err">@</span><span class="nx">joker</span><span class="o">-</span><span class="nx">virtual</span><span class="o">-</span><span class="nx">machine</span><span class="o">:~</span><span class="err">/Code/PHP(*master) $ cat Hello.txt </span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span> <span class="nx">hotfix</span> <span class="nx">vim</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!</span> <span class="nx">master</span> <span class="nx">vim</span>
+</span></span><span class="line"><span class="cl"><span class="mi">222</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/git/">Git</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/git%E5%AD%A6%E4%B9%A0%E7%AF%87%E4%B8%89/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/img/3.png" loading="lazy" data-key="" data-hash="/img/3.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Git学习篇三</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/git%E5%AD%A6%E4%B9%A0%E7%AF%87%E4%B8%80/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/img/1.jpg" loading="lazy" data-key="" data-hash="/img/1.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Git学习篇一</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="joker0ops/comments"
+        issue-term="pathname"
+        
+        label="none"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2022 - 
+        
+        2023 木木龙的个人博客
+    </section>
+    
+    <section class="powerby">
+        
+            热爱可抵岁月漫长，温柔可挡艰难时光 <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+
+<script
+    src="https://cdn.jsdelivr.net/gh/zhixuan2333/gh-blog@v0.1.0/js/nprogress.min.js"
+    integrity="sha384-bHDlAEUFxsRI7JfULv3DTpL2IXbbgn4JHQJibgo5iiXSK6Iu8muwqHANhun74Cqg"
+    crossorigin="anonymous"
+></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/zhixuan2333/gh-blog@v0.1.0/css/nprogress.css"
+    integrity="sha384-KJyhr2syt5+4M9Pz5dipCvTrtvOmLk/olWVdfhAp858UCa64Ia5GFpTN7+G4BWpE"
+    crossorigin="anonymous"
+/>
+<script>
+    NProgress.start();
+    document.addEventListener("readystatechange", () => {
+        if (document.readyState === "interactive") NProgress.inc(0.8);
+        if (document.readyState === "complete") NProgress.done();
+    });
+</script>
+
+
+<script>
+!function(){
+    function n(n,e,t){
+        return n.getAttribute(e)||t
+    }
+    function e(n){
+        return document.getElementsByTagName(n)
+    }
+    function t(){
+        var t=e("script"),o=t.length,i=t[o-1];
+        return{
+            l:o,z:n(i,"zIndex",-1),o:n(i,"opacity",.7),c:n(i,"color","0,0,0"),n:n(i,"count",289)
+        }
+    }
+    function o(){
+        a=m.width=window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth,
+        c=m.height=window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight
+    }
+    function i(){
+        r.clearRect(0,0,a,c);
+        var n,e,t,o,m,l;
+        s.forEach(function(i,x){
+        for(i.x+=i.xa,i.y+=i.ya,i.xa*=i.x>a||i.x<0?-1:1,i.ya*=i.y>c||i.y<0?-1:1,r.fillRect(i.x-.5,i.y-.5,1,1),e=x+1;e<u.length;e++)n=u[e],null!==n.x&&null!==n.y&&(o=i.x-n.x,m=i.y-n.y,l=o*o+m*m,l<n.max&&(n===y&&l>=n.max/2&&(i.x-=.03*o,i.y-=.03*m),t=(n.max-l)/n.max,r.beginPath(),r.lineWidth=t/2,r.strokeStyle="rgba("+d.c+","+(t+.2)+")",r.moveTo(i.x,i.y),r.lineTo(n.x,n.y),r.stroke()))}),
+        x(i)
+    }
+    var a,c,u,m=document.createElement("canvas"),
+    d=t(),l="c_n"+d.l,r=m.getContext("2d"),
+    x=window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||
+    function(n){
+    window.setTimeout(n,1e3/45)
+    },
+    w=Math.random,y={x:null,y:null,max:2e4};m.id=l,m.style.cssText="position:fixed;top:0;left:0;z-index:"+d.z+";opacity:"+d.o,e("body")[0].appendChild(m),o(),window.onresize=o,
+    window.onmousemove=function(n){
+        n=n||window.event,y.x=n.clientX,y.y=n.clientY
+    },
+    window.onmouseout=function(){
+        y.x=null,y.y=null
+    };
+    for(var s=[],f=0;d.n>f;f++){
+        var h=w()*a,g=w()*c,v=2*w()-1,p=2*w()-1;s.push({x:h,y:g,xa:v,ya:p,max:6e3})
+    }
+    u=s.concat([y]),
+    setTimeout(function(){i()},100)
+}();</script>
+
+
+<style type="text/css">
+    .fireworks {
+        position: fixed;
+        pointer-events: none;
+        top: 0;
+        left: 0;
+        height: 100%;
+    }
+</style>
+<canvas class="fireworks"></canvas>
+<script src="/js/anime.min.js"></script>
+<script src="/js/fireworks.js"></script>
+<script>
+    fireworks.setCanvasSize();
+</script>
+    </body>
+</html>

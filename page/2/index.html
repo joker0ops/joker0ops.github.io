@@ -5,17 +5,52 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='这是一个博客'>
 <title>木木龙的个人博客</title>
 
-<link rel='canonical' href='https://example.com/'>
+<link rel='canonical' href='https://joker0ops.github.io/'>
 
 <link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='木木龙的个人博客'>
 <meta property='og:description' content='这是一个博客'>
-<meta property='og:url' content='https://example.com/'>
+<meta property='og:url' content='https://joker0ops.github.io/'>
 <meta property='og:site_name' content='木木龙的个人博客'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2023-03-08T00:28:41&#43;08:00 '/>
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2023-03-25T10:32:54&#43;08:00 '/>
 <meta name="twitter:title" content="木木龙的个人博客">
-<meta name="twitter:description" content="这是一个博客"><link rel="alternate" type="application/rss&#43;xml" href="https://example.com/index.xml">
-    <link rel="shortcut icon" href="/favicon3.ico" />
+<meta name="twitter:description" content="这是一个博客"><link rel="alternate" type="application/rss&#43;xml" href="https://joker0ops.github.io/index.xml">
+    <link rel="shortcut icon" href="/favicon.ico" />
 
+<script charset="utf-8"  src="https://cdn.jsdelivr.net/npm/live2d-widget@3.1.4/lib/L2Dwidget.min.js"></script>
+
+<style>
+    #live2d-widget{
+        opacity: 0.7 !important
+    }
+</style>
+
+<script>
+    L2Dwidget.init({
+        model: {
+            scale: 1,
+            hHeadPos: 0.5,
+            vHeadPos: 0.618,
+            jsonPath: 'https://cdn.jsdelivr.net/gh/cn-night-ray/live2d-widget-models@latest/packages/live2d-widget-model-shizuku/assets/shizuku.model.json',       
+        },
+        display: {
+            superSample: 1,     
+            width: 240,         
+            height: 600,        
+            position: 'right',   
+            hOffset: 70,         
+            vOffset: -110,         
+        },
+        mobile: {
+            show: false,         
+            scale: 1,           
+            motion: true,       
+        },
+        react: {
+            opacityDefault: 0.7,  
+            opacityOnHover: 0.2  
+        },
+     });
+</script>
     </head>
     <body class="">
     <script>
@@ -254,77 +289,6 @@
             
         
             
-                <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">归档</h2>
-
-        
-        
-        
-        
-        
-        <div class="widget-archive--list">
-            <div class="archives-year">
-                    <a href="/archives/#2023">
-                        
-                            <span class="year">2023</span>
-                            <span class="count">1</span>
-                        
-                    </a> 
-                </div>
-            <div class="archives-year">
-                    <a href="/archives/#2019">
-                        
-                            <span class="year">2019</span>
-                            <span class="count">5</span>
-                        
-                    </a> 
-                </div>
-            
-        </div>
-    </section>
-            
-        
-            
-                <section class="widget tagCloud">
-    <div class="widget-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-    </div>
-    <h2 class="widget-title section-title">分类</h2>
-
-    <div class="tagCloud-tags">
-        
-            <a href="/categories/%E4%B8%BB%E9%A2%98/" class="font_size_5">
-                主题
-            </a>
-        
-            <a href="/categories/%E8%AF%AD%E6%B3%95/" class="font_size_5">
-                语法
-            </a>
-        
-    </div>
-</section>
-
-            
-        
-            
                 <section class="widget tagCloud">
     <div class="widget-icon">
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -350,6 +314,10 @@
         
             <a href="/tags/html/" class="font_size_4">
                 html
+            </a>
+        
+            <a href="/tags/git/" class="font_size_3">
+                Git
             </a>
         
             <a href="/tags/shortcodes/" class="font_size_1">
@@ -394,6 +362,180 @@
     
 
     <section class="article-list">
+        
+            
+<article class="has-image">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/placeholder-text/">
+                <img src="/p/placeholder-text/matt_hu958d513eeefe5556a31d065479ecc5ac_14205_800x0_resize_q75_box.jpg"
+                        srcset="/p/placeholder-text/matt_hu958d513eeefe5556a31d065479ecc5ac_14205_800x0_resize_q75_box.jpg 800w, /p/placeholder-text/matt_hu958d513eeefe5556a31d065479ecc5ac_14205_1600x0_resize_q75_box.jpg 1600w"
+                        width="800" 
+                        height="533" 
+                        loading="lazy"
+                        alt="Featured image of post Placeholder Text" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E4%B8%BB%E9%A2%98/" >
+                主题
+            </a>
+        
+            <a href="/categories/%E8%AF%AD%E6%B3%95/" >
+                语法
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/placeholder-text/">Placeholder Text</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            Lorem Ipsum Dolor Si Amet
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Mar 09, 2019</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 1 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+</article>
+        
+            
+<article class="has-image">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/math-typesetting/">
+                <img src="/p/math-typesetting/the_huf941de4769045cdfa8c9ee7036519a2a_35369_800x0_resize_q75_box.jpg"
+                        srcset="/p/math-typesetting/the_huf941de4769045cdfa8c9ee7036519a2a_35369_800x0_resize_q75_box.jpg 800w, /p/math-typesetting/the_huf941de4769045cdfa8c9ee7036519a2a_35369_1600x0_resize_q75_box.jpg 1600w"
+                        width="800" 
+                        height="566" 
+                        loading="lazy"
+                        alt="Featured image of post Math Typesetting" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E4%B8%BB%E9%A2%98/" >
+                主题
+            </a>
+        
+            <a href="/categories/%E8%AF%AD%E6%B3%95/" >
+                语法
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/math-typesetting/">Math Typesetting</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            A brief guide to setup KaTeX
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Mar 08, 2019</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 1 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+</article>
         
             
 <article class="has-image">
@@ -508,6 +650,8 @@
     </section>
     
     <section class="powerby">
+        
+            热爱可抵岁月漫长，温柔可挡艰难时光 <br/>
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
@@ -532,6 +676,7 @@
     }());
 </script>
 
+
 <script
     src="https://cdn.jsdelivr.net/gh/zhixuan2333/gh-blog@v0.1.0/js/nprogress.min.js"
     integrity="sha384-bHDlAEUFxsRI7JfULv3DTpL2IXbbgn4JHQJibgo5iiXSK6Iu8muwqHANhun74Cqg"
@@ -551,5 +696,67 @@
     });
 </script>
 
+
+<script>
+!function(){
+    function n(n,e,t){
+        return n.getAttribute(e)||t
+    }
+    function e(n){
+        return document.getElementsByTagName(n)
+    }
+    function t(){
+        var t=e("script"),o=t.length,i=t[o-1];
+        return{
+            l:o,z:n(i,"zIndex",-1),o:n(i,"opacity",.7),c:n(i,"color","0,0,0"),n:n(i,"count",289)
+        }
+    }
+    function o(){
+        a=m.width=window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth,
+        c=m.height=window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight
+    }
+    function i(){
+        r.clearRect(0,0,a,c);
+        var n,e,t,o,m,l;
+        s.forEach(function(i,x){
+        for(i.x+=i.xa,i.y+=i.ya,i.xa*=i.x>a||i.x<0?-1:1,i.ya*=i.y>c||i.y<0?-1:1,r.fillRect(i.x-.5,i.y-.5,1,1),e=x+1;e<u.length;e++)n=u[e],null!==n.x&&null!==n.y&&(o=i.x-n.x,m=i.y-n.y,l=o*o+m*m,l<n.max&&(n===y&&l>=n.max/2&&(i.x-=.03*o,i.y-=.03*m),t=(n.max-l)/n.max,r.beginPath(),r.lineWidth=t/2,r.strokeStyle="rgba("+d.c+","+(t+.2)+")",r.moveTo(i.x,i.y),r.lineTo(n.x,n.y),r.stroke()))}),
+        x(i)
+    }
+    var a,c,u,m=document.createElement("canvas"),
+    d=t(),l="c_n"+d.l,r=m.getContext("2d"),
+    x=window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||
+    function(n){
+    window.setTimeout(n,1e3/45)
+    },
+    w=Math.random,y={x:null,y:null,max:2e4};m.id=l,m.style.cssText="position:fixed;top:0;left:0;z-index:"+d.z+";opacity:"+d.o,e("body")[0].appendChild(m),o(),window.onresize=o,
+    window.onmousemove=function(n){
+        n=n||window.event,y.x=n.clientX,y.y=n.clientY
+    },
+    window.onmouseout=function(){
+        y.x=null,y.y=null
+    };
+    for(var s=[],f=0;d.n>f;f++){
+        var h=w()*a,g=w()*c,v=2*w()-1,p=2*w()-1;s.push({x:h,y:g,xa:v,ya:p,max:6e3})
+    }
+    u=s.concat([y]),
+    setTimeout(function(){i()},100)
+}();</script>
+
+
+<style type="text/css">
+    .fireworks {
+        position: fixed;
+        pointer-events: none;
+        top: 0;
+        left: 0;
+        height: 100%;
+    }
+</style>
+<canvas class="fireworks"></canvas>
+<script src="/js/anime.min.js"></script>
+<script src="/js/fireworks.js"></script>
+<script>
+    fireworks.setCanvasSize();
+</script>
     </body>
 </html>
