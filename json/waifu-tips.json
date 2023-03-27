@@ -70,7 +70,7 @@
         { "selector": "c-player div.volume", "text": ["在这里可以调整<span style=\"color:#0099cc;\">音量</span>呢"] },
         { "selector": "c-player div.list-button", "text": ["<span style=\"color:#0099cc;\">播放列表</span>里都有什么呢"] },
         { "selector": "c-player div.lyric-button", "text": ["有<span style=\"color:#0099cc;\">歌词</span>的话就能跟着一起唱呢"] },
-        { "selector": ".waifu #live2d", "text": ["你好哦，请问有什么事吗？", "不要指我，哼(╬￣皿￣)☞ ", "拿鼠标指人很不礼貌哦！"] }
+        { "selector": ".waifu #live2d", "text": ["你好哦，请问有什么事吗？", "不要指我，哼(╬￣^￣)☞ ", "拿鼠标指人很不礼貌哦！"] }
     ],
     "click": [
         {
