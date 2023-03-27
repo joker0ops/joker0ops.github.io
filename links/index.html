@@ -620,17 +620,17 @@ This page&amp;rsquo;s frontmatter:
         background-attachment: fixed;
     }
 </style>
-<script src="./js/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var init = $("#dark-mode-toggle > svg.icon.icon-tabler.icon-tabler-toggle-left");
         if (init.css("display") == "none") {
-            document.body.style.background = 'url(\'./img/3.png\')';
+            document.body.style.background = 'url(\'/img/3.png\')';
             document.body.style.backgroundSize = '100%';
             document.body.style.backgroundAttachment = 'fixed';
         }
         else {
-            document.body.style.background = 'url(\'./img/41.jpg\')';
+            document.body.style.background = 'url(\'/img/41.jpg\')';
             document.body.style.backgroundSize = '100%';
             document.body.style.backgroundAttachment = 'fixed';
         }
@@ -638,13 +638,13 @@ This page&amp;rsquo;s frontmatter:
     document.getElementById('dark-mode-toggle').addEventListener("click", function () {
         var white = $("#dark-mode-toggle > svg.icon.icon-tabler.icon-tabler-toggle-left");
         if (white.css("display") == "none") {
-            document.body.style.background = 'url(\'./img/41.jpg\')';
+            document.body.style.background = 'url(\'/img/41.jpg\')';
             document.body.style.backgroundSize = '100%';
             document.body.style.backgroundAttachment = 'fixed';
         }
         var dark = $("#dark-mode-toggle > svg.icon.icon-tabler.icon-tabler-toggle-right");
         if (dark.css("display") == "none") {
-            document.body.style.background = 'url(\'./img/3.png\')';
+            document.body.style.background = 'url(\'/img/3.png\')';
             document.body.style.backgroundSize = '100%';
             document.body.style.backgroundAttachment = 'fixed';
         }
