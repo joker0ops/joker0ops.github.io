@@ -477,17 +477,11 @@
 </script>
 
 
-<script
-    src="https://cdn.jsdelivr.net/gh/zhixuan2333/gh-blog@v0.1.0/js/nprogress.min.js"
+<script src="https://cdn.jsdelivr.net/gh/zhixuan2333/gh-blog@v0.1.0/js/nprogress.min.js"
     integrity="sha384-bHDlAEUFxsRI7JfULv3DTpL2IXbbgn4JHQJibgo5iiXSK6Iu8muwqHANhun74Cqg"
-    crossorigin="anonymous"
-></script>
-<link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/gh/zhixuan2333/gh-blog@v0.1.0/css/nprogress.css"
-    integrity="sha384-KJyhr2syt5+4M9Pz5dipCvTrtvOmLk/olWVdfhAp858UCa64Ia5GFpTN7+G4BWpE"
-    crossorigin="anonymous"
-/>
+    crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zhixuan2333/gh-blog@v0.1.0/css/nprogress.css"
+    integrity="sha384-KJyhr2syt5+4M9Pz5dipCvTrtvOmLk/olWVdfhAp858UCa64Ia5GFpTN7+G4BWpE" crossorigin="anonymous" />
 <script>
     NProgress.start();
     document.addEventListener("readystatechange", () => {
@@ -498,49 +492,50 @@
 
 
 <script>
-!function(){
-    function n(n,e,t){
-        return n.getAttribute(e)||t
-    }
-    function e(n){
-        return document.getElementsByTagName(n)
-    }
-    function t(){
-        var t=e("script"),o=t.length,i=t[o-1];
-        return{
-            l:o,z:n(i,"zIndex",-1),o:n(i,"opacity",.7),c:n(i,"color","0,0,0"),n:n(i,"count",289)
+    !function () {
+        function n(n, e, t) {
+            return n.getAttribute(e) || t
         }
-    }
-    function o(){
-        a=m.width=window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth,
-        c=m.height=window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight
-    }
-    function i(){
-        r.clearRect(0,0,a,c);
-        var n,e,t,o,m,l;
-        s.forEach(function(i,x){
-        for(i.x+=i.xa,i.y+=i.ya,i.xa*=i.x>a||i.x<0?-1:1,i.ya*=i.y>c||i.y<0?-1:1,r.fillRect(i.x-.5,i.y-.5,1,1),e=x+1;e<u.length;e++)n=u[e],null!==n.x&&null!==n.y&&(o=i.x-n.x,m=i.y-n.y,l=o*o+m*m,l<n.max&&(n===y&&l>=n.max/2&&(i.x-=.03*o,i.y-=.03*m),t=(n.max-l)/n.max,r.beginPath(),r.lineWidth=t/2,r.strokeStyle="rgba("+d.c+","+(t+.2)+")",r.moveTo(i.x,i.y),r.lineTo(n.x,n.y),r.stroke()))}),
-        x(i)
-    }
-    var a,c,u,m=document.createElement("canvas"),
-    d=t(),l="c_n"+d.l,r=m.getContext("2d"),
-    x=window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||
-    function(n){
-    window.setTimeout(n,1e3/45)
-    },
-    w=Math.random,y={x:null,y:null,max:2e4};m.id=l,m.style.cssText="position:fixed;top:0;left:0;z-index:"+d.z+";opacity:"+d.o,e("body")[0].appendChild(m),o(),window.onresize=o,
-    window.onmousemove=function(n){
-        n=n||window.event,y.x=n.clientX,y.y=n.clientY
-    },
-    window.onmouseout=function(){
-        y.x=null,y.y=null
-    };
-    for(var s=[],f=0;d.n>f;f++){
-        var h=w()*a,g=w()*c,v=2*w()-1,p=2*w()-1;s.push({x:h,y:g,xa:v,ya:p,max:6e3})
-    }
-    u=s.concat([y]),
-    setTimeout(function(){i()},100)
-}();</script>
+        function e(n) {
+            return document.getElementsByTagName(n)
+        }
+        function t() {
+            var t = e("script"), o = t.length, i = t[o - 1];
+            return {
+                l: o, z: n(i, "zIndex", -1), o: n(i, "opacity", .7), c: n(i, "color", "252,254,218"), n: n(i, "count", 289)
+            }
+        }
+        function o() {
+            a = m.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
+                c = m.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+        }
+        function i() {
+            r.clearRect(0, 0, a, c);
+            var n, e, t, o, m, l;
+            s.forEach(function (i, x) {
+                for (i.x += i.xa, i.y += i.ya, i.xa *= i.x > a || i.x < 0 ? -1 : 1, i.ya *= i.y > c || i.y < 0 ? -1 : 1, r.fillRect(i.x - .5, i.y - .5, 1, 1), e = x + 1; e < u.length; e++)n = u[e], null !== n.x && null !== n.y && (o = i.x - n.x, m = i.y - n.y, l = o * o + m * m, l < n.max && (n === y && l >= n.max / 2 && (i.x -= .03 * o, i.y -= .03 * m), t = (n.max - l) / n.max, r.beginPath(), r.lineWidth = t / 2, r.strokeStyle = "rgba(" + d.c + "," + (t + .2) + ")", r.moveTo(i.x, i.y), r.lineTo(n.x, n.y), r.stroke()))
+            }),
+                x(i)
+        }
+        var a, c, u, m = document.createElement("canvas"),
+            d = t(), l = "c_n" + d.l, r = m.getContext("2d"),
+            x = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
+                function (n) {
+                    window.setTimeout(n, 1e3 / 45)
+                },
+            w = Math.random, y = { x: null, y: null, max: 2e4 }; m.id = l, m.style.cssText = "position:fixed;top:0;left:0;z-index:" + d.z + ";opacity:" + d.o, e("body")[0].appendChild(m), o(), window.onresize = o,
+                window.onmousemove = function (n) {
+                    n = n || window.event, y.x = n.clientX, y.y = n.clientY
+                },
+                window.onmouseout = function () {
+                    y.x = null, y.y = null
+                };
+        for (var s = [], f = 0; d.n > f; f++) {
+            var h = w() * a, g = w() * c, v = 2 * w() - 1, p = 2 * w() - 1; s.push({ x: h, y: g, xa: v, ya: p, max: 6e3 })
+        }
+        u = s.concat([y]),
+            setTimeout(function () { i() }, 100)
+    }();</script>
 
 
 <style type="text/css">
@@ -562,53 +557,90 @@
 
 <style>
     body {
-    cursor: url('/js/45.cur'), auto;
+        cursor: url('/js/45.cur'), auto;
+         
+         
+        background: url('/img/41.jpg');
+        background-size: 100%;
+        background-attachment: fixed;
     }
 </style>
+<script src="./js/jquery.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var init = $("#dark-mode-toggle > svg.icon.icon-tabler.icon-tabler-toggle-left");
+        if (init.css("display") == "none") {
+            document.body.style.background = 'url(\'./img/3.png\')';
+            document.body.style.backgroundSize = '100%';
+            document.body.style.backgroundAttachment = 'fixed';
+        }
+        else {
+            document.body.style.background = 'url(\'./img/41.jpg\')';
+            document.body.style.backgroundSize = '100%';
+            document.body.style.backgroundAttachment = 'fixed';
+        }
+    });
+    document.getElementById('dark-mode-toggle').addEventListener("click", function () {
+        var white = $("#dark-mode-toggle > svg.icon.icon-tabler.icon-tabler-toggle-left");
+        if (white.css("display") == "none") {
+            document.body.style.background = 'url(\'./img/41.jpg\')';
+            document.body.style.backgroundSize = '100%';
+            document.body.style.backgroundAttachment = 'fixed';
+        }
+        var dark = $("#dark-mode-toggle > svg.icon.icon-tabler.icon-tabler-toggle-right");
+        if (dark.css("display") == "none") {
+            document.body.style.background = 'url(\'./img/3.png\')';
+            document.body.style.backgroundSize = '100%';
+            document.body.style.backgroundAttachment = 'fixed';
+        }
+    });
+</script>
 
 
-    
-    <script src="/js/jquery.min.js"></script>
-    
-    
-    <script src="/js/jquery-ui.min.js"></script>
-    
-    <div class="waifu">
-        <div class="waifu-tips"></div>
-        <canvas id="live2d" class="live2d"></canvas>
-        <div class="waifu-tool">
-            <span class="fui-home"></span>
-            <span class="fui-chat"></span>
-            <span class="fui-eye"></span>
-            <span class="fui-user"></span>
-            <span class="fui-photo"></span>
-            <span class="fui-info-circle"></span>
-            <span class="fui-cross"></span>
-        </div>
+
+<script src="/js/jquery.min.js"></script>
+
+
+<script src="/js/jquery-ui.min.js"></script>
+
+<div class="waifu">
+    <div class="waifu-tips"></div>
+    <canvas id="live2d" class="live2d"></canvas>
+    <div class="waifu-tool">
+        <span class="fui-home"></span>
+        <span class="fui-chat"></span>
+        <span class="fui-eye"></span>
+        <span class="fui-user"></span>
+        <span class="fui-photo"></span>
+        <span class="fui-info-circle"></span>
+        <span class="fui-cross"></span>
     </div>
-        
-    <script src="/js/waifu-tips.min.js"></script>
-    <script src="/js/live2d.min.js"></script>
-    <script type="text/javascript">
-         
-        live2d_settings['modelId'] = 1;                  
-        live2d_settings['modelTexturesId'] = 87;         
-        live2d_settings['modelStorage'] = true;         
-        live2d_settings['canCloseLive2d'] = true;       
-        live2d_settings['canTurnToHomePage'] = true;    
-        live2d_settings['waifuSize'] = '280x250';        
-        live2d_settings['waifuTipsSize'] = '250x70';    
-        live2d_settings['waifuFontSize'] = '12px';       
-        live2d_settings['waifuToolFont'] = '14px';       
-        live2d_settings['waifuToolLine'] = '20px';       
-        live2d_settings['waifuToolTop'] = '0px';       
-        live2d_settings['waifuMinWidth']        = '768px';      
-        live2d_settings['waifuEdgeSide']        = 'right:80';     
-        live2d_settings['waifuDraggable'] = 'axis-x';    
-        live2d_settings['waifuDraggableRevert'] = false;         
-        live2d_settings['homePageUrl'] = 'https://joker0ops.github.io';       
-         
-        initModel("/json/waifu-tips.json")
-    </script>
+</div>
+
+<script src="/js/waifu-tips.min.js"></script>
+<script src="/js/live2d.min.js"></script>
+<script type="text/javascript">
+     
+    live2d_settings['modelId'] = 5;                  
+    live2d_settings['modelTexturesId'] = 2;         
+    live2d_settings['modelStorage'] = true;         
+    live2d_settings['canCloseLive2d'] = true;       
+    live2d_settings['canTurnToHomePage'] = true;    
+    live2d_settings['showHitokoto'] = false;         
+    live2d_settings['canSwitchHitokoto'] = false;         
+    live2d_settings['waifuSize'] = '280x250';        
+    live2d_settings['waifuTipsSize'] = '250x70';    
+    live2d_settings['waifuFontSize'] = '12px';       
+    live2d_settings['waifuToolFont'] = '14px';       
+    live2d_settings['waifuToolLine'] = '20px';       
+    live2d_settings['waifuToolTop'] = '0px';       
+    live2d_settings['waifuMinWidth'] = '768px';      
+    live2d_settings['waifuEdgeSide'] = 'right:80';     
+    live2d_settings['waifuDraggable'] = 'axis-x';    
+    live2d_settings['waifuDraggableRevert'] = true;         
+    live2d_settings['homePageUrl'] = 'https://joker0ops.github.io';       
+     
+    initModel("/json/waifu-tips.json")
+</script>
     </body>
 </html>

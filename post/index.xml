@@ -12,7 +12,7 @@
         <pubDate>Sat, 25 Mar 2023 18:07:32 +0800</pubDate>
         
         <guid>https://joker0ops.github.io/p/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%95/</guid>
-        <description>&lt;h1 id=&#34;01-程序设计与算法&#34;&gt;01. 程序设计与算法&lt;/h1&gt;
+        <description>&lt;img src="https://joker0ops.github.io/img/32.jpg" alt="Featured image of post 程序设计与算法" /&gt;&lt;h1 id=&#34;01-程序设计与算法&#34;&gt;01. 程序设计与算法&lt;/h1&gt;
 &lt;h2 id=&#34;程序初探&#34;&gt;程序初探&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/p/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%95/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%951.png&#34;
 	width=&#34;1478&#34;
@@ -20,7 +20,7 @@
 	srcset=&#34;https://joker0ops.github.io/p/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%95/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%951_hu1f07a8d1e2ed09298ba2d015697d0e3d_169717_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%95/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%951_hu1f07a8d1e2ed09298ba2d015697d0e3d_169717_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
-		alt=&#34;Alt&#34;
+		alt=&#34;图1&#34;
 	
 	
 		class=&#34;gallery-image&#34; 
@@ -34,7 +34,7 @@
 	srcset=&#34;https://joker0ops.github.io/p/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%95/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%952_hubdb20c8f131b5bd0399e8487cb748d68_113830_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%95/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%952_hubdb20c8f131b5bd0399e8487cb748d68_113830_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
-		alt=&#34;Alt&#34;
+		alt=&#34;图2&#34;
 	
 	
 		class=&#34;gallery-image&#34; 
@@ -48,7 +48,7 @@
 	srcset=&#34;https://joker0ops.github.io/p/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%95/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%953_hub01c506aa88a1c83268b2ac7c93bf617_80649_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%95/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%953_hub01c506aa88a1c83268b2ac7c93bf617_80649_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
-		alt=&#34;Alt&#34;
+		alt=&#34;图3&#34;
 	
 	
 		class=&#34;gallery-image&#34; 
@@ -56,8 +56,67 @@
 		data-flex-basis=&#34;421px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;h2 id=&#34;c语言程序的结构&#34;&gt;C语言程序的结构&lt;/h2&gt;
-&lt;h2 id=&#34;c语言程序的执行步骤&#34;&gt;C语言程序的执行步骤&lt;/h2&gt;
+&lt;h2 id=&#34;c语言程序的结构的特点&#34;&gt;C语言程序的结构的特点&lt;/h2&gt;
+&lt;p&gt;（1）一个程序由一个或多个源程序文件组成，而源程序文件一般包括[预处理指令]、[全局声明]、[函数定义]&lt;br&gt;
+（2）函数是C程序的主要组成部分&lt;br&gt;
+（3）一个函数包含函数首部与函数体两个部分&lt;br&gt;
+（4）程序总是从main函数开始执行的&lt;br&gt;
+（5）程序中要求计算机完成的操作是由函数中的C语句完成的&lt;br&gt;
+（6）每个数据声明和语句的后面必须跟一个分号&lt;br&gt;
+（7）C语言本身不提供输入输出语句&lt;br&gt;
+示例程序：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;include&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;stdio&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;h&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 预处理指令，在C语言进行编译的时候会先从当前目录寻找文件，再去系统指定的目录寻找文件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kr&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(){&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kr&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 该函数在主函数内部定义，并不是全局声明，只能在主函数内部使用
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;kr&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;max&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kr&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nx&#34;&gt;scanf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;%d, %d&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nx&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;max&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nx&#34;&gt;printf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;%d&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 对于返回值要视系统而定
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;c1&#34;&gt;// 对于Linux系统必须有返回值来标识程序的退出状态(0为正常)，Windows则不需要
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;max&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kr&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;){&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;c语言程序的执行步骤&#34;&gt;C语言程序的执行步骤&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;上机输入和编辑源程序&lt;/li&gt;
+&lt;li&gt;对源程序进行编译，先用C编译系统提供的“预处理器”对程序中的预处理指令进行编译预处理，若未发现任何语法错误则继续进行正式编译将源程序转换为二进制形式的目标程序。&lt;/li&gt;
+&lt;li&gt;通过连接编辑程序把所有编译后得到的目标模块连接装配起来，再与函数库相连接成一个整体，生成可执行程序。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;在C语言程序中，&lt;strong&gt;函数是程序的基本单位&lt;/strong&gt;，在一个源程序文件中包含若干函数（只有一个main函数）&lt;strong&gt;在进行编译时以源程序文件为对象&lt;/strong&gt;进行编译。在分别对各源程序文件编译并得到相应的目标程序后，再将这些目标程序连接成为统一的二进制的可执行程序&lt;/li&gt;
+&lt;li&gt;不同编译系统所提供的库函数和功能不完全相同&lt;/li&gt;
+&lt;li&gt;在进行预处理操作时，会将头文件内容完整地读进来并与其他部分组成一个完整的，可以用来进行正式编译的源程序，再检查源程序语法，如出错则抛出错误提示，无错误则编译程序自动把源程序转换为当前目录下的二进制目标程序&lt;/li&gt;
+&lt;li&gt;必须把所有源程序文件编译后得到的目标文件连接装配起来，再与&lt;strong&gt;函数库&lt;/strong&gt;相连接成一个整体，生成一个可供计算机执行的目标程序，称为&lt;strong&gt;可执行程序&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&#34;程序设计的任务&#34;&gt;程序设计的任务&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;问题分析&lt;/li&gt;
@@ -67,6 +126,8 @@
 &lt;li&gt;运行程序并分析结构&lt;/li&gt;
 &lt;li&gt;编写程序文档&lt;/li&gt;
 &lt;/ol&gt;
+&lt;h2 id=&#34;本章节使用的思维导图httpswwwprocessoncompreview641ed26bc405831214081f06&#34;&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.processon.com/preview/641ed26bc405831214081f06&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;本章节使用的思维导图&lt;/a&gt;&lt;/h2&gt;
 </description>
         </item>
         <item>
