@@ -808,17 +808,49 @@
 &lt;/ol&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;使用搜索引擎搜集敏感信息
-| 关键字   | 说明                                                 |
-| ******** | **************************************************** |
-| site     | 指定域名                                             |
-| inurl    | URL中存在关键字的网页                                |
-| intext   | 网页正文中的关键字                                   |
-| filetype | 指定文件类型                                         |
-| intitle  | 网页标题中的关键字                                   |
-| link     | link:baidu.com即表示返回所有和baidu.com做了链接的URL |
-| info     | 查找指定站点的一些基本信息                           |
-| cache    | 搜索关于某些内容的缓存                               |&lt;/p&gt;
+&lt;p&gt;使用搜索引擎搜集敏感信息&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;关键字&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;site&lt;/td&gt;
+&lt;td&gt;指定域名&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;inurl&lt;/td&gt;
+&lt;td&gt;URL中存在关键字的网页&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;intext&lt;/td&gt;
+&lt;td&gt;网页正文中的关键字&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;filetype&lt;/td&gt;
+&lt;td&gt;指定文件类型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;intitle&lt;/td&gt;
+&lt;td&gt;网页标题中的关键字&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;link&lt;/td&gt;
+&lt;td&gt;link:baidu.com即表示返回所有和baidu.com做了链接的URL&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;info&lt;/td&gt;
+&lt;td&gt;查找指定站点的一些基本信息&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;cache&lt;/td&gt;
+&lt;td&gt;搜索关于某些内容的缓存&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;示例：site: edu.cn intext: 后台管理&lt;/p&gt;
