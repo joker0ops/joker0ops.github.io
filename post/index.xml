@@ -14,14 +14,18 @@
         <guid>https://joker0ops.github.io/p/c%E8%AF%AD%E8%A8%80%E6%B1%82%E8%A7%A3%E8%BF%B7%E5%AE%AB%E9%97%AE%E9%A2%98dfs/</guid>
         <description>&lt;img src="https://joker0ops.github.io/img/84.jpg" alt="Featured image of post C语言求解迷宫问题(DFS)" /&gt;&lt;h2 id=&#34;问题如下&#34;&gt;问题如下：&lt;/h2&gt;
 &lt;p&gt;实现如下迷宫的自动寻路，以圆圈为迷宫入口，以五角星为迷宫出口，打印出完整的走迷宫路径。
-&lt;img src=&#34;https://joker0ops.github.io/20210115231421734.png&#34;
-	
-	
-	
+&lt;img src=&#34;https://joker0ops.github.io/p/c%E8%AF%AD%E8%A8%80%E6%B1%82%E8%A7%A3%E8%BF%B7%E5%AE%AB%E9%97%AE%E9%A2%98dfs/20210115231421734.png&#34;
+	width=&#34;531&#34;
+	height=&#34;528&#34;
+	srcset=&#34;https://joker0ops.github.io/p/c%E8%AF%AD%E8%A8%80%E6%B1%82%E8%A7%A3%E8%BF%B7%E5%AE%AB%E9%97%AE%E9%A2%98dfs/20210115231421734_huf890a30c3b0e8956a4b73711335f3ec1_10287_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/c%E8%AF%AD%E8%A8%80%E6%B1%82%E8%A7%A3%E8%BF%B7%E5%AE%AB%E9%97%AE%E9%A2%98dfs/20210115231421734_huf890a30c3b0e8956a4b73711335f3ec1_10287_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;迷宫&#34;
 	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;100&#34;
+		data-flex-basis=&#34;241px&#34;
 	
 &gt;为了表示迷宫，我们设置一个二维数组mg，其中每个元素代表一个方位的状态，我们定义0为通路，1为墙，-1为已走过的路，通过堆栈保存当前路径，找到一条可行的路径。&lt;/p&gt;
 &lt;h2 id=&#34;算法如下&#34;&gt;算法如下：&lt;/h2&gt;
@@ -311,14 +315,18 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;实现结果&#34;&gt;实现结果：&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/20210115232805556.png&#34;
-	
-	
-	
+&lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/p/c%E8%AF%AD%E8%A8%80%E6%B1%82%E8%A7%A3%E8%BF%B7%E5%AE%AB%E9%97%AE%E9%A2%98dfs/20210115232805556.png&#34;
+	width=&#34;1223&#34;
+	height=&#34;639&#34;
+	srcset=&#34;https://joker0ops.github.io/p/c%E8%AF%AD%E8%A8%80%E6%B1%82%E8%A7%A3%E8%BF%B7%E5%AE%AB%E9%97%AE%E9%A2%98dfs/20210115232805556_hu6a2123e613288b2304dc5088be40fb89_50035_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/c%E8%AF%AD%E8%A8%80%E6%B1%82%E8%A7%A3%E8%BF%B7%E5%AE%AB%E9%97%AE%E9%A2%98dfs/20210115232805556_hu6a2123e613288b2304dc5088be40fb89_50035_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;运行结果&#34;
 	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;191&#34;
+		data-flex-basis=&#34;459px&#34;
 	
 &gt;&lt;/p&gt;
 </description>
@@ -1199,14 +1207,18 @@
         <description>&lt;img src="https://joker0ops.github.io/img/2.png" alt="Featured image of post Git学习篇二" /&gt;&lt;h1 id=&#34;02-git分支&#34;&gt;02. Git分支&lt;/h1&gt;
 &lt;h2 id=&#34;分支的概念&#34;&gt;分支的概念&lt;/h2&gt;
 &lt;p&gt;有时在版本控制的过程中，我们需要同时推进多个任务，因此我们可以为每个任务创建单独的分支。这使得程序员可以将自己的工作从开发主线上分离出来，在开发自己的分支时不会影响主线分支的运行（分支底层也是指针应用）&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/%e5%88%86%e6%94%af.png&#34;
-	
-	
-	
+&lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/p/git%E5%AD%A6%E4%B9%A0%E7%AF%87%E4%BA%8C/%E5%88%86%E6%94%AF.png&#34;
+	width=&#34;1208&#34;
+	height=&#34;605&#34;
+	srcset=&#34;https://joker0ops.github.io/p/git%E5%AD%A6%E4%B9%A0%E7%AF%87%E4%BA%8C/%E5%88%86%E6%94%AF_hu3af0540f772dcc6f18d0021435c69306_94861_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/git%E5%AD%A6%E4%B9%A0%E7%AF%87%E4%BA%8C/%E5%88%86%E6%94%AF_hu3af0540f772dcc6f18d0021435c69306_94861_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Alt&#34;
 	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;199&#34;
+		data-flex-basis=&#34;479px&#34;
 	
 &gt;
 &lt;strong&gt;图片介绍&lt;/strong&gt;&lt;/p&gt;
@@ -1376,25 +1388,33 @@
 &lt;ol&gt;
 &lt;li&gt;基本语法
 &lt;br/&gt;(1) 正常合并：将分支B合并到分支A-&amp;gt;切换到分支A，使用git merge B将分支B合并到分支A，进行正常合并需要保证分支B当前版本从分支A分离出来后的后续版本，并且分支A在分离节点后不再进行修改。
-&lt;br/&gt;&lt;img src=&#34;https://joker0ops.github.io/%e6%ad%a3%e5%b8%b8%e5%90%88%e5%b9%b6.jpg&#34;
-	
-	
-	
+&lt;br/&gt;&lt;img src=&#34;https://joker0ops.github.io/p/git%E5%AD%A6%E4%B9%A0%E7%AF%87%E4%BA%8C/%E6%AD%A3%E5%B8%B8%E5%90%88%E5%B9%B6.jpg&#34;
+	width=&#34;1791&#34;
+	height=&#34;988&#34;
+	srcset=&#34;https://joker0ops.github.io/p/git%E5%AD%A6%E4%B9%A0%E7%AF%87%E4%BA%8C/%E6%AD%A3%E5%B8%B8%E5%90%88%E5%B9%B6_hu628b36792ee5526bc95a0a6368223f8a_109706_480x0_resize_q75_box.jpg 480w, https://joker0ops.github.io/p/git%E5%AD%A6%E4%B9%A0%E7%AF%87%E4%BA%8C/%E6%AD%A3%E5%B8%B8%E5%90%88%E5%B9%B6_hu628b36792ee5526bc95a0a6368223f8a_109706_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Alt&#34;
 	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;181&#34;
+		data-flex-basis=&#34;435px&#34;
 	
 &gt;
 &lt;br/&gt;(2)冲突合并：分支B从分离版本分离出来后，分支A和分支B都进行了版本迭代，此时需要用户自行选择两个版本之间需要保留的部分。
-&lt;br/&gt;&lt;img src=&#34;https://joker0ops.github.io/%e5%86%b2%e7%aa%81%e5%90%88%e5%b9%b6.jpg&#34;
-	
-	
-	
+&lt;br/&gt;&lt;img src=&#34;https://joker0ops.github.io/p/git%E5%AD%A6%E4%B9%A0%E7%AF%87%E4%BA%8C/%E5%86%B2%E7%AA%81%E5%90%88%E5%B9%B6.jpg&#34;
+	width=&#34;2053&#34;
+	height=&#34;859&#34;
+	srcset=&#34;https://joker0ops.github.io/p/git%E5%AD%A6%E4%B9%A0%E7%AF%87%E4%BA%8C/%E5%86%B2%E7%AA%81%E5%90%88%E5%B9%B6_hu6967893c9192243d48a60bda259aa576_139952_480x0_resize_q75_box.jpg 480w, https://joker0ops.github.io/p/git%E5%AD%A6%E4%B9%A0%E7%AF%87%E4%BA%8C/%E5%86%B2%E7%AA%81%E5%90%88%E5%B9%B6_hu6967893c9192243d48a60bda259aa576_139952_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Alt&#34;
 	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;238&#34;
+		data-flex-basis=&#34;573px&#34;
 	
 &gt;&lt;/li&gt;
 &lt;li&gt;案例实操
