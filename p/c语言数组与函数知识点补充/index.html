@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='这是一个博客'>
-<title>404 Page not found</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='03. C语言数组与函数知识点补充 本章节使用的思维导图 补充 scanf、printf函数输入输出说明 输出的字符不包括结束符&amp;rsquo;\0&amp;rsq'>
+<title>C语言数组与函数知识点补充</title>
 
-<link rel='canonical' href='https://joker0ops.github.io/404.html'>
+<link rel='canonical' href='https://joker0ops.github.io/p/c%E8%AF%AD%E8%A8%80%E6%95%B0%E7%BB%84%E4%B8%8E%E5%87%BD%E6%95%B0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85/'>
 
-<link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='404 Page not found'>
-<meta property='og:description' content='这是一个博客'>
-<meta property='og:url' content='https://joker0ops.github.io/404.html'>
+<link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='C语言数组与函数知识点补充'>
+<meta property='og:description' content='03. C语言数组与函数知识点补充 本章节使用的思维导图 补充 scanf、printf函数输入输出说明 输出的字符不包括结束符&amp;rsquo;\0&amp;rsq'>
+<meta property='og:url' content='https://joker0ops.github.io/p/c%E8%AF%AD%E8%A8%80%E6%95%B0%E7%BB%84%E4%B8%8E%E5%87%BD%E6%95%B0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85/'>
 <meta property='og:site_name' content='木木龙的个人博客'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2023-03-29T16:21:33&#43;08:00 '/>
-<meta name="twitter:title" content="404 Page not found">
-<meta name="twitter:description" content="这是一个博客">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C' /><meta property='article:tag' content='算法' /><meta property='article:published_time' content='2023-03-29T16:21:33&#43;08:00'/><meta property='article:modified_time' content='2023-03-29T16:21:33&#43;08:00'/><meta property='og:image' content='https://joker0ops.github.io/img/0.jpg' />
+<meta name="twitter:title" content="C语言数组与函数知识点补充">
+<meta name="twitter:description" content="03. C语言数组与函数知识点补充 本章节使用的思维导图 补充 scanf、printf函数输入输出说明 输出的字符不包括结束符&amp;rsquo;\0&amp;rsq"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://joker0ops.github.io/img/0.jpg' />
     <link rel="shortcut icon" href="/favicon.ico" />
 
 <link rel="stylesheet" type="text/css" href="/css/waifu.min.css" />
 
 
     </head>
-    <body class="">
+    <body class="
+    article-page
+    ">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -233,11 +236,382 @@
     </ol>
 </aside>
 
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#本章节使用的思维导图httpswwwprocessoncomviewlink6423f44c446ff6698cf0f42b"><a href="https://www.processon.com/view/link/6423f44c446ff6698cf0f42b">本章节使用的思维导图</a></a></li>
+    <li><a href="#补充">补充</a>
+      <ol>
+        <li><a href="#scanfprintf函数输入输出说明">scanf、printf函数输入输出说明</a></li>
+        <li><a href="#对于函数声明">对于函数声明</a></li>
+      </ol>
+    </li>
+    <li><a href="#局部变量和全局变量思维导图"><a href="">局部变量和全局变量思维导图</a></a></li>
+    <li><a href="#补充-1">补充</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
             <main class="main full-width">
-    <div class="not-found-card">
-        <h1 class="article-title">404 错误</h1>
-        <h2 class="article-subtitle">页面不存在</h2>
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/c%E8%AF%AD%E8%A8%80%E6%95%B0%E7%BB%84%E4%B8%8E%E5%87%BD%E6%95%B0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85/">
+                
+                    <img src="/img/0.jpg" loading="lazy" alt="Featured image of post C语言数组与函数知识点补充" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/c/" >
+                C
+            </a>
+        
+            <a href="/categories/%E5%A4%8D%E8%AF%95/" >
+                复试
+            </a>
+        
+            <a href="/categories/%E9%93%B6%E8%A1%8C%E6%8B%9B%E8%80%83/" >
+                银行招考
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/c%E8%AF%AD%E8%A8%80%E6%95%B0%E7%BB%84%E4%B8%8E%E5%87%BD%E6%95%B0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85/">C语言数组与函数知识点补充</a>
+        </h2>
+    
+        
     </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Mar 29, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 2 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="03-c语言数组与函数知识点补充">03. C语言数组与函数知识点补充</h1>
+<h2 id="本章节使用的思维导图httpswwwprocessoncomviewlink6423f44c446ff6698cf0f42b"><a class="link" href="https://www.processon.com/view/link/6423f44c446ff6698cf0f42b"  target="_blank" rel="noopener"
+    >本章节使用的思维导图</a></h2>
+<h2 id="补充">补充</h2>
+<h3 id="scanfprintf函数输入输出说明">scanf、printf函数输入输出说明</h3>
+<ol>
+<li>输出的字符不包括结束符&rsquo;\0&rsquo;，遇到第一个&rsquo;\0&rsquo;就结束输出</li>
+<li>printf函数输出字符串时接收的是字符串的数组名</li>
+<li>使用scanf函数输入字符串时，系统会自动在已输入字符串的后面添加&rsquo;\0&rsquo;，如果利用scanf接收多个输入的字符串，则应该在输入时用空格分隔，如：
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">char</span> <span class="nx">str1</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="nx">str2</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="nx">str3</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="nx">scanf</span><span class="p">(</span><span class="s2">&#34;%s%s%s&#34;</span><span class="p">,</span> <span class="nx">srt1</span><span class="p">,</span> <span class="nx">str2</span><span class="p">,</span> <span class="nx">srt3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 输入数据：How are you?
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div>由于scanf不接收空格，因此会将这三个单词分别存入str1、str2、str3中，剩下的位置系统自动用&rsquo;\0&rsquo;补全
+<br>如果是
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">char</span> <span class="nx">str</span><span class="p">[</span><span class="mi">20</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="nx">scanf</span><span class="p">(</span><span class="s2">&#34;%s&#34;</span><span class="p">,</span> <span class="nx">str</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 输入数据：How are you?
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div>则str只会接收How，剩下的位置为&rsquo;\0'</li>
+<li>注意，scanf函数中的输入项如果是字符数组名或指针则无需再添加地址符&amp;，在C语言中数组名代表该数组第一个元素的地址</li>
+</ol>
+<h3 id="对于函数声明">对于函数声明</h3>
+<ul>
+<li>使用函数原型声明函数是C语言的一个重要特点，在函数声明时，只需保证是参类型和形参类型一致，不必考虑形参名是什么，因此在函数声明中形参名可写可不写</li>
+</ul>
+<h2 id="局部变量和全局变量思维导图"><a class="link" href="" >局部变量和全局变量思维导图</a></h2>
+<h2 id="补充-1">补充</h2>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/c/">C</a>
+        
+            <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/c%E8%AF%AD%E8%A8%80%E6%B1%82%E8%A7%A3%E8%BF%B7%E5%AE%AB%E9%97%AE%E9%A2%98dfs/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/img/84.jpg" loading="lazy" data-key="" data-hash="/img/84.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C语言求解迷宫问题(DFS)</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/c%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/img/86.png" loading="lazy" data-key="" data-hash="/img/86.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C语言实现选择排序</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/c%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E6%A1%B6%E6%8E%92%E5%BA%8F/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/img/87.jpg" loading="lazy" data-key="" data-hash="/img/87.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C语言实现快速排序、冒泡排序、桶排序</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/c%E8%AF%AD%E8%A8%80%E9%80%89%E6%8B%A9%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0%E8%A1%A5%E5%85%85/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/img/41.jpg" loading="lazy" data-key="" data-hash="/img/41.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C语言选择结构与循环结构复习补充</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%AE%97%E6%B3%95/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/img/32.jpg" loading="lazy" data-key="" data-hash="/img/32.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">程序设计与算法</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="joker0ops/comments"
+        issue-term="pathname"
+        
+        label="none"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
     <footer class="site-footer">
     <section class="copyright">
         &copy; 
@@ -255,6 +629,84 @@
     </section>
 </footer>
 
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
 
             </main>
         </div>
