@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='使用Hugo框架构建Stack主题的个人博客——Day1'>
+<title>Hugo建站指南——Day1</title>
+
+<link rel='canonical' href='http://localhost:1313/p/hugo-development/'>
+
+<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='Hugo建站指南——Day1'>
+<meta property='og:description' content='使用Hugo框架构建Stack主题的个人博客——Day1'>
+<meta property='og:url' content='http://localhost:1313/p/hugo-development/'>
+<meta property='og:site_name' content='木木龙的个人博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Hugo' /><meta property='article:tag' content='Web' /><meta property='article:published_time' content='2024-02-02T15:19:35&#43;08:00'/><meta property='article:modified_time' content='2024-02-02T15:19:35&#43;08:00'/><meta property='og:image' content='http://localhost:1313/p/hugo-development/82.jpg' />
+<meta name="twitter:title" content="Hugo建站指南——Day1">
+<meta name="twitter:description" content="使用Hugo框架构建Stack主题的个人博客——Day1"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/p/hugo-development/82.jpg' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar02_hufaee62c155fcf27c6865e7e5ba9676bf_129485_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🇨🇳</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">木木龙的个人博客</a></h1>
+            <h2 class="site-description">热爱可抵岁月漫长</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/joker0ops'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#写在前面">写在前面</a></li>
+    <li><a href="#准备阶段">准备阶段</a>
+      <ol>
+        <li><a href="#go">Go</a></li>
+        <li><a href="#git">Git</a></li>
+        <li><a href="#dartsass">DartSass</a></li>
+      </ol>
+    </li>
+    <li><a href="#安装hugo">安装Hugo</a></li>
+    <li><a href="#使用hugo新建站点并引入主题">使用Hugo新建站点并引入主题</a></li>
+    <li><a href="#总结">总结</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/hugo-development/">
+                <img src="/p/hugo-development/82_hub28da18d4871e87a3433ed7bebc8e373_795065_800x0_resize_q75_box.jpg"
+                        srcset="/p/hugo-development/82_hub28da18d4871e87a3433ed7bebc8e373_795065_800x0_resize_q75_box.jpg 800w, /p/hugo-development/82_hub28da18d4871e87a3433ed7bebc8e373_795065_1600x0_resize_q75_box.jpg 1600w"
+                        width="800" 
+                        height="450" 
+                        loading="lazy"
+                        alt="Featured image of post Hugo建站指南——Day1" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%8A%80%E6%9C%AF/" >
+                技术
+            </a>
+        
+            <a href="/categories/%E5%8D%9A%E5%AE%A2/" >
+                博客
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/hugo-development/">Hugo建站指南——Day1</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            使用Hugo框架构建Stack主题的个人博客——Day1
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2024/02/02</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 5 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="写在前面">写在前面</h2>
+<p>           大学期间曾经尝试了许多中博客框架，从最初的WordPress到后来的Hexo再到使用Django搭建包含管理员后台系统的完整博客网站，但都没能够长时间使用，总感觉从前期开发到后期部署会出现各种各样的问题。于是我一直想要寻找一个能够快速构建、方便部署并能够让我在更新过程中不断对其进行完善的博客框架；直到Git Pages的出现，让静态网站框架搭建博客有了无与伦比的优势，我也开始搜集各种教程搭建博客，并最终确定了Hugo这一优秀的框架。</p>
+<p>           本篇文章作为Hugo建站的系列文章，将详细记录我在建站过程中的建站流程、遇到的困难以及解决方法，希望能给读者朋友们带来一定的帮助。</p>
+<p>           <strong>注：我是在Ubuntu 20.04环境下搭建的，在一些细节方面不同系统可能存在一些差异，见谅。</strong></p>
+<h2 id="准备阶段">准备阶段</h2>
+<p>           由于Hugo是基于Go语言开发的静态网页框架，并且需要我们部署到Github上来允许其他人的访问，因此我推荐你预先安装以下三款软件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="mf">1.</span> <span class="nx">Go</span>           <span class="err">#</span> <span class="nx">为Hugo提供更多的Go语言支持</span>
+</span></span><span class="line"><span class="cl"><span class="mf">2.</span> <span class="nx">Git</span>          <span class="err">#</span> <span class="nx">实现与Github的远程拉取及推送服务</span>
+</span></span><span class="line"><span class="cl"><span class="mf">3.</span> <span class="nx">DartSass</span>     <span class="err">#</span> <span class="nx">实现Hugo中Sass语法与css语法的转换</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="go">Go</h3>
+<ul>
+<li>Linux</li>
+</ul>
+<ol>
+<li>删除旧版本的Go，一般是在 <strong>/usr/local/go</strong> 中，然后下载<a class="link" href="https://go.dev/doc/install"  target="_blank" rel="noopener"
+    >官方</a>的tar包并解压到 <strong>/usr/local</strong> 中:</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    $ rm -rf /usr/local/go &amp;&amp; tar -C /usr/local -xzf go1.21.6.linux-amd64.tar.gz
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>           以上指令可能需要管理员身份或添加sudo语句来执行，记住不要将文件解压到一个已经存在的go目录，可能会导致Go无法正常运行。</p>
+<ol start="2">
+<li>将 <strong>/usr/local/go/bin</strong> 添加到环境变量中（将以下语句写入 <strong>$HOME/.profile</strong> 或者 <strong>/etc/profile</strong> ）</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    export PATH=$PATH:/usr/local/go/bin
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>           添加该行语句并保存退出后记得使用<strong>source</strong>指令更新系统环境变量</p>
+<ol start="3">
+<li>在命令行中输入以下语句来检验go的安装及版本号</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    $ go version
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Windows</li>
+</ul>
+<ol>
+<li>下载好相应的MSI文件后根据提示依次执行安装程序</li>
+<li>重新打开命令行输入 <strong>go version</strong> 验证安装。</li>
+</ol>
+<h3 id="git">Git</h3>
+<ul>
+<li>Linux(System Based on Debian)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    sudo apt install git-all
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Windows</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    直接按照官网提示进行安装即可。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="dartsass">DartSass</h3>
+<ul>
+<li>Linux(System Based on Debian)</li>
+</ul>
+<ol>
+<li>进入<a class="link" href="https://github.com/sass/dart-sass/releases/tag/1.70.0"  target="_blank" rel="noopener"
+    >Dart-Sass Release</a>下载相应的安装包</li>
+<li>解压到 <strong>/usr/local</strong> 中</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    sudo tar -zxvf ~/Downloads/dart-sass-1.52.1-linux-x64.tar.gz -C /usr/local
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>           以上指令可能需要管理员身份或添加sudo语句来执行，记住不要将文件解压到一个已经存在的dart-sass目录，可能会导致Dart无法正常运行。</p>
+<ol start="3">
+<li>将 <strong>/usr/local/dart-sass</strong> 添加到环境变量中（将以下语句写入 <strong>$HOME/.profile</strong> 或者 <strong>/etc/profile</strong> ）</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    export PATH=$PATH:/usr/local/dart-sass
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>           添加该行语句并保存退出后记得使用 <strong>source</strong> 指令更新系统环境变量</p>
+<ol start="4">
+<li>在命令行中输入以下语句来检验go的安装及版本号</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    $ sass --version
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="安装hugo">安装Hugo</h2>
+<ol>
+<li>进入<a class="link" href="https://github.com/gohugoio/hugo/releases/tag/v0.122.0"  target="_blank" rel="noopener"
+    >Hugo Release</a>的下载页面，下载对应的<strong>Hugo-extended</strong>版本的deb包(<strong>注意！！！一定要安装hugo-extended版本，否则有些主题会出现不支持的问题</strong>)</li>
+<li>输入以下命令进行安装和验证</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    sudo dpkg -i 你的安装包的名字.deb
+</span></span><span class="line"><span class="cl">    hugo version
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>           若命令行中出现extended字样，说明Hugo已被正确安装。</p>
+<h2 id="使用hugo新建站点并引入主题">使用Hugo新建站点并引入主题</h2>
+<ol>
+<li>首先需要创建一个新的个人站点</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    hugo new site blog
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>blog就是博客站点所在的目录，即站点根目录，创建后站点目录结构如下：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    archetypes
+</span></span><span class="line"><span class="cl">    assets
+</span></span><span class="line"><span class="cl">    content
+</span></span><span class="line"><span class="cl">    data
+</span></span><span class="line"><span class="cl">    i18n
+</span></span><span class="line"><span class="cl">    layouts
+</span></span><span class="line"><span class="cl">    public
+</span></span><span class="line"><span class="cl">    resources
+</span></span><span class="line"><span class="cl">    static
+</span></span><span class="line"><span class="cl">    themes
+</span></span><span class="line"><span class="cl">    config.toml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>简单介绍下Hugo根目录下各个文件目录的作用：</li>
+</ol>
+<ul>
+<li><strong>archetypes</strong> 存放创建文件时使用的模板，可以自定义front matter属性。</li>
+<li><strong>assets</strong> 存放需要被Hugo Pipes处理的文件，且只有使用了.Permalink或者.RelPermalink的文件才能被发布到public目录。 注意，默认不会创建assets目录。</li>
+<li><strong>content</strong> 存放的各种md文件用于部署站点，该目录下可以自行创建若干个子目录来便于对文章进行分类，这些子目录被称为section。</li>
+<li><strong>data</strong> 目录存放的是用于定义变量的模板文件，相当于Java里的常量类，这些文件有JSON、 YAML或者TOML三种格式，会在生成站点时被使用到。一般用不到该功能，具体用法可以参考：data templates</li>
+<li><strong>i18n</strong> 存放博客所需的各种语言包</li>
+<li><strong>layouts</strong> 目录存放的模板文件用于渲染html页面，模板里可以定义不同页面的html代码。</li>
+<li><strong>public</strong> 目录用于存放站点执行<strong>hugo -D</strong>指令后生成的静态页面文件，提交时只需将此目录中的文件推送到远程库中即可</li>
+<li><strong>resources</strong> 目录用于缓存某些文件来提高生成效率。 注意，默认不会创建resources目录。</li>
+<li><strong>static</strong> 目录存放的是静态内容：图片、CSS、JavaScript等。</li>
+<li><strong>themes</strong> 目录用于存放Hugo支持的主题文件</li>
+<li><strong>config.toml</strong> 是配置文件，可以有JSON、 YAML或者TOML三种格式，默认使用根目录下的config.toml、config.yaml或config.json中的某一个。可以通过&ndash;config来配置读取一个或多个配置文件，如：hugo &ndash;config a.toml,b.toml,c.toml。 注意，默认不会创建config目录。</li>
+</ul>
+<ol start="4">
+<li>进入站点目录，下载主题到站点theme文件夹的相应主题目录下：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    git clone https://github.com/CaiJimmy/hugo-theme-stack/ themes/hugo-theme-stack
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="5">
+<li>进入<strong>themes/hugo-theme-stack/exampleSite</strong>目录，复制所有内容到站点目录并进行替换：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    cd themes/hugo-theme-stack/exampleSite
+</span></span><span class="line"><span class="cl">    sudo cp * ../../../
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="6">
+<li>切换到站点目录，使用如下指令即可新建博文并且在本地运行博客网站：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    hugo new post/我的第一篇博客
+</span></span><span class="line"><span class="cl">    hugo -D
+</span></span><span class="line"><span class="cl">    hugo server -D
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>注：新建博文后博文头部front matter中draft: true表明该文章是草稿，如果在启用服务时不指定参数-D或&ndash;buildDrafts，或者在配置文件config.toml中配置buildDrafts = true，则会在生成文章时忽略草稿。如果不想指定该参数就生成文章，需要改为draft: false或者将其删去。</strong></p>
+<h2 id="总结">总结</h2>
+<p>           以上就是Hugo搭建Stack主题博客的基础部分，下期将会讲解如何将个人博客推送到GitPages以允许博客的外部访问。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/hugo/">Hugo</a>
+        
+            <a href="/tags/web/">Web</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2023 - 
+        
+        2024 木木龙的个人博客
+    </section>
+    
+    <section class="powerby">
+        
+            热爱可抵岁月漫长，温柔可挡艰难时光。 <br/>
+        Nothing but enthusiasm brightens up the endless years. <br />
+        转载请注明主页网址哦~
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<script type="text/javascript" 
+color="255,255,255" opacity="0.7" count="500" zIndex="-1" src="JS/canvas-nest.min.js" ></script>
+<style type="text/css">
+    body { cursor: url("ZhongLiPosition.cur"), auto; }
+    .fireworks {
+        position: fixed;
+        pointer-events: none;
+        top: 0;
+        left: 0;
+        height: 100%;
+    }
+</style>
+<canvas class="fireworks"></canvas>
+<script src="JS/anime.min.js"></script>
+<script src="JS/fireworks.js"></script>
+<script src="JS/jquery-3.7.1.min.js"></script>
+<script>fireworks.setCanvacSize();</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var init = $("#dark-mode-toggle > svg.icon.icon-tabler.icon-tabler-toggle-left");
+        if (init.css("display") == "none") {
+            document.body.style.background = 'url(\'/Image/BGDark.png\')';
+            document.body.style.backgroundSize = '100%';
+            document.body.style.backgroundAttachment = 'fixed';
+        }
+        else {
+            document.body.style.background = 'url(\'/Image/BGLight.jpg\')';
+            document.body.style.backgroundSize = '100%';
+            document.body.style.backgroundAttachment = 'fixed';
+        }
+    });
+    document.getElementById('dark-mode-toggle').addEventListener("click", function () {
+        var white = $("#dark-mode-toggle > svg.icon.icon-tabler.icon-tabler-toggle-left");
+        if (white.css("display") == "none") {
+            document.body.style.background = 'url(\'/Image/BGLight.jpg\')';
+            document.body.style.backgroundSize = '100%';
+            document.body.style.backgroundAttachment = 'fixed';
+        }
+        var dark = $("#dark-mode-toggle > svg.icon.icon-tabler.icon-tabler-toggle-right");
+        if (dark.css("display") == "none") {
+            document.body.style.background = 'url(\'/Image/BGDark.png\')';
+            document.body.style.backgroundSize = '100%';
+            document.body.style.backgroundAttachment = 'fixed';
+        }
+    });
+</script>
+    </body>
+</html>
