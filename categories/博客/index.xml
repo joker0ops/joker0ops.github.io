@@ -9,11 +9,11 @@
         <copyright>木木龙的个人博客</copyright>
         <lastBuildDate>Fri, 02 Feb 2024 15:19:35 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/%E5%8D%9A%E5%AE%A2/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Hugo建站指南——Day1</title>
-        <link>http://localhost:1313/p/hugo-development/</link>
+        <link>http://localhost:1313/p/hugo-development-day1/</link>
         <pubDate>Fri, 02 Feb 2024 15:19:35 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/hugo-development/</guid>
-        <description>&lt;img src="http://localhost:1313/p/hugo-development/82.jpg" alt="Featured image of post Hugo建站指南——Day1" /&gt;&lt;h2 id=&#34;写在前面&#34;&gt;写在前面&lt;/h2&gt;
+        <guid>http://localhost:1313/p/hugo-development-day1/</guid>
+        <description>&lt;img src="http://localhost:1313/p/hugo-development-day1/82.jpg" alt="Featured image of post Hugo建站指南——Day1" /&gt;&lt;h2 id=&#34;写在前面&#34;&gt;写在前面&lt;/h2&gt;
 &lt;p&gt;           大学期间曾经尝试了许多中博客框架，从最初的WordPress到后来的Hexo再到使用Django搭建包含管理员后台系统的完整博客网站，但都没能够长时间使用，总感觉从前期开发到后期部署会出现各种各样的问题。于是我一直想要寻找一个能够快速构建、方便部署并能够让我在更新过程中不断对其进行完善的博客框架；直到Git Pages的出现，让静态网站框架搭建博客有了无与伦比的优势，我也开始搜集各种教程搭建博客，并最终确定了Hugo这一优秀的框架。&lt;/p&gt;
 &lt;p&gt;           本篇文章作为Hugo建站的系列文章，将详细记录我在建站过程中的建站流程、遇到的困难以及解决方法，希望能给读者朋友们带来一定的帮助。&lt;/p&gt;
 &lt;p&gt;           &lt;strong&gt;注：我是在Ubuntu 20.04环境下搭建的，在一些细节方面不同系统可能存在一些差异，见谅。&lt;/strong&gt;&lt;/p&gt;
@@ -257,7 +257,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    hugo server -D
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;strong&gt;注：新建博文后博文头部front matter中draft: true表明该文章是草稿，如果在启用服务时不指定参数-D或&amp;ndash;buildDrafts，或者在配置文件config.toml中配置buildDrafts = true，则会在生成文章时忽略草稿。如果不想指定该参数就生成文章，需要改为draft: false或者将其删去。&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;注：新建博文后博文头部front matter中draft: true表明该文章是草稿，如果在启用服务时不指定参数-D或&amp;ndash;buildDrafts，或者在配置文件config.toml中配置buildDrafts = true，则会在生成文章时忽略草稿。如果不想指定该参数就生成文章，需要改为draft: false或者将其删去！！！&lt;/strong&gt;
+&lt;strong&gt;另注：新建博文后front matter中一定记着填写一个独一无二的标签，不是为了方便自己阅读，而是能够保证Hugo在生成静态页面文件时不至于将多篇博文错认成一篇博文从而导致一篇博文多次发表的情况！！！&lt;/strong&gt;&lt;/p&gt;
 &lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
 &lt;p&gt;           以上就是Hugo搭建Stack主题博客的基础部分，下期将会讲解如何将个人博客推送到GitPages以允许博客的外部访问。&lt;/p&gt;
 </description>

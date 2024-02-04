@@ -7,13 +7,999 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>木木龙的个人博客</copyright>
-        <lastBuildDate>Fri, 02 Feb 2024 15:19:35 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 04 Feb 2024 20:52:02 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>QT学习记录_03</title>
+        <link>http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/</link>
+        <pubDate>Sun, 04 Feb 2024 20:52:02 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/</guid>
+        <description>&lt;img src="http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/22.jpg" alt="Featured image of post QT学习记录_03" /&gt;&lt;h1 id=&#34;第一个qt小程序&#34;&gt;第一个Qt小程序&lt;/h1&gt;
+&lt;p&gt;本篇开始即进入QT的开发环节，本节主要内容有QT PushButton的添加、QT 窗口编辑操作、QT 对象树及QT中的坐标系。&lt;/p&gt;
+&lt;h2 id=&#34;qpushbutton的创建&#34;&gt;QPushButton的创建&lt;/h2&gt;
+&lt;h3 id=&#34;1-查询assistant找到qpushbutton的相关介绍&#34;&gt;1. 查询assistant找到QPushButton的相关介绍&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/day3_01.png&#34;
+	width=&#34;1920&#34;
+	height=&#34;1029&#34;
+	srcset=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/day3_01_huce5a41f5a565619cd22e149c6bce8c98_248630_480x0_resize_box_3.png 480w, http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/day3_01_huce5a41f5a565619cd22e149c6bce8c98_248630_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;186&#34;
+		data-flex-basis=&#34;447px&#34;
+	
+&gt;
+从图中说明我们可以看出，使用QPushButton需要包含头文件&amp;lt;&lt;strong&gt;QPushButton&lt;/strong&gt;&amp;gt; ，同时需要&lt;strong&gt;widget&lt;/strong&gt;模块的支持，由于我们使用的是QT5版本，因此QtCreator在项目构建时会自动包含widget模块（&lt;strong&gt;在使用QT4及以下版本时，需要在.pro文件中手动包含widget模块&lt;/strong&gt;），而通过Inherits和Inherits By可得到QPushButton的继承路径：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;QObject&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QWidget&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QAbstractButton&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QPushButton&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QCommandLinkButton&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;2-通过qpushbutton类创建按钮并进行一系列初始化设置&#34;&gt;2. 通过QPushButton类创建按钮并进行一系列初始化设置&lt;/h3&gt;
+&lt;p&gt;打开mywidget.cpp（构建项目时自定义的类的源文件）并添加以下代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;#34;mywidget.h&amp;#34;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;#34;ui_mywidget.h&amp;#34;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 按钮控件的头文件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;#include&amp;lt;QPushButton&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;MyWidget&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MyWidget&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;QWidget&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;parent&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QWidget&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;parent&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ui&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Ui&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MyWidget&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;ui&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setupUi&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 使用无参构造函数重新构建一个QPushButton对象并使btn指向该对象
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;QPushButton&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;btn&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QPushButton&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// Question1: 添加的控件默认不会显示，需要调用show方法进行可视化，但为何生成的按钮并不依附于当前窗口内，而是重新打开一个窗口？
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;c1&#34;&gt;// btn-&amp;gt;show();
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;c1&#34;&gt;// 将当前窗口设置为父窗口，使得生成的按钮依附在当前窗口内部，并依赖父窗口的show方法显示按钮
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;btn&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setParent&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 设置并显示含文本的按钮
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;c1&#34;&gt;// Question2: 为什么我的中文显示乱码？
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;btn&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setText&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;第一个按钮&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 创建第二个按钮
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;c1&#34;&gt;// Question3: 为什么不能使用以下方法创建按钮对象？ 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;c1&#34;&gt;// QPushButton btn2(&amp;#34;第二个按钮&amp;#34;,this);
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;QPushButton&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;btn2&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QPushButton&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;第二个按钮&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 移动btn2按钮
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;btn2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;move&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 重置窗口大小
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;resize&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;600&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;400&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 修改窗口标题
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;setWindowTitle&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;这是一个窗口标题&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 设置固定的窗口大小（防止用户使用鼠标拉伸窗口）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;setFixedSize&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;600&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;400&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 设置按钮大小
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;btn2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;resize&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;50&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;MyWidget&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::~&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MyWidget&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;delete&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ui&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;问题解答&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Question1：&lt;/strong&gt; 由于当前新建按钮是基于一个新的Qt控件类——&lt;strong&gt;QPushButton&lt;/strong&gt;，因此在调用&lt;strong&gt;show&lt;/strong&gt;方法时调用的是QPushButton的&lt;strong&gt;show&lt;/strong&gt;方法进行显示，在运行时会分别生成主窗口和按钮窗口（回顾&lt;strong&gt;main.cpp&lt;/strong&gt;的内容）。因此我们在构建按钮时需要使用&lt;strong&gt;setParent&lt;/strong&gt;方法为其指定父窗口，使其能够依附于主窗口进行显示。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Question2：&lt;/strong&gt; 中文显示乱码是因为文件的默认编码不是utf-8，需要在上方菜单栏中选择&lt;kbd&gt;工具&lt;/kbd&gt;-&amp;gt;&lt;kbd&gt;选项&lt;/kbd&gt;-&amp;gt;&lt;kbd&gt;文本编辑器&lt;/kbd&gt;-&amp;gt;&lt;kbd&gt;Behavior&lt;/kbd&gt;找到文件编码，修改默认编码为utf-8后应用并确认即可&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Question3：&lt;/strong&gt; 在Qt中，对象模型一般基于&lt;strong&gt;动态内存分配&lt;/strong&gt;而不是在栈上分配，即在创建对象时一般需要开发者在&lt;strong&gt;堆区&lt;/strong&gt;为对象开辟内存空间，而不是将对象作为局部变量使用。这是因为局部变量存在于栈区，其生命周期在函数运行结束时截止，因此若使用&lt;strong&gt;QPushButton btn(&amp;ldquo;Text&amp;rdquo;, parent)&lt;strong&gt;的方法创建对象，那么该对象的生命周期仅仅是&lt;/strong&gt;MiWidget&lt;/strong&gt;构造函数的&lt;strong&gt;运行时间&lt;/strong&gt;，当构造函数执行结束后，&lt;strong&gt;该对象也将会执行析构因此不会在运行时显示&lt;/strong&gt;。而若使用&lt;strong&gt;new&lt;/strong&gt;关键字在&lt;strong&gt;堆区&lt;/strong&gt;创建对象，则其生命周期由开发者自行控制，在执行&lt;strong&gt;delete&lt;/strong&gt;前该对象会一直存在。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;对象树&#34;&gt;对象树&lt;/h2&gt;
+&lt;p&gt;从上文中我们可以看到，在创建控件对象时我们一般使用new关键字为新对象开辟内存空间，然而却并没有相对应的delete进行空间释放，这是因为Qt使用了对象树的技术使得程序运行结束后能够自行释放内存空间。&lt;/p&gt;
+&lt;h3 id=&#34;对象树的定义&#34;&gt;对象树的定义：&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;当你创建一个QObject对象时，可以看到QObject的构造函数会接收一个QObject指针作为参数，这个参数就是parent（父对象指针）。由此，每当创建一个QObject对象时，Qt便会自动添加该对象到其父对象的children()列表，当父对象析构时，这个列表中的所有对象也会被析构。（注意：这里的父对象并不是继承意义上的父类，而是说该对象显示在（或依附于）哪个对象中。例如：一个按钮有一个QShortcut（快捷键）对象作为其子对象，当我们删除按钮时，这个快捷键也会被删除。&lt;/li&gt;
+&lt;li&gt;QWidget是能够在屏幕上显示的一切组件的父类。QWidget继承自QObject，因此也继承了这种对象树关系。当创建的对象在堆区时，如果指定的父对象所属类是QObject派生下来的类或其子类，那么派生下来的类可以无需管理释放操作，会将对象放入对象树，一定程度上简化了内存回收机制。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;qt中的坐标系&#34;&gt;Qt中的坐标系&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;左上角为(0, 0)点&lt;/li&gt;
+&lt;li&gt;x以右为正方向，y以下为正方向，坐标向右向下逐渐增大&lt;/li&gt;
+&lt;li&gt;对于嵌套窗口，其坐标是相对于父窗口来说的(即坐标原点总是位于父窗口左上角)&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>QT学习记录_02</title>
+        <link>http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/</link>
+        <pubDate>Sun, 04 Feb 2024 20:51:56 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/</guid>
+        <description>&lt;img src="http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/20.jpg" alt="Featured image of post QT学习记录_02" /&gt;&lt;h1 id=&#34;qt项目构建及项目结构说明&#34;&gt;Qt项目构建及项目结构说明&lt;/h1&gt;
+&lt;h2 id=&#34;qt-creator窗口介绍&#34;&gt;Qt Creator窗口介绍&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;欢迎界面
+&lt;ul&gt;
+&lt;li&gt;Projects：主要功能为管理会话、创建项目、打开项目&lt;/li&gt;
+&lt;li&gt;示例：可下载并参考一些官方做的Qt项目&lt;/li&gt;
+&lt;li&gt;教程：官方的Qt教程，需要翻墙观看&lt;/li&gt;
+&lt;li&gt;MarketPlace：一些可下载的Qt工具包&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;编辑界面：编辑当前项目代码&lt;/li&gt;
+&lt;li&gt;设计界面：通过可视化操作编辑当前界面UI&lt;/li&gt;
+&lt;li&gt;Debug界面：代码调试&lt;/li&gt;
+&lt;li&gt;项目界面：设置并查看当前项目的一些配置信息&lt;/li&gt;
+&lt;li&gt;帮助界面：极为重要的界面，可以使用Filter学习自己不熟悉的类&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;qt项目构建流程&#34;&gt;Qt项目构建流程&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;欢迎界面的Projects模块点击New新建项目
+&lt;img src=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_01.png&#34;
+	width=&#34;1920&#34;
+	height=&#34;1029&#34;
+	srcset=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_01_hud65570157ff5699892c123f57a047fa4_244715_480x0_resize_box_3.png 480w, http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_01_hud65570157ff5699892c123f57a047fa4_244715_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;186&#34;
+		data-flex-basis=&#34;447px&#34;
+	
+&gt;&lt;/li&gt;
+&lt;li&gt;在本次学习中，我们只涉及到Qt窗口应用的构建及开发，选择&lt;strong&gt;Application(Qt)-&amp;gt;Qt Widgets Application&lt;/strong&gt;点击&lt;strong&gt;Choose&lt;/strong&gt;
+&lt;img src=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_02.png&#34;
+	width=&#34;899&#34;
+	height=&#34;566&#34;
+	srcset=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_02_hu9f7c4b76f7a61668ad100bfcf3ffb2fa_110088_480x0_resize_box_3.png 480w, http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_02_hu9f7c4b76f7a61668ad100bfcf3ffb2fa_110088_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;158&#34;
+		data-flex-basis=&#34;381px&#34;
+	
+&gt;&lt;/li&gt;
+&lt;li&gt;选择要创建项目的存储路径并输入项目名称，该步骤完成后会在存储路径生成两个目录，一个用于存放源文件，另一个用于存放构建及调试文件。（后续会讲解如何将这两个目录合并到一起）
+&lt;img src=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_03.png&#34;
+	width=&#34;819&#34;
+	height=&#34;546&#34;
+	srcset=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_03_hu59f967a3b07b298705724a2b0a535c55_85943_480x0_resize_box_3.png 480w, http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_03_hu59f967a3b07b298705724a2b0a535c55_85943_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;150&#34;
+		data-flex-basis=&#34;360px&#34;
+	
+&gt;&lt;/li&gt;
+&lt;li&gt;选择项目的构建系统，在该步骤中，&lt;del&gt;Qbs一般不会考虑&lt;/del&gt;，剩余两项构建系统的区别为：&lt;br&gt;
+&lt;strong&gt;qmake&lt;/strong&gt;：是Qt内置的构建系统，十分地简单方便，但扩展性和功能相对较低，&lt;strong&gt;初学阶段或小型项目选择qmake点击下一步即可。&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;cmake&lt;/strong&gt;：相对复杂，但扩展性和功能更加强大，适用于复杂度超过qmake处理能力的项目。
+&lt;img src=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_04.png&#34;
+	width=&#34;819&#34;
+	height=&#34;546&#34;
+	srcset=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_04_hu94ad926104f9839edb486d2e399a0d7b_61981_480x0_resize_box_3.png 480w, http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_04_hu94ad926104f9839edb486d2e399a0d7b_61981_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;150&#34;
+		data-flex-basis=&#34;360px&#34;
+	
+&gt;&lt;/li&gt;
+&lt;li&gt;设置自己的窗口类，并勾选是否使用设计界面编辑窗口，其中类名可以自由指定，&lt;strong&gt;QWidget&lt;/strong&gt;是&lt;strong&gt;QMainWindow&lt;/strong&gt;和&lt;strong&gt;QDialog&lt;/strong&gt;的父类。
+&lt;img src=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_05.png&#34;
+	width=&#34;819&#34;
+	height=&#34;546&#34;
+	srcset=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_05_hu9bad009c5601684a406f7592d12a5aea_93717_480x0_resize_box_3.png 480w, http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_05_hu9bad009c5601684a406f7592d12a5aea_93717_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;150&#34;
+		data-flex-basis=&#34;360px&#34;
+	
+&gt;
+&lt;strong&gt;QWidget&lt;/strong&gt;是最简单的交互窗口，&lt;strong&gt;QMainWindow&lt;/strong&gt;除了窗口外多了菜单栏、状态栏等等，&lt;strong&gt;QDialog&lt;/strong&gt;是对话框（&lt;strong&gt;包含确认按钮、取消按钮等，类比当前窗口&lt;/strong&gt;）
+&lt;img src=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_06.png&#34;
+	width=&#34;819&#34;
+	height=&#34;546&#34;
+	srcset=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_06_hu44c8b9a52182db7236475d2a2e84abcb_96489_480x0_resize_box_3.png 480w, http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_06_hu44c8b9a52182db7236475d2a2e84abcb_96489_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;150&#34;
+		data-flex-basis=&#34;360px&#34;
+	
+&gt;
+选中&lt;strong&gt;Generate form&lt;/strong&gt;后会启用设计界面。指定类名后，下面的基类名、头文件、源文件等会自动跟随自定义类名进行命名。配置完成后点击下一步。
+&lt;img src=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_07.png&#34;
+	width=&#34;819&#34;
+	height=&#34;546&#34;
+	srcset=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_07_hu6c0feee33250237323ac28ac3f05c685_93473_480x0_resize_box_3.png 480w, http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_07_hu6c0feee33250237323ac28ac3f05c685_93473_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;150&#34;
+		data-flex-basis=&#34;360px&#34;
+	
+&gt;&lt;/li&gt;
+&lt;li&gt;选择是否为Qt项目添加英文自动翻译工具，一般不需要因此暂时忽略。
+&lt;img src=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_08.png&#34;
+	width=&#34;819&#34;
+	height=&#34;546&#34;
+	srcset=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_08_hufbb322bb72188b1ade5292131d9efebe_84585_480x0_resize_box_3.png 480w, http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_08_hufbb322bb72188b1ade5292131d9efebe_84585_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;150&#34;
+		data-flex-basis=&#34;360px&#34;
+	
+&gt;&lt;/li&gt;
+&lt;li&gt;选择构建项目所使用的编译环境，我是64位机因此选择第二个选项，如要获得更多的系统可移植性可选择32位进行项目构建。
+&lt;img src=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_09.png&#34;
+	width=&#34;1015&#34;
+	height=&#34;614&#34;
+	srcset=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_09_hu77a57acda479fe4a9b962454702b2e32_170281_480x0_resize_box_3.png 480w, http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_09_hu77a57acda479fe4a9b962454702b2e32_170281_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;165&#34;
+		data-flex-basis=&#34;396px&#34;
+	
+&gt;&lt;/li&gt;
+&lt;li&gt;完成项目构建，从&lt;strong&gt;要添加的文件&lt;/strong&gt;中可了解到项目的构建路径以及项目所包含的项目文件。&lt;br&gt;
+&lt;kbd&gt;main.cpp&lt;/kbd&gt;是主程序入口&lt;br&gt;
+&lt;kbd&gt;mywidget.cpp&lt;/kbd&gt;是个人定制的窗口类&lt;br&gt;
+&lt;kbd&gt;mywidget.h&lt;/kbd&gt;是个人定制的窗口类的头文件&lt;br&gt;
+&lt;kbd&gt;mywidget.ui&lt;/kbd&gt;是个人定制的窗口类的可视化设计文件，它本质上是一个标准XML格式的文本，需要通过&lt;strong&gt;uic&lt;/strong&gt;工具将其转换为项目中可用的&lt;strong&gt;ui_*.h&lt;/strong&gt;头文件，使用时ui是一个指向自定义界面类的指针（后面一般跟着控件名）例如ui文件中有一个叫&lt;strong&gt;textEdit&lt;/strong&gt;的&lt;strong&gt;QTextEdit&lt;/strong&gt;组件，你就可以通过&lt;strong&gt;ui-&amp;gt;textEdit&lt;/strong&gt;来访问这个文本框&lt;br&gt;
+&lt;kbd&gt;QtStudy_Day01.pro&lt;/kbd&gt;是工程文件，是&lt;strong&gt;qmake&lt;/strong&gt;(or cmake)自动生成的用于生成makefile的配置文件，可以通过该文件直接打开项目。&lt;br&gt;
+&lt;img src=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_10.png&#34;
+	width=&#34;1015&#34;
+	height=&#34;614&#34;
+	srcset=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_10_hu6956dfd086844066f2816f1bdc65d5b4_93507_480x0_resize_box_3.png 480w, http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_10_hu6956dfd086844066f2816f1bdc65d5b4_93507_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;165&#34;
+		data-flex-basis=&#34;396px&#34;
+	
+&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;基础main函数详解&#34;&gt;基础main函数详解&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 自己新建的窗口类
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;#34;mywidget.h&amp;#34;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 包含一个应用程序类的头文件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;lt;QApplication&amp;gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// main函数主要执行一些初始化的工作，然后将控制权转交给Qt库，然后Qt库通过事件向程序告知用户行为。
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 程序入口，argc用来接收命令行参数的个数，argv用来接收命令行参数的数组
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;argc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;argv&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// a是应用程序类QApplication实例化出来的对象，每个Qt程序有且仅有一个
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;QApplication&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;argc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;argv&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 使用自定义的窗口类MyWidget构建一个窗口对象w，MyWidget是继承自父类QWidget的子类
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;MyWidget&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;w&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 构建窗口对象w后默认不会显示窗口，必须调用show方法进行显示
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;w&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;show&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 让应用程序对象进入消息循环，即main函数将控制权转交给Qt
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;c1&#34;&gt;// 在exec()函数中，Qt接收处理用户和系统的事件并将它们传递给适当的窗口部件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;exec&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;cm&#34;&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;        类比:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;        while(true){
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;            if(点击叉号)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;                break;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;            else{
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;                捕获动作
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;                continue;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;            }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;    */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;pro文件详解&#34;&gt;&lt;strong&gt;.pro&lt;/strong&gt;文件详解&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 一般情况下不要轻易改动.pro文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Qt包含的模块：core和gui（Qt5以上才将Qt Widget模块从gui模块分离出来）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;QT&lt;/span&gt;       &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;core&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;gui&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Qt版本号大于4，Qt新增了Widget模块&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;greaterThan&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;QT_MAJOR_VERSION&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QT&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;widgets&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 工程配置和编译的参数，允许C++11语法&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;CONFIG&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;11&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 项目编译后生成的可执行文件的文件名（可修改），在项目调试目录中&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;TARGET&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QtStudy_Day01&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 使用Qt的application模板，告诉qmake为这个应用程序生成哪种makefile&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;TEMPLATE&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;app&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 预定义预处理符号&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;DEFINES&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QT_DEPRECATED_WARNINGS&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 指定来自moc的所有中间文件放置的目录（含Q_OBJECT宏的头文件转换为标准.h文件的存放目录）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;MOC_DIR&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; \
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 指定多有中间文件.o(.obj)放置的目录&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;OBJECTS_DIR&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; \
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# UIC将ui转化为头文件所存放的目录&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;UI_DIR&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; \
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 指定编译项目时应该搜索的文件夹&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;INCLUDEPATH&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; \
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 指定最终文件生成的目录&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;DESTDIR&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; \
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# You can make your code fail to compile if it uses deprecated APIs.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# In order to do so, uncomment the following line.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 源文件包含main.cpp以及mywidget.cpp文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;SOURCES&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; \
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cpp&lt;/span&gt; \
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;mywidget&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cpp&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 头文件包含mywidget.h文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;HEADERS&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; \
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;mywidget&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;h&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 设计文件包含mywidget.ui文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;FORMS&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; \
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;mywidget&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ui&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Default rules for deployment.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 目标文件地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;qnx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;target&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;path&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tmp&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;$$&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TARGET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;bin&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;unix&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;android&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;target&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;path&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;opt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;$$&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TARGET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;bin&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;isEmpty&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;target&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;INSTALLS&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;target&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;自定义窗口头文件详解&#34;&gt;自定义窗口头文件详解&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 防止头文件被重复引用，如果没有该自定义头文件则执行#define MYWIDGET_H进行头文件包含操作。
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;#ifndef MYWIDGET_H  
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#define MYWIDGET_H
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 包含窗口类头文件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;lt;QWidget&amp;gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 定义自定义窗口类的命名空间Ui，声明Ui命名空间下的Widget类
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;QT_BEGIN_NAMESPACE&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;namespace&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Ui&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;MyWidget&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;QT_END_NAMESPACE&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 让自定义窗口类继承QWidget类以使用show等方法
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;MyWidget&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QWidget&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 宏，允许类中使用信号和槽的机制以及元对象系统服务，必须限定为私有访问权限
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;Q_OBJECT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 声明有参构造函数并提供默认值，使用该默认值时将调用父类QWidget的有参构造函数
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;MyWidget&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;QWidget&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;parent&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;nullptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 声明默认析构函数
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MyWidget&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;private&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 创建Ui::Widget类型的指针，用于操作ui界面及其控件。
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;Ui&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MyWidget&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ui&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#endif &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// MYWIDGET_H
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;自定义窗口源文件详解&#34;&gt;自定义窗口源文件详解&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;#34;mywidget.h&amp;#34;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;#34;ui_mywidget.h&amp;#34;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 有参构造函数的定义：声明时使用了默认参数，定义时则不再使用
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt; * MyWidget有参构造函数的定义，并使用初始化列表对其进行初始化：
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt; * 已知MyWidget继承自QWidget，令QWidget *parent = parent，然后对MyWidget进行初始化。
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt; * 令ui = new Ui::MyWidget，使得ui指针指向新创建的Ui命名空间内的MyWidget类型对象，通过这个对象可以访问和操作MyWidget的用户界面元素。
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;*/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;MyWidget&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MyWidget&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;QWidget&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;parent&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QWidget&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;parent&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ui&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Ui&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MyWidget&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 为ui对象传入当前窗口对象指针，将当前窗口对象与其ui绑定
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;ui&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setupUi&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 析构函数的定义
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MyWidget&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::~&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MyWidget&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;delete&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ui&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;qt-creator快捷键&#34;&gt;Qt Creator快捷键&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;Key&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;kbd&gt;ctrl + /&lt;/kbd&gt;&lt;/td&gt;
+&lt;td&gt;注释&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;kbd&gt;ctrl + r&lt;/kbd&gt;&lt;/td&gt;
+&lt;td&gt;运行&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;kbd&gt;ctrl + b&lt;/kbd&gt;&lt;/td&gt;
+&lt;td&gt;编译&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;kbd&gt;ctrl + MouseUp/MouseDown&lt;/kbd&gt;&lt;/td&gt;
+&lt;td&gt;字体缩放&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;kbd&gt;ctrl + f&lt;/kbd&gt;&lt;/td&gt;
+&lt;td&gt;查找&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;kbd&gt;ctrl + shift + ↑/↓&lt;/kbd&gt;&lt;/td&gt;
+&lt;td&gt;整行移动&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;kbd&gt;F1&lt;/kbd&gt;&lt;/td&gt;
+&lt;td&gt;帮助文档（或者直接运行Qt Assistant）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;kbd&gt;ctrl + i&lt;/kbd&gt;&lt;/td&gt;
+&lt;td&gt;自动对齐&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;kbd&gt;F4&lt;/kbd&gt;&lt;/td&gt;
+&lt;td&gt;同名之间 .h和 .cpp自由切换&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        </item>
+        <item>
+        <title>QT学习记录_01</title>
+        <link>http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_01/</link>
+        <pubDate>Sun, 04 Feb 2024 20:51:42 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_01/</guid>
+        <description>&lt;img src="http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_01/19.jpg" alt="Featured image of post QT学习记录_01" /&gt;&lt;h1 id=&#34;qt概述&#34;&gt;QT概述&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;QT简介：跨平台C++图形用户界面应用程序框架，完全面向对象，易扩展且允许组件编程。&lt;/li&gt;
+&lt;li&gt;版本及兼容性：
+&lt;ul&gt;
+&lt;li&gt;QT商业版：相较开源版本多提供了商业有效期内的免费升级和技术支持服务。&lt;/li&gt;
+&lt;li&gt;QT开源：与商业版相同功能，在GNU通用公共许可下发布的免费版本。&lt;/li&gt;
+&lt;li&gt;Windows全平台、Linux、Mac全平台、嵌入式Linux、iOS、Android、WP&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;qt入门资源推荐&#34;&gt;QT入门资源推荐&lt;/h2&gt;
+&lt;h3 id=&#34;qt入门到进阶书籍建议从qt5开始学&#34;&gt;QT入门到进阶书籍（建议从Qt5开始学）&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;《QT Creator 快速入门 霍亚飞》：必买&lt;/li&gt;
+&lt;li&gt;《QT及QT Quick开发实战精解》：5个实用的QT实例以及QT Quick技术介绍&lt;/li&gt;
+&lt;li&gt;《Qt5.9 C++开发指南》：必买&lt;/li&gt;
+&lt;li&gt;《Qt5开发及实例》：以QT5作为平台，每个章节用一个小实例介绍QT5开发的各个方面，最后通过三个大实例系统介绍QT5综合应用开发。&lt;/li&gt;
+&lt;li&gt;《QT5编程入门》：qml推荐书籍&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;进阶&#34;&gt;进阶&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;《C++ GUI QT4编程》&lt;/li&gt;
+&lt;li&gt;《QT高级编程》&lt;/li&gt;
+&lt;li&gt;OpenCV3和Qt5计算机视觉应用开发&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;推荐的qt论坛个人博客网站&#34;&gt;推荐的QT论坛+个人博客+网站&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名称&lt;/th&gt;
+&lt;th&gt;网址&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;qtcn&lt;/td&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.qtcn.org&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://www.qtcn.org&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;豆子的空间&lt;/td&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.devbean.net&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;[DevBean Tech World](DevBean Tech World)&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;yafeilinux&lt;/td&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.qter.org&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;qt qml linux 嵌入式 教程!&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;一去二三里&lt;/td&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;http://blog.csdn.net/liang19890820&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://blog.csdn.net/liang19890820&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;乌托邦2号&lt;/td&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;http://blog.csdn.net/taiyang1987912&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://blog.csdn.net/taiyang1987912&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;foruok&lt;/td&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;http://blog.csdn.net/foruok&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://blog.csdn.net/foruok&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;jason&lt;/td&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;http://blog.csdn.net/wsj18808050&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://blog.csdn.net/wsj18808050&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;朝十晚八&lt;/td&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.cnblogs.com/swarmbees&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;[朝十晚八 - 博客园](朝十晚八 - 博客园)&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;BIG_C_GOD&lt;/td&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;http://blog.csdn.net/big_c_god&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://blog.csdn.net/big_c_god&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;公孙二狗&lt;/td&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://qtdebug.com/qtbook&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://qtdebug.com/qtbook&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;雨田哥&lt;/td&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/ly305750665&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://blog.csdn.net/ly305750665&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;郑天佐&lt;/td&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/zhengtianzuo06&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://blog.csdn.net/zhengtianzuo06&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;寒山-居士&lt;/td&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/esonpo&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://blog.csdn.net/esonpo&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;feiyangqingyun&lt;/td&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/feiyangqingyun&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://blog.csdn.net/feiyangqingyun&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;前行中小猪&lt;/td&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;http://blog.csdn.net/goforwardtostep&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://blog.csdn.net/goforwardtostep&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;涛哥的知乎专栏&lt;/td&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;Qt%e8%bf%9b%e9%98%b6%e4%b9%8b%e8%b7%af&#34; &gt;Qt进阶之路&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Qt君&lt;/td&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/nicai_xiaoqinxi&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://blog.csdn.net/nicai_xiaoqinxi&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Qt老外视频教程&lt;/td&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;http://space.bilibili.com/2592237/#!/index&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;[哔哩哔哩 ( ゜- ゜)つロ 乾杯~ Bilibili](哔哩哔哩 ( ゜- ゜)つロ 乾杯~ Bilibili)&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Qt维基补充文档&lt;/td&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://wiki.qt.io/Main&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Qt Wiki&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Qt源码查看网站&lt;/td&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://code.woboq.org/qt5&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;qt5/ Source Tree - Woboq Code Browser&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Qt官方下载地址&lt;/td&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://download.qt.io&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Index of /&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Qt国内镜像下载地址&lt;/td&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://mirrors.cloud.tencent.com/qt&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;[Index of /qt/](Index of /qt/)&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;qt优点&#34;&gt;Qt优点&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;跨平台&lt;/li&gt;
+&lt;li&gt;接口简单&lt;/li&gt;
+&lt;li&gt;一定程度上简化了内存回收程序&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;qt成功案例&#34;&gt;Qt成功案例&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Linux的一种桌面环境：KDE&lt;/li&gt;
+&lt;li&gt;WPS Office&lt;/li&gt;
+&lt;li&gt;Skype 网络电话&lt;/li&gt;
+&lt;li&gt;Google Earth 谷歌地图&lt;/li&gt;
+&lt;li&gt;VLC 多媒体播放器&lt;/li&gt;
+&lt;li&gt;VirtualBox虚拟机软件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;qt版本&#34;&gt;Qt版本&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;商业版
+为商业发行版Qt，并且提供商业有效期内的免费升级和技术支持服务&lt;/li&gt;
+&lt;li&gt;开源LGPL版本
+提供了与商业版本同样的功能，但没有免费升级和技术支持服务&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>研究生周报 2024 02 04</title>
+        <link>http://localhost:1313/p/postgraduate-weekly-report-2024-02-04/</link>
+        <pubDate>Sun, 04 Feb 2024 20:47:08 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/postgraduate-weekly-report-2024-02-04/</guid>
+        <description>&lt;img src="http://localhost:1313/p/postgraduate-weekly-report-2024-02-04/17.jpg" alt="Featured image of post 研究生周报 2024 02 04" /&gt;&lt;h2 id=&#34;摘要&#34;&gt;摘要&lt;/h2&gt;
+&lt;p&gt;该文档主要描述本周主要活动内容及收获，之后主要论述下周个人计划及其被安排在此时间节点的原因。&lt;/p&gt;
+&lt;h2 id=&#34;本周个人提升计划&#34;&gt;本周个人提升计划&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;每日英语、粤语学习&lt;/li&gt;
+&lt;li&gt;完成Qt基础，了解信号及槽的机制&lt;/li&gt;
+&lt;li&gt;学习龙曲良深度学习课程&lt;/li&gt;
+&lt;li&gt;复习C++ STL部分，开始刷题&lt;/li&gt;
+&lt;li&gt;如有空余时间，继续51单片机的学习&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;本周个人提升内容&#34;&gt;本周个人提升内容&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;完成Qt信号与槽机制的复习，学习记录更新完Qt基础部分&lt;/li&gt;
+&lt;li&gt;由于个人惰性，未分出多余时间继续深度学习课程，转而阅读周岭的《认知觉醒》且受益良多&lt;/li&gt;
+&lt;li&gt;完成C++ STL vector和string容器的复习，继续PTA刷题之旅，目前天梯赛卡在第9题还是无法通过&amp;hellip;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;了解原神内存扫描技术实现机理，搜索MOD并使用3dmigoto库更换游戏人物及武器模型&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;完成个人博客基础阶段的复现，再次导入GitHub Pages实现外部访问&lt;/li&gt;
+&lt;li&gt;周累计完成5篇博文的写作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;下周计划&#34;&gt;下周计划&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;完成《认知觉醒》的阅读并在博客上更新读书笔记&lt;/li&gt;
+&lt;li&gt;完成Qt剩余部分的学习并更新学习笔记&lt;/li&gt;
+&lt;li&gt;完成VMware&amp;amp;Ubuntu环境搭建指南博客的编写&lt;/li&gt;
+&lt;li&gt;Hugo建站指南系列博客——Day2的编写&lt;/li&gt;
+&lt;li&gt;继续复习C++ STL模块和刷题&lt;/li&gt;
+&lt;li&gt;整理自己目标拆解的思路并应用到每日规划中&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;总结与反思&#34;&gt;总结与反思&lt;/h2&gt;
+&lt;p&gt;相较于前几周，从工作完成度上来说本周的成果还是略有进步的。首先在个人提升方面，我通过《认知觉醒》这本书的确了解到了很多十分震撼的大脑运行机制，开始了解大脑的组成以及所谓毅力、耐心、学习力的底层原理——即理智脑与本能脑和情绪脑的完美合作才是一个人能够拥有这些品质的根本原因。解读此书前半部分后，回头再看老师曾给出的建议会有更大的感悟——要想持续获得进步，不是只靠个人“毅力”就行，而是要有一个明确合理的目标，并且要对目标进行&lt;strong&gt;深度的拆解&lt;/strong&gt;，拆解成一个个&lt;strong&gt;切实可执行&lt;/strong&gt;的步骤，才会让自己的本能脑和情绪脑获得安全感，自愿协助理智脑向着目标一步步前进，同时在努力过程中也要动用理智脑对当前工作进行评估，切莫不可让本能脑盲目努力，偏离方向是大忌！！！因此，从下周开始我要明确我的目标并进行详细拆解，并将步骤分配到每日规划中，不再是向前几周一样最后记周报，而是每天都要对周报进行更新。希望在下一周的学习中能够好好地巩固基础，为下学期的课题学习和论文阅读打下坚实基础！&lt;/p&gt;
+&lt;h4 id=&#34;下附更新后的个人博客地址下周更新评论系统希望老师多多指正&#34;&gt;下附更新后的个人博客地址，下周更新评论系统，希望老师多多指正(&lt;em&gt;^▽^&lt;/em&gt;)&lt;/h4&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;joker0ops.github.io&#34; &gt;木木龙的个人博客&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>研究生周报 2024 01 28</title>
+        <link>http://localhost:1313/p/postgraduate-weekly-report-2024-01-28/</link>
+        <pubDate>Sun, 04 Feb 2024 20:46:54 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/postgraduate-weekly-report-2024-01-28/</guid>
+        <description>&lt;img src="http://localhost:1313/p/postgraduate-weekly-report-2024-01-28/15.jpg" alt="Featured image of post 研究生周报 2024 01 28" /&gt;&lt;h2 id=&#34;摘要&#34;&gt;摘要&lt;/h2&gt;
+&lt;p&gt;该文档主要描述本周主要活动内容及收获，之后主要论述下周个人计划及其被安排在此时间节点的原因。&lt;/p&gt;
+&lt;h2 id=&#34;本周个人提升计划&#34;&gt;本周个人提升计划&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;完成LabWindows的学习并使用LabWindows复现C多线程时钟项目&lt;/li&gt;
+&lt;li&gt;学习龙曲良深度学习教程&lt;/li&gt;
+&lt;li&gt;阅读《流畅的Python》&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;本周个人提升内容&#34;&gt;本周个人提升内容&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;复习C++面向对象编程部分&lt;/li&gt;
+&lt;li&gt;学习串口通信、虚拟串口的相关知识，学会利用串口助手进行不同串口间的数据通信&lt;/li&gt;
+&lt;li&gt;继续Qt学习&lt;/li&gt;
+&lt;li&gt;阅读《流畅的Python》，开始复习Python&lt;/li&gt;
+&lt;li&gt;学习龙曲良深度学习课程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;下周计划&#34;&gt;下周计划&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;每日英语、粤语学习&lt;/li&gt;
+&lt;li&gt;完成Qt基础，了解信号及槽的机制&lt;/li&gt;
+&lt;li&gt;学习龙曲良深度学习课程&lt;/li&gt;
+&lt;li&gt;复习C++ STL部分，开始刷题&lt;/li&gt;
+&lt;li&gt;如有空余时间，继续51单片机的学习&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;总结与反思&#34;&gt;总结与反思&lt;/h2&gt;
+&lt;p&gt;本周时间还是主要分配到了工作方面，周一至周二在部队协助任总和陈靖老师修改邢老师军工项目的研制总要求、经济分析报告等7个文件，虽然没有学到什么技术方面的知识，但能与任总、陈老师一起交流工作、学习、个人提升等方面的经验的确受益匪浅，同时让我了解了实体项目开发的完整流程，当全功率运转两天完成所有项目文件的修改时，内心犹然升起的成就感还是能够让人感到满足的。周三周四基本都在收拾虚拟机的时间中度过，踩了十几次坑总算是搞懂了VMware共享文件夹的配置机制——虚拟挂载点的挂载，准备专门写一篇博客记录这次艰难的环境配置过程。本想从周三开始专心学习专业知识，但是仍然无法静下心来进入心流状态——学习时要仔细感知手机的震动幅度，不敢错过刘“老师”的“社会经验上的锻炼”。好在近几日小团队确立了比赛的大致方向，且龚老师给我们讲解了串口通信和虚拟串口的相关知识，最终明确了暑假努力的大致方向——C++(主攻Qt和控制)、Python（主攻AI），希望在寒假能够好好利用起来，加油！&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>研究生周报 2024 01 21</title>
+        <link>http://localhost:1313/p/postgraduate-weekly-report-2024-01-21/</link>
+        <pubDate>Sun, 04 Feb 2024 20:46:48 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/postgraduate-weekly-report-2024-01-21/</guid>
+        <description>&lt;img src="http://localhost:1313/p/postgraduate-weekly-report-2024-01-21/5.jpg" alt="Featured image of post 研究生周报 2024 01 21" /&gt;&lt;h2 id=&#34;摘要&#34;&gt;摘要&lt;/h2&gt;
+&lt;p&gt;该文档主要描述本周主要活动内容及收获，之后主要论述下周个人计划及其被安排在此时间节点的原因。&lt;/p&gt;
+&lt;h2 id=&#34;本周个人提升计划&#34;&gt;本周个人提升计划&lt;/h2&gt;
+&lt;p&gt;尝试重新拉回既定的项目计划及周计划-&amp;gt;在个人提升方面重新步入英语、粤语、深度学习、硬件编程上的学习，争取在原定目标日完成要求的学习任务及项目任务。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;每日英语单词打卡&lt;/li&gt;
+&lt;li&gt;每日口语打卡&lt;/li&gt;
+&lt;li&gt;每日粤语打卡&lt;/li&gt;
+&lt;li&gt;在个人主机搭建好深度学习开发环境&lt;/li&gt;
+&lt;li&gt;测试《机器学习的数学》中的代码&lt;/li&gt;
+&lt;li&gt;完成龙曲良《深度学习》课程基础部分&lt;/li&gt;
+&lt;li&gt;每日算法题&lt;/li&gt;
+&lt;li&gt;重启个人博客项目&lt;/li&gt;
+&lt;li&gt;学习Qt&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;本周个人提升内容&#34;&gt;本周个人提升内容&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;每日打卡&lt;/li&gt;
+&lt;li&gt;搭建Tensor flow深度学习开发环境&lt;/li&gt;
+&lt;li&gt;复习Python基础并测试机器学习代码&lt;/li&gt;
+&lt;li&gt;重启个人博客项目&lt;/li&gt;
+&lt;li&gt;总结Ubuntu系统初始化步骤&lt;/li&gt;
+&lt;li&gt;学习C多线程库并复现示例代码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;下周计划&#34;&gt;下周计划&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;完成LabWindows的学习并使用LabWindows复现C多线程时钟项目&lt;/li&gt;
+&lt;li&gt;学习龙曲良深度学习教程&lt;/li&gt;
+&lt;li&gt;阅读《流畅的Python》&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;总结与反思&#34;&gt;总结与反思&lt;/h2&gt;
+&lt;p&gt;也许是自己没有做好时间规划的原因，总感觉没有什么时间做自己的事情。本周时间分配为（周一周二去给邢老师帮忙改文件，周三给刘老师改论文，给邢老师做PPT，周四接着去华山出差交付材料，周五休息一天后，周六周天除每天改一点PPT、给刘老师找期刊外，剩余的学习时间还是较为充足的）但是由于个人懒惰、自制力差等原因，每天仍无法早起早睡，因此浪费较多时间。下周要多从个人生活习惯上抓起，养成早睡早起、睡前不看手机的习惯，注重碎片化时间的管理。
+由于下周一开始连续两三天出差，且出差后要参与查找期刊以及整理论文的工作。因此未安排过多计划，望个人能够注重时间及精力管理，合理安排个人时间提升自己。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>研究生周报 2024 01 14</title>
+        <link>http://localhost:1313/p/postgraduate-weekly-report-2024-01-14/</link>
+        <pubDate>Sun, 04 Feb 2024 20:46:36 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/postgraduate-weekly-report-2024-01-14/</guid>
+        <description>&lt;img src="http://localhost:1313/p/postgraduate-weekly-report-2024-01-14/4.png" alt="Featured image of post 研究生周报 2024 01 14" /&gt;&lt;h2 id=&#34;摘要&#34;&gt;摘要&lt;/h2&gt;
+&lt;p&gt;该文档主要描述本周主要活动内容及收获，之后主要论述下周个人计划及其被安排在此时间节点的原因。&lt;/p&gt;
+&lt;h2 id=&#34;本周个人提升计划&#34;&gt;本周个人提升计划&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    由于个人惰性以及易受外界环境干扰的性格，导致本周几乎没有任何有规律且十分合理的每日或每周计划，且距离曾经制定的每周及每月目标相去甚远，距离曾经制定的项目计划相去甚远，每天感觉被各种琐事缠身却又无法获得任何实际性的收获。以下将列出本周所做的一些工作安排和一些小习惯的安排。
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol&gt;
+&lt;li&gt;查询打印机的分类、原理及各型号、品牌的区别和定价，为爷爷找到适合家用且产生有害物对肺部危害最小的打印机品型&lt;/li&gt;
+&lt;li&gt;完成Kali Linux定制项目，并编写项目报告&lt;/li&gt;
+&lt;li&gt;查询计算机系统硬件的相关知识，向王崭师兄打听实验室4090的问题并寻找解决办法&lt;/li&gt;
+&lt;li&gt;完成院公众号关于于老师课题组宣传推文的编写&lt;/li&gt;
+&lt;li&gt;总结上周末与小队成员共同查询的各种人工智能&amp;amp;电子设计竞赛的相关信息并反映给邢老师&lt;/li&gt;
+&lt;li&gt;给刘老师查期刊&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;本周个人提升内容&#34;&gt;本周个人提升内容&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[&lt;strong&gt;最大收获&lt;/strong&gt;] 听龚老师讲解关于认知与思维模式相关的内容，从而产生共鸣并开始反思自己当前各种行为方式、生活作息等与既定目标和计划的联系与差距，学会戒断多巴胺上瘾的小技巧并尝试应用。&lt;/li&gt;
+&lt;li&gt;了解了打印机的分类以及各类打印机的工作模式、机制原理及其会产生的有害物质（臭氧、VOC2、PM2.5）
+&lt;ul&gt;
+&lt;li&gt;激光打印机&lt;/li&gt;
+&lt;li&gt;喷墨式打印机&lt;/li&gt;
+&lt;li&gt;热敏打印机&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;了解了当前各类打印机的主流技术及选购方法&lt;/li&gt;
+&lt;li&gt;了解了计算机系统主板、CPU、显卡（GPU）、电源、内存、硬盘的相互关系并与其他同学合作组装主机&lt;/li&gt;
+&lt;li&gt;了解LabWindows基本开发方式&lt;/li&gt;
+&lt;li&gt;根据实验室一体化驱动项目了解硬件设计项目的组成和项目开发原理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;下周计划&#34;&gt;下周计划&lt;/h2&gt;
+&lt;p&gt;尝试重新拉回既定的项目计划及周计划-&amp;gt;在个人提升方面重新步入英语、粤语、深度学习、硬件编程上的学习，争取在原定目标日完成要求的学习任务及项目任务。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;每日英语单词打卡&lt;/li&gt;
+&lt;li&gt;每日口语打卡&lt;/li&gt;
+&lt;li&gt;每日粤语打卡&lt;/li&gt;
+&lt;li&gt;在个人主机搭建好深度学习开发环境&lt;/li&gt;
+&lt;li&gt;测试《机器学习的数学》中的代码&lt;/li&gt;
+&lt;li&gt;完成龙曲良《深度学习》课程基础部分&lt;/li&gt;
+&lt;li&gt;每日算法题&lt;/li&gt;
+&lt;li&gt;重启个人博客项目&lt;/li&gt;
+&lt;li&gt;学习Qt&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;总结与反思&#34;&gt;总结与反思&lt;/h2&gt;
+&lt;p&gt;本周几乎未有计划有目标地完成任何一件事，这样是不行的！还是要每天进行总结，进行反思，一定要有一个强烈的总目标并进行拆解，时刻注意停下脚步回头看一看，否则将可能离自己的目标越走越远！此外，这周周报还交晚了&amp;hellip;反思反思。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Hugo建站指南——Day1</title>
-        <link>http://localhost:1313/p/hugo-development/</link>
+        <link>http://localhost:1313/p/hugo-development-day1/</link>
         <pubDate>Fri, 02 Feb 2024 15:19:35 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/hugo-development/</guid>
-        <description>&lt;img src="http://localhost:1313/p/hugo-development/82.jpg" alt="Featured image of post Hugo建站指南——Day1" /&gt;&lt;h2 id=&#34;写在前面&#34;&gt;写在前面&lt;/h2&gt;
+        <guid>http://localhost:1313/p/hugo-development-day1/</guid>
+        <description>&lt;img src="http://localhost:1313/p/hugo-development-day1/82.jpg" alt="Featured image of post Hugo建站指南——Day1" /&gt;&lt;h2 id=&#34;写在前面&#34;&gt;写在前面&lt;/h2&gt;
 &lt;p&gt;           大学期间曾经尝试了许多中博客框架，从最初的WordPress到后来的Hexo再到使用Django搭建包含管理员后台系统的完整博客网站，但都没能够长时间使用，总感觉从前期开发到后期部署会出现各种各样的问题。于是我一直想要寻找一个能够快速构建、方便部署并能够让我在更新过程中不断对其进行完善的博客框架；直到Git Pages的出现，让静态网站框架搭建博客有了无与伦比的优势，我也开始搜集各种教程搭建博客，并最终确定了Hugo这一优秀的框架。&lt;/p&gt;
 &lt;p&gt;           本篇文章作为Hugo建站的系列文章，将详细记录我在建站过程中的建站流程、遇到的困难以及解决方法，希望能给读者朋友们带来一定的帮助。&lt;/p&gt;
 &lt;p&gt;           &lt;strong&gt;注：我是在Ubuntu 20.04环境下搭建的，在一些细节方面不同系统可能存在一些差异，见谅。&lt;/strong&gt;&lt;/p&gt;
@@ -257,7 +1243,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    hugo server -D
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;strong&gt;注：新建博文后博文头部front matter中draft: true表明该文章是草稿，如果在启用服务时不指定参数-D或&amp;ndash;buildDrafts，或者在配置文件config.toml中配置buildDrafts = true，则会在生成文章时忽略草稿。如果不想指定该参数就生成文章，需要改为draft: false或者将其删去。&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;注：新建博文后博文头部front matter中draft: true表明该文章是草稿，如果在启用服务时不指定参数-D或&amp;ndash;buildDrafts，或者在配置文件config.toml中配置buildDrafts = true，则会在生成文章时忽略草稿。如果不想指定该参数就生成文章，需要改为draft: false或者将其删去！！！&lt;/strong&gt;
+&lt;strong&gt;另注：新建博文后front matter中一定记着填写一个独一无二的标签，不是为了方便自己阅读，而是能够保证Hugo在生成静态页面文件时不至于将多篇博文错认成一篇博文从而导致一篇博文多次发表的情况！！！&lt;/strong&gt;&lt;/p&gt;
 &lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
 &lt;p&gt;           以上就是Hugo搭建Stack主题博客的基础部分，下期将会讲解如何将个人博客推送到GitPages以允许博客的外部访问。&lt;/p&gt;
 </description>

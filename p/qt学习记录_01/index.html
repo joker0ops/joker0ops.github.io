@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Qt Study Record Day1'>
+<title>QT学习记录_01</title>
+
+<link rel='canonical' href='http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_01/'>
+
+<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='QT学习记录_01'>
+<meta property='og:description' content='Qt Study Record Day1'>
+<meta property='og:url' content='http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_01/'>
+<meta property='og:site_name' content='木木龙的个人博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Qt' /><meta property='article:tag' content='C&#43;&#43;' /><meta property='article:published_time' content='2024-02-04T20:51:42&#43;08:00'/><meta property='article:modified_time' content='2024-02-04T20:51:42&#43;08:00'/><meta property='og:image' content='http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_01/19.jpg' />
+<meta name="twitter:title" content="QT学习记录_01">
+<meta name="twitter:description" content="Qt Study Record Day1"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_01/19.jpg' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar02_hufaee62c155fcf27c6865e7e5ba9676bf_129485_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🇨🇳</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">木木龙的个人博客</a></h1>
+            <h2 class="site-description">热爱可抵岁月漫长</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/joker0ops'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#qt入门资源推荐">QT入门资源推荐</a>
+      <ol>
+        <li><a href="#qt入门到进阶书籍建议从qt5开始学">QT入门到进阶书籍（建议从Qt5开始学）</a></li>
+        <li><a href="#进阶">进阶</a></li>
+        <li><a href="#推荐的qt论坛个人博客网站">推荐的QT论坛+个人博客+网站</a></li>
+      </ol>
+    </li>
+    <li><a href="#qt优点">Qt优点</a></li>
+    <li><a href="#qt成功案例">Qt成功案例</a></li>
+    <li><a href="#qt版本">Qt版本</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_01/">
+                <img src="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_01/19_hu279ce5e96b74c838a255ccc4e759ad22_706904_800x0_resize_q75_box.jpg"
+                        srcset="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_01/19_hu279ce5e96b74c838a255ccc4e759ad22_706904_800x0_resize_q75_box.jpg 800w, /p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_01/19_hu279ce5e96b74c838a255ccc4e759ad22_706904_1600x0_resize_q75_box.jpg 1600w"
+                        width="800" 
+                        height="450" 
+                        loading="lazy"
+                        alt="Featured image of post QT学习记录_01" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%8A%80%E6%9C%AF/" >
+                技术
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_01/">QT学习记录_01</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            Qt Study Record Day1
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2024/02/04</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 2 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="qt概述">QT概述</h1>
+<ol>
+<li>QT简介：跨平台C++图形用户界面应用程序框架，完全面向对象，易扩展且允许组件编程。</li>
+<li>版本及兼容性：
+<ul>
+<li>QT商业版：相较开源版本多提供了商业有效期内的免费升级和技术支持服务。</li>
+<li>QT开源：与商业版相同功能，在GNU通用公共许可下发布的免费版本。</li>
+<li>Windows全平台、Linux、Mac全平台、嵌入式Linux、iOS、Android、WP</li>
+</ul>
+</li>
+</ol>
+<h2 id="qt入门资源推荐">QT入门资源推荐</h2>
+<h3 id="qt入门到进阶书籍建议从qt5开始学">QT入门到进阶书籍（建议从Qt5开始学）</h3>
+<ol>
+<li>《QT Creator 快速入门 霍亚飞》：必买</li>
+<li>《QT及QT Quick开发实战精解》：5个实用的QT实例以及QT Quick技术介绍</li>
+<li>《Qt5.9 C++开发指南》：必买</li>
+<li>《Qt5开发及实例》：以QT5作为平台，每个章节用一个小实例介绍QT5开发的各个方面，最后通过三个大实例系统介绍QT5综合应用开发。</li>
+<li>《QT5编程入门》：qml推荐书籍</li>
+</ol>
+<h3 id="进阶">进阶</h3>
+<ol>
+<li>《C++ GUI QT4编程》</li>
+<li>《QT高级编程》</li>
+<li>OpenCV3和Qt5计算机视觉应用开发</li>
+</ol>
+<h3 id="推荐的qt论坛个人博客网站">推荐的QT论坛+个人博客+网站</h3>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>网址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>qtcn</td>
+<td><a class="link" href="http://www.qtcn.org"  target="_blank" rel="noopener"
+    >http://www.qtcn.org</a></td>
+</tr>
+<tr>
+<td>豆子的空间</td>
+<td><a class="link" href="https://www.devbean.net"  target="_blank" rel="noopener"
+    >[DevBean Tech World](DevBean Tech World)</a></td>
+</tr>
+<tr>
+<td>yafeilinux</td>
+<td><a class="link" href="http://www.qter.org"  target="_blank" rel="noopener"
+    >qt qml linux 嵌入式 教程!</a></td>
+</tr>
+<tr>
+<td>一去二三里</td>
+<td><a class="link" href="http://blog.csdn.net/liang19890820"  target="_blank" rel="noopener"
+    >http://blog.csdn.net/liang19890820</a></td>
+</tr>
+<tr>
+<td>乌托邦2号</td>
+<td><a class="link" href="http://blog.csdn.net/taiyang1987912"  target="_blank" rel="noopener"
+    >http://blog.csdn.net/taiyang1987912</a></td>
+</tr>
+<tr>
+<td>foruok</td>
+<td><a class="link" href="http://blog.csdn.net/foruok"  target="_blank" rel="noopener"
+    >http://blog.csdn.net/foruok</a></td>
+</tr>
+<tr>
+<td>jason</td>
+<td><a class="link" href="http://blog.csdn.net/wsj18808050"  target="_blank" rel="noopener"
+    >http://blog.csdn.net/wsj18808050</a></td>
+</tr>
+<tr>
+<td>朝十晚八</td>
+<td><a class="link" href="http://www.cnblogs.com/swarmbees"  target="_blank" rel="noopener"
+    >[朝十晚八 - 博客园](朝十晚八 - 博客园)</a></td>
+</tr>
+<tr>
+<td>BIG_C_GOD</td>
+<td><a class="link" href="http://blog.csdn.net/big_c_god"  target="_blank" rel="noopener"
+    >http://blog.csdn.net/big_c_god</a></td>
+</tr>
+<tr>
+<td>公孙二狗</td>
+<td><a class="link" href="https://qtdebug.com/qtbook"  target="_blank" rel="noopener"
+    >https://qtdebug.com/qtbook</a></td>
+</tr>
+<tr>
+<td>雨田哥</td>
+<td><a class="link" href="https://blog.csdn.net/ly305750665"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/ly305750665</a></td>
+</tr>
+<tr>
+<td>郑天佐</td>
+<td><a class="link" href="https://blog.csdn.net/zhengtianzuo06"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/zhengtianzuo06</a></td>
+</tr>
+<tr>
+<td>寒山-居士</td>
+<td><a class="link" href="https://blog.csdn.net/esonpo"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/esonpo</a></td>
+</tr>
+<tr>
+<td>feiyangqingyun</td>
+<td><a class="link" href="https://blog.csdn.net/feiyangqingyun"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/feiyangqingyun</a></td>
+</tr>
+<tr>
+<td>前行中小猪</td>
+<td><a class="link" href="http://blog.csdn.net/goforwardtostep"  target="_blank" rel="noopener"
+    >http://blog.csdn.net/goforwardtostep</a></td>
+</tr>
+<tr>
+<td>涛哥的知乎专栏</td>
+<td><a class="link" href="Qt%e8%bf%9b%e9%98%b6%e4%b9%8b%e8%b7%af" >Qt进阶之路</a></td>
+</tr>
+<tr>
+<td>Qt君</td>
+<td><a class="link" href="https://blog.csdn.net/nicai_xiaoqinxi"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/nicai_xiaoqinxi</a></td>
+</tr>
+<tr>
+<td>Qt老外视频教程</td>
+<td><a class="link" href="http://space.bilibili.com/2592237/#!/index"  target="_blank" rel="noopener"
+    >[哔哩哔哩 ( ゜- ゜)つロ 乾杯~ Bilibili](哔哩哔哩 ( ゜- ゜)つロ 乾杯~ Bilibili)</a></td>
+</tr>
+<tr>
+<td>Qt维基补充文档</td>
+<td><a class="link" href="https://wiki.qt.io/Main"  target="_blank" rel="noopener"
+    >Qt Wiki</a></td>
+</tr>
+<tr>
+<td>Qt源码查看网站</td>
+<td><a class="link" href="https://code.woboq.org/qt5"  target="_blank" rel="noopener"
+    >qt5/ Source Tree - Woboq Code Browser</a></td>
+</tr>
+<tr>
+<td>Qt官方下载地址</td>
+<td><a class="link" href="https://download.qt.io"  target="_blank" rel="noopener"
+    >Index of /</a></td>
+</tr>
+<tr>
+<td>Qt国内镜像下载地址</td>
+<td><a class="link" href="https://mirrors.cloud.tencent.com/qt"  target="_blank" rel="noopener"
+    >[Index of /qt/](Index of /qt/)</a></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="qt优点">Qt优点</h2>
+<ul>
+<li>跨平台</li>
+<li>接口简单</li>
+<li>一定程度上简化了内存回收程序</li>
+</ul>
+<h2 id="qt成功案例">Qt成功案例</h2>
+<ul>
+<li>Linux的一种桌面环境：KDE</li>
+<li>WPS Office</li>
+<li>Skype 网络电话</li>
+<li>Google Earth 谷歌地图</li>
+<li>VLC 多媒体播放器</li>
+<li>VirtualBox虚拟机软件</li>
+</ul>
+<h2 id="qt版本">Qt版本</h2>
+<ul>
+<li>商业版
+为商业发行版Qt，并且提供商业有效期内的免费升级和技术支持服务</li>
+<li>开源LGPL版本
+提供了与商业版本同样的功能，但没有免费升级和技术支持服务</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/qt/">Qt</a>
+        
+            <a href="/tags/c&#43;&#43;/">C&#43;&#43;</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/">
+        
+        
+            <div class="article-image">
+                <img src="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/22.7f061a0d92fd8334efdc1952d855a513_hu8c3a5b5f054fe6608239643744ee4034_521651_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post QT学习记录_03"
+                        
+                        data-hash="md5-fwYaDZL9gzTv3BlS2FWlEw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">QT学习记录_03</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/">
+        
+        
+            <div class="article-image">
+                <img src="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/20.6c285e7b02356f8d34a0e48b4b65e15d_hue8028801c9f73dd91eba9fc177c5fd74_708628_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post QT学习记录_02"
+                        
+                        data-hash="md5-bCheewI1b400oOSLS2XhXQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">QT学习记录_02</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/hugo-development-day1/">
+        
+        
+            <div class="article-image">
+                <img src="/p/hugo-development-day1/82.404289d49ca0d37d4378e2c622b3cebc_hub28da18d4871e87a3433ed7bebc8e373_795065_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Hugo建站指南——Day1"
+                        data-key="Hugo Development Day1" 
+                        data-hash="md5-QEKJ1Jyg031DeOLGIrPOvA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Hugo建站指南——Day1</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2023 - 
+        
+        2024 木木龙的个人博客
+    </section>
+    
+    <section class="powerby">
+        
+            热爱可抵岁月漫长，温柔可挡艰难时光。 <br/>
+        Nothing but enthusiasm brightens up the endless years. <br />
+        转载请注明主页网址哦~
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<script type="text/javascript" 
+color="255,255,255" opacity="0.7" count="500" zIndex="-1" src="JS/canvas-nest.min.js" ></script>
+<style type="text/css">
+    body { cursor: url("ZhongLiPosition.cur"), auto; }
+    .fireworks {
+        position: fixed;
+        pointer-events: none;
+        top: 0;
+        left: 0;
+        height: 100%;
+    }
+</style>
+<canvas class="fireworks"></canvas>
+<script src="JS/anime.min.js"></script>
+<script src="JS/fireworks.js"></script>
+<script src="JS/jquery-3.7.1.min.js"></script>
+<script>fireworks.setCanvacSize();</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var init = $("#dark-mode-toggle > svg.icon.icon-tabler.icon-tabler-toggle-left");
+        if (init.css("display") == "none") {
+            document.body.style.background = 'url(\'/Image/BGDark.png\')';
+            document.body.style.backgroundSize = '100%';
+            document.body.style.backgroundAttachment = 'fixed';
+        }
+        else {
+            document.body.style.background = 'url(\'/Image/BGLight.jpg\')';
+            document.body.style.backgroundSize = '100%';
+            document.body.style.backgroundAttachment = 'fixed';
+        }
+    });
+    document.getElementById('dark-mode-toggle').addEventListener("click", function () {
+        var white = $("#dark-mode-toggle > svg.icon.icon-tabler.icon-tabler-toggle-left");
+        if (white.css("display") == "none") {
+            document.body.style.background = 'url(\'/Image/BGLight.jpg\')';
+            document.body.style.backgroundSize = '100%';
+            document.body.style.backgroundAttachment = 'fixed';
+        }
+        var dark = $("#dark-mode-toggle > svg.icon.icon-tabler.icon-tabler-toggle-right");
+        if (dark.css("display") == "none") {
+            document.body.style.background = 'url(\'/Image/BGDark.png\')';
+            document.body.style.backgroundSize = '100%';
+            document.body.style.backgroundAttachment = 'fixed';
+        }
+    });
+</script>
+    </body>
+</html>

@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Qt Study Record Day2'>
+<title>QT学习记录_02</title>
+
+<link rel='canonical' href='http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/'>
+
+<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='QT学习记录_02'>
+<meta property='og:description' content='Qt Study Record Day2'>
+<meta property='og:url' content='http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/'>
+<meta property='og:site_name' content='木木龙的个人博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Qt' /><meta property='article:tag' content='C&#43;&#43;' /><meta property='article:published_time' content='2024-02-04T20:51:56&#43;08:00'/><meta property='article:modified_time' content='2024-02-04T20:51:56&#43;08:00'/><meta property='og:image' content='http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/20.jpg' />
+<meta name="twitter:title" content="QT学习记录_02">
+<meta name="twitter:description" content="Qt Study Record Day2"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/20.jpg' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar02_hufaee62c155fcf27c6865e7e5ba9676bf_129485_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🇨🇳</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">木木龙的个人博客</a></h1>
+            <h2 class="site-description">热爱可抵岁月漫长</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/joker0ops'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#qt-creator窗口介绍">Qt Creator窗口介绍</a></li>
+    <li><a href="#qt项目构建流程">Qt项目构建流程</a></li>
+    <li><a href="#基础main函数详解">基础main函数详解</a></li>
+    <li><a href="#pro文件详解"><strong>.pro</strong>文件详解</a></li>
+    <li><a href="#自定义窗口头文件详解">自定义窗口头文件详解</a></li>
+    <li><a href="#自定义窗口源文件详解">自定义窗口源文件详解</a></li>
+    <li><a href="#qt-creator快捷键">Qt Creator快捷键</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/">
+                <img src="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/20_hue8028801c9f73dd91eba9fc177c5fd74_708628_800x0_resize_q75_box.jpg"
+                        srcset="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/20_hue8028801c9f73dd91eba9fc177c5fd74_708628_800x0_resize_q75_box.jpg 800w, /p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/20_hue8028801c9f73dd91eba9fc177c5fd74_708628_1600x0_resize_q75_box.jpg 1600w"
+                        width="800" 
+                        height="450" 
+                        loading="lazy"
+                        alt="Featured image of post QT学习记录_02" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%8A%80%E6%9C%AF/" >
+                技术
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/">QT学习记录_02</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            Qt Study Record Day2
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2024/02/04</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 6 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="qt项目构建及项目结构说明">Qt项目构建及项目结构说明</h1>
+<h2 id="qt-creator窗口介绍">Qt Creator窗口介绍</h2>
+<ul>
+<li>欢迎界面
+<ul>
+<li>Projects：主要功能为管理会话、创建项目、打开项目</li>
+<li>示例：可下载并参考一些官方做的Qt项目</li>
+<li>教程：官方的Qt教程，需要翻墙观看</li>
+<li>MarketPlace：一些可下载的Qt工具包</li>
+</ul>
+</li>
+<li>编辑界面：编辑当前项目代码</li>
+<li>设计界面：通过可视化操作编辑当前界面UI</li>
+<li>Debug界面：代码调试</li>
+<li>项目界面：设置并查看当前项目的一些配置信息</li>
+<li>帮助界面：极为重要的界面，可以使用Filter学习自己不熟悉的类</li>
+</ul>
+<h2 id="qt项目构建流程">Qt项目构建流程</h2>
+<ol>
+<li>欢迎界面的Projects模块点击New新建项目
+<img src="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_01.png"
+	width="1920"
+	height="1029"
+	srcset="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_01_hud65570157ff5699892c123f57a047fa4_244715_480x0_resize_box_3.png 480w, /p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_01_hud65570157ff5699892c123f57a047fa4_244715_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Picture"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="186"
+		data-flex-basis="447px"
+	
+></li>
+<li>在本次学习中，我们只涉及到Qt窗口应用的构建及开发，选择<strong>Application(Qt)-&gt;Qt Widgets Application</strong>点击<strong>Choose</strong>
+<img src="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_02.png"
+	width="899"
+	height="566"
+	srcset="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_02_hu9f7c4b76f7a61668ad100bfcf3ffb2fa_110088_480x0_resize_box_3.png 480w, /p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_02_hu9f7c4b76f7a61668ad100bfcf3ffb2fa_110088_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Picture"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="158"
+		data-flex-basis="381px"
+	
+></li>
+<li>选择要创建项目的存储路径并输入项目名称，该步骤完成后会在存储路径生成两个目录，一个用于存放源文件，另一个用于存放构建及调试文件。（后续会讲解如何将这两个目录合并到一起）
+<img src="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_03.png"
+	width="819"
+	height="546"
+	srcset="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_03_hu59f967a3b07b298705724a2b0a535c55_85943_480x0_resize_box_3.png 480w, /p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_03_hu59f967a3b07b298705724a2b0a535c55_85943_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Picture"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="150"
+		data-flex-basis="360px"
+	
+></li>
+<li>选择项目的构建系统，在该步骤中，<del>Qbs一般不会考虑</del>，剩余两项构建系统的区别为：<br>
+<strong>qmake</strong>：是Qt内置的构建系统，十分地简单方便，但扩展性和功能相对较低，<strong>初学阶段或小型项目选择qmake点击下一步即可。</strong><br>
+<strong>cmake</strong>：相对复杂，但扩展性和功能更加强大，适用于复杂度超过qmake处理能力的项目。
+<img src="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_04.png"
+	width="819"
+	height="546"
+	srcset="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_04_hu94ad926104f9839edb486d2e399a0d7b_61981_480x0_resize_box_3.png 480w, /p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_04_hu94ad926104f9839edb486d2e399a0d7b_61981_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Picture"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="150"
+		data-flex-basis="360px"
+	
+></li>
+<li>设置自己的窗口类，并勾选是否使用设计界面编辑窗口，其中类名可以自由指定，<strong>QWidget</strong>是<strong>QMainWindow</strong>和<strong>QDialog</strong>的父类。
+<img src="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_05.png"
+	width="819"
+	height="546"
+	srcset="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_05_hu9bad009c5601684a406f7592d12a5aea_93717_480x0_resize_box_3.png 480w, /p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_05_hu9bad009c5601684a406f7592d12a5aea_93717_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Picture"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="150"
+		data-flex-basis="360px"
+	
+>
+<strong>QWidget</strong>是最简单的交互窗口，<strong>QMainWindow</strong>除了窗口外多了菜单栏、状态栏等等，<strong>QDialog</strong>是对话框（<strong>包含确认按钮、取消按钮等，类比当前窗口</strong>）
+<img src="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_06.png"
+	width="819"
+	height="546"
+	srcset="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_06_hu44c8b9a52182db7236475d2a2e84abcb_96489_480x0_resize_box_3.png 480w, /p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_06_hu44c8b9a52182db7236475d2a2e84abcb_96489_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Picture"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="150"
+		data-flex-basis="360px"
+	
+>
+选中<strong>Generate form</strong>后会启用设计界面。指定类名后，下面的基类名、头文件、源文件等会自动跟随自定义类名进行命名。配置完成后点击下一步。
+<img src="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_07.png"
+	width="819"
+	height="546"
+	srcset="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_07_hu6c0feee33250237323ac28ac3f05c685_93473_480x0_resize_box_3.png 480w, /p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_07_hu6c0feee33250237323ac28ac3f05c685_93473_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Picture"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="150"
+		data-flex-basis="360px"
+	
+></li>
+<li>选择是否为Qt项目添加英文自动翻译工具，一般不需要因此暂时忽略。
+<img src="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_08.png"
+	width="819"
+	height="546"
+	srcset="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_08_hufbb322bb72188b1ade5292131d9efebe_84585_480x0_resize_box_3.png 480w, /p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_08_hufbb322bb72188b1ade5292131d9efebe_84585_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Picture"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="150"
+		data-flex-basis="360px"
+	
+></li>
+<li>选择构建项目所使用的编译环境，我是64位机因此选择第二个选项，如要获得更多的系统可移植性可选择32位进行项目构建。
+<img src="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_09.png"
+	width="1015"
+	height="614"
+	srcset="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_09_hu77a57acda479fe4a9b962454702b2e32_170281_480x0_resize_box_3.png 480w, /p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_09_hu77a57acda479fe4a9b962454702b2e32_170281_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Picture"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="165"
+		data-flex-basis="396px"
+	
+></li>
+<li>完成项目构建，从<strong>要添加的文件</strong>中可了解到项目的构建路径以及项目所包含的项目文件。<br>
+<kbd>main.cpp</kbd>是主程序入口<br>
+<kbd>mywidget.cpp</kbd>是个人定制的窗口类<br>
+<kbd>mywidget.h</kbd>是个人定制的窗口类的头文件<br>
+<kbd>mywidget.ui</kbd>是个人定制的窗口类的可视化设计文件，它本质上是一个标准XML格式的文本，需要通过<strong>uic</strong>工具将其转换为项目中可用的<strong>ui_*.h</strong>头文件，使用时ui是一个指向自定义界面类的指针（后面一般跟着控件名）例如ui文件中有一个叫<strong>textEdit</strong>的<strong>QTextEdit</strong>组件，你就可以通过<strong>ui-&gt;textEdit</strong>来访问这个文本框<br>
+<kbd>QtStudy_Day01.pro</kbd>是工程文件，是<strong>qmake</strong>(or cmake)自动生成的用于生成makefile的配置文件，可以通过该文件直接打开项目。<br>
+<img src="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_10.png"
+	width="1015"
+	height="614"
+	srcset="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_10_hu6956dfd086844066f2816f1bdc65d5b4_93507_480x0_resize_box_3.png 480w, /p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_10_hu6956dfd086844066f2816f1bdc65d5b4_93507_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Picture"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="165"
+		data-flex-basis="396px"
+	
+></li>
+</ol>
+<h2 id="基础main函数详解">基础main函数详解</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">// 自己新建的窗口类
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&#34;mywidget.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1">// 包含一个应用程序类的头文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;QApplication&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1">// main函数主要执行一些初始化的工作，然后将控制权转交给Qt库，然后Qt库通过事件向程序告知用户行为。
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 程序入口，argc用来接收命令行参数的个数，argv用来接收命令行参数的数组
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// a是应用程序类QApplication实例化出来的对象，每个Qt程序有且仅有一个
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">QApplication</span> <span class="n">a</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 使用自定义的窗口类MyWidget构建一个窗口对象w，MyWidget是继承自父类QWidget的子类
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">MyWidget</span> <span class="n">w</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 构建窗口对象w后默认不会显示窗口，必须调用show方法进行显示
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">w</span><span class="p">.</span><span class="n">show</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 让应用程序对象进入消息循环，即main函数将控制权转交给Qt
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 在exec()函数中，Qt接收处理用户和系统的事件并将它们传递给适当的窗口部件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="n">exec</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">        类比:
+</span></span></span><span class="line"><span class="cl"><span class="cm">        while(true){
+</span></span></span><span class="line"><span class="cl"><span class="cm">            if(点击叉号)
+</span></span></span><span class="line"><span class="cl"><span class="cm">                break;
+</span></span></span><span class="line"><span class="cl"><span class="cm">            else{
+</span></span></span><span class="line"><span class="cl"><span class="cm">                捕获动作
+</span></span></span><span class="line"><span class="cl"><span class="cm">                continue;
+</span></span></span><span class="line"><span class="cl"><span class="cm">            }
+</span></span></span><span class="line"><span class="cl"><span class="cm">        }
+</span></span></span><span class="line"><span class="cl"><span class="cm">    */</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="pro文件详解"><strong>.pro</strong>文件详解</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 一般情况下不要轻易改动.pro文件</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Qt包含的模块：core和gui（Qt5以上才将Qt Widget模块从gui模块分离出来）</span>
+</span></span><span class="line"><span class="cl"><span class="n">QT</span>       <span class="o">+=</span> <span class="n">core</span> <span class="n">gui</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Qt版本号大于4，Qt新增了Widget模块</span>
+</span></span><span class="line"><span class="cl"><span class="n">greaterThan</span><span class="p">(</span><span class="n">QT_MAJOR_VERSION</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span> <span class="n">QT</span> <span class="o">+=</span> <span class="n">widgets</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 工程配置和编译的参数，允许C++11语法</span>
+</span></span><span class="line"><span class="cl"><span class="n">CONFIG</span> <span class="o">+=</span> <span class="n">c</span><span class="o">++</span><span class="mi">11</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 项目编译后生成的可执行文件的文件名（可修改），在项目调试目录中</span>
+</span></span><span class="line"><span class="cl"><span class="n">TARGET</span> <span class="o">=</span> <span class="n">QtStudy_Day01</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 使用Qt的application模板，告诉qmake为这个应用程序生成哪种makefile</span>
+</span></span><span class="line"><span class="cl"><span class="n">TEMPLATE</span> <span class="o">=</span> <span class="n">app</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 预定义预处理符号</span>
+</span></span><span class="line"><span class="cl"><span class="n">DEFINES</span> <span class="o">+=</span> <span class="n">QT_DEPRECATED_WARNINGS</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 指定来自moc的所有中间文件放置的目录（含Q_OBJECT宏的头文件转换为标准.h文件的存放目录）</span>
+</span></span><span class="line"><span class="cl"><span class="n">MOC_DIR</span> <span class="o">+=</span> \
+</span></span><span class="line"><span class="cl"><span class="c1"># 指定多有中间文件.o(.obj)放置的目录</span>
+</span></span><span class="line"><span class="cl"><span class="n">OBJECTS_DIR</span> <span class="o">+=</span> \
+</span></span><span class="line"><span class="cl"><span class="c1"># UIC将ui转化为头文件所存放的目录</span>
+</span></span><span class="line"><span class="cl"><span class="n">UI_DIR</span> <span class="o">+=</span> \
+</span></span><span class="line"><span class="cl"><span class="c1"># 指定编译项目时应该搜索的文件夹</span>
+</span></span><span class="line"><span class="cl"><span class="n">INCLUDEPATH</span> <span class="o">+=</span> \
+</span></span><span class="line"><span class="cl"><span class="c1"># 指定最终文件生成的目录</span>
+</span></span><span class="line"><span class="cl"><span class="n">DESTDIR</span> <span class="o">+=</span> \
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># You can make your code fail to compile if it uses deprecated APIs.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># In order to do so, uncomment the following line.</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 源文件包含main.cpp以及mywidget.cpp文件</span>
+</span></span><span class="line"><span class="cl"><span class="n">SOURCES</span> <span class="o">+=</span> \
+</span></span><span class="line"><span class="cl">    <span class="n">main</span><span class="o">.</span><span class="n">cpp</span> \
+</span></span><span class="line"><span class="cl">    <span class="n">mywidget</span><span class="o">.</span><span class="n">cpp</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 头文件包含mywidget.h文件</span>
+</span></span><span class="line"><span class="cl"><span class="n">HEADERS</span> <span class="o">+=</span> \
+</span></span><span class="line"><span class="cl">    <span class="n">mywidget</span><span class="o">.</span><span class="n">h</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 设计文件包含mywidget.ui文件</span>
+</span></span><span class="line"><span class="cl"><span class="n">FORMS</span> <span class="o">+=</span> \
+</span></span><span class="line"><span class="cl">    <span class="n">mywidget</span><span class="o">.</span><span class="n">ui</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Default rules for deployment.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 目标文件地址</span>
+</span></span><span class="line"><span class="cl"><span class="n">qnx</span><span class="p">:</span> <span class="n">target</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="err">$$</span><span class="p">{</span><span class="n">TARGET</span><span class="p">}</span><span class="o">/</span><span class="nb">bin</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span><span class="p">:</span> <span class="n">unix</span><span class="p">:</span><span class="err">!</span><span class="n">android</span><span class="p">:</span> <span class="n">target</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="err">$$</span><span class="p">{</span><span class="n">TARGET</span><span class="p">}</span><span class="o">/</span><span class="nb">bin</span>
+</span></span><span class="line"><span class="cl"><span class="err">!</span><span class="n">isEmpty</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">path</span><span class="p">):</span> <span class="n">INSTALLS</span> <span class="o">+=</span> <span class="n">target</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="自定义窗口头文件详解">自定义窗口头文件详解</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">// 防止头文件被重复引用，如果没有该自定义头文件则执行#define MYWIDGET_H进行头文件包含操作。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#ifndef MYWIDGET_H  
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define MYWIDGET_H
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1">// 包含窗口类头文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;QWidget&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 定义自定义窗口类的命名空间Ui，声明Ui命名空间下的Widget类
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QT_BEGIN_NAMESPACE</span>
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="n">Ui</span> <span class="p">{</span> <span class="k">class</span> <span class="nc">MyWidget</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">QT_END_NAMESPACE</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 让自定义窗口类继承QWidget类以使用show等方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">MyWidget</span> <span class="o">:</span> <span class="k">public</span> <span class="n">QWidget</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 宏，允许类中使用信号和槽的机制以及元对象系统服务，必须限定为私有访问权限
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Q_OBJECT</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 声明有参构造函数并提供默认值，使用该默认值时将调用父类QWidget的有参构造函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">MyWidget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 声明默认析构函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="o">~</span><span class="n">MyWidget</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 创建Ui::Widget类型的指针，用于操作ui界面及其控件。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Ui</span><span class="o">::</span><span class="n">MyWidget</span> <span class="o">*</span><span class="n">ui</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif </span><span class="c1">// MYWIDGET_H
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="自定义窗口源文件详解">自定义窗口源文件详解</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;mywidget.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;ui_mywidget.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1">// 有参构造函数的定义：声明时使用了默认参数，定义时则不再使用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * MyWidget有参构造函数的定义，并使用初始化列表对其进行初始化：
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * 已知MyWidget继承自QWidget，令QWidget *parent = parent，然后对MyWidget进行初始化。
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * 令ui = new Ui::MyWidget，使得ui指针指向新创建的Ui命名空间内的MyWidget类型对象，通过这个对象可以访问和操作MyWidget的用户界面元素。
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span><span class="line"><span class="cl"><span class="n">MyWidget</span><span class="o">::</span><span class="n">MyWidget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span><span class="o">:</span> <span class="n">QWidget</span><span class="p">(</span><span class="n">parent</span><span class="p">),</span> <span class="n">ui</span><span class="p">(</span><span class="k">new</span> <span class="n">Ui</span><span class="o">::</span><span class="n">MyWidget</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 为ui对象传入当前窗口对象指针，将当前窗口对象与其ui绑定
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ui</span><span class="o">-&gt;</span><span class="n">setupUi</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 析构函数的定义
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">MyWidget</span><span class="o">::~</span><span class="n">MyWidget</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">delete</span> <span class="n">ui</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="qt-creator快捷键">Qt Creator快捷键</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th><strong>Key</strong></th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><kbd>ctrl + /</kbd></td>
+<td>注释</td>
+</tr>
+<tr>
+<td><kbd>ctrl + r</kbd></td>
+<td>运行</td>
+</tr>
+<tr>
+<td><kbd>ctrl + b</kbd></td>
+<td>编译</td>
+</tr>
+<tr>
+<td><kbd>ctrl + MouseUp/MouseDown</kbd></td>
+<td>字体缩放</td>
+</tr>
+<tr>
+<td><kbd>ctrl + f</kbd></td>
+<td>查找</td>
+</tr>
+<tr>
+<td><kbd>ctrl + shift + ↑/↓</kbd></td>
+<td>整行移动</td>
+</tr>
+<tr>
+<td><kbd>F1</kbd></td>
+<td>帮助文档（或者直接运行Qt Assistant）</td>
+</tr>
+<tr>
+<td><kbd>ctrl + i</kbd></td>
+<td>自动对齐</td>
+</tr>
+<tr>
+<td><kbd>F4</kbd></td>
+<td>同名之间 .h和 .cpp自由切换</td>
+</tr>
+</tbody>
+</table></div>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/qt/">Qt</a>
+        
+            <a href="/tags/c&#43;&#43;/">C&#43;&#43;</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/">
+        
+        
+            <div class="article-image">
+                <img src="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/22.7f061a0d92fd8334efdc1952d855a513_hu8c3a5b5f054fe6608239643744ee4034_521651_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post QT学习记录_03"
+                        
+                        data-hash="md5-fwYaDZL9gzTv3BlS2FWlEw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">QT学习记录_03</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_01/">
+        
+        
+            <div class="article-image">
+                <img src="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_01/19.0f1fb5f39c8c441b90ac02ee93e770ff_hu279ce5e96b74c838a255ccc4e759ad22_706904_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post QT学习记录_01"
+                        
+                        data-hash="md5-Dx&#43;185yMRBuQrALuk&#43;dw/w==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">QT学习记录_01</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/hugo-development-day1/">
+        
+        
+            <div class="article-image">
+                <img src="/p/hugo-development-day1/82.404289d49ca0d37d4378e2c622b3cebc_hub28da18d4871e87a3433ed7bebc8e373_795065_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Hugo建站指南——Day1"
+                        data-key="Hugo Development Day1" 
+                        data-hash="md5-QEKJ1Jyg031DeOLGIrPOvA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Hugo建站指南——Day1</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2023 - 
+        
+        2024 木木龙的个人博客
+    </section>
+    
+    <section class="powerby">
+        
+            热爱可抵岁月漫长，温柔可挡艰难时光。 <br/>
+        Nothing but enthusiasm brightens up the endless years. <br />
+        转载请注明主页网址哦~
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<script type="text/javascript" 
+color="255,255,255" opacity="0.7" count="500" zIndex="-1" src="JS/canvas-nest.min.js" ></script>
+<style type="text/css">
+    body { cursor: url("ZhongLiPosition.cur"), auto; }
+    .fireworks {
+        position: fixed;
+        pointer-events: none;
+        top: 0;
+        left: 0;
+        height: 100%;
+    }
+</style>
+<canvas class="fireworks"></canvas>
+<script src="JS/anime.min.js"></script>
+<script src="JS/fireworks.js"></script>
+<script src="JS/jquery-3.7.1.min.js"></script>
+<script>fireworks.setCanvacSize();</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var init = $("#dark-mode-toggle > svg.icon.icon-tabler.icon-tabler-toggle-left");
+        if (init.css("display") == "none") {
+            document.body.style.background = 'url(\'/Image/BGDark.png\')';
+            document.body.style.backgroundSize = '100%';
+            document.body.style.backgroundAttachment = 'fixed';
+        }
+        else {
+            document.body.style.background = 'url(\'/Image/BGLight.jpg\')';
+            document.body.style.backgroundSize = '100%';
+            document.body.style.backgroundAttachment = 'fixed';
+        }
+    });
+    document.getElementById('dark-mode-toggle').addEventListener("click", function () {
+        var white = $("#dark-mode-toggle > svg.icon.icon-tabler.icon-tabler-toggle-left");
+        if (white.css("display") == "none") {
+            document.body.style.background = 'url(\'/Image/BGLight.jpg\')';
+            document.body.style.backgroundSize = '100%';
+            document.body.style.backgroundAttachment = 'fixed';
+        }
+        var dark = $("#dark-mode-toggle > svg.icon.icon-tabler.icon-tabler-toggle-right");
+        if (dark.css("display") == "none") {
+            document.body.style.background = 'url(\'/Image/BGDark.png\')';
+            document.body.style.backgroundSize = '100%';
+            document.body.style.backgroundAttachment = 'fixed';
+        }
+    });
+</script>
+    </body>
+</html>
