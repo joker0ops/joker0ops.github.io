@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Qt Study Record Day4'>
+<title>QT学习记录_04</title>
+
+<link rel='canonical' href='http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/'>
+
+<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='QT学习记录_04'>
+<meta property='og:description' content='Qt Study Record Day4'>
+<meta property='og:url' content='http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/'>
+<meta property='og:site_name' content='木木龙的个人博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Qt' /><meta property='article:tag' content='C&#43;&#43;' /><meta property='article:published_time' content='2024-02-17T16:02:44&#43;08:00'/><meta property='article:modified_time' content='2024-02-17T16:02:44&#43;08:00'/><meta property='og:image' content='http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/31.jpg' />
+<meta name="twitter:title" content="QT学习记录_04">
+<meta name="twitter:description" content="Qt Study Record Day4"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/31.jpg' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar02_hufaee62c155fcf27c6865e7e5ba9676bf_129485_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🇨🇳</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">木木龙的个人博客</a></h1>
+            <h2 class="site-description">热爱可抵岁月漫长</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/joker0ops'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#使用系统自带的信号和槽实现关闭窗口功能">使用系统自带的信号和槽实现关闭窗口功能</a></li>
+    <li><a href="#自定义信号与槽函数">自定义信号与槽函数</a></li>
+    <li><a href="#重载信号与槽函数">重载信号与槽函数</a></li>
+    <li><a href="#使用信号连接信号">使用信号连接信号</a></li>
+    <li><a href="#qt4版本信号和槽的写法">Qt4版本信号和槽的写法</a></li>
+    <li><a href="#lambda表达式"><strong>Lambda</strong>表达式</a>
+      <ol>
+        <li><a href="#使用lambda表达式的优点">使用Lambda表达式的优点：</a></li>
+      </ol>
+    </li>
+    <li><a href="#信号和槽总结">信号和槽总结</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/">
+                <img src="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/31_hu257b54557e64e568910f9552664481a3_2550935_800x0_resize_q75_box.jpg"
+                        srcset="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/31_hu257b54557e64e568910f9552664481a3_2550935_800x0_resize_q75_box.jpg 800w, /p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/31_hu257b54557e64e568910f9552664481a3_2550935_1600x0_resize_q75_box.jpg 1600w"
+                        width="800" 
+                        height="450" 
+                        loading="lazy"
+                        alt="Featured image of post QT学习记录_04" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%8A%80%E6%9C%AF/" >
+                技术
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/">QT学习记录_04</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            Qt Study Record Day4
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2024/02/17</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 9 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="qt信号与槽机制">Qt信号与槽机制</h1>
+<p>信号槽是 Qt 框架引以为豪的机制之一。所谓<strong>信号槽</strong>，实际就是<strong>观察者模式</strong>。当某个事件发生之后，比如，按钮检测到自己被点击了一下，它就会发出一个<strong>信号（signal）</strong>。<strong>这种发出是没有目的的，类似广播</strong>。如果有对象对这个信号感兴趣，它就会使用<strong>连接（connect）函数</strong>，意思是，<strong>将想要处理的信号和自己的一个函数（称为槽（slot））绑定来处理这个信号</strong>。也就是说，<strong>当信号发出时，被连接的槽函数会自动被回调</strong>。这就类似观察者模式：当发生了感兴趣的事件，某一个操作就会被自动触发。</p>
+<h2 id="使用系统自带的信号和槽实现关闭窗口功能">使用系统自带的信号和槽实现关闭窗口功能</h2>
+<p>首先需要创建一个按钮用于触发“关闭窗口”信号：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">QPushButton</span> <span class="o">*</span><span class="n">btn</span> <span class="o">=</span> <span class="k">new</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s">&#34;关闭窗口&#34;</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后我们可以通过connect函数进行信号的连接操作，connect函数的一般形式为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">connect</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">signal</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">slot</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>参数解释：</strong><br></p>
+<ol>
+<li><strong>sender</strong>：发出信号的对象</li>
+<li><strong>signal</strong>：发送对象发出的信号（函数的地址）</li>
+<li><strong>receiver</strong>：接收信号的对象</li>
+<li><strong>slot</strong>：接收对象在接收到信号之后所需要调用的函数（槽函数）</li>
+</ol>
+<p>此处即体现出信号和槽机制<strong>松散耦合</strong>的优点：<strong>信号发送端和接收端本身没有关联，但可以通过connect进行连接将两端耦合在一起。</strong> 随后，填入相应实参即可调用connect函数进行信号连接。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">connect</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QPushButton</span><span class="o">::</span><span class="n">clicked</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Widget</span><span class="o">::</span><span class="n">close</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>那么系统自带的信号和槽通常如何查找呢？这个就需要利用帮助文档了，比如这里我们需要的是QPushButton的点击信号，在帮助文档中输入QPushButton，首先我们可以在Contents中寻找关键字 signals，但发现并没有找到，<strong>这时候我们应该想到也许这个信号的被父类继承下来的</strong>，因此我们去他的父类QAbstractButton中就可以找到该关键字，点击signals索引到系统自带的信号有如下几个</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">void clicked(bool checked = false)
+</span></span><span class="line"><span class="cl">void pressed()
+</span></span><span class="line"><span class="cl">void released()
+</span></span><span class="line"><span class="cl">void toggled(bool checked)
+</span></span><span class="line"><span class="cl">  - 3 signals inherited from QWidget
+</span></span><span class="line"><span class="cl">  - 2 signals inherited from QObiect
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里的clicked就是我们需要的signal函数，<strong>槽函数的寻找方式和信号一样，只不过他的关键字是slot。</strong></p>
+<h2 id="自定义信号与槽函数">自定义信号与槽函数</h2>
+<p>定义两个继承自QObject的类——Teacher和Student，实现一个场景：<strong>上课铃响后，老师喊上课，学生们收到上课的信号回教室坐好。</strong></p>
+<ul>
+<li>teacher.h</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#ifndef TEACHER_H
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define TEACHER_H
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;QObject&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Teacher</span> <span class="o">:</span> <span class="k">public</span> <span class="n">QObject</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Q_OBJECT</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">explicit</span> <span class="n">Teacher</span><span class="p">(</span><span class="n">QObject</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nl">signals</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 自定义信号 写到signal下
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 返回值是void，只需要声明，不需要实现
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 可以有参数，可以发生重载
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">void</span> <span class="n">ClassBegin</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="nl">slots</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 自定义槽函数，写到slot下
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#endif </span><span class="c1">// TEACHER_H
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>student.h</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#ifndef STUDENT_H
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define STUDENT_H
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;QObject&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Student</span> <span class="o">:</span> <span class="k">public</span> <span class="n">QObject</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Q_OBJECT</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">explicit</span> <span class="n">Student</span><span class="p">(</span><span class="n">QObject</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nl">signals</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="nl">slots</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 早期Qt版本必须要写到public slots下，高级版本可以写到public或者全局下
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 返回值void，需要声明也需要实现
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 可以有参数，也可以发生重载
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">void</span> <span class="n">SitDown</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#endif </span><span class="c1">// STUDENT_H
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>student.cpp</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;student.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;QDebug&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="n">Student</span><span class="o">::</span><span class="n">Student</span><span class="p">(</span><span class="n">QObject</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span> <span class="o">:</span> <span class="n">QObject</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 自定义成员函数记得加函数返回值类型
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">Student</span><span class="o">::</span><span class="n">SitDown</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;学生都坐好&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>widget.h</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#ifndef WIDGET_H
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define WIDGET_H
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;QWidget&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;teacher.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;student.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="n">QT_BEGIN_NAMESPACE</span>
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="n">Ui</span> <span class="p">{</span> <span class="k">class</span> <span class="nc">Widget</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">QT_END_NAMESPACE</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Widget</span> <span class="o">:</span> <span class="k">public</span> <span class="n">QWidget</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Q_OBJECT</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Widget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">~</span><span class="n">Widget</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Ui</span><span class="o">::</span><span class="n">Widget</span> <span class="o">*</span><span class="n">ui</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 声明teacher和student类型成员变量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Teacher</span> <span class="o">*</span><span class="n">tp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Student</span> <span class="o">*</span><span class="n">sp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 声明上课铃响函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">void</span> <span class="nf">Ring</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif </span><span class="c1">// WIDGET_H
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>widget.cpp</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;widget.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;ui_widget.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;QPushButton&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="n">Widget</span><span class="o">::</span><span class="n">Widget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span><span class="o">:</span> <span class="n">QWidget</span><span class="p">(</span><span class="n">parent</span><span class="p">),</span> <span class="n">ui</span><span class="p">(</span><span class="k">new</span> <span class="n">Ui</span><span class="o">::</span><span class="n">Widget</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ui</span><span class="o">-&gt;</span><span class="n">setupUi</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">QPushButton</span> <span class="o">*</span><span class="n">btn</span> <span class="o">=</span> <span class="k">new</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s">&#34;关闭窗口&#34;</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 新建信号连接函数
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 参数1：信号发送者
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 参数2：发送的具体的信号（函数的地址）
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 参数3：信号的接收者
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 参数4：信号的处理——槽函数地址（槽）
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 信号和槽的优点——松散耦合：信号发送端和接收端本身没有关联，但可以通过connect进行连接将两端耦合在一起
+</span></span></span><span class="line"><span class="cl"><span class="cm">    */</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 参数2和参数4写父类子类都可以
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">connect</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QPushButton</span><span class="o">::</span><span class="n">clicked</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Widget</span><span class="o">::</span><span class="n">close</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 创建对象并指定父窗口
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">tp</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Teacher</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">-&gt;</span><span class="n">sp</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Student</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 情景：上课铃响后，老师发出上课信号，学生响应信号，坐好
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 老师说上课，学生坐好的连接
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">connect</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Teacher</span><span class="o">::</span><span class="n">ClassBegin</span><span class="p">,</span> <span class="n">sp</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Student</span><span class="o">::</span><span class="n">SitDown</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 调用上课铃响函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Ring</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 自定义的类方法记得加返回值类型
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">Widget</span><span class="o">::</span><span class="n">Ring</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 上课函数，调用后触发老师喊上课的信号
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">emit</span> <span class="n">tp</span><span class="o">-&gt;</span><span class="n">ClassBegin</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Widget</span><span class="o">::~</span><span class="n">Widget</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">delete</span> <span class="n">ui</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此时的代码执行流程为：<br><strong><kbd>调用Ring()函数</kbd>&ndash;&gt;<kbd>触发老师喊上课信号</kbd>&ndash;&gt;<kbd>回调connect函数</kbd>&ndash;&gt;<kbd>学生收到信号</kbd>&ndash;&gt;<kbd>调用SitDown函数</kbd></strong></p>
+<h2 id="重载信号与槽函数">重载信号与槽函数</h2>
+<p>信号和槽函数均可发生重载</p>
+<ul>
+<li>student.h</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">SitDown</span><span class="p">(</span><span class="n">QString</span> <span class="n">ClassName</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>student.cpp</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">Student</span><span class="o">::</span><span class="n">SitDown</span><span class="p">(</span><span class="n">QString</span> <span class="n">ClassName</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 直接使用此方式打印会使得ClassName带引号（QString类型字符串），需要转换为char*类型字符串
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// qDebug() &lt;&lt; &#34;学生都坐好并拿出&#34; &lt;&lt; ClassName &lt;&lt; &#34;课本&#34; &lt;&lt; endl;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// QString -&gt; char* 先转换成QByteArray再转成char*
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 下面这种方式会多出一个空格
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// qDebug() &lt;&lt; &#34;学生都坐好并拿出&#34; &lt;&lt; ClassName.toUtf8().data() &lt;&lt; &#34;课本&#34; &lt;&lt; endl;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="s">&#34;学生都坐好并拿出&#34;</span> <span class="o">+</span> <span class="n">ClassName</span> <span class="o">+</span> <span class="s">&#34;课本&#34;</span><span class="p">).</span><span class="n">toUtf8</span><span class="p">().</span><span class="n">data</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>teacher.h</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">ClassBegin</span><span class="p">(</span><span class="n">QString</span> <span class="n">ClassName</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>widget.cpp</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">Widget</span><span class="o">::</span><span class="n">Widget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span><span class="o">:</span> <span class="n">QWidget</span><span class="p">(</span><span class="n">parent</span><span class="p">),</span> <span class="n">ui</span><span class="p">(</span><span class="k">new</span> <span class="n">Ui</span><span class="o">::</span><span class="n">Widget</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ui</span><span class="o">-&gt;</span><span class="n">setupUi</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">...</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 创建对象并指定父窗口
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">tp</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Teacher</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">-&gt;</span><span class="n">sp</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Student</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 情景：上课铃响后，老师发出上课信号，学生响应信号，坐好
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 老师说上课，学生坐好的连接
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 当发生信号或槽函数重载后，connect无法分清是哪个函数发生了重载，需要通过函数指针重新指定函数地址
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// connect(tp, &amp;Teacher::ClassBegin, sp, &amp;Student::SitDown);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 函数指针写法：
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 函数返回值类型(命名空间:: *指针名)(参数类型1， 参数类型2...) = 函数地址
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">void</span><span class="p">(</span><span class="n">Teacher</span><span class="o">::</span> <span class="o">*</span><span class="n">teachersignal</span><span class="p">)(</span><span class="n">QString</span><span class="p">)</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">Teacher</span><span class="o">::</span><span class="n">ClassBegin</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span><span class="p">(</span><span class="n">Student</span><span class="o">::</span> <span class="o">*</span><span class="n">studentslot</span><span class="p">)(</span><span class="n">QString</span><span class="p">)</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">Student</span><span class="o">::</span><span class="n">SitDown</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">connect</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span> <span class="n">teachersignal</span><span class="p">,</span> <span class="n">sp</span><span class="p">,</span> <span class="n">studentslot</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 调用上课铃响函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Ring</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 自定义的类方法记得加返回值类型
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">Widget</span><span class="o">::</span><span class="n">Ring</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 上课函数，调用后触发老师喊上课的信号
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// emit tp-&gt;ClassBegin();
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">emit</span> <span class="n">tp</span><span class="o">-&gt;</span><span class="n">ClassBegin</span><span class="p">(</span><span class="s">&#34;语文&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="使用信号连接信号">使用信号连接信号</h2>
+<p>程序情景：点击一个上课的按钮，再触发上课铃响，然后老师叫同学们坐好上课。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">// 通过函数指针重新指定有参函数的地址
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span><span class="p">(</span><span class="n">Teacher</span><span class="o">::</span> <span class="o">*</span><span class="n">teachersignal</span><span class="p">)(</span><span class="n">QString</span><span class="p">)</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">Teacher</span><span class="o">::</span><span class="n">ClassBegin</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span><span class="p">(</span><span class="n">Student</span><span class="o">::</span> <span class="o">*</span><span class="n">studentslot</span><span class="p">)(</span><span class="n">QString</span><span class="p">)</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">Student</span><span class="o">::</span><span class="n">SitDown</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 通过函数指针重新指定无参函数的地址
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span><span class="p">(</span><span class="n">Teacher</span><span class="o">::</span> <span class="o">*</span><span class="n">tsignal</span><span class="p">)(</span><span class="kt">void</span><span class="p">)</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">Teacher</span><span class="o">::</span><span class="n">ClassBegin</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span><span class="p">(</span><span class="n">Student</span><span class="o">::</span> <span class="o">*</span><span class="n">ssignal</span><span class="p">)(</span><span class="kt">void</span><span class="p">)</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">Student</span><span class="o">::</span><span class="n">SitDown</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">connect</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span> <span class="n">teachersignal</span><span class="p">,</span> <span class="n">sp</span><span class="p">,</span> <span class="n">studentslot</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 使用按钮调用Ring函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QPushButton</span> <span class="o">*</span><span class="n">classbtn</span> <span class="o">=</span> <span class="k">new</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s">&#34;上课&#34;</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">classbtn</span><span class="o">-&gt;</span><span class="n">move</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">connect</span><span class="p">(</span><span class="n">classbtn</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QPushButton</span><span class="o">::</span><span class="n">clicked</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Widget</span><span class="o">::</span><span class="n">Ring</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>程序情景：点击上课的按钮直接触发老师喊上课信号，然后老师喊同学们坐好上课。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="kt">void</span><span class="p">(</span><span class="n">Teacher</span><span class="o">::</span> <span class="o">*</span><span class="n">teachersignal</span><span class="p">)(</span><span class="n">QString</span><span class="p">)</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">Teacher</span><span class="o">::</span><span class="n">ClassBegin</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span><span class="p">(</span><span class="n">Student</span><span class="o">::</span> <span class="o">*</span><span class="n">studentslot</span><span class="p">)(</span><span class="n">QString</span><span class="p">)</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">Student</span><span class="o">::</span><span class="n">SitDown</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 通过函数指针重新指定无参函数的地址
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span><span class="p">(</span><span class="n">Teacher</span><span class="o">::</span> <span class="o">*</span><span class="n">tsignal</span><span class="p">)(</span><span class="kt">void</span><span class="p">)</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">Teacher</span><span class="o">::</span><span class="n">ClassBegin</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span><span class="p">(</span><span class="n">Student</span><span class="o">::</span> <span class="o">*</span><span class="n">ssignal</span><span class="p">)(</span><span class="kt">void</span><span class="p">)</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">Student</span><span class="o">::</span><span class="n">SitDown</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">connect</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span> <span class="n">teachersignal</span><span class="p">,</span> <span class="n">sp</span><span class="p">,</span> <span class="n">studentslot</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 使用按钮调用Ring函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QPushButton</span> <span class="o">*</span><span class="n">classbtn</span> <span class="o">=</span> <span class="k">new</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s">&#34;上课&#34;</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">classbtn</span><span class="o">-&gt;</span><span class="n">move</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// connect(classbtn, &amp;QPushButton::clicked, this, &amp;Widget::Ring);
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 使用按钮直接连接老师上课信号（有参），让老师上课信号作为槽函数再连接学生坐好的槽函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">connect</span><span class="p">(</span><span class="n">classbtn</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QPushButton</span><span class="o">::</span><span class="n">clicked</span><span class="p">,</span> <span class="n">tp</span><span class="p">,</span> <span class="n">tsignal</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">connect</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span> <span class="n">tsignal</span><span class="p">,</span> <span class="n">sp</span><span class="p">,</span> <span class="n">ssignal</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>程序情景：点击上课按钮触发老师喊上课的信号，但学生不听老师的，不坐好</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">// 使用disconnect函数断开连接
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">disconnect</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span> <span class="n">tsignal</span><span class="p">,</span> <span class="n">sp</span><span class="p">,</span> <span class="n">ssignal</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="qt4版本信号和槽的写法">Qt4版本信号和槽的写法</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">connect</span><span class="p">(</span><span class="n">zt</span><span class="p">,</span><span class="n">SIGNAL</span><span class="p">(</span><span class="n">ClassBegin</span><span class="p">(</span><span class="n">QString</span><span class="p">)),</span><span class="n">st</span><span class="p">,</span><span class="n">SLOT</span><span class="p">(</span><span class="n">SitDown</span><span class="p">(</span><span class="n">QString</span><span class="p">)));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里使用了<kbd>SIGNAL</kbd>和<kbd>SLOT</kbd>这两个宏，<strong>将两个函数名转换成了字符串</strong>。注意到**connect()**函数的 <strong>signal</strong> 和 <strong>slot</strong> 都是接受字符串，一旦出现连接不成功的情况，<strong>Qt4</strong>是没有编译错误的（因为一切都是字符串，编译期是不检查字符串是否匹配），而是在运行时给出错误。这无疑会增加程序的不稳定性。
+<strong>Qt5在语法上完全兼容Qt4，而反之是不可以的。</strong></p>
+<h2 id="lambda表达式"><strong>Lambda</strong>表达式</h2>
+<p>Lambda是属于C++11的新特性。在早期版本(Qt4之前)需要在.pro文件中添加：<kbd>CONFIG += c++11</kbd>
+<br>C++中的Lambda表达式用于定义并创建匿名的函数对象，以简化编程工作。Lambda表达式的基本构成为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">// 函数定义：
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">[</span><span class="err">函数对象参数</span><span class="p">](</span><span class="err">操作符重载函数参数</span><span class="p">)</span><span class="k">mutable</span><span class="o">-&gt;</span><span class="err">返回值类型</span><span class="p">{</span><span class="err">函数体</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 函数调用：
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>函数对象参数[]，标识一个Lambda的开始，必须存在</strong>。函数对象参数是传递给编译器自动生成的函数对象类的构造函数的。函数对象参数只能使用那些到定义Lambda为止时Lambda所在作用范围内可见的局部变量（包括Lambda所在类的this）。函数对象参数有以下形式：</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>函数对象参数</th>
+<th>解析</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>空</strong></td>
+<td>没有使用任何函数对象参数。</td>
+</tr>
+<tr>
+<td><strong>=</strong></td>
+<td>函数体内可以使用Lambda所在作用范围内所有可见的局部变量（包括Lambda所在类的this），并且是值传递方式（相当于编译器自动为我们按值传递了所有局部变量）。</td>
+</tr>
+<tr>
+<td><strong>this</strong></td>
+<td>函数体内可以使用Lambda所在类中的成员变量。若在connect函数中使用this时，前面的信号接收者(或信号发送者)可省略</td>
+</tr>
+<tr>
+<td><strong>a</strong></td>
+<td>将a按值进行传递。按值进行传递时，函数体内不能修改传递进来的a的拷贝，因为默认情况下函数是const的。要修改传递进来的a的拷贝，可以添加mutable修饰符。</td>
+</tr>
+<tr>
+<td><strong>&amp;a</strong></td>
+<td>将a按引用进行传递。</td>
+</tr>
+<tr>
+<td><strong>a, &amp;b</strong></td>
+<td>将a按值进行传递，b按引用进行传递。</td>
+</tr>
+<tr>
+<td><strong>=, &amp;a, &amp;b</strong></td>
+<td>除a和b按引用进行传递外，其他参数都按值进行传递。</td>
+</tr>
+<tr>
+<td><strong>&amp;, a, b</strong></td>
+<td>除a和b按值进行传递外，其他参数都按引用进行传递。</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>操作符重载函数参数标识重载的()操作符的参数</strong>，没有参数时，这部分可以省略。参数可以通过按值（如：<strong>(a,b)</strong>）和按引用（如：<strong>(&amp;a,&amp;b)</strong>）两种方式进行传递。<br>
+<strong>可修改标示符即mutable声明，这部分可以省略</strong>。按值传递函数对象参数时，加上mutable修饰符后，可以修改按值传递进来的拷贝（注意是能修改拷贝，而不是值本身，再次访问传入的函数对象参数时仍是原值）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">QPushButton</span> <span class="o">*</span> <span class="n">myBtn</span> <span class="o">=</span> <span class="k">new</span> <span class="n">QPushButton</span> <span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">QPushButton</span> <span class="o">*</span> <span class="n">myBtn2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">QPushButton</span> <span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">myBtn2</span><span class="o">-&gt;</span><span class="n">move</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 点击按钮输出110
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">connect</span><span class="p">(</span><span class="n">myBtn</span><span class="p">,</span><span class="o">&amp;</span><span class="n">QPushButton</span><span class="o">::</span><span class="n">clicked</span><span class="p">,</span><span class="k">this</span><span class="p">,[</span><span class="n">m</span><span class="p">]</span> <span class="p">()</span><span class="k">mutable</span> <span class="p">{</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">+</span> <span class="mi">10</span><span class="p">;</span> <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 点击按钮输出10
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">connect</span><span class="p">(</span><span class="n">myBtn2</span><span class="p">,</span><span class="o">&amp;</span><span class="n">QPushButton</span><span class="o">::</span><span class="n">clicked</span><span class="p">,</span><span class="k">this</span><span class="p">,[</span><span class="o">=</span><span class="p">]</span> <span class="p">()</span>  <span class="p">{</span> <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 输出10
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">m</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>函数返回值-&gt;返回值类型，标识函数返回值的类型</strong>。当返回值为void，或者函数体中只有一处return的地方（此时编译器可以自动推断出返回值类型）时，这部分可以省略。<br>
+<strong>函数体{}标识函数的实现</strong>，这部分不能省略，但函数体可以为空。</p>
+<h3 id="使用lambda表达式的优点">使用Lambda表达式的优点：</h3>
+<p>在connect函数中使用Lambda表达式，可以更加方便地使用有参槽函数。</p>
+<h2 id="信号和槽总结">信号和槽总结</h2>
+<ul>
+<li>信号可以连接信号</li>
+<li>一个信号可以连接多个槽函数。如果是这种情况，这些槽会一个接一个的被调用，但是它们的调用顺序是不确定的。</li>
+<li>多个信号也可以连接同一个槽函数。只要任意一个信号发出，这个槽就会被调用。</li>
+<li>信号和槽函数的参数类型必须一一对应</li>
+<li>信号的参数个数可以多于槽函数的参数个数，但除了多出来的参数，剩下的参数类型仍然要一一对应。</li>
+<li>信号槽可以通过disconnect函数断开连接</li>
+<li>槽可以被取消链接。但这种情况并不经常出现，因为当一个对象delete之后，Qt自动取消所有连接到这个对象上面的槽。</li>
+<li>发送者和接收者都需要是QObject的子类（当然，槽函数是全局函数、Lambda 表达式等无需接收者的时候除外）；</li>
+<li>信号和槽函数返回值是 void</li>
+<li>信号只需要声明，不需要实现</li>
+<li>槽函数需要声明也需要实现</li>
+<li>槽函数是普通的成员函数，作为成员函数，会受到 public、private、protected 的影响；</li>
+<li>使用 emit 在恰当的位置发送信号；</li>
+<li>使用connect()函数连接信号和槽。</li>
+<li>任何成员函数、static 函数、全局函数和 Lambda 表达式都可以作为槽函数</li>
+</ul>
+<p><img src="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/signal_slot.png"
+	width="1009"
+	height="986"
+	srcset="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/signal_slot_hu27ca9d517d3847d2e0475edd73ca944f_203725_480x0_resize_box_3.png 480w, /p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/signal_slot_hu27ca9d517d3847d2e0475edd73ca944f_203725_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Picture"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="102"
+		data-flex-basis="245px"
+	
+></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/qt/">Qt</a>
+        
+            <a href="/tags/c&#43;&#43;/">C&#43;&#43;</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/">
+        
+        
+            <div class="article-image">
+                <img src="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/22.7f061a0d92fd8334efdc1952d855a513_hu8c3a5b5f054fe6608239643744ee4034_521651_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post QT学习记录_03"
+                        
+                        data-hash="md5-fwYaDZL9gzTv3BlS2FWlEw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">QT学习记录_03</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/">
+        
+        
+            <div class="article-image">
+                <img src="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/20.6c285e7b02356f8d34a0e48b4b65e15d_hue8028801c9f73dd91eba9fc177c5fd74_708628_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post QT学习记录_02"
+                        
+                        data-hash="md5-bCheewI1b400oOSLS2XhXQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">QT学习记录_02</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_01/">
+        
+        
+            <div class="article-image">
+                <img src="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_01/19.0f1fb5f39c8c441b90ac02ee93e770ff_hu279ce5e96b74c838a255ccc4e759ad22_706904_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post QT学习记录_01"
+                        
+                        data-hash="md5-Dx&#43;185yMRBuQrALuk&#43;dw/w==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">QT学习记录_01</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/hugo-development-day2/">
+        
+        
+            <div class="article-image">
+                <img src="/p/hugo-development-day2/30.335e71507c66a7fa411a44fa0c1429c1_hud2fc0782b828068ad19fdccc62bddd6d_475432_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Hugo建站指南——Day2"
+                        data-key="Hugo Development Day2" 
+                        data-hash="md5-M15xUHxmp/pBGkT6DBQpwQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Hugo建站指南——Day2</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/hugo-development-day1/">
+        
+        
+            <div class="article-image">
+                <img src="/p/hugo-development-day1/82.404289d49ca0d37d4378e2c622b3cebc_hub28da18d4871e87a3433ed7bebc8e373_795065_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Hugo建站指南——Day1"
+                        data-key="Hugo Development Day1" 
+                        data-hash="md5-QEKJ1Jyg031DeOLGIrPOvA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Hugo建站指南——Day1</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2023 - 
+        
+        2024 木木龙的个人博客
+    </section>
+    
+    <section class="powerby">
+        
+            热爱可抵岁月漫长，温柔可挡艰难时光。 <br/>
+        Nothing but enthusiasm brightens up the endless years. <br />
+        转载请注明主页网址哦~
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<script type="text/javascript" 
+color="255,255,255" opacity="0.7" count="500" zIndex="-1" src="JS/canvas-nest.min.js" ></script>
+<style type="text/css">
+    body { cursor: url("ZhongLiPosition.cur"), auto; }
+    .fireworks {
+        position: fixed;
+        pointer-events: none;
+        top: 0;
+        left: 0;
+        height: 100%;
+    }
+</style>
+<canvas class="fireworks"></canvas>
+<script src="JS/anime.min.js"></script>
+<script src="JS/fireworks.js"></script>
+<script src="JS/jquery-3.7.1.min.js"></script>
+<script>fireworks.setCanvacSize();</script>
+    </body>
+</html>

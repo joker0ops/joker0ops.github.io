@@ -7,7 +7,15 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>木木龙的个人博客</copyright>
-        <lastBuildDate>Fri, 02 Feb 2024 15:19:35 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/web/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 17 Feb 2024 16:01:18 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/web/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Hugo建站指南——Day2</title>
+        <link>http://localhost:1313/p/hugo-development-day2/</link>
+        <pubDate>Sat, 17 Feb 2024 16:01:18 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/hugo-development-day2/</guid>
+        <description>&lt;img src="http://localhost:1313/p/hugo-development-day2/30.jpg" alt="Featured image of post Hugo建站指南——Day2" /&gt;</description>
+        </item>
+        <item>
         <title>Hugo建站指南——Day1</title>
         <link>http://localhost:1313/p/hugo-development-day1/</link>
         <pubDate>Fri, 02 Feb 2024 15:19:35 +0800</pubDate>
