@@ -7,7 +7,93 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>木木龙的个人博客</copyright>
-        <lastBuildDate>Sun, 18 Feb 2024 20:15:46 +0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 04 Mar 2024 21:53:46 +0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>研究生周报 2024 03 04</title>
+        <link>http://localhost:1313/p/postgraduate-weekly-report-2024-03-04/</link>
+        <pubDate>Mon, 04 Mar 2024 21:53:46 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/postgraduate-weekly-report-2024-03-04/</guid>
+        <description>&lt;img src="http://localhost:1313/p/postgraduate-weekly-report-2024-03-04/36.jpg" alt="Featured image of post 研究生周报 2024 03 04" /&gt;&lt;h2 id=&#34;摘要&#34;&gt;摘要&lt;/h2&gt;
+&lt;p&gt;该文档主要描述本周主要活动内容及收获，之后主要论述下周个人计划及其被安排在此时间节点的原因。&lt;/p&gt;
+&lt;h2 id=&#34;本周个人提升计划&#34;&gt;本周个人提升计划&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;每天学习至少十分钟粤语及英语&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;了解计算机视觉相关的光学原理&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;至少完成Qt翻金币项目的框架设计&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;完成项目初步方案设计并找老师讨论可行性&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;整理《认知觉醒》上的方法及思维模型&lt;/li&gt;
+&lt;li&gt;每天学习至少一节课深度学习课程&lt;/li&gt;
+&lt;li&gt;每天学习至少一节课51单片机&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;复习C++模板及刷题&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;博客优化&lt;/del&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;本周个人提升内容&#34;&gt;本周个人提升内容&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;与团队成员和老师讨论比赛选题及方向&lt;/li&gt;
+&lt;li&gt;完成每日粤语及英语打卡&lt;/li&gt;
+&lt;li&gt;了解光学侦测相关的光学原理&lt;/li&gt;
+&lt;li&gt;完成Qt翻金币项目的框架设计&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;下周计划按优先级排序&#34;&gt;下周计划&amp;lt;按优先级排序&amp;gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;与老师讨论新的项目方向&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;完成Stable Diffusion服务器搭建&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;完成Qt翻金币项目UI设计&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;给未央主机搭建内网穿透&lt;/li&gt;
+&lt;li&gt;更新个人博客项目&lt;/li&gt;
+&lt;li&gt;龙曲良深度学习教程完成手写数字识别项目&lt;/li&gt;
+&lt;li&gt;精读一篇深度学习方向论文&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;总结与反思&#34;&gt;总结与反思&lt;/h2&gt;
+&lt;p&gt;本周在学习上略有懈怠&amp;hellip;感觉自身目标性还是不够强烈，在实验室玩电脑比较多，而且由于对竞赛项目方向选择的模糊性导致可行性分析报告一直拖到周五才勉强完成并和老师讨论方向。目前竞赛思路基本确定：&lt;br&gt;
+1、从原定项目方向——电子导盲犬出发，增加限定条件及场景限制，尽可能找到&lt;strong&gt;一个&lt;/strong&gt;确定的需求场景进行重点突破。&lt;br&gt;
+2、更换方向，从突破人类身体极限进行考虑，例如需要高强度的重复工作、无氧环境、核污染环境、体型限制、力量限制等。从这些方面就比较容易找到相关的需求并且比较容易和军工联系起来。
+下周在实施计划时，一定注意要及时分解目标并将每日自己需要完成的任务添加到手机待办事项中，否则还是容易陷入每天没有目的性的思维怪圈中。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>研究生周报 2024 02 26</title>
+        <link>http://localhost:1313/p/postgraduate-weekly-report-2024-02-26/</link>
+        <pubDate>Mon, 04 Mar 2024 21:53:01 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/postgraduate-weekly-report-2024-02-26/</guid>
+        <description>&lt;img src="http://localhost:1313/p/postgraduate-weekly-report-2024-02-26/35.jpg" alt="Featured image of post 研究生周报 2024 02 26" /&gt;&lt;h2 id=&#34;摘要&#34;&gt;摘要&lt;/h2&gt;
+&lt;p&gt;该文档主要描述本周主要活动内容及收获，之后主要论述下周个人计划及其被安排在此时间节点的原因。&lt;/p&gt;
+&lt;h2 id=&#34;本周个人提升计划&#34;&gt;本周个人提升计划&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;周一完成《认知觉醒》整本的阅读并整理读书笔记&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;周一周二制定机器人比赛的初步方案并和队友讨论&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;确定方案后询问老师们的意见并和老师们讨论研究方向&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;继续学习龙曲良深度学习课程（每日一课）&lt;/li&gt;
+&lt;li&gt;周天前完成第一个Qt小项目——翻金币（加入多线程计时模块）&lt;/li&gt;
+&lt;li&gt;根据自己感兴趣的研究方向查找相关论文进行阅读&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;继续优化博客并完成评论系统&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;复习C++模板及刷题&lt;/del&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;本周个人提升内容&#34;&gt;本周个人提升内容&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;完成《认知觉醒》的阅读&lt;/li&gt;
+&lt;li&gt;完成机器人创新设计大赛调研及初步方案的制订&lt;/li&gt;
+&lt;li&gt;查找计算机视觉以及大模型方向相关论文，对当前AI研究进展有了初步的了解&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;下周计划按优先级排序高中次&#34;&gt;下周计划&amp;lt;按优先级排序&lt;strong&gt;高&lt;/strong&gt;中&lt;del&gt;次&lt;/del&gt;&amp;gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;每天学习至少十分钟粤语及英语&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;了解计算机视觉相关的光学原理&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;至少完成Qt翻金币项目的框架设计&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;完成项目初步方案设计并找老师讨论可行性&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;整理《认知觉醒》上的方法及思维模型&lt;/li&gt;
+&lt;li&gt;每天学习至少一节课深度学习课程&lt;/li&gt;
+&lt;li&gt;每天学习至少一节课51单片机&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;复习C++模板及刷题&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;博客优化&lt;/del&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;总结与反思&#34;&gt;总结与反思&lt;/h2&gt;
+&lt;p&gt;在本周的工作中，我基本完成了《认知觉醒》的阅读并大致找到了竞赛项目的研究方向。通过对《认知觉醒》的阅读，我了解到了深度沉浸和关联学习的重要性——学习知识并不只是对技术或思想有一定的了解，而是通过学习构建自己的认知体系并能够通过联想将所学知识应用到不同领域。大部分人其实看起来很勤奋，把知识点全部背熟，但是并没有实际应用的能力，深究其因不过是通过肉体上的努力来掩盖思想上的懒惰罢了。我们在学习时不仅要了解知识，更要通过这层了解进行深度思考——这个知识点都可以用在哪些领域？此外，我们在学习时还要注重反馈的作用，这也是老师常说的为何让我们经常对自己所做的工作进行总结和反思，一方面我们会从总结中将所学知识进行拼接整合，通过审视自己所完成的工作而获得一定的多巴胺成就感，另一方面即是通过反思来改进自己当前的学习方法，以获得更加长足的进步。最后，还要注意目标和自身实力的适配性，不要定过高的目标（类似每天打卡要完成一个自己能力的上限），这样做其实很容易让自己的本能脑和情绪脑感到懈怠，为了完成任务而不看重知识的吸收质量，即使坚持下去也不一定收获很多，反而是每次给自己定较低的目标，在催动本能脑和情绪脑完成任务的同时又能让学习进度始终保持在自己舒适区的边缘，这样才能够保证自己在学习中始终能够保持沉浸，从而快速提升自己的实力。
+在下周的工作中，我将尝试践行《认知觉醒》中的方法论来完成所定目标，并注重学习带来的反馈，不断更新自己的方法和工作习惯，希望能够获得更大的进步。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>研究生周报 2024 02 18</title>
         <link>http://localhost:1313/p/postgraduate-weekly-report-2024-02-18/</link>
         <pubDate>Sun, 18 Feb 2024 20:15:46 +0800</pubDate>
@@ -763,7 +849,8 @@
         <pubDate>Sat, 17 Feb 2024 16:01:18 +0800</pubDate>
         
         <guid>http://localhost:1313/p/hugo-development-day2/</guid>
-        <description>&lt;img src="http://localhost:1313/p/hugo-development-day2/30.jpg" alt="Featured image of post Hugo建站指南——Day2" /&gt;</description>
+        <description>&lt;img src="http://localhost:1313/p/hugo-development-day2/30.jpg" alt="Featured image of post Hugo建站指南——Day2" /&gt;&lt;h2 id=&#34;准备阶段&#34;&gt;准备阶段&lt;/h2&gt;
+</description>
         </item>
         <item>
         <title>QT学习记录_03</title>
