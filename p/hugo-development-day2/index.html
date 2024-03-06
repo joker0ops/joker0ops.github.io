@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='http://localhost:1313/p/hugo-development-day2/'>
 
-<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='Hugo建站指南——Day2'>
+<link rel="stylesheet" href="/scss/style.min.24ef1cc321916467896e8c70c10c0ad7b98c2a8df14298032fb637216e397f50.css"><meta property='og:title' content='Hugo建站指南——Day2'>
 <meta property='og:description' content='使用Hugo框架构建Stack主题的个人博客——Day2'>
 <meta property='og:url' content='http://localhost:1313/p/hugo-development-day2/'>
 <meta property='og:site_name' content='木木龙的个人博客'>
@@ -65,7 +65,7 @@
                 
                 </a>
                 
-                    <span class="emoji">🇨🇳</span>
+                    <span class="emoji">😍</span>
                 
             </figure>
             
@@ -267,7 +267,9 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#准备阶段">准备阶段</a></li>
+    <li><a href="#创建github-pages">创建Github Pages</a></li>
+    <li><a href="#hugo站点和目标文件">Hugo站点和目标文件</a></li>
+    <li><a href="#发布博客到github-pages">发布博客到Github Pages</a></li>
   </ol>
 </nav>
         </div>
@@ -352,7 +354,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 1 分钟
+                    阅读时长: 4 分钟
                 </time>
             </div>
         
@@ -367,8 +369,178 @@
     <section class="article-content">
     
     
-    <h2 id="准备阶段">准备阶段</h2>
-
+    <h2 id="创建github-pages">创建Github Pages</h2>
+<p>要想把个人博客托管在Github Pages上，首先在GitHub上创建一个Repository，命名为：<kbd>{your_username}.github.io</kbd>比如我的仓库就叫<kbd>codingxiaoma.github.io</kbd>
+如果你对你的username不满意，需要先在<kbd>Setting</kbd>-&gt;<kbd>Account</kbd>-&gt;<kbd>Change username</kbd>修改一个你满意的username。
+注： Repository的前缀 <strong>(.github.io之前的内容)</strong> 一定要跟你的username保持一致。
+<img src="/p/hugo-development-day2/setting.png"
+	width="2792"
+	height="1514"
+	srcset="/p/hugo-development-day2/setting_hu8f00f0119db460992fa5f9e2ca7fb583_411898_480x0_resize_box_3.png 480w, /p/hugo-development-day2/setting_hu8f00f0119db460992fa5f9e2ca7fb583_411898_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Picture"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="184"
+		data-flex-basis="442px"
+	
+>
+仓库的权限需要选择Public, 否则无法访问。<br>
+勾选<strong>Add a README.md</strong>，主要是为了自动创建<strong>main</strong>分支。<br>
+然后在你的 仓库<strong>xx.github.io</strong>里面点击<strong>Settings</strong>, 左边的菜单栏找到<strong>Pages</strong>。
+<img src="/p/hugo-development-day2/github_create.png"
+	width="1594"
+	height="1486"
+	srcset="/p/hugo-development-day2/github_create_hu05cd3f308579e5233f88dfd53ddb3b9d_259471_480x0_resize_box_3.png 480w, /p/hugo-development-day2/github_create_hu05cd3f308579e5233f88dfd53ddb3b9d_259471_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Picture"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="107"
+		data-flex-basis="257px"
+	
+>
+可以看到Your site is live at <a class="link" href="https://codingxiaoma.github.io/"  target="_blank" rel="noopener"
+    >https://codingxiaoma.github.io/</a>
+此时Github Pages就自动部署好了。点击Visit Site就可以看到你的网站了（因为我们的仓库是空的，所以网站也是空的）</p>
+<h2 id="hugo站点和目标文件">Hugo站点和目标文件</h2>
+<p>现在我们有了Hugo个人站点，有了Github Pages，那么下一步就是把Hugo博客发布到github。这样我们才能在互联网的任何地方访问我们的博客。<br>
+在我们本地的hugo根目录中执行<kbd>hugo</kbd>指令。会生成一个<strong>public</strong>文件夹，我们只需要把<strong>public</strong>的文件夹上传到Github上刚才创建的仓库里面, 一分钟左右，就能正常查看博客内容。<br>
+<strong>这里解释一下：</strong><br></p>
+<ul>
+<li>hugo站点（hugo根目录）：这个是源文件，也就是你写Markdown的地方，可以不用提交到github，也可以选择在github上创建一个新的repo，并提交。</li>
+<li>public文件（hugo/public）：这个是目标文件，是使用<strong>hugo</strong>指令生成的发布HTML内容，可以在浏览器浏览的格式，需要推送到Github上然后发布到Github Pages静态网站上。
+我们的hugo站点是<strong>源文件</strong>（带主题，图片，markdown源文件），public是<strong>目标文件</strong>（最终生成的css/js/html文件）。我们最终网页上展示的是目标文件，所以需要使用<strong>hugo</strong>指令生成目标文件。</li>
+</ul>
+<h2 id="发布博客到github-pages">发布博客到Github Pages</h2>
+<p>在任意hugo站点外（是为了以后把hugo源文件也上传到github，git是不能有层级的，所以要放在站点外）直接用git clone把创建好的github仓库克隆下来。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">git clone git@github.com:codingxiaoma/codingxiaoma.github.io.git
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后把<strong>public</strong>里面的所有内容复制到这个Git仓库(codingxiaoma.github.io)并执行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">git add *
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;first commit&#34;</span>
+</span></span><span class="line"><span class="cl">git push
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>即可成功把内容<strong>push</strong>到远程仓库。<br>
+<strong>复杂一点但是方便的办法</strong>为了不要每次改动都手动复制，我们可以创建一个<strong>public</strong>目录和<strong>github</strong>仓库的软链接。(需要先删除public目录)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># 进入你的hugo根目录</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 删除public文件夹</span>
+</span></span><span class="line"><span class="cl">rm -rf public
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 前面是 github.io仓库的本地目录，后面是 public文件夹的本地​目录</span>
+</span></span><span class="line"><span class="cl">ln -s /Users/hugo/codingxiaoma.github.io /Users/hugo/codingxiaoma/public
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后在<strong>hugo根目录</strong>下使用<strong>hugo</strong>指令，就会自动在<strong>public</strong>软链接也就是<strong>git repo</strong>下生成目标文件。
+最终执行<strong>git add/commit/push</strong>之后，打开
+<a class="link" href="https://codingxiaoma.github.io/"  target="_blank" rel="noopener"
+    >https://codingxiaoma.github.io/</a>
+就能看到博客内容。(可能有几分钟延迟，耐心等待)。
+如果git push提示没有权限</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ERROR: Permission to left-pocket-test/left-pocket-test.github.io.git denied to left-pocket.
+</span></span><span class="line"><span class="cl">fatal: Could not read from remote repository.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Please make sure you have the correct access rights
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>说明还没有在Github上添加本机电脑的ssh key。
+在本地生成ssh key：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 查看本地是否有已经生成的SSH密钥
+</span></span><span class="line"><span class="cl">ls -al ~/.ssh
+</span></span><span class="line"><span class="cl"># 没有则重新创建SSH密钥
+</span></span><span class="line"><span class="cl">cd ~/.ssh
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ssh-keygen -t ed25519 -C &#34;xxx@xxx.com&#34; # 填写你的邮箱地址
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后一路<kbd>Enter</kbd>到底（如有需要可以键入默认文件位置和自定义安全密码）。<br>
+然后就会在<kbd>~/.ssh/</kbd>目录生成默认的文件:</p>
+<ul>
+<li>id_rsa 私钥</li>
+<li>id_rsa.pub 公钥</li>
+</ul>
+<p>在新的管理提升终端窗口（PowerShell或CMD）中，确保ssh代理正在运行。可以使用“自动启动ssh代理”说明使用SSH密钥密码”，或手动启动它：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># start the ssh-agent in the background
+</span></span><span class="line"><span class="cl">Get-Service -Name ssh-agent | Set-Service -StartupType Manual
+</span></span><span class="line"><span class="cl">Start-Service ssh-agent
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在没有提升权限的终端窗口中，将SSH私钥添加到ssh代理中。如果使用不同的名称创建了密钥，或者如果正在添加具有不同名称的现有密钥，请将命令中的id_ed25519替换为私钥文件的名称。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ssh-add C:\Users\YOU/.ssh/id_ed25519
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>之后把<kbd>id_ed25519.pub</kbd>也就是<kbd><strong>公钥</strong></kbd>的内容copy到github上即可。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cat ~/.ssh/id_ed25519.pub 并复制
+</span></span><span class="line"><span class="cl">登录github，Settings-&gt;SSH and GPG Keys-&gt;add SSH Key.
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
 </section>
 
 
@@ -460,6 +632,30 @@
             
                 
 <article class="has-image">
+    <a href="/p/gitbash%E5%A4%8D%E5%88%B6%E7%B2%98%E8%B4%B4%E5%BF%AB%E6%8D%B7%E9%94%AE/">
+        
+        
+            <div class="article-image">
+                <img src="/p/gitbash%E5%A4%8D%E5%88%B6%E7%B2%98%E8%B4%B4%E5%BF%AB%E6%8D%B7%E9%94%AE/34.4d909b6888c5b7004ce477559a4a0b49_hu1fcfd80b17ed2a5f977b43a96e67bcb1_715245_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post GitBash复制粘贴快捷键"
+                        
+                        data-hash="md5-TZCbaIjFtwBM5HdVmkoLSQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">GitBash复制粘贴快捷键</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
     <a href="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/">
         
         
@@ -525,30 +721,6 @@
 
         <div class="article-details">
             <h2 class="article-title">QT学习记录_02</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_01/">
-        
-        
-            <div class="article-image">
-                <img src="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_01/19.0f1fb5f39c8c441b90ac02ee93e770ff_hu279ce5e96b74c838a255ccc4e759ad22_706904_250x150_fill_q75_box_smart1.jpg" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post QT学习记录_01"
-                        
-                        data-hash="md5-Dx&#43;185yMRBuQrALuk&#43;dw/w==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">QT学习记录_01</h2>
         </div>
     </a>
 </article>
