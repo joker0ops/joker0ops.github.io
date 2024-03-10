@@ -2749,6 +2749,38 @@ $$&lt;/p&gt;</description>
 &lt;/div&gt;</description>
         </item>
         <item>
+        <title>Blog</title>
+        <link>http://localhost:1313/categories/blog/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/categories/blog/</guid>
+        <description>&lt;img src="http://localhost:1313/categories/blog/1.jpg" alt="Featured image of post Blog" /&gt;</description>
+        </item>
+        <item>
+        <title>MarkDown</title>
+        <link>http://localhost:1313/categories/markdown/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/categories/markdown/</guid>
+        <description>&lt;img src="http://localhost:1313/categories/markdown/0.jpg" alt="Featured image of post MarkDown" /&gt;</description>
+        </item>
+        <item>
+        <title>Personal</title>
+        <link>http://localhost:1313/categories/personal/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/categories/personal/</guid>
+        <description>&lt;img src="http://localhost:1313/categories/personal/7.jpg" alt="Featured image of post Personal" /&gt;</description>
+        </item>
+        <item>
+        <title>Technique</title>
+        <link>http://localhost:1313/categories/technique/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/categories/technique/</guid>
+        <description>&lt;img src="http://localhost:1313/categories/technique/2.png" alt="Featured image of post Technique" /&gt;</description>
+        </item>
+        <item>
         <title>关于</title>
         <link>http://localhost:1313/%E5%85%B3%E4%BA%8E/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
