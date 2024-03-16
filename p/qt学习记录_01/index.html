@@ -15,7 +15,26 @@
 <meta name="twitter:description" content="Qt Study Record Day1"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_01/19.jpg' />
     <link rel="shortcut icon" href="/favicon.ico" />
-
+<style type="text/css">
+    body{cursor:url('/Cursor/01.cur'), auto;} 
+    a:hover{cursor:url('/Cursor/03.cur'), pointer !important;}
+    button:hover{cursor: url('/Cursor/03.cur'), pointer !important;}
+    i:hover{cursor: url('/Cursor/03.cur'), pointer !important;}
+    input{cursor: url('/Cursor/06.cur'), text !important;}
+    #dark-mode-toggle:hover{cursor: url('/Cursor/03.cur'), pointer !important;}
+    .fireworks {
+        position: fixed;
+        pointer-events: none;
+        top: 0;
+        left: 0;
+        height: 100%;
+    }
+</style>
+<canvas class="fireworks" id="fireworks"></canvas>
+<script src="/JS/anime.min.js"></script>
+<script src="/JS/fireworks.js"></script>
+<script src="/JS/jquery-3.7.1.min.js"></script>
+<script>setCanvasSize();</script>
     </head>
     <body class="
     article-page
@@ -59,7 +78,7 @@
                     
                     
                         
-                        <img src="/img/avatar02_hufaee62c155fcf27c6865e7e5ba9676bf_129485_300x0_resize_box_3.png" width="300"
+                        <img src="/img/Avatar_hu5179492d212c9c841146f5622b7e2dae_1451194_300x0_resize_box_3.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -89,26 +108,6 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
   <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
-</svg>
-
-
-
-                        
-                    </a>
-                </li>
-            
-                <li>
-                    <a 
-                        href='https://twitter.com'
-                        target="_blank"
-                        title="Twitter"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
 </svg>
 
 
@@ -680,23 +679,23 @@
             
                 
 <article class="has-image">
-    <a href="/p/gitbash%E5%A4%8D%E5%88%B6%E7%B2%98%E8%B4%B4%E5%BF%AB%E6%8D%B7%E9%94%AE/">
+    <a href="/p/pythonbasic07/">
         
         
             <div class="article-image">
-                <img src="/p/gitbash%E5%A4%8D%E5%88%B6%E7%B2%98%E8%B4%B4%E5%BF%AB%E6%8D%B7%E9%94%AE/34.4d909b6888c5b7004ce477559a4a0b49_hu1fcfd80b17ed2a5f977b43a96e67bcb1_715245_250x150_fill_q75_box_smart1.jpg" 
+                <img src="/p/pythonbasic07/38.3a5e160d8218fea55e57f71f304d50da_hu144f3be509ee1c6ddf2909d358951aca_1445473_250x150_fill_q75_box_smart1.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
-                        alt="Featured image of post GitBash复制粘贴快捷键"
-                        
-                        data-hash="md5-TZCbaIjFtwBM5HdVmkoLSQ==">
+                        alt="Featured image of post Python基础 07 文件操作"
+                        data-key="PythonBasic07" 
+                        data-hash="md5-Ol4WDYIY/qVeV/cfME1Q2g==">
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">GitBash复制粘贴快捷键</h2>
+            <h2 class="article-title">Python基础 07 文件操作</h2>
         </div>
     </a>
 </article>
@@ -704,23 +703,23 @@
             
                 
 <article class="has-image">
-    <a href="/p/hugo-development-day2/">
+    <a href="/p/pythonbasic06/">
         
         
             <div class="article-image">
-                <img src="/p/hugo-development-day2/30.335e71507c66a7fa411a44fa0c1429c1_hud2fc0782b828068ad19fdccc62bddd6d_475432_250x150_fill_q75_box_smart1.jpg" 
+                <img src="/p/pythonbasic06/37.f4f226795eed8589198ec5f08504482f_hu0c079b41d74169b6af3ee1b4d0a4c00c_3362922_250x150_fill_q75_box_smart1.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
-                        alt="Featured image of post Hugo建站指南——Day2"
-                        data-key="Hugo Development Day2" 
-                        data-hash="md5-M15xUHxmp/pBGkT6DBQpwQ==">
+                        alt="Featured image of post Python基础 06 面向对象"
+                        data-key="PythonBasic06" 
+                        data-hash="md5-9PImeV7thYkZjsXwhQRILw==">
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">Hugo建站指南——Day2</h2>
+            <h2 class="article-title">Python基础 06 面向对象</h2>
         </div>
     </a>
 </article>
@@ -849,22 +848,6 @@
         document.head.appendChild(customFont);
     }());
 </script>
-<script type="text/javascript" 
-color="255,255,255" opacity="0.7" count="350" zIndex="-1" src="JS/canvas-nest.min.js" ></script>
-<style type="text/css">
-    body { cursor: url("ZhongLiPosition.cur"), auto; }
-    .fireworks {
-        position: fixed;
-        pointer-events: none;
-        top: 0;
-        left: 0;
-        height: 100%;
-    }
-</style>
-<canvas class="fireworks"></canvas>
-<script src="JS/anime.min.js"></script>
-<script src="JS/fireworks.js"></script>
-<script src="JS/jquery-3.7.1.min.js"></script>
-<script>fireworks.setCanvacSize();</script>
+
     </body>
 </html>

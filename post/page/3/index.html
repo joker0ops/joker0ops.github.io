@@ -10,11 +10,30 @@
 <meta property='og:description' content='木木龙的个人博客'>
 <meta property='og:url' content='http://localhost:1313/post/'>
 <meta property='og:site_name' content='木木龙的个人博客'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2024-03-10T21:56:08&#43;08:00 '/>
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2024-03-14T21:10:28&#43;08:00 '/>
 <meta name="twitter:title" content="Posts">
 <meta name="twitter:description" content="木木龙的个人博客"><link rel="alternate" type="application/rss&#43;xml" href="http://localhost:1313/post/index.xml">
     <link rel="shortcut icon" href="/favicon.ico" />
-
+<style type="text/css">
+    body{cursor:url('/Cursor/01.cur'), auto;} 
+    a:hover{cursor:url('/Cursor/03.cur'), pointer !important;}
+    button:hover{cursor: url('/Cursor/03.cur'), pointer !important;}
+    i:hover{cursor: url('/Cursor/03.cur'), pointer !important;}
+    input{cursor: url('/Cursor/06.cur'), text !important;}
+    #dark-mode-toggle:hover{cursor: url('/Cursor/03.cur'), pointer !important;}
+    .fireworks {
+        position: fixed;
+        pointer-events: none;
+        top: 0;
+        left: 0;
+        height: 100%;
+    }
+</style>
+<canvas class="fireworks" id="fireworks"></canvas>
+<script src="/JS/anime.min.js"></script>
+<script src="/JS/fireworks.js"></script>
+<script src="/JS/jquery-3.7.1.min.js"></script>
+<script>setCanvasSize();</script>
     </head>
     <body class="">
     <script>
@@ -56,7 +75,7 @@
                     
                     
                         
-                        <img src="/img/avatar02_hufaee62c155fcf27c6865e7e5ba9676bf_129485_300x0_resize_box_3.png" width="300"
+                        <img src="/img/Avatar_hu5179492d212c9c841146f5622b7e2dae_1451194_300x0_resize_box_3.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -86,26 +105,6 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
   <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
-</svg>
-
-
-
-                        
-                    </a>
-                </li>
-            
-                <li>
-                    <a 
-                        href='https://twitter.com'
-                        target="_blank"
-                        title="Twitter"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
 </svg>
 
 
@@ -287,7 +286,7 @@
                     <a href="/archives/#2024">
                         
                             <span class="year">2024</span>
-                            <span class="count">16</span>
+                            <span class="count">23</span>
                         
                     </a> 
                 </div>
@@ -330,12 +329,12 @@
 
     <div class="tagCloud-tags">
         
-            <a href="/categories/personal/" class="font_size_9">
-                Personal
+            <a href="/categories/technique/" class="font_size_14">
+                Technique
             </a>
         
-            <a href="/categories/technique/" class="font_size_7">
-                Technique
+            <a href="/categories/personal/" class="font_size_9">
+                Personal
             </a>
         
             <a href="/categories/markdown/" class="font_size_5">
@@ -369,6 +368,10 @@
         
             <a href="/tags/%E5%91%A8%E6%8A%A5%E5%91%8A/" class="font_size_9">
                 周报告
+            </a>
+        
+            <a href="/tags/python/" class="font_size_7">
+                Python
             </a>
         
             <a href="/tags/c&#43;&#43;/" class="font_size_4">
@@ -412,7 +415,7 @@
 
         <div class="section-card">
             <div class="section-details">
-                <h3 class="section-count">21 篇文章</h3>
+                <h3 class="section-count">28 篇文章</h3>
                 <h1 class="section-term">Posts</h1>
                 
             </div>
@@ -422,18 +425,18 @@
     <section class="article-list--compact">
         
             <article>
-    <a href="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_01/">
+    <a href="/p/postgraduate-weekly-report-2024-02-26/">
         <div class="article-details">
-            <h2 class="article-title">QT学习记录_01</h2>
+            <h2 class="article-title">研究生周报 2024 02 26</h2>
             <footer class="article-time">
-                <time datetime='2024-02-04T20:51:42&#43;08:00'>2024/02/04</time>
+                <time datetime='2024-03-04T21:53:01&#43;08:00'>2024/03/04</time>
             </footer>
         </div>
             <div class="article-image">
-                <img src="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_01/19_hu279ce5e96b74c838a255ccc4e759ad22_706904_120x120_fill_q75_box_smart1.jpg" 
+                <img src="/p/postgraduate-weekly-report-2024-02-26/35_hu38b354471b543df6103c57dcfdcaffb2_3812188_120x120_fill_q75_box_smart1.jpg" 
                         width="120"
                         height="120" 
-                        alt="QT学习记录_01"
+                        alt="研究生周报 2024 02 26"
                         loading="lazy">
                 
             </div>
@@ -442,18 +445,18 @@
 </article>
         
             <article>
-    <a href="/p/postgraduate-weekly-report-2024-02-04/">
+    <a href="/p/postgraduate-weekly-report-2024-02-18/">
         <div class="article-details">
-            <h2 class="article-title">研究生周报 2024 02 04</h2>
+            <h2 class="article-title">研究生周报 2024 02 18</h2>
             <footer class="article-time">
-                <time datetime='2024-02-04T20:47:08&#43;08:00'>2024/02/04</time>
+                <time datetime='2024-02-18T20:15:46&#43;08:00'>2024/02/18</time>
             </footer>
         </div>
             <div class="article-image">
-                <img src="/p/postgraduate-weekly-report-2024-02-04/17_hub468cb9e2e0fb22530e23a0e0293acef_781019_120x120_fill_q75_box_smart1.jpg" 
+                <img src="/p/postgraduate-weekly-report-2024-02-18/32_hu8af220edbd02810877d97f57345f0b88_892264_120x120_fill_q75_box_smart1.jpg" 
                         width="120"
                         height="120" 
-                        alt="研究生周报 2024 02 04"
+                        alt="研究生周报 2024 02 18"
                         loading="lazy">
                 
             </div>
@@ -462,18 +465,18 @@
 </article>
         
             <article>
-    <a href="/p/postgraduate-weekly-report-2024-01-28/">
+    <a href="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/">
         <div class="article-details">
-            <h2 class="article-title">研究生周报 2024 01 28</h2>
+            <h2 class="article-title">QT学习记录_04</h2>
             <footer class="article-time">
-                <time datetime='2024-02-04T20:46:54&#43;08:00'>2024/02/04</time>
+                <time datetime='2024-02-17T16:02:44&#43;08:00'>2024/02/17</time>
             </footer>
         </div>
             <div class="article-image">
-                <img src="/p/postgraduate-weekly-report-2024-01-28/15_hua9639fdd76374f00e733dda3b2a0aac6_206055_120x120_fill_q75_box_smart1.jpg" 
+                <img src="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/31_hu257b54557e64e568910f9552664481a3_2550935_120x120_fill_q75_box_smart1.jpg" 
                         width="120"
                         height="120" 
-                        alt="研究生周报 2024 01 28"
+                        alt="QT学习记录_04"
                         loading="lazy">
                 
             </div>
@@ -482,18 +485,18 @@
 </article>
         
             <article>
-    <a href="/p/postgraduate-weekly-report-2024-01-21/">
+    <a href="/p/postgraduate-weekly-report-2024-02-11/">
         <div class="article-details">
-            <h2 class="article-title">研究生周报 2024 01 21</h2>
+            <h2 class="article-title">研究生周报 2024 02 11</h2>
             <footer class="article-time">
-                <time datetime='2024-02-04T20:46:48&#43;08:00'>2024/02/04</time>
+                <time datetime='2024-02-17T16:02:15&#43;08:00'>2024/02/17</time>
             </footer>
         </div>
             <div class="article-image">
-                <img src="/p/postgraduate-weekly-report-2024-01-21/5_huacaf5c8865a77222a35a7e533953dfb1_799811_120x120_fill_q75_box_smart1.jpg" 
+                <img src="/p/postgraduate-weekly-report-2024-02-11/29_huc3644c617b1047362e8c282841d9bafa_2238983_120x120_fill_q75_box_smart1.jpg" 
                         width="120"
                         height="120" 
-                        alt="研究生周报 2024 01 21"
+                        alt="研究生周报 2024 02 11"
                         loading="lazy">
                 
             </div>
@@ -502,18 +505,18 @@
 </article>
         
             <article>
-    <a href="/p/postgraduate-weekly-report-2024-01-14/">
+    <a href="/p/hugo-development-day2/">
         <div class="article-details">
-            <h2 class="article-title">研究生周报 2024 01 14</h2>
+            <h2 class="article-title">Hugo建站指南——Day2</h2>
             <footer class="article-time">
-                <time datetime='2024-02-04T20:46:36&#43;08:00'>2024/02/04</time>
+                <time datetime='2024-02-17T16:01:18&#43;08:00'>2024/02/17</time>
             </footer>
         </div>
             <div class="article-image">
-                <img src="/p/postgraduate-weekly-report-2024-01-14/4_hu3b8c4ec53e3fd0f517d4e8188a63723a_4425471_120x120_fill_box_smart1_3.png" 
+                <img src="/p/hugo-development-day2/30_hud2fc0782b828068ad19fdccc62bddd6d_475432_120x120_fill_q75_box_smart1.jpg" 
                         width="120"
                         height="120" 
-                        alt="研究生周报 2024 01 14"
+                        alt="Hugo建站指南——Day2"
                         loading="lazy">
                 
             </div>
@@ -544,7 +547,14 @@
                 
             
             
-                    <a class='page-link' href='/post/page/5/'>5</a>
+                    
+                        
+                        <span class='page-link dots'>&hellip;</span>
+                    
+                
+            
+            
+                    <a class='page-link' href='/post/page/6/'>6</a>
                 
             
     </nav>
@@ -585,22 +595,6 @@
         document.head.appendChild(customFont);
     }());
 </script>
-<script type="text/javascript" 
-color="255,255,255" opacity="0.7" count="350" zIndex="-1" src="JS/canvas-nest.min.js" ></script>
-<style type="text/css">
-    body { cursor: url("ZhongLiPosition.cur"), auto; }
-    .fireworks {
-        position: fixed;
-        pointer-events: none;
-        top: 0;
-        left: 0;
-        height: 100%;
-    }
-</style>
-<canvas class="fireworks"></canvas>
-<script src="JS/anime.min.js"></script>
-<script src="JS/fireworks.js"></script>
-<script src="JS/jquery-3.7.1.min.js"></script>
-<script>fireworks.setCanvacSize();</script>
+
     </body>
 </html>

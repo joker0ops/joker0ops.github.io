@@ -11,11 +11,30 @@
 <meta property='og:description' content='木木龙的个人博客'>
 <meta property='og:url' content='http://localhost:1313/'>
 <meta property='og:site_name' content='木木龙的个人博客'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2024-03-10T21:56:08&#43;08:00 '/>
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2024-03-14T21:10:28&#43;08:00 '/>
 <meta name="twitter:title" content="木木龙的个人博客">
 <meta name="twitter:description" content="木木龙的个人博客"><link rel="alternate" type="application/rss&#43;xml" href="http://localhost:1313/index.xml">
     <link rel="shortcut icon" href="/favicon.ico" />
-
+<style type="text/css">
+    body{cursor:url('/Cursor/01.cur'), auto;} 
+    a:hover{cursor:url('/Cursor/03.cur'), pointer !important;}
+    button:hover{cursor: url('/Cursor/03.cur'), pointer !important;}
+    i:hover{cursor: url('/Cursor/03.cur'), pointer !important;}
+    input{cursor: url('/Cursor/06.cur'), text !important;}
+    #dark-mode-toggle:hover{cursor: url('/Cursor/03.cur'), pointer !important;}
+    .fireworks {
+        position: fixed;
+        pointer-events: none;
+        top: 0;
+        left: 0;
+        height: 100%;
+    }
+</style>
+<canvas class="fireworks" id="fireworks"></canvas>
+<script src="/JS/anime.min.js"></script>
+<script src="/JS/fireworks.js"></script>
+<script src="/JS/jquery-3.7.1.min.js"></script>
+<script>setCanvasSize();</script>
     </head>
     <body class="">
     <script>
@@ -57,7 +76,7 @@
                     
                     
                         
-                        <img src="/img/avatar02_hufaee62c155fcf27c6865e7e5ba9676bf_129485_300x0_resize_box_3.png" width="300"
+                        <img src="/img/Avatar_hu5179492d212c9c841146f5622b7e2dae_1451194_300x0_resize_box_3.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -87,26 +106,6 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
   <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
-</svg>
-
-
-
-                        
-                    </a>
-                </li>
-            
-                <li>
-                    <a 
-                        href='https://twitter.com'
-                        target="_blank"
-                        title="Twitter"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
 </svg>
 
 
@@ -288,7 +287,7 @@
                     <a href="/archives/#2024">
                         
                             <span class="year">2024</span>
-                            <span class="count">16</span>
+                            <span class="count">23</span>
                         
                     </a> 
                 </div>
@@ -331,12 +330,12 @@
 
     <div class="tagCloud-tags">
         
-            <a href="/categories/personal/" class="font_size_9">
-                Personal
+            <a href="/categories/technique/" class="font_size_14">
+                Technique
             </a>
         
-            <a href="/categories/technique/" class="font_size_7">
-                Technique
+            <a href="/categories/personal/" class="font_size_9">
+                Personal
             </a>
         
             <a href="/categories/markdown/" class="font_size_5">
@@ -370,6 +369,10 @@
         
             <a href="/tags/%E5%91%A8%E6%8A%A5%E5%91%8A/" class="font_size_9">
                 周报告
+            </a>
+        
+            <a href="/tags/python/" class="font_size_7">
+                Python
             </a>
         
             <a href="/tags/c&#43;&#43;/" class="font_size_4">
@@ -415,13 +418,13 @@
 <article class="has-image">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/">
-                <img src="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/31_hu257b54557e64e568910f9552664481a3_2550935_800x0_resize_q75_box.jpg"
-                        srcset="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/31_hu257b54557e64e568910f9552664481a3_2550935_800x0_resize_q75_box.jpg 800w, /p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/31_hu257b54557e64e568910f9552664481a3_2550935_1600x0_resize_q75_box.jpg 1600w"
+            <a href="/p/pythonbasic02/">
+                <img src="/p/pythonbasic02/14_hud0ff8cb5dfde4b1c6ac322f6a5a0836f_349693_800x0_resize_q75_box.jpg"
+                        srcset="/p/pythonbasic02/14_hud0ff8cb5dfde4b1c6ac322f6a5a0836f_349693_800x0_resize_q75_box.jpg 800w, /p/pythonbasic02/14_hud0ff8cb5dfde4b1c6ac322f6a5a0836f_349693_1600x0_resize_q75_box.jpg 1600w"
                         width="800" 
-                        height="450" 
+                        height="455" 
                         loading="lazy"
-                        alt="Featured image of post QT学习记录_04" />
+                        alt="Featured image of post Python基础 02 列表" />
                 
             </a>
         </div>
@@ -440,12 +443,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/">QT学习记录_04</a>
+            <a href="/p/pythonbasic02/">Python基础 02 列表</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            Qt Study Record Day4
+            Python基础巩固第二天！学习列表操作
         </h3>
         
     </div>
@@ -466,7 +469,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2024/02/17</time>
+                <time class="article-time--published">2024/03/14</time>
             </div>
         
 
@@ -481,7 +484,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 9 分钟
+                    阅读时长: 3 分钟
                 </time>
             </div>
         
@@ -498,13 +501,13 @@
 <article class="has-image">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/postgraduate-weekly-report-2024-02-11/">
-                <img src="/p/postgraduate-weekly-report-2024-02-11/29_huc3644c617b1047362e8c282841d9bafa_2238983_800x0_resize_q75_box.jpg"
-                        srcset="/p/postgraduate-weekly-report-2024-02-11/29_huc3644c617b1047362e8c282841d9bafa_2238983_800x0_resize_q75_box.jpg 800w, /p/postgraduate-weekly-report-2024-02-11/29_huc3644c617b1047362e8c282841d9bafa_2238983_1600x0_resize_q75_box.jpg 1600w"
+            <a href="/p/pythonbasic01/">
+                <img src="/p/pythonbasic01/12_hue96f00eb035c05652d604d3b67693450_240008_800x0_resize_q75_box.jpg"
+                        srcset="/p/pythonbasic01/12_hue96f00eb035c05652d604d3b67693450_240008_800x0_resize_q75_box.jpg 800w, /p/pythonbasic01/12_hue96f00eb035c05652d604d3b67693450_240008_1600x0_resize_q75_box.jpg 1600w"
                         width="800" 
-                        height="450" 
+                        height="455" 
                         loading="lazy"
-                        alt="Featured image of post 研究生周报 2024 02 11" />
+                        alt="Featured image of post Python基础 01 字符串操作" />
                 
             </a>
         </div>
@@ -514,8 +517,8 @@
     
     <header class="article-category">
         
-            <a href="/categories/personal/" >
-                Personal
+            <a href="/categories/technique/" >
+                Technique
             </a>
         
     </header>
@@ -523,12 +526,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/postgraduate-weekly-report-2024-02-11/">研究生周报 2024 02 11</a>
+            <a href="/p/pythonbasic01/">Python基础 01 字符串操作</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            反思、进步、斗争、提升自我
+            Python基础巩固第一天！学习各种字符串处理操作以及格式化输出方式
         </h3>
         
     </div>
@@ -549,7 +552,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2024/02/17</time>
+                <time class="article-time--published">2024/03/14</time>
             </div>
         
 
@@ -581,13 +584,13 @@
 <article class="has-image">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/hugo-development-day2/">
-                <img src="/p/hugo-development-day2/30_hud2fc0782b828068ad19fdccc62bddd6d_475432_800x0_resize_q75_box.jpg"
-                        srcset="/p/hugo-development-day2/30_hud2fc0782b828068ad19fdccc62bddd6d_475432_800x0_resize_q75_box.jpg 800w, /p/hugo-development-day2/30_hud2fc0782b828068ad19fdccc62bddd6d_475432_1600x0_resize_q75_box.jpg 1600w"
+            <a href="/p/postgraduate-weekly-report-2024-03-10/">
+                <img src="/p/postgraduate-weekly-report-2024-03-10/6_hu5c903a671b8ba7b0eb81b9d1f9246689_210610_800x0_resize_q75_box.jpg"
+                        srcset="/p/postgraduate-weekly-report-2024-03-10/6_hu5c903a671b8ba7b0eb81b9d1f9246689_210610_800x0_resize_q75_box.jpg 800w, /p/postgraduate-weekly-report-2024-03-10/6_hu5c903a671b8ba7b0eb81b9d1f9246689_210610_1600x0_resize_q75_box.jpg 1600w"
                         width="800" 
-                        height="500" 
+                        height="441" 
                         loading="lazy"
-                        alt="Featured image of post Hugo建站指南——Day2" />
+                        alt="Featured image of post 研究生周报 2024 03 10" />
                 
             </a>
         </div>
@@ -597,12 +600,8 @@
     
     <header class="article-category">
         
-            <a href="/categories/technique/" >
-                Technique
-            </a>
-        
-            <a href="/categories/blog/" >
-                Blog
+            <a href="/categories/personal/" >
+                Personal
             </a>
         
     </header>
@@ -610,12 +609,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/hugo-development-day2/">Hugo建站指南——Day2</a>
+            <a href="/p/postgraduate-weekly-report-2024-03-10/">研究生周报 2024 03 10</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            使用Hugo框架构建Stack主题的个人博客——Day2
+            反思、进步、斗争、提升自我
         </h3>
         
     </div>
@@ -636,7 +635,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2024/02/17</time>
+                <time class="article-time--published">2024/03/10</time>
             </div>
         
 
@@ -651,7 +650,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 4 分钟
+                    阅读时长: 1 分钟
                 </time>
             </div>
         
@@ -668,13 +667,13 @@
 <article class="has-image">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/">
-                <img src="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/22_hu8c3a5b5f054fe6608239643744ee4034_521651_800x0_resize_q75_box.jpg"
-                        srcset="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/22_hu8c3a5b5f054fe6608239643744ee4034_521651_800x0_resize_q75_box.jpg 800w, /p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/22_hu8c3a5b5f054fe6608239643744ee4034_521651_1600x0_resize_q75_box.jpg 1600w"
+            <a href="/p/gitbash%E5%A4%8D%E5%88%B6%E7%B2%98%E8%B4%B4%E5%BF%AB%E6%8D%B7%E9%94%AE/">
+                <img src="/p/gitbash%E5%A4%8D%E5%88%B6%E7%B2%98%E8%B4%B4%E5%BF%AB%E6%8D%B7%E9%94%AE/34_hu1fcfd80b17ed2a5f977b43a96e67bcb1_715245_800x0_resize_q75_box.jpg"
+                        srcset="/p/gitbash%E5%A4%8D%E5%88%B6%E7%B2%98%E8%B4%B4%E5%BF%AB%E6%8D%B7%E9%94%AE/34_hu1fcfd80b17ed2a5f977b43a96e67bcb1_715245_800x0_resize_q75_box.jpg 800w, /p/gitbash%E5%A4%8D%E5%88%B6%E7%B2%98%E8%B4%B4%E5%BF%AB%E6%8D%B7%E9%94%AE/34_hu1fcfd80b17ed2a5f977b43a96e67bcb1_715245_1600x0_resize_q75_box.jpg 1600w"
                         width="800" 
-                        height="395" 
+                        height="600" 
                         loading="lazy"
-                        alt="Featured image of post QT学习记录_03" />
+                        alt="Featured image of post GitBash复制粘贴快捷键" />
                 
             </a>
         </div>
@@ -693,12 +692,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/">QT学习记录_03</a>
+            <a href="/p/gitbash%E5%A4%8D%E5%88%B6%E7%B2%98%E8%B4%B4%E5%BF%AB%E6%8D%B7%E9%94%AE/">GitBash复制粘贴快捷键</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            Qt Study Record Day3
+            在GitBash中使用Ctrl与Shift——Ins组合键来快捷复制粘贴
         </h3>
         
     </div>
@@ -719,7 +718,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2024/02/04</time>
+                <time class="article-time--published">2024/03/05</time>
             </div>
         
 
@@ -734,7 +733,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 4 分钟
+                    阅读时长: 1 分钟
                 </time>
             </div>
         
@@ -751,13 +750,13 @@
 <article class="has-image">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/">
-                <img src="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/20_hue8028801c9f73dd91eba9fc177c5fd74_708628_800x0_resize_q75_box.jpg"
-                        srcset="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/20_hue8028801c9f73dd91eba9fc177c5fd74_708628_800x0_resize_q75_box.jpg 800w, /p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/20_hue8028801c9f73dd91eba9fc177c5fd74_708628_1600x0_resize_q75_box.jpg 1600w"
+            <a href="/p/postgraduate-weekly-report-2024-03-04/">
+                <img src="/p/postgraduate-weekly-report-2024-03-04/36_hu1558120cca5f15bf48df30464e48bac8_4298276_800x0_resize_q75_box.jpg"
+                        srcset="/p/postgraduate-weekly-report-2024-03-04/36_hu1558120cca5f15bf48df30464e48bac8_4298276_800x0_resize_q75_box.jpg 800w, /p/postgraduate-weekly-report-2024-03-04/36_hu1558120cca5f15bf48df30464e48bac8_4298276_1600x0_resize_q75_box.jpg 1600w"
                         width="800" 
-                        height="450" 
+                        height="390" 
                         loading="lazy"
-                        alt="Featured image of post QT学习记录_02" />
+                        alt="Featured image of post 研究生周报 2024 03 04" />
                 
             </a>
         </div>
@@ -767,8 +766,8 @@
     
     <header class="article-category">
         
-            <a href="/categories/technique/" >
-                Technique
+            <a href="/categories/personal/" >
+                Personal
             </a>
         
     </header>
@@ -776,12 +775,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/">QT学习记录_02</a>
+            <a href="/p/postgraduate-weekly-report-2024-03-04/">研究生周报 2024 03 04</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            Qt Study Record Day2
+            反思、进步、斗争、提升自我
         </h3>
         
     </div>
@@ -802,7 +801,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2024/02/04</time>
+                <time class="article-time--published">2024/03/04</time>
             </div>
         
 
@@ -817,7 +816,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 6 分钟
+                    阅读时长: 2 分钟
                 </time>
             </div>
         
@@ -856,7 +855,11 @@
                 
             
             
-                    <a class='page-link' href='/page/5/'>5</a>
+                    
+                
+            
+            
+                    <a class='page-link' href='/page/6/'>6</a>
                 
             
     </nav>
@@ -896,22 +899,6 @@
         document.head.appendChild(customFont);
     }());
 </script>
-<script type="text/javascript" 
-color="255,255,255" opacity="0.7" count="350" zIndex="-1" src="JS/canvas-nest.min.js" ></script>
-<style type="text/css">
-    body { cursor: url("ZhongLiPosition.cur"), auto; }
-    .fireworks {
-        position: fixed;
-        pointer-events: none;
-        top: 0;
-        left: 0;
-        height: 100%;
-    }
-</style>
-<canvas class="fireworks"></canvas>
-<script src="JS/anime.min.js"></script>
-<script src="JS/fireworks.js"></script>
-<script src="JS/jquery-3.7.1.min.js"></script>
-<script>fireworks.setCanvacSize();</script>
+
     </body>
 </html>
