@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>MachineLearning on 木木龙的个人博客</title>
+        <link>http://localhost:1313/categories/machinelearning/</link>
+        <description>Recent content in MachineLearning on 木木龙的个人博客</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>木木龙的个人博客</copyright>
+        <lastBuildDate>Tue, 19 Mar 2024 19:25:26 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/machinelearning/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>机器学习-决策树</title>
+        <link>http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%86%B3%E7%AD%96%E6%A0%91/</link>
+        <pubDate>Tue, 19 Mar 2024 19:25:26 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%86%B3%E7%AD%96%E6%A0%91/</guid>
+        <description>&lt;img src="http://localhost:1313/p/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%86%B3%E7%AD%96%E6%A0%91/9.jpg" alt="Featured image of post 机器学习-决策树" /&gt;&lt;h1 id=&#34;决策树定义&#34;&gt;决策树定义&lt;/h1&gt;
+&lt;p&gt;决策树是一种常见的用于机器学习的分类算法，常用于对数据集做发分类或回归处理。决策树常常包含一个根结点、若干内部结点和若干叶节点；叶结点对应于决策结果，其他每个结点则对应于一个属性测试；每个结点包含的样本集合根据属性测试的结果被划分到子结点中；根节点包含样本全集。从根节点到叶结点的路径对应了一个判定测试序列。决策树学习的目的是产生一个泛化能力强，对新数据分类正确率高的分类系统，其基本流程遵循简单而直观的”分而治之“的算法。&lt;/p&gt;
+&lt;h2 id=&#34;决策树&#34;&gt;决策树&lt;/h2&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

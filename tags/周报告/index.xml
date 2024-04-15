@@ -7,7 +7,96 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>木木龙的个人博客</copyright>
-        <lastBuildDate>Sun, 10 Mar 2024 21:56:08 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%91%A8%E6%8A%A5%E5%91%8A/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 15 Apr 2024 15:59:20 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%91%A8%E6%8A%A5%E5%91%8A/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>研究生周报 2024 04 15</title>
+        <link>http://localhost:1313/p/postgraduate-weekly-report-2024-04-15/</link>
+        <pubDate>Mon, 15 Apr 2024 15:59:20 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/postgraduate-weekly-report-2024-04-15/</guid>
+        <description>&lt;img src="http://localhost:1313/p/postgraduate-weekly-report-2024-04-15/13.jpg" alt="Featured image of post 研究生周报 2024 04 15" /&gt;&lt;h2 id=&#34;摘要&#34;&gt;摘要&lt;/h2&gt;
+&lt;p&gt;该文档主要描述本周主要活动内容及收获，之后主要论述下周个人计划及其被安排在此时间节点的原因。&lt;/p&gt;
+&lt;h2 id=&#34;本周个人提升计划&#34;&gt;本周个人提升计划&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;通过Qt实现基础串口通信（与中继器进行通信）&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;完成Qt翻金币项目&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;学习Stable Diffusion并整理常用提示词&lt;/li&gt;
+&lt;li&gt;复现Smart Home物联网项目，完成项目框架及数据库搭建&lt;/li&gt;
+&lt;li&gt;阅读深度学习相关文献&lt;/li&gt;
+&lt;li&gt;整理个人学习心得并记录&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;总结与反思&#34;&gt;总结与反思&lt;/h2&gt;
+&lt;p&gt;已经有两周没有写周报了，虽然这两周在外地旅行的确开拓了眼界和思想，但是并没有积极主动地进行记录和总结，并且对自己有些放纵，从下周开始一定要继续严格要求自己，根据自己的计划向着目标继续前进。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>研究生周报 2024 03 24</title>
+        <link>http://localhost:1313/p/postgraduate-weekly-report-2024-03-24/</link>
+        <pubDate>Sun, 24 Mar 2024 21:40:09 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/postgraduate-weekly-report-2024-03-24/</guid>
+        <description>&lt;img src="http://localhost:1313/p/postgraduate-weekly-report-2024-03-24/8.jpg" alt="Featured image of post 研究生周报 2024 03 24" /&gt;&lt;h2 id=&#34;摘要&#34;&gt;摘要&lt;/h2&gt;
+&lt;p&gt;该文档主要描述本周主要活动内容及收获，之后主要论述下周个人计划及其被安排在此时间节点的原因。&lt;/p&gt;
+&lt;h2 id=&#34;本周个人提升计划&#34;&gt;本周个人提升计划&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;完成数据挖掘课程PPT&lt;/strong&gt;(完成)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;完成发射动力学课程作业&lt;/strong&gt;(完成)&lt;/li&gt;
+&lt;li&gt;完成兵器系统概论PPT（已经建文件夹了）&lt;/li&gt;
+&lt;li&gt;自己动手实现数字识别项目（能力不够，暂时先放一下&amp;hellip;😢）&lt;/li&gt;
+&lt;li&gt;完成Qt翻金币项目关卡设计(完成)&lt;/li&gt;
+&lt;li&gt;精读一篇深度学习方向论文(完成)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;本周个人提升内容&#34;&gt;本周个人提升内容&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;学习并巩固了决策树算法，对数据挖掘的理论和应用有了更清晰的了解。&lt;/li&gt;
+&lt;li&gt;学习并掌握Qt的GUI编程，实现翻金币关卡界面设计&lt;/li&gt;
+&lt;li&gt;精读魏师姐《激光背向散射的马铃薯品质智能分级》的论文。&lt;/li&gt;
+&lt;li&gt;发现自己只是了解Python的一些最基础的语法，并不清楚Python的一些特性，从而深入了解Python数据类型、数据结构等知识并进行总结。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;下周计划按优先级排序高中次&#34;&gt;下周计划&amp;lt;按优先级排序&lt;strong&gt;高&lt;/strong&gt;中&lt;del&gt;次&lt;/del&gt;&amp;gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;完成兵器系统概论PPT&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;完成Pandas和Numpy入门博客&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;完成Qt翻金币项目关卡设计&lt;/li&gt;
+&lt;li&gt;精读一篇关于激光后向散射方面或关于Desnet应用的论文&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;总结与反思&#34;&gt;总结与反思&lt;/h2&gt;
+&lt;p&gt;本周在“&lt;strong&gt;不得不完成的学习任务&lt;/strong&gt;”的“逼迫”下学习效率有了显著的提高，不仅对决策树算法的历史、思想以及相关的数学原理有了比较清晰的了解，同时还在Github上查找了相应的示例项目并进行应用学习，在此过程中也发现自己对Python的一些较为基础的语法并不了解（如使用列表推导式进行列表的生成），根据自己的未来目标推导发现Python和C++应该是自己的学习重点，因此重新开始巩固Python基础并寻找小的项目进行练习，希望下周能够巩固好Python基础并完成Pandas和Numpy的学习。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>研究生周报 2024 03 18</title>
+        <link>http://localhost:1313/p/postgraduate-weekly-report-2024-03-18/</link>
+        <pubDate>Mon, 18 Mar 2024 10:45:48 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/postgraduate-weekly-report-2024-03-18/</guid>
+        <description>&lt;img src="http://localhost:1313/p/postgraduate-weekly-report-2024-03-18/55.jpg" alt="Featured image of post 研究生周报 2024 03 18" /&gt;&lt;h2 id=&#34;摘要&#34;&gt;摘要&lt;/h2&gt;
+&lt;p&gt;该文档主要描述本周主要活动内容及收获，之后主要论述下周个人计划及其被安排在此时间节点的原因。&lt;/p&gt;
+&lt;h2 id=&#34;本周个人提升计划&#34;&gt;本周个人提升计划&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;与老师讨论新的项目方向&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;完成Qt翻金币项目主界面机制设计&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;根据龙曲良深度学习教程学会Tensorflow基础语法&lt;/li&gt;
+&lt;li&gt;精读一篇深度学习方向论文&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;本周个人提升内容&#34;&gt;本周个人提升内容&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;熟悉Numpy&lt;/li&gt;
+&lt;li&gt;练车&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;下周计划按优先级排序高中次&#34;&gt;下周计划&amp;lt;按优先级排序&lt;strong&gt;高&lt;/strong&gt;中&lt;del&gt;次&lt;/del&gt;&amp;gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;完成数据挖掘课程PPT&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;完成发射动力学课程作业&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;完成兵器系统概论PPT&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;自己动手实现数字识别项目&lt;/li&gt;
+&lt;li&gt;完成Qt翻金币项目关卡设计&lt;/li&gt;
+&lt;li&gt;精读一篇深度学习方向论文&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;总结与反思&#34;&gt;总结与反思&lt;/h2&gt;
+&lt;p&gt;本周浪费在手机和游戏上的时间过多！并且没有持续通过项目练习获得正反馈，希望在本周能够有所改进，另外要合理评估自己当前能力，合理地根据自己的时间定制计划。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>研究生周报 2024 03 10</title>
         <link>http://localhost:1313/p/postgraduate-weekly-report-2024-03-10/</link>
         <pubDate>Sun, 10 Mar 2024 21:56:08 +0800</pubDate>

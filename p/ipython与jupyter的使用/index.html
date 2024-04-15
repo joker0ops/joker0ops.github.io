@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='IPython与Jupiter是什么？ IPython是Python的一个交互式解释器，可以提供交互式命令行，支持自动补全、历史记录等功能。J'>
+<title>IPython与Jupyter的使用</title>
+
+<link rel='canonical' href='http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/'>
+
+<link rel="stylesheet" href="/scss/style.min.24ef1cc321916467896e8c70c10c0ad7b98c2a8df14298032fb637216e397f50.css"><meta property='og:title' content='IPython与Jupyter的使用'>
+<meta property='og:description' content='IPython与Jupiter是什么？ IPython是Python的一个交互式解释器，可以提供交互式命令行，支持自动补全、历史记录等功能。J'>
+<meta property='og:url' content='http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/'>
+<meta property='og:site_name' content='木木龙的个人博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Python' /><meta property='article:published_time' content='2024-03-22T22:04:01&#43;08:00'/><meta property='article:modified_time' content='2024-03-22T22:04:01&#43;08:00'/><meta property='og:image' content='http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/10.jpg' />
+<meta name="twitter:title" content="IPython与Jupyter的使用">
+<meta name="twitter:description" content="IPython与Jupiter是什么？ IPython是Python的一个交互式解释器，可以提供交互式命令行，支持自动补全、历史记录等功能。J"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/10.jpg' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+<style type="text/css">
+    html{cursor:url('/cursor/01.cur'), default !important;}
+    a:hover{cursor:url('/cursor/03.cur'), pointer !important;}
+    button:hover{cursor: url('/cursor/03.cur'), pointer !important;}
+    i:hover{cursor: url('/cursor/03.cur'), pointer !important;}
+    input{cursor: url('/cursor/06.cur'), text !important;}
+    #dark-mode-toggle:hover{cursor: url('/cursor/03.cur'), pointer !important;}
+    .fireworks {
+        position: fixed;
+        pointer-events: none;
+        top: 0;
+        left: 0;
+        height: 100%;
+    }
+</style>
+<canvas class="fireworks" id="fireworks"></canvas>
+<script src="/JS/anime.min.js"></script>
+<script src="/JS/fireworks.js"></script>
+<script src="/JS/jquery-3.7.1.min.js"></script>
+<script src="/JS/stars.js"></script>
+<script>setCanvasSize();</script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/Avatar_hu5179492d212c9c841146f5622b7e2dae_1451194_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">😍</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">木木龙的个人博客</a></h1>
+            <h2 class="site-description">热爱可抵岁月漫长</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/joker0ops'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#ipython的使用">IPython的使用</a>
+      <ol>
+        <li><a href="#启动ipython">启动IPython</a></li>
+        <li><a href="#ipython的交互式命令行">IPython的交互式命令行</a></li>
+        <li><a href="#ipython输出风格">IPython输出风格</a></li>
+        <li><a href="#ipython的tab补全功能">IPython的Tab补全功能</a></li>
+        <li><a href="#内省">内省</a></li>
+        <li><a href="#run命令">%run命令</a></li>
+        <li><a href="#关于魔术命令">关于魔术命令</a></li>
+        <li><a href="#matplotlib集成">matplotlib集成</a></li>
+      </ol>
+    </li>
+    <li><a href="#jupyter的使用">Jupyter的使用</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/">
+                <img src="/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/10_hu8625cb07d962bca02a4ea674454ebd55_242272_800x0_resize_q75_box.jpg"
+                        srcset="/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/10_hu8625cb07d962bca02a4ea674454ebd55_242272_800x0_resize_q75_box.jpg 800w, /p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/10_hu8625cb07d962bca02a4ea674454ebd55_242272_1600x0_resize_q75_box.jpg 1600w"
+                        width="800" 
+                        height="431" 
+                        loading="lazy"
+                        alt="Featured image of post IPython与Jupyter的使用" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/technique/" >
+                Technique
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/">IPython与Jupyter的使用</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2024/03/22</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 5 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="ipython与jupiter是什么">IPython与Jupiter是什么？</h1>
+<p>IPython是Python的一个交互式解释器，可以提供交互式命令行，支持自动补全、历史记录等功能。Jupyter是IPython的一个扩展，可以提供交互式命令行、Markdown文档、代码块等功能。当你使用%run命令时，IPython会在同一个进程内执行指定文件中的代码，确保你能够在执行完成时立即探索结果。
+<img src="/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython01.png"
+	width="979"
+	height="511"
+	srcset="/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython01_huec1346ff16f088a1c9bb1cd0467e5677_16073_480x0_resize_box_3.png 480w, /p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython01_huec1346ff16f088a1c9bb1cd0467e5677_16073_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Picture"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="191"
+		data-flex-basis="459px"
+	
+></p>
+<h2 id="ipython的使用">IPython的使用</h2>
+<h3 id="启动ipython">启动IPython</h3>
+<p>像启动标准Python解释器一样，你可以ipython命令启动IPython命令行。
+<img src="/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython02.png"
+	width="979"
+	height="511"
+	srcset="/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython02_hu7072543c0c8b562782fa441533c8ee93_18334_480x0_resize_box_3.png 480w, /p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython02_hu7072543c0c8b562782fa441533c8ee93_18334_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Picture"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="191"
+		data-flex-basis="459px"
+	
+></p>
+<h3 id="ipython的交互式命令行">IPython的交互式命令行</h3>
+<p>你可以将Python语句输入命令行，然后按下回车键运行。当你在IPython命令行中仅仅输入一个变量名后，它会返回一个表示该对象的字符串：
+<img src="/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython03.png"
+	width="769"
+	height="188"
+	srcset="/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython03_hu9ee9c0e91171cfd25b017fcad1594b89_19730_480x0_resize_box_3.png 480w, /p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython03_hu9ee9c0e91171cfd25b017fcad1594b89_19730_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Picture"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="409"
+		data-flex-basis="981px"
+	
+></p>
+<h3 id="ipython输出风格">IPython输出风格</h3>
+<p>与常见的print打印语句不同，IPython会将输出格式化为一个更易读的格式。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl"><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">)}</span>
+</span></span><span class="line"><span class="cl"><span class="n">data</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.4046457180241955</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">     <span class="mi">1</span><span class="p">:</span> <span class="o">-</span><span class="mf">2.27136111318475</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">     <span class="mi">2</span><span class="p">:</span> <span class="mf">1.7273107463935018</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">     <span class="mi">3</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.364839504945707</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">     <span class="mi">4</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.957277837917039</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">     <span class="mi">5</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.5369751270845555</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">     <span class="mi">6</span><span class="p">:</span> <span class="mf">0.9250198022472945</span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="ipython的tab补全功能">IPython的Tab补全功能</h3>
+<p>相较于标准Python命令行，IPython增添了Tab补全功能。通常这种功能只在IDE或者其他交互式计算分析环境中提供。当在命令行中输入一个表达式时，按下Tab键可以自动搜索能够匹配当前表达式的<strong>自定义变量、关键字、内建函数、方法、属性、名称、关键字参数</strong>等。另外需要导入的模块也可以通过相同的方式进行补全。并且在新版的IPython中，自动补全是在下拉列表中进行的，需要在补全列表中选择一个选项，然后按回车键执行。<br>
+<kbd> 请注意IPython默认情况下隐藏了以下划线开始的方法和属性，诸如魔术方法，内部“私有”方法和属性以防止新手混淆，这些属性必须先输入下划线才可以看到</kbd><br>
+此外，Tab补全功能还可以用于对计算机文件系统的搜索，当输入任意路径（甚至是Python字符串）时，按下Tab键可以自动补全文件和目录名。这与%run命令搭配使用能够节省大量的输入时间（%run + Tab补全文件路径）。</p>
+<h3 id="内省">内省</h3>
+<p>在一个变量名前后使用问号(?)可以显示一些关于该对象的概要信息：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="line"><span class="cl"><span class="n">array</span><span class="err">?</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_03.png"
+	width="1920"
+	height="880"
+	srcset="/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_03_hue97b7933a90e36455e70786400928036_46631_480x0_resize_box_3.png 480w, /p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_03_hue97b7933a90e36455e70786400928036_46631_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Picture"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="218"
+		data-flex-basis="523px"
+	
+>
+这就是对象内省。如果对象是一个函数或实例方法且文档字符串已经写好，则文档字符串就会显示出来。例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">exchange_numbers</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Exchange two numbers without a temp variable
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Returns
+</span></span></span><span class="line"><span class="cl"><span class="s2">    --------
+</span></span></span><span class="line"><span class="cl"><span class="s2">    b, a
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后使用?显示对象的完整文档字符串：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="line"><span class="cl"><span class="n">exchange_numbers</span><span class="err">?</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_01.png"
+	width="1920"
+	height="880"
+	srcset="/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_01_hu818e7a13ad335ca326b9179cc658fd35_52967_480x0_resize_box_3.png 480w, /p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_01_hu818e7a13ad335ca326b9179cc658fd35_52967_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Picture"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="218"
+		data-flex-basis="523px"
+	
+>
+使用双问号??可以显示函数源代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">exchange_numbers</span><span class="err">??</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_02.png"
+	width="1920"
+	height="880"
+	srcset="/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_02_hucd8dc3fe5e6a0819245f28b98cd564d4_47765_480x0_resize_box_3.png 480w, /p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_02_hucd8dc3fe5e6a0819245f28b98cd564d4_47765_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Picture"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="218"
+		data-flex-basis="523px"
+	
+>
+此外?操作符还有一个终极用途，可以结合通配符*使用，例如我们可以得到Numpy顶层函数中包含load的函数名列表：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">np</span><span class="o">.*</span><span class="n">load</span><span class="o">*</span><span class="err">?</span>
+</span></span><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">__loader__</span>
+</span></span><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">load</span>
+</span></span><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">loads</span>
+</span></span><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span>
+</span></span><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">pkgload</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="run命令">%run命令</h3>
+<p>在Juypter中可以使用<kbd>%run</kbd>命令运行任意的Python程序文件，并且Jupyter提供了良好的用户输入接口。</p>
+<p>在<kbd>%run FileName.py</kbd>这行命令中，脚本是在一个独立的空白命名空间中运行的，之前导入的模块或定义的变量对其不会造成影响。（类似于在一个单独的命令行中执行<kbd>python FileName.py</kbd>）。</p>
+<p>在程序执行期间，按下<kbd>Ctrl+C</kbd>可以中断程序。除了某些特殊情况，这将导致所有的Python程序立即停止运行。但需要注意的是，当一段Python代码被其他已经编译的扩展模块调用时，按下<kbd>Ctrl+C</kbd>将不会中断程序。在这些情况下，你需要等到控制流重新返回Python解释器，甚至有时还需要强制结束Python进程。</p>
+<h3 id="关于魔术命令">关于魔术命令</h3>
+<p>IPython中存在一些特殊的内置命令称为魔术命令，它们以%开头，用于简化常见任务。例如：</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%time statement</td>
+<td>命令可以测量一段代码的执行时间</td>
+</tr>
+<tr>
+<td>%timeit statement</td>
+<td>命令多次运行单个语句计算平均时间</td>
+</tr>
+<tr>
+<td>%pwd</td>
+<td>命令可以显示当前工作目录</td>
+</tr>
+<tr>
+<td>%cd</td>
+<td>命令可以改变当前工作目录</td>
+</tr>
+<tr>
+<td>%ls</td>
+<td>命令可以列出当前工作目录下的文件</td>
+</tr>
+<tr>
+<td>%matplotlib</td>
+<td>命令可以启用matplotlib绘图功能</td>
+</tr>
+<tr>
+<td>%edit</td>
+<td>命令可以打开一个Python程序文件的编辑器</td>
+</tr>
+<tr>
+<td>%debug</td>
+<td>命令可以启动调试器</td>
+</tr>
+<tr>
+<td>%hist</td>
+<td>命令可以显示命令历史记录</td>
+</tr>
+<tr>
+<td>%pdb</td>
+<td>命令可以启用Python调试器</td>
+</tr>
+<tr>
+<td>%who, %who_ls, %whos</td>
+<td>命令可以显示当前工作空间中的变量</td>
+</tr>
+<tr>
+<td>%quickref</td>
+<td>命令可以打开一个快速参考手册</td>
+</tr>
+<tr>
+<td>%magic</td>
+<td>命令可以列出所有魔术命令的详细文档</td>
+</tr>
+<tr>
+<td>%paste</td>
+<td>命令可以从剪贴板中执行已经预先格式化的Python代码</td>
+</tr>
+<tr>
+<td>%cpaste</td>
+<td>命令可以打开一个特殊提示符，然后手动粘贴待执行的Python代码</td>
+</tr>
+<tr>
+<td>%reset</td>
+<td>命令可以重置当前工作空间，删除当前工作空间中的所有变量和函数</td>
+</tr>
+<tr>
+<td>%page OBJECT</td>
+<td>通过分页器更美观地打印显示一个对象</td>
+</tr>
+<tr>
+<td>%xdel variable</td>
+<td>命令可以删除一个变量并清除相关的引用</td>
+</tr>
+<tr>
+<td><strong>Tips:</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>魔术命令可以看作IPython系统内部的命令行程序，大多数魔术命令都可以在其后追加?操作符来显示更加详细的文档</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="o">%</span><span class="n">time</span><span class="err">?</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>只要没有变量定义为与魔术命令相同的名字，魔术命令即可不加%使用，这种特性可以通过%automagic命令来启用或禁用</li>
+<li>一些魔术命令（例如%pwd）也像Python函数一样，其输出可以赋值给一个变量。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">pwd</span> <span class="o">=</span> <span class="o">%</span><span class="n">pwd</span>
+</span></span><span class="line"><span class="cl"><span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">pwd</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="matplotlib集成">matplotlib集成</h3>
+<p>IPython良好得集成了matplotlib，在IPython中，运行%matplotlib命令可以生成多个绘图窗口而不会干扰控制台的会话。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="o">%</span><span class="n">matplotlib</span>
+</span></span><span class="line"><span class="cl"><span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</span></span><span class="line"><span class="cl"><span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl"><span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(),</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在Jupyter中，命令会有所不同：
+<img src="/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_04.png"
+	width="1141"
+	height="593"
+	srcset="/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_04_hu33b12d9252e36f4cf9c967bb9611b149_103072_480x0_resize_box_3.png 480w, /p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_04_hu33b12d9252e36f4cf9c967bb9611b149_103072_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Picture"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="192"
+		data-flex-basis="461px"
+	
+></p>
+<h2 id="jupyter的使用">Jupyter的使用</h2>
+<p>Jupyter是一个基于Web的交互式计算分析环境，可以运行多种数据分析语言。一般安装Anaconda时，已经安装了Jupyter。
+在使用Jupyter时，需要打开命令行输入jupyter notebook命令，然后打开浏览器访问localhost:8888。一般情况下，Jupyter会自动打开一个浏览器窗口（除非你使用了 &ndash;no-browser 选项）同时，你可以在jupyter notebook命令后面追加目录来指定Jupyter的默认打开地址。
+<img src="/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_05.png"
+	width="978"
+	height="511"
+	srcset="/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_05_hu2d26dcd763840aef4e52c93416ec1892_257104_480x0_resize_box_3.png 480w, /p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_05_hu2d26dcd763840aef4e52c93416ec1892_257104_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Picture"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="191"
+		data-flex-basis="459px"
+	
+></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/python/">Python</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/numpy%E5%9F%BA%E7%A1%80-%E6%95%B0%E7%BB%84%E4%B8%8E%E5%90%91%E9%87%8F%E5%8C%96%E8%AE%A1%E7%AE%97/">
+        
+        
+            <div class="article-image">
+                <img src="/p/numpy%E5%9F%BA%E7%A1%80-%E6%95%B0%E7%BB%84%E4%B8%8E%E5%90%91%E9%87%8F%E5%8C%96%E8%AE%A1%E7%AE%97/11.1d63a2229eb7a01fa3ed057a774caced_hud14b30b6222d9ae7dd5e21a201e5eaf6_255595_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Numpy基础-数组与向量化计算"
+                        
+                        data-hash="md5-HWOiIp63oB&#43;j7QV6d0ys7Q==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Numpy基础-数组与向量化计算</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/gitbash%E5%A4%8D%E5%88%B6%E7%B2%98%E8%B4%B4%E5%BF%AB%E6%8D%B7%E9%94%AE/">
+        
+        
+            <div class="article-image">
+                <img src="/p/gitbash%E5%A4%8D%E5%88%B6%E7%B2%98%E8%B4%B4%E5%BF%AB%E6%8D%B7%E9%94%AE/34.4d909b6888c5b7004ce477559a4a0b49_hu1fcfd80b17ed2a5f977b43a96e67bcb1_715245_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post GitBash复制粘贴快捷键"
+                        
+                        data-hash="md5-TZCbaIjFtwBM5HdVmkoLSQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">GitBash复制粘贴快捷键</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/">
+        
+        
+            <div class="article-image">
+                <img src="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/31.f52d43219bb57f86008e045b9c0a9716_hu257b54557e64e568910f9552664481a3_2550935_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post QT学习记录_04"
+                        
+                        data-hash="md5-9S1DIZu1f4YAjgRbnAqXFg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">QT学习记录_04</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/hugo-development-day2/">
+        
+        
+            <div class="article-image">
+                <img src="/p/hugo-development-day2/30.335e71507c66a7fa411a44fa0c1429c1_hud2fc0782b828068ad19fdccc62bddd6d_475432_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Hugo建站指南——Day2"
+                        data-key="Hugo Development Day2" 
+                        data-hash="md5-M15xUHxmp/pBGkT6DBQpwQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Hugo建站指南——Day2</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/">
+        
+        
+            <div class="article-image">
+                <img src="/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/22.7f061a0d92fd8334efdc1952d855a513_hu8c3a5b5f054fe6608239643744ee4034_521651_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post QT学习记录_03"
+                        
+                        data-hash="md5-fwYaDZL9gzTv3BlS2FWlEw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">QT学习记录_03</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2023 - 
+        
+        2024 木木龙的个人博客
+    </section>
+    
+    <section class="powerby">
+        
+            热爱可抵岁月漫长，温柔可挡艰难时光。 <br/>
+        Nothing but enthusiasm brightens up the endless years. <br />
+        转载请注明主页网址哦~
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
