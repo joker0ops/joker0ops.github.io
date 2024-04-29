@@ -7,7 +7,76 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>木木龙的个人博客</copyright>
-        <lastBuildDate>Mon, 15 Apr 2024 15:59:20 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%91%A8%E6%8A%A5%E5%91%8A/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 28 Apr 2024 21:30:44 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%91%A8%E6%8A%A5%E5%91%8A/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>研究生周报 2024 04 28</title>
+        <link>http://localhost:1313/p/postgraduate-weekly-report-2024-04-28/</link>
+        <pubDate>Sun, 28 Apr 2024 21:30:44 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/postgraduate-weekly-report-2024-04-28/</guid>
+        <description>&lt;img src="http://localhost:1313/p/postgraduate-weekly-report-2024-04-28/39.jpg" alt="Featured image of post 研究生周报 2024 04 28" /&gt;&lt;h2 id=&#34;本周计划完成情况&#34;&gt;本周计划完成情况&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;本周完成了翻金币游戏第一代版本的开发及优化工作，主要包含开始界面、关卡选择界面、游戏界面的设计以及游戏逻辑的实现，并在以下几个方面实现了程序优化：
+&lt;ul&gt;
+&lt;li&gt;加入按钮点击音效，增强游戏的按钮触感。&lt;/li&gt;
+&lt;li&gt;优化关卡逻辑，增加关卡难度。&lt;/li&gt;
+&lt;li&gt;Bug Fix：禁止用户在胜利后再次点击金币(银币)从而导致胜利画面显示异常。&lt;/li&gt;
+&lt;li&gt;优化原作者代码的内存管理模式，仅使用两个二维数组存储关卡数据，内存占用量减少三分之一左右。
+&lt;br&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/joker0ops/CoinFlip&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;完整项目地址&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;学习Qt串口通信以及多线程、虚拟串口的相关知识。&lt;/li&gt;
+&lt;li&gt;完成smart home整体框架设计&lt;/li&gt;
+&lt;li&gt;给邢老师帮忙改写专利文件，研究CLDNN网络结构以及损失函数等内容的应用和创新思路。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;下周计划&#34;&gt;下周计划&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;完成邢老师专利要求书初稿&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;本地配置MySQL数据库环境，翻金币加入Rank功能（多线程记录时间）及下一关、上一关按钮。&lt;/li&gt;
+&lt;li&gt;尝试实现Qt串口通信助手并使其与虚拟串口通信。&lt;/li&gt;
+&lt;li&gt;学习Stable Diffusion模型，尝试图像生成并发布在BiliBili&lt;/li&gt;
+&lt;li&gt;开始Smart Home项目&lt;/li&gt;
+&lt;li&gt;继续学习深度学习相关课程&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;项目样例&#34;&gt;项目样例&lt;/h2&gt;
+&lt;div align=center&gt;
+&lt;img src=&#34;./image.png&#34;/&gt;
+&lt;/div&gt;
+&lt;div align=center&gt;
+&lt;img src=&#34;./image2.png&#34;/&gt;
+&lt;/div&gt;
+&lt;div align=center&gt;
+&lt;img src=&#34;./image3.png&#34;/&gt;
+&lt;/div&gt;
+&lt;div align=center&gt;
+&lt;img src=&#34;./image4.png&#34;/&gt;
+&lt;/div&gt;</description>
+        </item>
+        <item>
+        <title>研究生周报 2024 04 21</title>
+        <link>http://localhost:1313/p/postgraduate-weekly-report-2024-04-21/</link>
+        <pubDate>Sun, 21 Apr 2024 22:34:41 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/postgraduate-weekly-report-2024-04-21/</guid>
+        <description>&lt;img src="http://localhost:1313/p/postgraduate-weekly-report-2024-04-21/16.jpg" alt="Featured image of post 研究生周报 2024 04 21" /&gt;&lt;h2 id=&#34;本周计划完成情况&#34;&gt;本周计划完成情况&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;本周基本完成了Qt的学习，主要收获有Qt界面跳转的实现思路、触发自定义信号实现一些特定功能的小技巧如按键联合触发、槽函数多级调用等。同时在B站学习了Qt串口通信（SerialPort）的相关教程，并通过虚拟串口实现了基础通信。通过本周的学习，个人对Qt的感触还是比较深刻的，总结来看Qt其实可以算为一个功能强大的跨平台GUI开发工具，在GUI设计方面并不涉及任何复杂的算法，而是各种组件的运用。作为学习者及使用者完全可以将其当作代码版的“PS”，只需熟悉其基本的机制即可，绝大多数需求都已经被封装成一个完整的库函数，只需调用即可。&lt;/li&gt;
+&lt;li&gt;对于Stable Diffusion的学习方面，我在AutoDL上部署了模型并在小红书上搜集到了Stable Diffusion的常用正向提示词、反向提示词、模板、学习率等资料并生成了较为成功的图片，下一步准备查询一下comfyui的相关资料看是否能将其利用到Stable Diffusion的训练中。&lt;/li&gt;
+&lt;li&gt;在文献阅读方面还是遇到了一些困难。由于个人才疏学浅，看论文时总感觉很难理解，因为很多名词解释或者算法原理都没有掌握，读论文的感觉就好像是“意大利面必须要拌42号混凝土才好吃”，常常弄得一头雾水，但是感觉自己还是有些收获的，看论文的确能够感受到前人在写作上的行文逻辑，能够帮助我培养一定的“语感”。&lt;/li&gt;
+&lt;li&gt;在课外文献阅读方面，我阅读了《认知驱动》这本书，感觉到自己执行力较差，遇到事情刚开始壮志满怀，但是真到自己要做的时候就会找各种理由逃避，目前这本书给我的感受是，人一定要有对外的输出而不能只重视对内的培养，这样才能真正达到自我认知的提升，提高自己的执行力。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;下周计划&#34;&gt;下周计划&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;优化Qt翻金币项目的内存管理，引入多线程库实现闯关时间记录。&lt;/li&gt;
+&lt;li&gt;尝试实现一个基础版的串口调试助手&lt;/li&gt;
+&lt;li&gt;Stable Diffusion稳定出图&lt;/li&gt;
+&lt;li&gt;完成Smart Home UML模型的设计&lt;/li&gt;
+&lt;li&gt;继续学习深度学习课程&lt;/li&gt;
+&lt;li&gt;读完《认知驱动》并整理读书笔记&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>研究生周报 2024 04 15</title>
         <link>http://localhost:1313/p/postgraduate-weekly-report-2024-04-15/</link>
         <pubDate>Mon, 15 Apr 2024 15:59:20 +0800</pubDate>
