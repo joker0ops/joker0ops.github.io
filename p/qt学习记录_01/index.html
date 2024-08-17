@@ -16,12 +16,14 @@
     <meta name="twitter:image" content='http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_01/19.jpg' />
     <link rel="shortcut icon" href="/favicon.ico" />
 <style type="text/css">
+     
     html{cursor:url('/cursor/01.cur'), default !important;}
     a:hover{cursor:url('/cursor/03.cur'), pointer !important;}
     button:hover{cursor: url('/cursor/03.cur'), pointer !important;}
     i:hover{cursor: url('/cursor/03.cur'), pointer !important;}
     input{cursor: url('/cursor/06.cur'), text !important;}
     #dark-mode-toggle:hover{cursor: url('/cursor/03.cur'), pointer !important;}
+     
     .fireworks {
         position: fixed;
         pointer-events: none;
@@ -29,12 +31,23 @@
         left: 0;
         height: 100%;
     }
+     
+    img.site-logo {
+         
+        transition: all 1.65s   
+    }
+    img.site-logo:hover {
+        transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+    }
 </style>
 <canvas class="fireworks" id="fireworks"></canvas>
 <script src="/JS/anime.min.js"></script>
 <script src="/JS/fireworks.js"></script>
 <script src="/JS/jquery-3.7.1.min.js"></script>
-<script src="/JS/stars.js"></script>
 <script>setCanvasSize();</script>
     </head>
     <body class="
