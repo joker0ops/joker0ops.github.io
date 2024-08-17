@@ -70,35 +70,32 @@
         { "selector": "c-player div.volume", "text": ["在这里可以调整<span style=\"color:#0099cc;\">音量</span>呢"] },
         { "selector": "c-player div.list-button", "text": ["<span style=\"color:#0099cc;\">播放列表</span>里都有什么呢"] },
         { "selector": "c-player div.lyric-button", "text": ["有<span style=\"color:#0099cc;\">歌词</span>的话就能跟着一起唱呢"] },
-        { "selector": ".waifu #live2d", "text": ["你好哦，请问有什么事吗？", "不要指我，哼(╬￣^￣)☞ ", "拿鼠标指人很不礼貌哦！"] }
+        { "selector": ".waifu #live2d", "text": ["干嘛呢你，快把手拿开", "鼠…鼠标放错地方了！"] }
     ],
     "click": [
         {
             "selector": ".waifu #live2d",
             "text": [
-                "有什么事吗？",
+                "是…是不小心碰到了吧",
                 "萝莉控是什么呀",
                 "你看到我的小熊了吗",
-                "再点的话我可要报警了！⌇●﹏●⌇",
-                "想尝尝姐姐的八十米大刀吗？"
+                "再摸的话我可要报警了！⌇●﹏●⌇",
+                "110吗? 这里有个变态一直在摸我(ó﹏ò｡)"
             ]
         }
     ],
     "seasons": [
         { "date": "01/01", "text": ["<span style=\"color:#0099cc;\">元旦</span>了呢，新的一年又开始了，今年是{year}年~"] },
-        { "date": "02/14", "text": ["又是一年<span style=\"color:#0099cc;\">情人节</span>，{year}年给她小惊喜了吗~"] },
-        { "date": "03/01", "text": ["今天是小兔崽子的<span style=\"color:#0099cc;\">生日</span>呢，恭喜他又老了一岁呢~"] },        
+        { "date": "02/14", "text": ["又是一年<span style=\"color:#0099cc;\">情人节</span>，{year}年找到对象了嘛~"] },
         { "date": "03/08", "text": ["今天是<span style=\"color:#0099cc;\">妇女节</span>！"] },
         { "date": "03/12", "text": ["今天是<span style=\"color:#0099cc;\">植树节</span>，要保护环境呀"] },
-        { "date": "03/26", "text": ["今天是站长和雯姐姐的<span style=\"color:#0099cc;\">纪念日</span>呢，祝愿你们百年好合哦~"] },
         { "date": "04/01", "text": ["悄悄告诉你一个秘密~<span style=\"background-color:#34495e;\">今天是愚人节，不要被骗了哦~</span>"] },
         { "date": "05/01", "text": ["今天是<span style=\"color:#0099cc;\">五一劳动节</span>，计划好假期去哪里了吗~"] },
-        { "date": "05/21", "text": ["今天是美丽动人、优雅大方的雯雯姐的<span style=\"color:#0099cc;\">生日</span>呢，祝你<span style=\"color:#0099cc;\">18岁</span>生日快乐哦~"] },
         { "date": "06/01", "text": ["<span style=\"color:#0099cc;\">儿童节</span>了呢，快活的时光总是短暂，要是永远长不大该多好啊…"] },
         { "date": "09/03", "text": ["<span style=\"color:#0099cc;\">中国人民抗日战争胜利纪念日</span>，铭记历史、缅怀先烈、珍爱和平、开创未来。"] },
-        { "date": "09/10", "text": ["今天是<span style=\"color:#0099cc;\">教师节</span>，也是站长的生日，祝站长和老师们节日快乐呀~"] },
-        { "date": "10/01", "text": ["<span style=\"color:#0099cc;\">国庆节</span>，祝祖国生日快乐哦~"] },
-        { "date": "11/05-11/12", "text": ["今年的<span style=\"color:#0099cc;\">双十一</span>主人肯定又去剁手买买买了~"] },
-        { "date": "12/20-12/31", "text": ["今年的<span style=\"color:#0099cc;\">圣诞节</span>，是和谁一起过的呢~"] }
+        { "date": "09/10", "text": ["<span style=\"color:#0099cc;\">教师节</span>，在学校要给老师问声好呀~"] },
+        { "date": "10/01", "text": ["<span style=\"color:#0099cc;\">国庆节</span>，新中国已经成立69年了呢"] },
+        { "date": "11/05-11/12", "text": ["今年的<span style=\"color:#0099cc;\">双十一</span>是和谁一起过的呢~"] },
+        { "date": "12/20-12/31", "text": ["这几天是<span style=\"color:#0099cc;\">圣诞节</span>，主人肯定又去剁手买买买了~"] }
     ]
 }

@@ -23,6 +23,10 @@
     i:hover{cursor: url('/cursor/03.cur'), pointer !important;}
     input{cursor: url('/cursor/06.cur'), text !important;}
     #dark-mode-toggle:hover{cursor: url('/cursor/03.cur'), pointer !important;}
+    .fui-eye:hover{cursor: url('/cursor/03.cur'), pointer !important;}
+    .fui-user:hover{cursor: url('/cursor/03.cur'), pointer !important;}
+    .fui-photo:hover{cursor: url('/cursor/03.cur'), pointer !important;}
+    .fui-info-circle:hover{cursor: url('/cursor/03.cur'), pointer !important;}
      
     .fireworks {
         position: fixed;
@@ -48,6 +52,8 @@
 <script src="/JS/anime.min.js"></script>
 <script src="/JS/fireworks.js"></script>
 <script src="/JS/jquery-3.7.1.min.js"></script>
+<script src="/JS/jquery-ui-1.14.0/jquery-ui.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/CSS/waifu.min.css">
 <script>setCanvasSize();</script>
     </head>
     <body class="
@@ -651,6 +657,44 @@
         document.head.appendChild(customFont);
     }());
 </script>
-
+<div class="waifu">
+    <div class="waifu-tips"></div>
+    <canvas id="live2d" class="live2d"></canvas>
+    <div class="waifu-tool">
+        <span class="fui-home"></span>
+        <span class="fui-chat"></span>
+        <span class="fui-eye"></span>
+        <span class="fui-user"></span>
+        <span class="fui-photo"></span>
+        <span class="fui-info-circle"></span>
+        <span class="fui-cross"></span>
+    </div>
+</div>
+    
+<script src="/JS/waifu-tips.js?v=1.4.2"></script>
+<script src="/JS/live2d.js?v=1.0.5"></script>
+<script type="text/javascript">
+     
+    live2d_settings['modelId'] = 6;                 
+    live2d_settings['modelTexturesId'] = 8;         
+    live2d_settings['modelStorage'] = false;        
+    live2d_settings['canSwitchHitokoto'] = false;   
+    live2d_settings['canCloseLive2d'] = true;       
+    live2d_settings['canTurnToHomePage'] = true;    
+    live2d_settings['canTurnToAboutPage'] = true;   
+    live2d_settings['waifuSize'] = '280x250';       
+    live2d_settings['waifuTipsSize'] = '250x70';    
+    live2d_settings['waifuFontSize'] = '12px';      
+    live2d_settings['waifuToolFont'] = '18px';      
+    live2d_settings['waifuToolLine'] = '20px';      
+    live2d_settings['waifuToolTop'] = '0px';        
+    live2d_settings['waifuEdgeSide'] = 'right:30';  
+    live2d_settings['waifuDraggable'] = 'axis-x';   
+    live2d_settings['homePageUrl'] = 'https://joker0ops.github.io';     
+    live2d_settings['aboutPageUrl'] = 'https://github.com/joker0ops';   
+    live2d_settings['screenshotCaptureName'] = 'live2d.png';            
+     
+    initModel("/JSON/waifu-tips.json?v=1.4.2")
+</script>
     </body>
 </html>
