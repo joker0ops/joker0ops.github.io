@@ -292,12 +292,9 @@
 &lt;td&gt;%xdel variable&lt;/td&gt;
 &lt;td&gt;命令可以删除一个变量并清除相关的引用&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;Tips:&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Tips:&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;魔术命令可以看作IPython系统内部的命令行程序，大多数魔术命令都可以在其后追加?操作符来显示更加详细的文档&lt;/li&gt;
 &lt;/ul&gt;
