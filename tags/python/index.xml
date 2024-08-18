@@ -2,23 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Python on 木木龙的个人博客</title>
-        <link>http://localhost:1313/tags/python/</link>
+        <link>https://joker0ops.github.io/tags/python/</link>
         <description>Recent content in Python on 木木龙的个人博客</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>木木龙的个人博客</copyright>
-        <lastBuildDate>Fri, 22 Mar 2024 22:04:01 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/python/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 22 Mar 2024 22:04:01 +0800</lastBuildDate><atom:link href="https://joker0ops.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>IPython与Jupyter的使用</title>
-        <link>http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+        <link>https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
         <pubDate>Fri, 22 Mar 2024 22:04:01 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
-        <description>&lt;img src="http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/10.jpg" alt="Featured image of post IPython与Jupyter的使用" /&gt;&lt;h1 id=&#34;ipython与jupiter是什么&#34;&gt;IPython与Jupiter是什么？&lt;/h1&gt;
+        <guid>https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+        <description>&lt;img src="https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/10.jpg" alt="Featured image of post IPython与Jupyter的使用" /&gt;&lt;h1 id=&#34;ipython与jupiter是什么&#34;&gt;IPython与Jupiter是什么？&lt;/h1&gt;
 &lt;p&gt;IPython是Python的一个交互式解释器，可以提供交互式命令行，支持自动补全、历史记录等功能。Jupyter是IPython的一个扩展，可以提供交互式命令行、Markdown文档、代码块等功能。当你使用%run命令时，IPython会在同一个进程内执行指定文件中的代码，确保你能够在执行完成时立即探索结果。
-&lt;img src=&#34;http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython01.png&#34;
+&lt;img src=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython01.png&#34;
 	width=&#34;979&#34;
 	height=&#34;511&#34;
-	srcset=&#34;http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython01_huec1346ff16f088a1c9bb1cd0467e5677_16073_480x0_resize_box_3.png 480w, http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython01_huec1346ff16f088a1c9bb1cd0467e5677_16073_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython01_huec1346ff16f088a1c9bb1cd0467e5677_16073_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython01_huec1346ff16f088a1c9bb1cd0467e5677_16073_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Picture&#34;
@@ -32,10 +32,10 @@
 &lt;h2 id=&#34;ipython的使用&#34;&gt;IPython的使用&lt;/h2&gt;
 &lt;h3 id=&#34;启动ipython&#34;&gt;启动IPython&lt;/h3&gt;
 &lt;p&gt;像启动标准Python解释器一样，你可以ipython命令启动IPython命令行。
-&lt;img src=&#34;http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython02.png&#34;
+&lt;img src=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython02.png&#34;
 	width=&#34;979&#34;
 	height=&#34;511&#34;
-	srcset=&#34;http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython02_hu7072543c0c8b562782fa441533c8ee93_18334_480x0_resize_box_3.png 480w, http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython02_hu7072543c0c8b562782fa441533c8ee93_18334_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython02_hu7072543c0c8b562782fa441533c8ee93_18334_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython02_hu7072543c0c8b562782fa441533c8ee93_18334_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Picture&#34;
@@ -48,10 +48,10 @@
 &gt;&lt;/p&gt;
 &lt;h3 id=&#34;ipython的交互式命令行&#34;&gt;IPython的交互式命令行&lt;/h3&gt;
 &lt;p&gt;你可以将Python语句输入命令行，然后按下回车键运行。当你在IPython命令行中仅仅输入一个变量名后，它会返回一个表示该对象的字符串：
-&lt;img src=&#34;http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython03.png&#34;
+&lt;img src=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython03.png&#34;
 	width=&#34;769&#34;
 	height=&#34;188&#34;
-	srcset=&#34;http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython03_hu9ee9c0e91171cfd25b017fcad1594b89_19730_480x0_resize_box_3.png 480w, http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython03_hu9ee9c0e91171cfd25b017fcad1594b89_19730_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython03_hu9ee9c0e91171cfd25b017fcad1594b89_19730_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython03_hu9ee9c0e91171cfd25b017fcad1594b89_19730_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Picture&#34;
@@ -104,10 +104,10 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Python&#34; data-lang=&#34;Python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;array&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;?&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_03.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_03.png&#34;
 	width=&#34;1920&#34;
 	height=&#34;880&#34;
-	srcset=&#34;http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_03_hue97b7933a90e36455e70786400928036_46631_480x0_resize_box_3.png 480w, http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_03_hue97b7933a90e36455e70786400928036_46631_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_03_hue97b7933a90e36455e70786400928036_46631_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_03_hue97b7933a90e36455e70786400928036_46631_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Picture&#34;
@@ -150,10 +150,10 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Python&#34; data-lang=&#34;Python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;exchange_numbers&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;?&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_01.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_01.png&#34;
 	width=&#34;1920&#34;
 	height=&#34;880&#34;
-	srcset=&#34;http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_01_hu818e7a13ad335ca326b9179cc658fd35_52967_480x0_resize_box_3.png 480w, http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_01_hu818e7a13ad335ca326b9179cc658fd35_52967_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_01_hu818e7a13ad335ca326b9179cc658fd35_52967_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_01_hu818e7a13ad335ca326b9179cc658fd35_52967_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Picture&#34;
@@ -173,10 +173,10 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;exchange_numbers&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;??&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_02.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_02.png&#34;
 	width=&#34;1920&#34;
 	height=&#34;880&#34;
-	srcset=&#34;http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_02_hucd8dc3fe5e6a0819245f28b98cd564d4_47765_480x0_resize_box_3.png 480w, http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_02_hucd8dc3fe5e6a0819245f28b98cd564d4_47765_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_02_hucd8dc3fe5e6a0819245f28b98cd564d4_47765_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_02_hucd8dc3fe5e6a0819245f28b98cd564d4_47765_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Picture&#34;
@@ -337,10 +337,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;在Jupyter中，命令会有所不同：
-&lt;img src=&#34;http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_04.png&#34;
+&lt;img src=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_04.png&#34;
 	width=&#34;1141&#34;
 	height=&#34;593&#34;
-	srcset=&#34;http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_04_hu33b12d9252e36f4cf9c967bb9611b149_103072_480x0_resize_box_3.png 480w, http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_04_hu33b12d9252e36f4cf9c967bb9611b149_103072_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_04_hu33b12d9252e36f4cf9c967bb9611b149_103072_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_04_hu33b12d9252e36f4cf9c967bb9611b149_103072_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Picture&#34;
@@ -354,10 +354,10 @@
 &lt;h2 id=&#34;jupyter的使用&#34;&gt;Jupyter的使用&lt;/h2&gt;
 &lt;p&gt;Jupyter是一个基于Web的交互式计算分析环境，可以运行多种数据分析语言。一般安装Anaconda时，已经安装了Jupyter。
 在使用Jupyter时，需要打开命令行输入jupyter notebook命令，然后打开浏览器访问localhost:8888。一般情况下，Jupyter会自动打开一个浏览器窗口（除非你使用了 &amp;ndash;no-browser 选项）同时，你可以在jupyter notebook命令后面追加目录来指定Jupyter的默认打开地址。
-&lt;img src=&#34;http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_05.png&#34;
+&lt;img src=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_05.png&#34;
 	width=&#34;978&#34;
 	height=&#34;511&#34;
-	srcset=&#34;http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_05_hu2d26dcd763840aef4e52c93416ec1892_257104_480x0_resize_box_3.png 480w, http://localhost:1313/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_05_hu2d26dcd763840aef4e52c93416ec1892_257104_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_05_hu2d26dcd763840aef4e52c93416ec1892_257104_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_05_hu2d26dcd763840aef4e52c93416ec1892_257104_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Picture&#34;

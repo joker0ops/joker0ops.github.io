@@ -2,25 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Web on 木木龙的个人博客</title>
-        <link>http://localhost:1313/tags/web/</link>
+        <link>https://joker0ops.github.io/tags/web/</link>
         <description>Recent content in Web on 木木龙的个人博客</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>木木龙的个人博客</copyright>
-        <lastBuildDate>Sat, 17 Feb 2024 16:01:18 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/web/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 17 Feb 2024 16:01:18 +0800</lastBuildDate><atom:link href="https://joker0ops.github.io/tags/web/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Hugo建站指南——Day2</title>
-        <link>http://localhost:1313/p/hugo-development-day2/</link>
+        <link>https://joker0ops.github.io/p/hugo-development-day2/</link>
         <pubDate>Sat, 17 Feb 2024 16:01:18 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/hugo-development-day2/</guid>
-        <description>&lt;img src="http://localhost:1313/p/hugo-development-day2/30.jpg" alt="Featured image of post Hugo建站指南——Day2" /&gt;&lt;h2 id=&#34;创建github-pages&#34;&gt;创建Github Pages&lt;/h2&gt;
+        <guid>https://joker0ops.github.io/p/hugo-development-day2/</guid>
+        <description>&lt;img src="https://joker0ops.github.io/p/hugo-development-day2/30.jpg" alt="Featured image of post Hugo建站指南——Day2" /&gt;&lt;h2 id=&#34;创建github-pages&#34;&gt;创建Github Pages&lt;/h2&gt;
 &lt;p&gt;要想把个人博客托管在Github Pages上，首先在GitHub上创建一个Repository，命名为：&lt;kbd&gt;{your_username}.github.io&lt;/kbd&gt;比如我的仓库就叫&lt;kbd&gt;codingxiaoma.github.io&lt;/kbd&gt;
 如果你对你的username不满意，需要先在&lt;kbd&gt;Setting&lt;/kbd&gt;-&amp;gt;&lt;kbd&gt;Account&lt;/kbd&gt;-&amp;gt;&lt;kbd&gt;Change username&lt;/kbd&gt;修改一个你满意的username。
 注： Repository的前缀 &lt;strong&gt;(.github.io之前的内容)&lt;/strong&gt; 一定要跟你的username保持一致。
-&lt;img src=&#34;http://localhost:1313/p/hugo-development-day2/setting.png&#34;
+&lt;img src=&#34;https://joker0ops.github.io/p/hugo-development-day2/setting.png&#34;
 	width=&#34;2792&#34;
 	height=&#34;1514&#34;
-	srcset=&#34;http://localhost:1313/p/hugo-development-day2/setting_hu8f00f0119db460992fa5f9e2ca7fb583_411898_480x0_resize_box_3.png 480w, http://localhost:1313/p/hugo-development-day2/setting_hu8f00f0119db460992fa5f9e2ca7fb583_411898_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;https://joker0ops.github.io/p/hugo-development-day2/setting_hu8f00f0119db460992fa5f9e2ca7fb583_411898_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/hugo-development-day2/setting_hu8f00f0119db460992fa5f9e2ca7fb583_411898_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Picture&#34;
@@ -34,10 +34,10 @@
 仓库的权限需要选择Public, 否则无法访问。&lt;br&gt;
 勾选&lt;strong&gt;Add a README.md&lt;/strong&gt;，主要是为了自动创建&lt;strong&gt;main&lt;/strong&gt;分支。&lt;br&gt;
 然后在你的 仓库&lt;strong&gt;xx.github.io&lt;/strong&gt;里面点击&lt;strong&gt;Settings&lt;/strong&gt;, 左边的菜单栏找到&lt;strong&gt;Pages&lt;/strong&gt;。
-&lt;img src=&#34;http://localhost:1313/p/hugo-development-day2/github_create.png&#34;
+&lt;img src=&#34;https://joker0ops.github.io/p/hugo-development-day2/github_create.png&#34;
 	width=&#34;1594&#34;
 	height=&#34;1486&#34;
-	srcset=&#34;http://localhost:1313/p/hugo-development-day2/github_create_hu05cd3f308579e5233f88dfd53ddb3b9d_259471_480x0_resize_box_3.png 480w, http://localhost:1313/p/hugo-development-day2/github_create_hu05cd3f308579e5233f88dfd53ddb3b9d_259471_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;https://joker0ops.github.io/p/hugo-development-day2/github_create_hu05cd3f308579e5233f88dfd53ddb3b9d_259471_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/hugo-development-day2/github_create_hu05cd3f308579e5233f88dfd53ddb3b9d_259471_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Picture&#34;
@@ -188,11 +188,11 @@
         </item>
         <item>
         <title>Hugo建站指南——Day1</title>
-        <link>http://localhost:1313/p/hugo-development-day1/</link>
+        <link>https://joker0ops.github.io/p/hugo-development-day1/</link>
         <pubDate>Fri, 02 Feb 2024 15:19:35 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/hugo-development-day1/</guid>
-        <description>&lt;img src="http://localhost:1313/p/hugo-development-day1/82.jpg" alt="Featured image of post Hugo建站指南——Day1" /&gt;&lt;h2 id=&#34;写在前面&#34;&gt;写在前面&lt;/h2&gt;
+        <guid>https://joker0ops.github.io/p/hugo-development-day1/</guid>
+        <description>&lt;img src="https://joker0ops.github.io/p/hugo-development-day1/82.jpg" alt="Featured image of post Hugo建站指南——Day1" /&gt;&lt;h2 id=&#34;写在前面&#34;&gt;写在前面&lt;/h2&gt;
 &lt;p&gt;           大学期间曾经尝试了许多中博客框架，从最初的WordPress到后来的Hexo再到使用Django搭建包含管理员后台系统的完整博客网站，但都没能够长时间使用，总感觉从前期开发到后期部署会出现各种各样的问题。于是我一直想要寻找一个能够快速构建、方便部署并能够让我在更新过程中不断对其进行完善的博客框架；直到Git Pages的出现，让静态网站框架搭建博客有了无与伦比的优势，我也开始搜集各种教程搭建博客，并最终确定了Hugo这一优秀的框架。&lt;/p&gt;
 &lt;p&gt;           本篇文章作为Hugo建站的系列文章，将详细记录我在建站过程中的建站流程、遇到的困难以及解决方法，希望能给读者朋友们带来一定的帮助。&lt;/p&gt;
 &lt;p&gt;           &lt;strong&gt;注：我是在Ubuntu 20.04环境下搭建的，在一些细节方面不同系统可能存在一些差异，见谅。&lt;/strong&gt;&lt;/p&gt;

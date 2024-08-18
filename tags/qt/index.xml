@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Qt on 木木龙的个人博客</title>
-        <link>http://localhost:1313/tags/qt/</link>
+        <link>https://joker0ops.github.io/tags/qt/</link>
         <description>Recent content in Qt on 木木龙的个人博客</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>木木龙的个人博客</copyright>
-        <lastBuildDate>Sat, 17 Feb 2024 16:02:44 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/qt/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 17 Feb 2024 16:02:44 +0800</lastBuildDate><atom:link href="https://joker0ops.github.io/tags/qt/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>QT学习记录_04</title>
-        <link>http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/</link>
+        <link>https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/</link>
         <pubDate>Sat, 17 Feb 2024 16:02:44 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/</guid>
-        <description>&lt;img src="http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/31.jpg" alt="Featured image of post QT学习记录_04" /&gt;&lt;h1 id=&#34;qt信号与槽机制&#34;&gt;Qt信号与槽机制&lt;/h1&gt;
+        <guid>https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/</guid>
+        <description>&lt;img src="https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/31.jpg" alt="Featured image of post QT学习记录_04" /&gt;&lt;h1 id=&#34;qt信号与槽机制&#34;&gt;Qt信号与槽机制&lt;/h1&gt;
 &lt;p&gt;信号槽是 Qt 框架引以为豪的机制之一。所谓&lt;strong&gt;信号槽&lt;/strong&gt;，实际就是&lt;strong&gt;观察者模式&lt;/strong&gt;。当某个事件发生之后，比如，按钮检测到自己被点击了一下，它就会发出一个&lt;strong&gt;信号（signal）&lt;/strong&gt;。&lt;strong&gt;这种发出是没有目的的，类似广播&lt;/strong&gt;。如果有对象对这个信号感兴趣，它就会使用&lt;strong&gt;连接（connect）函数&lt;/strong&gt;，意思是，&lt;strong&gt;将想要处理的信号和自己的一个函数（称为槽（slot））绑定来处理这个信号&lt;/strong&gt;。也就是说，&lt;strong&gt;当信号发出时，被连接的槽函数会自动被回调&lt;/strong&gt;。这就类似观察者模式：当发生了感兴趣的事件，某一个操作就会被自动触发。&lt;/p&gt;
 &lt;h2 id=&#34;使用系统自带的信号和槽实现关闭窗口功能&#34;&gt;使用系统自带的信号和槽实现关闭窗口功能&lt;/h2&gt;
 &lt;p&gt;首先需要创建一个按钮用于触发“关闭窗口”信号：&lt;/p&gt;
@@ -657,10 +657,10 @@
 &lt;li&gt;使用connect()函数连接信号和槽。&lt;/li&gt;
 &lt;li&gt;任何成员函数、static 函数、全局函数和 Lambda 表达式都可以作为槽函数&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/signal_slot.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/signal_slot.png&#34;
 	width=&#34;1009&#34;
 	height=&#34;986&#34;
-	srcset=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/signal_slot_hu27ca9d517d3847d2e0475edd73ca944f_203725_480x0_resize_box_3.png 480w, http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/signal_slot_hu27ca9d517d3847d2e0475edd73ca944f_203725_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/signal_slot_hu27ca9d517d3847d2e0475edd73ca944f_203725_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_04/signal_slot_hu27ca9d517d3847d2e0475edd73ca944f_203725_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Picture&#34;
@@ -675,18 +675,18 @@
         </item>
         <item>
         <title>QT学习记录_03</title>
-        <link>http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/</link>
+        <link>https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/</link>
         <pubDate>Sun, 04 Feb 2024 20:52:02 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/</guid>
-        <description>&lt;img src="http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/22.jpg" alt="Featured image of post QT学习记录_03" /&gt;&lt;h1 id=&#34;第一个qt小程序&#34;&gt;第一个Qt小程序&lt;/h1&gt;
+        <guid>https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/</guid>
+        <description>&lt;img src="https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/22.jpg" alt="Featured image of post QT学习记录_03" /&gt;&lt;h1 id=&#34;第一个qt小程序&#34;&gt;第一个Qt小程序&lt;/h1&gt;
 &lt;p&gt;本篇开始即进入QT的开发环节，本节主要内容有QT PushButton的添加、QT 窗口编辑操作、QT 对象树及QT中的坐标系。&lt;/p&gt;
 &lt;h2 id=&#34;qpushbutton的创建&#34;&gt;QPushButton的创建&lt;/h2&gt;
 &lt;h3 id=&#34;1-查询assistant找到qpushbutton的相关介绍&#34;&gt;1. 查询assistant找到QPushButton的相关介绍&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/day3_01.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/day3_01.png&#34;
 	width=&#34;1920&#34;
 	height=&#34;1029&#34;
-	srcset=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/day3_01_huce5a41f5a565619cd22e149c6bce8c98_248630_480x0_resize_box_3.png 480w, http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/day3_01_huce5a41f5a565619cd22e149c6bce8c98_248630_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/day3_01_huce5a41f5a565619cd22e149c6bce8c98_248630_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_03/day3_01_huce5a41f5a565619cd22e149c6bce8c98_248630_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Picture&#34;
@@ -813,11 +813,11 @@
         </item>
         <item>
         <title>QT学习记录_02</title>
-        <link>http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/</link>
+        <link>https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/</link>
         <pubDate>Sun, 04 Feb 2024 20:51:56 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/</guid>
-        <description>&lt;img src="http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/20.jpg" alt="Featured image of post QT学习记录_02" /&gt;&lt;h1 id=&#34;qt项目构建及项目结构说明&#34;&gt;Qt项目构建及项目结构说明&lt;/h1&gt;
+        <guid>https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/</guid>
+        <description>&lt;img src="https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/20.jpg" alt="Featured image of post QT学习记录_02" /&gt;&lt;h1 id=&#34;qt项目构建及项目结构说明&#34;&gt;Qt项目构建及项目结构说明&lt;/h1&gt;
 &lt;h2 id=&#34;qt-creator窗口介绍&#34;&gt;Qt Creator窗口介绍&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;欢迎界面
@@ -837,10 +837,10 @@
 &lt;h2 id=&#34;qt项目构建流程&#34;&gt;Qt项目构建流程&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;欢迎界面的Projects模块点击New新建项目
-&lt;img src=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_01.png&#34;
+&lt;img src=&#34;https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_01.png&#34;
 	width=&#34;1920&#34;
 	height=&#34;1029&#34;
-	srcset=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_01_hud65570157ff5699892c123f57a047fa4_244715_480x0_resize_box_3.png 480w, http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_01_hud65570157ff5699892c123f57a047fa4_244715_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_01_hud65570157ff5699892c123f57a047fa4_244715_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_01_hud65570157ff5699892c123f57a047fa4_244715_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Picture&#34;
@@ -852,10 +852,10 @@
 	
 &gt;&lt;/li&gt;
 &lt;li&gt;在本次学习中，我们只涉及到Qt窗口应用的构建及开发，选择&lt;strong&gt;Application(Qt)-&amp;gt;Qt Widgets Application&lt;/strong&gt;点击&lt;strong&gt;Choose&lt;/strong&gt;
-&lt;img src=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_02.png&#34;
+&lt;img src=&#34;https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_02.png&#34;
 	width=&#34;899&#34;
 	height=&#34;566&#34;
-	srcset=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_02_hu9f7c4b76f7a61668ad100bfcf3ffb2fa_110088_480x0_resize_box_3.png 480w, http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_02_hu9f7c4b76f7a61668ad100bfcf3ffb2fa_110088_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_02_hu9f7c4b76f7a61668ad100bfcf3ffb2fa_110088_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_02_hu9f7c4b76f7a61668ad100bfcf3ffb2fa_110088_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Picture&#34;
@@ -867,10 +867,10 @@
 	
 &gt;&lt;/li&gt;
 &lt;li&gt;选择要创建项目的存储路径并输入项目名称，该步骤完成后会在存储路径生成两个目录，一个用于存放源文件，另一个用于存放构建及调试文件。（后续会讲解如何将这两个目录合并到一起）
-&lt;img src=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_03.png&#34;
+&lt;img src=&#34;https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_03.png&#34;
 	width=&#34;819&#34;
 	height=&#34;546&#34;
-	srcset=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_03_hu59f967a3b07b298705724a2b0a535c55_85943_480x0_resize_box_3.png 480w, http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_03_hu59f967a3b07b298705724a2b0a535c55_85943_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_03_hu59f967a3b07b298705724a2b0a535c55_85943_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_03_hu59f967a3b07b298705724a2b0a535c55_85943_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Picture&#34;
@@ -884,10 +884,10 @@
 &lt;li&gt;选择项目的构建系统，在该步骤中，&lt;del&gt;Qbs一般不会考虑&lt;/del&gt;，剩余两项构建系统的区别为：&lt;br&gt;
 &lt;strong&gt;qmake&lt;/strong&gt;：是Qt内置的构建系统，十分地简单方便，但扩展性和功能相对较低，&lt;strong&gt;初学阶段或小型项目选择qmake点击下一步即可。&lt;/strong&gt;&lt;br&gt;
 &lt;strong&gt;cmake&lt;/strong&gt;：相对复杂，但扩展性和功能更加强大，适用于复杂度超过qmake处理能力的项目。
-&lt;img src=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_04.png&#34;
+&lt;img src=&#34;https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_04.png&#34;
 	width=&#34;819&#34;
 	height=&#34;546&#34;
-	srcset=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_04_hu94ad926104f9839edb486d2e399a0d7b_61981_480x0_resize_box_3.png 480w, http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_04_hu94ad926104f9839edb486d2e399a0d7b_61981_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_04_hu94ad926104f9839edb486d2e399a0d7b_61981_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_04_hu94ad926104f9839edb486d2e399a0d7b_61981_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Picture&#34;
@@ -899,10 +899,10 @@
 	
 &gt;&lt;/li&gt;
 &lt;li&gt;设置自己的窗口类，并勾选是否使用设计界面编辑窗口，其中类名可以自由指定，&lt;strong&gt;QWidget&lt;/strong&gt;是&lt;strong&gt;QMainWindow&lt;/strong&gt;和&lt;strong&gt;QDialog&lt;/strong&gt;的父类。
-&lt;img src=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_05.png&#34;
+&lt;img src=&#34;https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_05.png&#34;
 	width=&#34;819&#34;
 	height=&#34;546&#34;
-	srcset=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_05_hu9bad009c5601684a406f7592d12a5aea_93717_480x0_resize_box_3.png 480w, http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_05_hu9bad009c5601684a406f7592d12a5aea_93717_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_05_hu9bad009c5601684a406f7592d12a5aea_93717_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_05_hu9bad009c5601684a406f7592d12a5aea_93717_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Picture&#34;
@@ -914,10 +914,10 @@
 	
 &gt;
 &lt;strong&gt;QWidget&lt;/strong&gt;是最简单的交互窗口，&lt;strong&gt;QMainWindow&lt;/strong&gt;除了窗口外多了菜单栏、状态栏等等，&lt;strong&gt;QDialog&lt;/strong&gt;是对话框（&lt;strong&gt;包含确认按钮、取消按钮等，类比当前窗口&lt;/strong&gt;）
-&lt;img src=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_06.png&#34;
+&lt;img src=&#34;https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_06.png&#34;
 	width=&#34;819&#34;
 	height=&#34;546&#34;
-	srcset=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_06_hu44c8b9a52182db7236475d2a2e84abcb_96489_480x0_resize_box_3.png 480w, http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_06_hu44c8b9a52182db7236475d2a2e84abcb_96489_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_06_hu44c8b9a52182db7236475d2a2e84abcb_96489_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_06_hu44c8b9a52182db7236475d2a2e84abcb_96489_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Picture&#34;
@@ -929,10 +929,10 @@
 	
 &gt;
 选中&lt;strong&gt;Generate form&lt;/strong&gt;后会启用设计界面。指定类名后，下面的基类名、头文件、源文件等会自动跟随自定义类名进行命名。配置完成后点击下一步。
-&lt;img src=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_07.png&#34;
+&lt;img src=&#34;https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_07.png&#34;
 	width=&#34;819&#34;
 	height=&#34;546&#34;
-	srcset=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_07_hu6c0feee33250237323ac28ac3f05c685_93473_480x0_resize_box_3.png 480w, http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_07_hu6c0feee33250237323ac28ac3f05c685_93473_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_07_hu6c0feee33250237323ac28ac3f05c685_93473_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_07_hu6c0feee33250237323ac28ac3f05c685_93473_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Picture&#34;
@@ -944,10 +944,10 @@
 	
 &gt;&lt;/li&gt;
 &lt;li&gt;选择是否为Qt项目添加英文自动翻译工具，一般不需要因此暂时忽略。
-&lt;img src=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_08.png&#34;
+&lt;img src=&#34;https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_08.png&#34;
 	width=&#34;819&#34;
 	height=&#34;546&#34;
-	srcset=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_08_hufbb322bb72188b1ade5292131d9efebe_84585_480x0_resize_box_3.png 480w, http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_08_hufbb322bb72188b1ade5292131d9efebe_84585_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_08_hufbb322bb72188b1ade5292131d9efebe_84585_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_08_hufbb322bb72188b1ade5292131d9efebe_84585_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Picture&#34;
@@ -959,10 +959,10 @@
 	
 &gt;&lt;/li&gt;
 &lt;li&gt;选择构建项目所使用的编译环境，我是64位机因此选择第二个选项，如要获得更多的系统可移植性可选择32位进行项目构建。
-&lt;img src=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_09.png&#34;
+&lt;img src=&#34;https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_09.png&#34;
 	width=&#34;1015&#34;
 	height=&#34;614&#34;
-	srcset=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_09_hu77a57acda479fe4a9b962454702b2e32_170281_480x0_resize_box_3.png 480w, http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_09_hu77a57acda479fe4a9b962454702b2e32_170281_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_09_hu77a57acda479fe4a9b962454702b2e32_170281_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_09_hu77a57acda479fe4a9b962454702b2e32_170281_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Picture&#34;
@@ -979,10 +979,10 @@
 &lt;kbd&gt;mywidget.h&lt;/kbd&gt;是个人定制的窗口类的头文件&lt;br&gt;
 &lt;kbd&gt;mywidget.ui&lt;/kbd&gt;是个人定制的窗口类的可视化设计文件，它本质上是一个标准XML格式的文本，需要通过&lt;strong&gt;uic&lt;/strong&gt;工具将其转换为项目中可用的&lt;strong&gt;ui_*.h&lt;/strong&gt;头文件，使用时ui是一个指向自定义界面类的指针（后面一般跟着控件名）例如ui文件中有一个叫&lt;strong&gt;textEdit&lt;/strong&gt;的&lt;strong&gt;QTextEdit&lt;/strong&gt;组件，你就可以通过&lt;strong&gt;ui-&amp;gt;textEdit&lt;/strong&gt;来访问这个文本框&lt;br&gt;
 &lt;kbd&gt;QtStudy_Day01.pro&lt;/kbd&gt;是工程文件，是&lt;strong&gt;qmake&lt;/strong&gt;(or cmake)自动生成的用于生成makefile的配置文件，可以通过该文件直接打开项目。&lt;br&gt;
-&lt;img src=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_10.png&#34;
+&lt;img src=&#34;https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_10.png&#34;
 	width=&#34;1015&#34;
 	height=&#34;614&#34;
-	srcset=&#34;http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_10_hu6956dfd086844066f2816f1bdc65d5b4_93507_480x0_resize_box_3.png 480w, http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_10_hu6956dfd086844066f2816f1bdc65d5b4_93507_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_10_hu6956dfd086844066f2816f1bdc65d5b4_93507_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_02/day2_10_hu6956dfd086844066f2816f1bdc65d5b4_93507_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Picture&#34;
@@ -1313,11 +1313,11 @@
         </item>
         <item>
         <title>QT学习记录_01</title>
-        <link>http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_01/</link>
+        <link>https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_01/</link>
         <pubDate>Sun, 04 Feb 2024 20:51:42 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_01/</guid>
-        <description>&lt;img src="http://localhost:1313/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_01/19.jpg" alt="Featured image of post QT学习记录_01" /&gt;&lt;h1 id=&#34;qt概述&#34;&gt;QT概述&lt;/h1&gt;
+        <guid>https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_01/</guid>
+        <description>&lt;img src="https://joker0ops.github.io/p/qt%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95_01/19.jpg" alt="Featured image of post QT学习记录_01" /&gt;&lt;h1 id=&#34;qt概述&#34;&gt;QT概述&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;QT简介：跨平台C++图形用户界面应用程序框架，完全面向对象，易扩展且允许组件编程。&lt;/li&gt;
 &lt;li&gt;版本及兼容性：
