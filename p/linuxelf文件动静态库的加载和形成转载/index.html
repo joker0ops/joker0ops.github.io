@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='前言 ELF是一种文件格式的名称 ELF（Executable and Linkable Format）是Linux和其他类Unix系统中用于可执行文件、目标文件、共享'>
+<title>Linux：ELF文件&amp;&amp;动静态库的加载和形成（转载）</title>
+
+<link rel='canonical' href='https://joker0ops.github.io/p/linuxelf%E6%96%87%E4%BB%B6%E5%8A%A8%E9%9D%99%E6%80%81%E5%BA%93%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%92%8C%E5%BD%A2%E6%88%90%E8%BD%AC%E8%BD%BD/'>
+
+<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='Linux：ELF文件&amp;&amp;动静态库的加载和形成（转载）'>
+<meta property='og:description' content='前言 ELF是一种文件格式的名称 ELF（Executable and Linkable Format）是Linux和其他类Unix系统中用于可执行文件、目标文件、共享'>
+<meta property='og:url' content='https://joker0ops.github.io/p/linuxelf%E6%96%87%E4%BB%B6%E5%8A%A8%E9%9D%99%E6%80%81%E5%BA%93%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%92%8C%E5%BD%A2%E6%88%90%E8%BD%AC%E8%BD%BD/'>
+<meta property='og:site_name' content='木木龙的个人博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Linux' /><meta property='article:published_time' content='2025-09-05T09:54:19&#43;08:00'/><meta property='article:modified_time' content='2025-09-05T09:54:19&#43;08:00'/>
+<meta name="twitter:title" content="Linux：ELF文件&amp;&amp;动静态库的加载和形成（转载）">
+<meta name="twitter:description" content="前言 ELF是一种文件格式的名称 ELF（Executable and Linkable Format）是Linux和其他类Unix系统中用于可执行文件、目标文件、共享">
+    <link rel="shortcut icon" href="/favicon.ico" />
+<style type="text/css">
+     
+    html{cursor:url('/cursor/01.cur'), default !important;}
+    a:hover{cursor:url('/cursor/03.cur'), pointer !important;}
+    button:hover{cursor: url('/cursor/03.cur'), pointer !important;}
+    i:hover{cursor: url('/cursor/03.cur'), pointer !important;}
+    input{cursor: url('/cursor/06.cur'), text !important;}
+    #dark-mode-toggle:hover{cursor: url('/cursor/03.cur'), pointer !important;}
+    .fui-eye:hover{cursor: url('/cursor/03.cur'), pointer !important;}
+    .fui-user:hover{cursor: url('/cursor/03.cur'), pointer !important;}
+    .fui-photo:hover{cursor: url('/cursor/03.cur'), pointer !important;}
+    .fui-info-circle:hover{cursor: url('/cursor/03.cur'), pointer !important;}
+    .fui-home:hover{cursor: url('/cursor/03.cur'), pointer !important;}
+    .fui-cross:hover{cursor: url('/cursor/03.cur'), pointer !important;}
+     
+    .fireworks {
+        position: fixed;
+        pointer-events: none;
+        top: 0;
+        left: 0;
+        height: 100%;
+    }
+     
+    img.site-logo {
+         
+        transition: all 1.65s   
+    }
+    img.site-logo:hover {
+        transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+    }
+</style>
+<canvas class="fireworks" id="fireworks"></canvas>
+<script src="/js/anime.min.js"></script>
+<script src="/js/fireworks.js"></script>
+<script src="/js/jquery-3.7.1.min.js"></script>
+<script src="/js/jquery-ui-1.14.0/jquery-ui.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/waifu.min.css">
+<script>setCanvasSize();</script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/Avatar_hu5179492d212c9c841146f5622b7e2dae_1451194_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">😍</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">木木龙的个人博客</a></h1>
+            <h2 class="site-description">热爱可抵岁月漫长</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/joker0ops'
+                        target="_blank"
+                        title="1"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <path d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zM277.3 415.7c-8.4 1.5-11.5-3.7-11.5-8 0-5.4.2-33 .2-55.3 0-15.6-5.2-25.5-11.3-30.7 37-4.1 76-9.2 76-73.1 0-18.2-6.5-27.3-17.1-39 1.7-4.3 7.4-22-1.7-45-13.9-4.3-45.7 17.9-45.7 17.9-13.2-3.7-27.5-5.6-41.6-5.6-14.1 0-28.4 1.9-41.6 5.6 0 0-31.8-22.2-45.7-17.9-9.1 22.9-3.5 40.6-1.7 45-10.6 11.7-15.6 20.8-15.6 39 0 63.6 37.3 69 74.3 73.1-4.8 4.3-9.1 11.7-10.6 22.3-9.5 4.3-33.8 11.7-48.3-13.9-9.1-15.8-25.5-17.1-25.5-17.1-16.2-.2-1.1 10.2-1.1 10.2 10.8 5 18.4 24.2 18.4 24.2 9.7 29.7 56.1 19.7 56.1 19.7 0 13.9.2 36.5.2 40.6 0 4.3-3 9.5-11.5 8-66-22.1-112.2-84.9-112.2-158.3 0-91.8 70.2-161.5 162-161.5S388 165.6 388 257.4c.1 73.4-44.7 136.3-110.7 158.3zm-98.1-61.1c-1.9.4-3.7-.4-3.9-1.7-.2-1.5 1.1-2.8 3-3.2 1.9-.2 3.7.6 3.9 1.9.3 1.3-1 2.6-3 3zm-9.5-.9c0 1.3-1.5 2.4-3.5 2.4-2.2.2-3.7-.9-3.7-2.4 0-1.3 1.5-2.4 3.5-2.4 1.9-.2 3.7.9 3.7 2.4zm-13.7-1.1c-.4 1.3-2.4 1.9-4.1 1.3-1.9-.4-3.2-1.9-2.8-3.2.4-1.3 2.4-1.9 4.1-1.5 2 .6 3.3 2.1 2.8 3.4zm-12.3-5.4c-.9 1.1-2.8.9-4.3-.6-1.5-1.3-1.9-3.2-.9-4.1.9-1.1 2.8-.9 4.3.6 1.3 1.3 1.8 3.3.9 4.1zm-9.1-9.1c-.9.6-2.6 0-3.7-1.5s-1.1-3.2 0-3.9c1.1-.9 2.8-.2 3.7 1.3 1.1 1.5 1.1 3.3 0 4.1zm-6.5-9.7c-.9.9-2.4.4-3.5-.6-1.1-1.3-1.3-2.8-.4-3.5.9-.9 2.4-.4 3.5.6 1.1 1.3 1.3 2.8.4 3.5zm-6.7-7.4c-.4.9-1.7 1.1-2.8.4-1.3-.6-1.9-1.7-1.5-2.6.4-.6 1.5-.9 2.8-.4 1.3.7 1.9 1.8 1.5 2.6z"/>
+</svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.zhihu.com/people/cutey-protectobei-mang'
+                        target="_blank"
+                        title="2"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1723986608698" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1462" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M940.35 795.875c0 78.652-63.771 142.422-142.421 142.422H228.226c-78.655 0-142.427-63.772-142.427-142.422v-569.7c0-78.658 63.772-142.432 142.427-142.432H797.93c78.658 0 142.432 63.772 142.432 142.431l-0.01 569.701zM415.621 543.356h125.593c0-29.528-13.923-46.824-13.923-46.824H418.295c2.59-53.493 4.91-122.15 5.739-147.65h103.677s-0.561-43.871-12.091-43.871H333.378s10.971-57.374 25.594-82.7c0 0-54.417-2.938-72.98 69.622-18.562 72.56-46.404 116.43-49.356 124.446-2.953 8.013 16.031 3.795 24.044 0 8.015-3.797 44.294-16.876 54.84-67.496h56.35c0.76 32.082 2.99 130.397 2.287 147.649H258.15c-16.45 11.81-21.936 46.824-21.936 46.824h132.592c-5.53 36.615-15.239 83.813-28.817 108.835-21.513 39.655-32.904 75.934-110.525 138.368 0 0-12.657 9.28 26.576 5.906 39.231-3.372 76.356-13.498 102.087-64.963 13.378-26.756 27.213-60.697 38.006-95.121l-0.04 0.12 109.26 125.795s14.343-33.747 3.798-70.87l-80.994-90.698-27.42 20.279-0.031 0.099c7.615-26.7 13.092-53.095 14.795-76.061 0.042-0.553 0.084-1.119 0.121-1.689zM567.366 295.73v435.35h45.77l18.753 52.405 79.328-52.405h99.978V295.73H567.366zM764.09 684.253h-51.968l-64.817 42.817-15.319-42.817H615.81v-339.94h148.28v339.94z m0 0" fill="#2c2c2c" p-id="1463"></path></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://x.com/Joker0ops'
+                        target="_blank"
+                        title="3"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 50 50">
+    <path d="M 11 4 C 7.134 4 4 7.134 4 11 L 4 39 C 4 42.866 7.134 46 11 46 L 39 46 C 42.866 46 46 42.866 46 39 L 46 11 C 46 7.134 42.866 4 39 4 L 11 4 z M 13.085938 13 L 21.023438 13 L 26.660156 21.009766 L 33.5 13 L 36 13 L 27.789062 22.613281 L 37.914062 37 L 29.978516 37 L 23.4375 27.707031 L 15.5 37 L 13 37 L 22.308594 26.103516 L 13.085938 13 z M 16.914062 15 L 31.021484 35 L 34.085938 35 L 19.978516 15 L 16.914062 15 z"/>
+</svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/375616854'
+                        target="_blank"
+                        title="4"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <path d="M488.6 104.1C505.3 122.2 513 143.8 511.9 169.8V372.2C511.5 398.6 502.7 420.3 485.4 437.3C468.2 454.3 446.3 463.2 419.9 464H92.02C65.57 463.2 43.81 454.2 26.74 436.8C9.682 419.4 .7667 396.5 0 368.2V169.8C.7667 143.8 9.682 122.2 26.74 104.1C43.81 87.75 65.57 78.77 92.02 78H121.4L96.05 52.19C90.3 46.46 87.42 39.19 87.42 30.4C87.42 21.6 90.3 14.34 96.05 8.603C101.8 2.868 109.1 0 117.9 0C126.7 0 134 2.868 139.8 8.603L213.1 78H301.1L375.6 8.603C381.7 2.868 389.2 0 398 0C406.8 0 414.1 2.868 419.9 8.603C425.6 14.34 428.5 21.6 428.5 30.4C428.5 39.19 425.6 46.46 419.9 52.19L394.6 78L423.9 78C450.3 78.77 471.9 87.75 488.6 104.1H488.6zM449.8 173.8C449.4 164.2 446.1 156.4 439.1 150.3C433.9 144.2 425.1 140.9 416.4 140.5H96.05C86.46 140.9 78.6 144.2 72.47 150.3C66.33 156.4 63.07 164.2 62.69 173.8V368.2C62.69 377.4 65.95 385.2 72.47 391.7C78.99 398.2 86.85 401.5 96.05 401.5H416.4C425.6 401.5 433.4 398.2 439.7 391.7C446 385.2 449.4 377.4 449.8 368.2L449.8 173.8zM185.5 216.5C191.8 222.8 195.2 230.6 195.6 239.7V273C195.2 282.2 191.9 289.9 185.8 296.2C179.6 302.5 171.8 305.7 162.2 305.7C152.6 305.7 144.7 302.5 138.6 296.2C132.5 289.9 129.2 282.2 128.8 273V239.7C129.2 230.6 132.6 222.8 138.9 216.5C145.2 210.2 152.1 206.9 162.2 206.5C171.4 206.9 179.2 210.2 185.5 216.5H185.5zM377 216.5C383.3 222.8 386.7 230.6 387.1 239.7V273C386.7 282.2 383.4 289.9 377.3 296.2C371.2 302.5 363.3 305.7 353.7 305.7C344.1 305.7 336.3 302.5 330.1 296.2C323.1 289.9 320.7 282.2 320.4 273V239.7C320.7 230.6 324.1 222.8 330.4 216.5C336.7 210.2 344.5 206.9 353.7 206.5C362.9 206.9 370.7 210.2 377 216.5H377z"/>
+</svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#一elf文件的类型及其组成的格式">一、ELF文件的类型及其组成的格式</a>
+      <ol>
+        <li><a href="#11-类型">1.1 类型</a></li>
+        <li><a href="#12-组成格式">1.2 组成格式</a></li>
+      </ol>
+    </li>
+    <li><a href="#二elf文件从形成到加载轮廓">二、ELF文件从形成到加载轮廓</a>
+      <ol>
+        <li><a href="#21-elf可执行文件形成过程">2.1 ELF可执行文件形成过程</a></li>
+        <li><a href="#22-elf可执行文件从磁盘加载到内存中section的变化">2.2 ELF可执行文件从磁盘加载到内存中section的变化</a></li>
+      </ol>
+    </li>
+    <li><a href="#三理解链接和加载">三、理解链接和加载</a>
+      <ol>
+        <li><a href="#31-静态链接">3.1 静态链接</a></li>
+        <li><a href="#32-动态链接">3.2 动态链接</a>
+          <ol>
+            <li><a href="#321-动态库中的相对地址">3.2.1 动态库中的相对地址</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#总结">总结</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/technique/" >
+                Technique
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/linuxelf%E6%96%87%E4%BB%B6%E5%8A%A8%E9%9D%99%E6%80%81%E5%BA%93%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%92%8C%E5%BD%A2%E6%88%90%E8%BD%AC%E8%BD%BD/">Linux：ELF文件&amp;&amp;动静态库的加载和形成（转载）</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025/09/05</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 6 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="前言">前言</h2>
+<p><code>ELF是一种文件格式的名称</code><br>
+ELF（Executable and Linkable Format）是Linux和其他类Unix系统中用于可执行文件、目标文件、共享库（动态链接库）和核心转储（core dumps）的标准<a class="link" href="https://so.csdn.net/so/search?q=%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F&amp;spm=1001.2101.3001.7020"  target="_blank" rel="noopener"
+    >文件格式</a>。它定义了程序在存储和运行时的结构，是理解程序编译、链接和加载过程的关键。</p>
+<hr>
+<h2 id="一elf文件的类型及其组成的格式">一、ELF文件的类型及其组成的格式</h2>
+<h3 id="11-类型">1.1 类型</h3>
+<ul>
+<li>可执行文件（Executable）：可直接运行的程序（如 /bin/ls）。</li>
+<li>目标文件（Relocatable Object File）：编译后的 .o 文件，需链接生成可执行文件。</li>
+<li>共享库（Shared Object）：动态链接库 .so，运行时被加载到进程内存。</li>
+<li>核心转储（Core Dump）：程序崩溃时的内存快照，用于调试。</li>
+</ul>
+<h3 id="12-组成格式">1.2 组成格式</h3>
+<p>ELF文件由以下四部分组成：</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>组成部分</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ELF Header</td>
+<td>描述文件的基本信息（架构、入口地址、段表和节表的位置等）。</td>
+</tr>
+<tr>
+<td>Program Headers</td>
+<td>描述程序在运行时的内存布局（如代码段、数据段、栈等），用于加载和执行程序。</td>
+</tr>
+<tr>
+<td>Section Headers</td>
+<td>描述文件的节（section）信息（如代码、数据、符号表等），用于链接和调试。</td>
+</tr>
+<tr>
+<td>Data Sections</td>
+<td>实际的代码、数据、字符串表、符号表等内容。</td>
+</tr>
+</tbody>
+</table></div>
+<p><img src="https://i-blog.csdnimg.cn/direct/30d8450ffb91440c8a1b3f259c5db49c.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="在这里插入图片描述"
+	
+	
+><br>
+常见的节</p>
+<blockquote>
+<ul>
+<li>代码节（.text）：⽤于保存机器指令，是程序的主要执⾏部分。</li>
+<li>数据节（.data）：保存已初始化的全局变量和局部静态变量。</li>
+<li>Block Started by Symbol(.bss):是程序内存布局中的一个重要部分，主要用于存储未初始化的全局变量和静态变量</li>
+</ul>
+</blockquote>
+<h2 id="二elf文件从形成到加载轮廓">二、ELF文件从形成到加载轮廓</h2>
+<h3 id="21-elf可执行文件形成过程">2.1 ELF可执行文件形成过程</h3>
+<p>- step-1：将多份 C/C++ 源代码，翻译成为⽬标 .o ⽂件<br>
+- step-2：将多份 .o ⽂件section进⾏合并</p>
+<p><img src="https://i-blog.csdnimg.cn/direct/b73b5e987bb449aa8dde5ea56cc22f6c.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="在这里插入图片描述"
+	
+	
+></p>
+<h3 id="22-elf可执行文件从磁盘加载到内存中section的变化">2.2 ELF可执行文件从磁盘加载到内存中section的变化</h3>
+<blockquote>
+<ol>
+<li>⼀个ELF会有多种不同的Section，在加载到内存的时候，也会进⾏Section合并，形成segment<br>
+目的是为了节省从磁盘加载到内存过程中的内存空间，一个页大小是4kb（4096字节），如果不合并前.text大小为4097字节，.data是1字节，那么它们会占3个页面，但是合并过后总大小为4098字节，那么只需要两个页，section在链接时起作用而segment在执行时起作用，segment其实就是往下合并section，两者的关系是segment包含section</li>
+<li>合并原则：相同属性，⽐如：可读，可写，可执⾏，需要加载时申请空间等.</li>
+<li>这样，即便是不同的Section，在加载到内存中，可能会以segment的形式，加载到⼀起</li>
+<li>很显然，这个合并⼯作也已经在形成ELF的时候，合并⽅式已经确定了，具体合并原则被记录在了ELF的 程序头表(Program header table) 中</li>
+</ol>
+</blockquote>
+<h2 id="三理解链接和加载">三、理解链接和加载</h2>
+<h3 id="31-静态链接">3.1 静态链接</h3>
+<p><code>研究静态链接其实就是研究不同的.o文件是如何链接到一起的，.o类型文件也叫做可重定位目标文件</code><br>
+以下是样例代码：</p>
+<pre><code>// hello.c
+#include&lt;stdio.h&gt;
+void run();
+int main() {
+ printf(&quot;hello world!\n&quot;);
+ run();
+ return 0;
+}
+
+// code.c
+#include&lt;stdio.h&gt;
+void run() {
+ printf(&quot;running...\n&quot;);
+}
+</code></pre>
+<blockquote>
+<p>objdump -d 命令：将代码段（.text）进⾏反汇编查看<br>
+以下图片是反汇编后的hello.o文件的汇编码<br>
+其中蓝色圈中的e8代表的就是callq的加载到内存的机械码，而后面跟着的一串0代表访问的函数地址，在链接中才会填充地址，也叫做地址重定位<img src="https://i-blog.csdnimg.cn/direct/f3c27bca5f68468cba93f5f1123d3af1.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="在这里插入图片描述"
+	
+	
+></p>
+</blockquote>
+<blockquote>
+<p>静态链接就是把库中的.o进⾏合并，和上述过程⼀样<br>
+所以链接其实就是将编译之后的所有⽬标⽂件连同⽤到的⼀些静态库运⾏时库组合，拼装成⼀个独⽴的可执⾏⽂件。其中就包括我们之前提到的地址修正，当所有模块组合在⼀起之后，链接器会根据我们的.o⽂件或者静态库中的重定位表找到那些需要被重定位的函数全局变量，从⽽修正它们的地址。这其实就是静态链接的过程<br>
+<img src="https://i-blog.csdnimg.cn/direct/315c20069b9841878788d1072a92c351.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="在这里插入图片描述"
+	
+	
+></p>
+</blockquote>
+<h3 id="32-动态链接">3.2 动态链接</h3>
+<p>首先交代一个结论：动态链接实际上将链接的整个过程推迟到了程序加载的时候。⽐如我们去运⾏⼀个程序，操作系统会⾸先将程序的数据代码连同它⽤到的⼀系列动态库先加载到内存，其中每个动态库的加载地址都是不固定的，操作系统会根据当前地址空间的使⽤情况为它们动态分配⼀段内存。</p>
+<blockquote>
+<p>动态库想要和运行程序关联起来需要进行两个步骤</p>
+<ol>
+<li>被程序相关的进程看到：动态库地址映射到进程的地址空间</li>
+<li>被进程调用：在地址空间中进行跳转<br>
+<img src="https://i-blog.csdnimg.cn/direct/d89970f1c0c944e6b218d44ce0242b7c.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="在这里插入图片描述"
+	
+	
+><br>
+动态库（也能被叫做共享库）的意义就是将所有能重复用到的代码在程序需要时放到内存的一片区域中然后不需要再出现重复的代码。</li>
+</ol>
+</blockquote>
+<p>—在C/C++程序中，当程序开始执⾏时，它⾸先并不会直接跳转到 main 函数。实际上，程序的⼊⼝点<br>
+是 _start ，这是⼀个由C运⾏时库（通常是glibc）或链接器（如ld）提供的特殊函数。<br>
+在 _start 函数中，会执⾏⼀系列初始化操作，这些操作包括：</p>
+<ol>
+<li>设置堆栈：为程序创建⼀个初始的堆栈环境。</li>
+<li>初始化数据段：将程序的数据段（如全局变量和静态变量）从初始化数据段复制到相应的内存位置，并清零未初始化的数据段。</li>
+<li>动态链接：这是关键的⼀步， _start 函数会调⽤动态链接器的代码来解析和加载程序所依赖的动态库（shared_libraries）。动态链接器会处理所有的符号解析和重定位，确保程序中的函数调⽤和变量访问能够正确地映射到动态库中的实际地址。</li>
+<li>调⽤ __libc_start_main ：⼀旦动态链接完成， _start 函数会调⽤__libc_start_main （这是glibc提供的⼀个函数）。 __libc_start_main 函数负责执⾏⼀些额外的初始化⼯作，⽐如设置信号处理函数、初始化线程库（如果使⽤了线程）等。</li>
+<li>调⽤ main 函数：最后， __libc_start_main 函数会调⽤程序的 main 函数，此时程序的执⾏控制权才正式交给⽤⼾编写的代码。</li>
+<li>处理 main 函数的返回值：当 main 函数返回时， __libc_start_main 会负责处理这个返回值，并最终调⽤ _exit 函数来终⽌程序。<br>
+上述过程描述了C/C++程序在 main 函数之前执⾏的⼀系列操作，但这些操作对于⼤多数程序员来说是透明的。程序员通常只需要关注 main 函数中的代码，⽽不需要关⼼底层的初始化过程。然⽽，了解这些底层细节有助于更好地理解程序的执⾏流程和调试问题。</li>
+</ol>
+<blockquote>
+<p>动态链接器：<br>
+◦ 动态链接器（如ld-linux.so）负责在程序运⾏时加载动态库。<br>
+◦ 当程序启动时，动态链接器会解析程序中的动态库依赖，并加载这些库到内存中。<br>
+环境变量和配置⽂件：<br>
+◦ <a class="link" href="https://so.csdn.net/so/search?q=Linux%E7%B3%BB%E7%BB%9F&amp;spm=1001.2101.3001.7020"  target="_blank" rel="noopener"
+    >Linux系统</a>通过环境变量（如LD_LIBRARY_PATH）和配置⽂件（如/etc/ld.so.conf及其⼦配置⽂件）来指定动态库的搜索路径。<br>
+◦ 这些路径会被动态链接器在加载动态库时搜索。<br>
+缓存⽂件：<br>
+◦ 为了提⾼动态库的加载效率，Linux系统会维护⼀个名为/etc/ld.so.cache的缓存⽂件。<br>
+◦ 该⽂件包含了系统中所有已知动态库的路径和相关信息，动态链接器在加载动态库时会⾸先<br>
+搜索这个缓存⽂件<br>
+<img src="https://i-blog.csdnimg.cn/direct/16692c764f7a4ce2ab7c808b08dffc72.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="在这里插入图片描述"
+	
+	
+></p>
+</blockquote>
+<h4 id="321-动态库中的相对地址">3.2.1 动态库中的相对地址</h4>
+<p>动态库也是elf类型的文件，当文件链接动态库的时候，发生以下过程</p>
+<blockquote>
+<ol>
+<li>通过mm_struct中的变量找到有关共享区的结构体，根据里面的成员指针变量找到路径</li>
+<li>根据路径找到磁盘中的数据块加载到内存</li>
+<li>发生映射关系关联起来</li>
+<li>得到库的起始虚拟地址</li>
+<li>数据区会有一个名为.GOT的表记录库函数的偏移量，映射过后，表会根据库的起始虚拟地址进行修改得到完整的访问共享区的地址<br>
+<img src="https://i-blog.csdnimg.cn/direct/142333df493341d6ac9a68ad7db933e9.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="在这里插入图片描述"
+	
+	
+></li>
+</ol>
+</blockquote>
+<h2 id="总结">总结</h2>
+<p>这篇博客是博主时隔三个多月再次恢复的博客写作，仍有诸多欠缺，希望看到这篇博客的小伙伴能一起坚持下学习和进步</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/linux/">Linux</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/elf%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%BC%E5%BC%8F%E5%89%96%E6%9E%90/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">ELF文件结构与格式剖析</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Clang到底是什么?(转载)</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/gnu/gcc%E7%BC%96%E8%AF%91%E5%99%A8%E5%8F%8A%E5%85%B6%E7%BC%96%E8%AF%91%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">GNU/GCC编译器及其编译流程详解</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/linux%E7%9A%84%E4%BF%A1%E5%8F%B7/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Linux的信号</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80numpy%E5%85%A5%E9%97%A8/">
+        
+        
+            <div class="article-image">
+                <img src="/p/python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80numpy%E5%85%A5%E9%97%A8/17.6b7f520fde14dee47a164cef450cf2dc_hub468cb9e2e0fb22530e23a0e0293acef_781019_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Python数据分析基础——Numpy入门"
+                        
+                        data-hash="md5-a39SD94U3uR6FkzvRQzy3A==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Python数据分析基础——Numpy入门</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="joker0ops/joker0ops.github.io"
+        issue-term="pathname"
+        
+        label="Comments"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2023 - 
+        
+        2025 木木龙的个人博客
+    </section>
+    
+    <section class="powerby">
+        
+            热爱可抵岁月漫长，温柔可挡艰难时光。 <br/>
+        Nothing but enthusiasm brightens up the endless years. <br />
+        转载请注明主页网址哦~
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<div class="waifu">
+    <div class="waifu-tips"></div>
+    <canvas id="live2d" class="live2d"></canvas>
+    <div class="waifu-tool">
+        <span class="fui-home"></span>
+        <span class="fui-chat"></span>
+        <span class="fui-eye"></span>
+        <span class="fui-user"></span>
+        <span class="fui-photo"></span>
+        <span class="fui-info-circle"></span>
+        <span class="fui-cross"></span>
+    </div>
+</div>
+    
+<script src="/js/waifu-tips.js?v=1.4.2"></script>
+<script src="/js/live2d.js?v=1.0.5"></script>
+<script pointColor="48,48,48" color="255,182,193" opacity='1' zIndex="-1" count="800" src="https://cdn.bootcss.com/canvas-nest.js/2.0.4/canvas-nest.js" type="text/javascript"></script>
+<script type="text/javascript">
+     
+    live2d_settings['modelId'] = 6;                 
+    live2d_settings['modelTexturesId'] = 8;         
+    live2d_settings['modelStorage'] = false;        
+    live2d_settings['canSwitchHitokoto'] = false;   
+    live2d_settings['canCloseLive2d'] = true;       
+    live2d_settings['canTurnToHomePage'] = true;    
+    live2d_settings['canTurnToAboutPage'] = true;   
+    live2d_settings['waifuSize'] = '280x250';       
+    live2d_settings['waifuTipsSize'] = '250x70';    
+    live2d_settings['waifuFontSize'] = '12px';      
+    live2d_settings['waifuToolFont'] = '18px';      
+    live2d_settings['waifuToolLine'] = '20px';      
+    live2d_settings['waifuToolTop'] = '0px';        
+    live2d_settings['waifuEdgeSide'] = 'right:30';  
+    live2d_settings['waifuDraggable'] = 'axis-x';   
+    live2d_settings['homePageUrl'] = 'https://joker0ops.github.io';     
+    live2d_settings['aboutPageUrl'] = 'https://github.com/joker0ops';   
+    live2d_settings['screenshotCaptureName'] = 'live2d.png';            
+     
+    initModel("/json/waifu-tips.json?v=1.4.2")
+</script>
+    </body>
+</html>

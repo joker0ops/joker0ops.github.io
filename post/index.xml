@@ -7,7 +7,1863 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>木木龙的个人博客</copyright>
-        <lastBuildDate>Sun, 18 Aug 2024 21:25:54 +0800</lastBuildDate><atom:link href="https://joker0ops.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 05 Sep 2025 11:32:02 +0800</lastBuildDate><atom:link href="https://joker0ops.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>ELF文件结构与格式剖析</title>
+        <link>https://joker0ops.github.io/p/elf%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%BC%E5%BC%8F%E5%89%96%E6%9E%90/</link>
+        <pubDate>Fri, 05 Sep 2025 11:32:02 +0800</pubDate>
+        
+        <guid>https://joker0ops.github.io/p/elf%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%BC%E5%BC%8F%E5%89%96%E6%9E%90/</guid>
+        <description>&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://so.csdn.net/so/search?q=ELF&amp;amp;spm=1001.2101.3001.7020&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ELF&lt;/a&gt; 文件，大名叫 Executable and Linkable Format。&lt;/p&gt;
+&lt;p&gt;作为一种文件，那么肯定就需要遵守一定的格式。&lt;/p&gt;
+&lt;p&gt;从宏观上看，可以分成四个部分：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/787e2d4fb2c93eb963a21ce8c19af972.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;图中的这几个概念，如果不明白的话也没关系，下面我会逐个说明的。&lt;/p&gt;
+&lt;p&gt;在 Linux 系统中，一个 ELF 文件主要用来表示 3 种类型的文件：&lt;/p&gt;
+&lt;p&gt;1. 可执行文件&lt;/p&gt;
+&lt;p&gt;2. 目标文件&lt;/p&gt;
+&lt;p&gt;3. 共享文件&lt;/p&gt;
+&lt;p&gt;既然可以用来表示 3 种类型的文件，那么在文件中，肯定有一个地方用来区分这 3 种情况。&lt;/p&gt;
+&lt;p&gt;在我的头部内容中，就存在一个字段，用来表示：当前这个 ELF 文件，它到底是一个可执行文件？是一个目标文件？还是一个共享库文件？&lt;/p&gt;
+&lt;p&gt;另外，既然我可以用来表示 3 种类型的文件，那么就肯定是在 3 种不同的场合下被使用，或者说被不同的家伙来操作我：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;可执行文件：被操作系统中的加载器从硬盘上读取，载入到内存中去执行;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;目标文件：被链接器读取，用来产生一个可执行文件或者共享库文件;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;共享库文件：在&lt;a class=&#34;link&#34; href=&#34;https://so.csdn.net/so/search?q=%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5&amp;amp;spm=1001.2101.3001.7020&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;动态链接&lt;/a&gt;的时候，由 ld-linux.so 来读取;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;就拿链接器和加载器来说吧，这两个家伙的性格是不一样的，它们看我的眼光也是不一样的。&lt;/p&gt;
+&lt;p&gt;链接器看ELF文件，看不见 Program header table. &lt;br&gt;
+加载器看ELF文件，看不见 section header table, 并将section改个名字叫segment;&lt;/p&gt;
+&lt;p&gt;可以理解为：一个 Segment 可能包含一个或者多个 Sections，就像下面这样：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/9f5657e62e255deb8ef1966b92a645c7.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;其实只要掌握到 &lt;code&gt;2&lt;/code&gt; 点内容就可以了：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;一个 ELF 文件一共由 4 个部分组成;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;链接器和加载器，它们在使用我的时候，只会使用它们感兴趣的部分;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;还有一点差点忘记给你提个醒了：在 &lt;code&gt;Linux&lt;/code&gt; 系统中，会有不同的数据结构来描述上面所说的每部分内容。&lt;/p&gt;
+&lt;p&gt;描述 ELF header 的结构体：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/cb4eae397f5d71a36a0472b64e2b93f4.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;描述 Program header table 的结构体：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/2d56ae7121751f6fbbbf9091738e6a31.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;描述 Section header table 的结构体：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/f3adc832ec8d4f54f028756d9bfe258e.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;elf-headerelf-头&#34;&gt;&lt;strong&gt;ELF header(ELF 头)&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;头部内容，就相当于是一个总管，它决定了这个完整的 ELF 文件内部的所有信息，比如：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;这是一个 ELF 文件;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;一些基本信息：版本，文件类型，机器类型;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Program header table(程序头表)的开始地址，在整个文件的什么地方;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Section header table(节头表)的开始地址，在整个文件的什么地方;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;为了方便描述，我就把 &lt;code&gt;Sections&lt;/code&gt; 和 &lt;code&gt;Segments&lt;/code&gt; 全部统一称为 Sections &lt;/p&gt;
+&lt;p&gt;在一个 ELF 文件中，存在很多个 Sections，这些 Sections 的具体信息，是在 &lt;code&gt;Program header table&lt;/code&gt; 或者 &lt;code&gt;Section head table&lt;/code&gt; 中进行描述的。&lt;/p&gt;
+&lt;p&gt;就拿 &lt;code&gt;Section head table&lt;/code&gt; 来举例吧：&lt;/p&gt;
+&lt;p&gt;假如一个 ELF 文件中一共存在 &lt;code&gt;4&lt;/code&gt; 个 Section: &lt;code&gt;.text、.rodata、.data、.bss&lt;/code&gt;，那么在 &lt;code&gt;Section head table&lt;/code&gt; 中，将会有 &lt;code&gt;4&lt;/code&gt; 个 Entry(条目)来分别描述这 4 个 Section 的具体信息(严格来说，不止 4 个 Entry，因为还存在一些其他辅助的 Sections)，就像下面这样：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/a4910e6acaee93492e94439fa445d6d5.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;用一个具体的代码示例来描述，看实实在在的字节码。&lt;/p&gt;
+&lt;p&gt;程序的功能比较简单：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/18d200aeec87b285eadc41e110114219.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// mymath.c int my_add(int a, int b){    return a + b;}
+
+// main.c #include &amp;lt;stdio.h&amp;gt;extern int my_add(int a, int b); int main(){   int i = 1;   int j = 2;   int k = my_add(i, j);   printf(&amp;quot;k = %d \n&amp;quot;, k);}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;从刚才的描述中可以知道：动态库文件 &lt;code&gt;libmymath.so&lt;/code&gt;, 目标文件 &lt;code&gt;main.o&lt;/code&gt; 和 可执行文件 &lt;code&gt;main&lt;/code&gt;，它们都是 ELF 文件，只不过属于不同的类型。&lt;/p&gt;
+&lt;p&gt;这里就以可执行文件 main 来拆解它！&lt;/p&gt;
+&lt;p&gt;首先用指令 &lt;strong&gt;&lt;code&gt;readelf -h main&lt;/code&gt;&lt;/strong&gt; 来看一下 main 文件中，&lt;code&gt;ELF header&lt;/code&gt; 的信息。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;readelf 这个工具，可是一个好东西啊！一定要好好的利用它。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/bf4081abce7a4a7e8f51fb83b86e31f6.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这张图中显示的信息，就是 &lt;code&gt;ELF header&lt;/code&gt; 中描述的所有内容了。这个内容与结构体 &lt;code&gt;Elf32_Ehdr&lt;/code&gt; 中的成员变量是一一对应的！&lt;/p&gt;
+&lt;p&gt;有没有发现图中第 15 行显示的内容：&lt;code&gt;Size of this header: 52 (bytes)&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;也就是说：&lt;code&gt;ELF header&lt;/code&gt; 部分的内容，一共是 &lt;code&gt;52&lt;/code&gt; 个字节。那么我就把开头的这 &lt;code&gt;52&lt;/code&gt; 个字节码给你看一下。&lt;/p&gt;
+&lt;p&gt;这回用 &lt;strong&gt;&lt;code&gt;od -Ax -t x1 -N 52 main&lt;/code&gt;&lt;/strong&gt; 这个指令来读取 main 中的字节码，简单解释一下其中的几个选项：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;-Ax: 显示地址的时候，用十六进制来表示。如果使用 -Ad，意思就是用十进制来显示地址;&lt;/p&gt;
+&lt;p&gt;-t -x1: 显示字节码内容的时候，使用十六进制(x)，每次显示一个字节(1);&lt;/p&gt;
+&lt;p&gt;-N 52：只需要读取 52 个字节;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/6ff126612b17a27ee6dd7c435ac7de07.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这 &lt;code&gt;52&lt;/code&gt; 个字节的内容，你可以对照上面的结构体中每个字段来解释了。&lt;/p&gt;
+&lt;p&gt;首先看一下前 16 个字节。&lt;/p&gt;
+&lt;p&gt;在结构体中的第一个成员是 &lt;code&gt;unsigned char e_ident[EI_NIDENT];&lt;/code&gt;，&lt;code&gt;EI_NIDENT&lt;/code&gt; 的长度是 &lt;code&gt;16&lt;/code&gt;，代表了 &lt;code&gt;EL header &lt;/code&gt;中的开始 &lt;code&gt;16&lt;/code&gt; 个字节，具体含义如下：&lt;/p&gt;
+&lt;p&gt;0 - 15 个字节&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/b8045da2543265f9254a2ce09a9d8ebd.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;官方文档对于这部分的解释：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/4cc6bfc8cbee37d16e3069c88a38676e.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;关于大端、小端格式，这个 &lt;code&gt;main&lt;/code&gt; 文件中显示的是 &lt;code&gt;1&lt;/code&gt;，代表小端格式。啥意思呢，看下面这张图就明白了：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/44d7d2b600bf043dcf5d4800e3a5d6c6.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;那么再来看一下大端格式：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/9bb7cad43a84d29095fa9bc713dab1ca.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;好了，下面我们继续把剩下的 &lt;code&gt;36&lt;/code&gt; 个字节(52 - 16 = 32)，也以这样的字节码含义画出来：&lt;/p&gt;
+&lt;p&gt;16 - 31 个字节：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/c86dc7834b70f91421b07c515e713cd9.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;32 - 47 个字节：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/a297747642ead3671b69af4759277712.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;48 - 51 个字节：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/c20df8bd328ef137f3db545d75af7728.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;字符串表表项-entry&#34;&gt;&lt;strong&gt;字符串表表项 Entry&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;在一个 &lt;code&gt;ELF&lt;/code&gt; 文件中，存在很多字符串，例如：变量名、Section名称、链接器加入的符号等等，这些字符串的长度都是不固定的，因此用一个固定的结构来表示这些字符串，肯定是不现实的。&lt;/p&gt;
+&lt;p&gt;于是，把这些字符串集中起来，统一放在一起，作为一个独立的 &lt;code&gt;Section&lt;/code&gt; 来进行管理。&lt;/p&gt;
+&lt;p&gt;在文件中的其他地方呢，如果想表示一个字符串，就在这个地方写一个数字索引：表示这个字符串位于字符串统一存储地方的某个偏移位置，经过这样的按图索骥，就可以找到这个具体的字符串了。&lt;/p&gt;
+&lt;p&gt;比如说啊，下面这个空间中存储了所有的字符串：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/0bb1187628f576e495341d5f3902c69d.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;在程序的其他地方，如果想引用字符串 “hello,world!”，那么就只需要在那个地方标明数字 &lt;code&gt;13&lt;/code&gt; 就可以了，表示：这个字符串从偏移 13 个字节处开始。&lt;/p&gt;
+&lt;p&gt;那么现在，咱们再回到这个 &lt;code&gt;main&lt;/code&gt; 文件中的字符串表，&lt;/p&gt;
+&lt;p&gt;在 &lt;code&gt;ELF header&lt;/code&gt; 的最后 2 个字节是 &lt;code&gt;0x1C 0x00&lt;/code&gt;，它对应结构体中的成员 &lt;code&gt;e_shstrndx&lt;/code&gt;，意思是这个 ELF 文件中，字符串表是一个普通的 Section，在这个 Section 中，存储了 &lt;code&gt;ELF&lt;/code&gt; 文件中使用到的所有的字符串。&lt;/p&gt;
+&lt;p&gt;既然是一个 &lt;code&gt;Section&lt;/code&gt;，那么在 &lt;code&gt;Section header table&lt;/code&gt; 中，就一定有一个表项 Entry 来描述它，那么是哪一个表项呢？&lt;/p&gt;
+&lt;p&gt;这就是 &lt;code&gt;0x1C 0x00&lt;/code&gt; 这个表项，也就是第 &lt;code&gt;28&lt;/code&gt; 个表项。&lt;/p&gt;
+&lt;p&gt;这里，我们还可以用指令 **&lt;code&gt;readelf -S main&lt;/code&gt; **来看一下这个 &lt;code&gt;ELF&lt;/code&gt; 文件中所有的 &lt;code&gt;Section&lt;/code&gt; 信息：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/27551fcfd591f3c8e63917211dbe13a8.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;其中的第 &lt;code&gt;28&lt;/code&gt; 个 Section，描述的正是字符串表 Section:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/875e8f157ad2c151d024e5335d1c7409.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;可以看出来：这个 &lt;code&gt;Section&lt;/code&gt; 在 &lt;code&gt;ELF&lt;/code&gt; 文件中的偏移地址是 &lt;code&gt;0x0016ed&lt;/code&gt;，长度是 &lt;code&gt;0x00010a&lt;/code&gt; 个字节。&lt;/p&gt;
+&lt;p&gt;下面，我们从 &lt;code&gt;ELF header&lt;/code&gt; 的二进制数据中，来推断这信息。&lt;/p&gt;
+&lt;p&gt;读取字符串表 Section 的内容&lt;/p&gt;
+&lt;p&gt;来演示一下：如何通过 &lt;code&gt;ELF header&lt;/code&gt; 中提供的信息，把字符串表这个 &lt;code&gt;Section&lt;/code&gt; 给找出来，然后把它的字节码打印出来给各位看官瞧瞧。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;要想打印字符串表 &lt;code&gt;Section&lt;/code&gt; 的内容，就必须知道这个 &lt;code&gt;Section&lt;/code&gt; 在 &lt;code&gt;ELF&lt;/code&gt; 文件中的偏移地址。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;要想知道偏移地址，只能从 &lt;code&gt;Section head table&lt;/code&gt; 中第 &lt;code&gt;28&lt;/code&gt; 个表项描述信息中获取。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;要想知道第 &lt;code&gt;28&lt;/code&gt; 个表项的地址，就必须知道 &lt;code&gt;Section head table&lt;/code&gt; 在 &lt;code&gt;ELF&lt;/code&gt; 文件中的开始地址，以及每一个表项的大小。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;正好最后这 &lt;code&gt;2&lt;/code&gt; 个需求信息，在 &lt;code&gt;ELF header&lt;/code&gt; 中都告诉我们了，因此我们倒着推算，就一定能成功。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;ELF header&lt;/code&gt; 中的第 &lt;code&gt;32&lt;/code&gt; 到 &lt;code&gt;35&lt;/code&gt; 字节内容是：&lt;code&gt;F8 17 00 00&lt;/code&gt;(注意这里的字节序，低位在前)，表示的就是 &lt;code&gt;Section head table&lt;/code&gt; 在 ELF 文件中的开始地址(&lt;code&gt;e_shoff&lt;/code&gt;)。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;0x000017F8 = 6136&lt;/code&gt;，也就是说  &lt;code&gt;Section head table&lt;/code&gt; 的开始地址位于 &lt;code&gt;ELF&lt;/code&gt; 文件的第 &lt;code&gt;6136&lt;/code&gt; 个字节处。&lt;/p&gt;
+&lt;p&gt;知道了开始地址，再来算一下第 &lt;code&gt;28&lt;/code&gt; 个表项 Entry 的地址。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;ELF header&lt;/code&gt; 中的第 &lt;code&gt;46、47&lt;/code&gt; 字节内容是：&lt;code&gt;28 00&lt;/code&gt;，表示每个表项的长度是 &lt;code&gt;0x0028 = 40&lt;/code&gt; 个字节。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;注意这里的计算都是从 &lt;code&gt;0&lt;/code&gt; 开始的，因此第 &lt;code&gt;28&lt;/code&gt; 个表项的开始地址就是：&lt;code&gt;6136 + 28 * 40 = 7256&lt;/code&gt;，也就是说用来描述字符串表这个 &lt;code&gt;Section&lt;/code&gt; 的表项，位于 &lt;code&gt;ELF&lt;/code&gt; 文件的 &lt;code&gt;7256&lt;/code&gt; 字节的位置。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/bea4f1e9c64a11292fa4cabecf23e1d6.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;既然知道了这个表项 Entry 的地址，那么就扒开来看一下其中的二进制内容：&lt;/p&gt;
+&lt;p&gt;执行指令：&lt;strong&gt;&lt;code&gt;od -Ad -t x1 -j 7256 -N 40 main&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;其中的 &lt;code&gt;-j 7256&lt;/code&gt; 选项，表示跳过前面的 &lt;code&gt;7256&lt;/code&gt; 个字节，也就是我们从 &lt;code&gt;main&lt;/code&gt; 这个 &lt;code&gt;ELF&lt;/code&gt; 文件的 &lt;code&gt;7256&lt;/code&gt; 字节处开始读取，一共读 &lt;code&gt;40&lt;/code&gt; 个字节。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/64c1cc79e8b2ecfe78dc9c3ee7494f30.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这 &lt;code&gt;40&lt;/code&gt; 个字节的内容，就对应了 &lt;code&gt;Elf32_Shdr&lt;/code&gt; 结构体中的每个成员变量：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/d1606078ee8e70131ee0adce45aaefb3.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这里主要关注一下上图中标注出来的 &lt;code&gt;4&lt;/code&gt; 个字段:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;sh_name: 暂时不告诉你，马上就解释到了;&lt;/p&gt;
+&lt;p&gt;sh_type：表示这个 Section 的类型，3 表示这是一个 string table;&lt;/p&gt;
+&lt;p&gt;sh_offset: 表示这个 Section，在 ELF 文件中的偏移量。0x000016ed = 5869，意思是字符串表这个 Section 的内容，从 ELF 文件的 5869 个字节处开始;&lt;/p&gt;
+&lt;p&gt;sh_size：表示这个 Section 的长度。0x0000010a = 266 个字节，意思是字符串表这个 Section 的内容，一共有 266 个字节。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;还记得刚才我们使用 &lt;code&gt;readelf&lt;/code&gt; 工具，读取到字符串表 &lt;code&gt;Section&lt;/code&gt; 在 ELF 文件中的偏移地址是 &lt;code&gt;0x0016ed&lt;/code&gt;，长度是 &lt;code&gt;0x00010a&lt;/code&gt; 个字节吗？&lt;/p&gt;
+&lt;p&gt;与我们这里的推断是完全一致的！&lt;/p&gt;
+&lt;p&gt;既然知道了字符串表这个 &lt;code&gt;Section&lt;/code&gt; 在 &lt;code&gt;ELF&lt;/code&gt; 文件中的偏移量以及长度，那么就可以把它的字节码内容读取出来。&lt;/p&gt;
+&lt;p&gt;执行指令:** &lt;code&gt;od -Ad -t c -j 5869 -N 266 main&lt;/code&gt;**，所有这些参数应该不用再解释了吧？！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/9adc53acd8a1fee105a3433a43deef56.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;看一看，瞧一瞧，是不是这个 &lt;code&gt;Section&lt;/code&gt; 中存储的全部是字符串？&lt;/p&gt;
+&lt;p&gt;刚才没有解释 &lt;code&gt;sh_name&lt;/code&gt; 这个字段，它表示字符串表这个 &lt;code&gt;Section&lt;/code&gt; 本身的名字，既然是名字，那一定是个字符串。&lt;/p&gt;
+&lt;p&gt;但是这个字符串不是直接存储在这里的，而是存储了一个索引，索引值是 &lt;code&gt;0x00000011&lt;/code&gt;，也就是十进制数值 &lt;code&gt;17&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;现在我们来数一下字符串表 &lt;code&gt;Section&lt;/code&gt; 内容中，第 &lt;code&gt;17&lt;/code&gt; 个字节开始的地方，存储的是什么？&lt;/p&gt;
+&lt;p&gt;不要偷懒，数一下，是不是看到了：“.shstrtab” 这个字符串(\0是字符串的分隔符)？！&lt;/p&gt;
+&lt;h2 id=&#34;读取代码段的内容&#34;&gt;读取代码段的内容&lt;/h2&gt;
+&lt;p&gt;从下面的这张图(指令：&lt;strong&gt;&lt;code&gt;readelf -S main&lt;/code&gt;&lt;/strong&gt;)：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/27551fcfd591f3c8e63917211dbe13a8.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;可以看到代码段是位于第 &lt;code&gt;14&lt;/code&gt; 个表项中，加载(虚拟)地址是 &lt;code&gt;0x08048470&lt;/code&gt;，它位于 &lt;code&gt;ELF&lt;/code&gt; 文件中的偏移量是 &lt;code&gt;0x000470&lt;/code&gt;，长度是 &lt;code&gt;0x0001b2&lt;/code&gt; 个字节。&lt;/p&gt;
+&lt;p&gt;那我们就来试着读一下其中的内容。&lt;/p&gt;
+&lt;p&gt;首先计算这个表项 &lt;code&gt;Entry&lt;/code&gt; 的地址：&lt;code&gt;6136 + 14 * 40 = 6696&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;然后读取这个表项 &lt;code&gt;Entry&lt;/code&gt;，读取指令是 &lt;strong&gt;&lt;code&gt;od -Ad -t x1 -j 6696 -N 40 main&lt;/code&gt;&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/0096e8c2932b0f7366e0815b4ee82f7a.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;同样的，我们也只关心下面这 &lt;code&gt;5&lt;/code&gt; 个字段内容：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/01b3db74732543d74f28d04b1e828871.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;sh_name: 这回应该清楚了，表示代码段的名称在字符串表 Section 中的偏移位置。0x9B = 155 字节，也就是在字符串表 Section 的第 155 字节处，存储的就是代码段的名字。回过头去找一下，看一下是不是字符串 “.text”;&lt;/p&gt;
+&lt;p&gt;sh_type：表示这个 Section 的类型，1(SHT_PROGBITS) 表示这是代码;&lt;/p&gt;
+&lt;p&gt;sh_addr：表示这个 Section 加载的虚拟地址是 0x08048470，这个值与 ELF header 中的 e_entry 字段的值是相同的;&lt;/p&gt;
+&lt;p&gt;sh_offset: 表示这个 Section，在 ELF 文件中的偏移量。0x00000470 = 1136，意思是这个 Section 的内容，从 ELF 文件的 1136 个字节处开始;&lt;/p&gt;
+&lt;p&gt;sh_size：表示这个 Section 的长度。0x000001b2 = 434 个字节，意思是代码段一共有 434 个字节。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;以上这些分析结构，与指令 &lt;strong&gt;&lt;code&gt;readelf -S main&lt;/code&gt;&lt;/strong&gt; 读取出来的完全一样！&lt;/p&gt;
+&lt;p&gt;PS: 在查看字符串表 &lt;code&gt;Section&lt;/code&gt; 中的字符串时，计算一下：字符串表的开始地址是 &lt;code&gt;5869&lt;/code&gt;(十进制)，加上 &lt;code&gt;155&lt;/code&gt;，结果就是 &lt;code&gt;6024&lt;/code&gt;，所以从 &lt;code&gt;6024&lt;/code&gt; 开始的地方，就是代码段的名称，也就是 “.text”。&lt;/p&gt;
+&lt;p&gt;知道了以上这些信息，我们就可以读取代码段的字节码了.使用指令：&lt;strong&gt;&lt;code&gt;od -Ad -t x1 -j 1136 -N 434 main&lt;/code&gt;&lt;/strong&gt; 即可。&lt;/p&gt;
+&lt;p&gt;内容全部是黑乎乎的的字节码，我就不贴出来了。&lt;/p&gt;
+&lt;h2 id=&#34;program-header&#34;&gt;Program header&lt;/h2&gt;
+&lt;p&gt;文章的开头，我就介绍了：我是一个通用的文件结构，链接器和加载器在看待我的时候，眼光是不同的。&lt;/p&gt;
+&lt;p&gt;为了对 &lt;code&gt;Program header&lt;/code&gt; 有更感性的认识，我还是先用 &lt;code&gt;readelf&lt;/code&gt; 这个工具来从总体上看一下 &lt;code&gt;main&lt;/code&gt; 文件中的所有段信息。&lt;/p&gt;
+&lt;p&gt;执行指令：&lt;code&gt;readelf -l main&lt;/code&gt;，得到下面这张图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/921cb162575e91b3d572799ef2933f5e.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;显示的信息已经很明白了:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;这是一个可执行程序;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;入口地址是 0x8048470;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;一共有 9 个 Program header，是从 ELF 文件的 52 个偏移地址开始的;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;布局如下图所示：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/7dedb05555e27c601e0ba906a521befd.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;从图中还可以看到，一共有 &lt;code&gt;2&lt;/code&gt; 个 &lt;code&gt;LOAD&lt;/code&gt; 类型的段:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/ee228397261aaa9010fdd69ad1c918ba.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;我们来读取第一个 LOAD 类型的段，当然还是扒开其中的二进制字节码。&lt;/p&gt;
+&lt;p&gt;第一步的工作是，计算这个段表项的地址信息。&lt;/p&gt;
+&lt;p&gt;从 &lt;code&gt;ELF header&lt;/code&gt; 中得知如下信息：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;字段 &lt;code&gt;e_phoff&lt;/code&gt; ：Program header table 位于 ELF 文件偏移 52 个字节的地方。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;字段 &lt;code&gt;e_phentsize&lt;/code&gt;: 每一个表项的长度是 32 个字节;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;字段 &lt;code&gt;e_phnum&lt;/code&gt;: 一共有 9 个表项 Entry;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;通过计算，得到可读、可执行的 &lt;code&gt;LOAD&lt;/code&gt; 段，位于偏移量 &lt;code&gt;116&lt;/code&gt; 字节处。&lt;/p&gt;
+&lt;p&gt;执行读取指令：&lt;code&gt;od -Ad -t x1 -j 116 -N 32 main&lt;/code&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/263cdb981380dab08cf60ceb936eda79.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;按照上面的惯例，我还是把其中几个需要关注的字段，与数据结构中的成员变量进行关联一下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/07e5bf32ee8f26e4331887c795ef7973.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;p_type: 段的类型，1: 表示这个段需要加载到内存中;&lt;/p&gt;
+&lt;p&gt;p_offset: 段在 ELF 文件中的偏移地址，这里值为 0，表示这个段从 ELF 文件的头部开始;&lt;/p&gt;
+&lt;p&gt;p_vaddr：段加载到内存中的虚拟地址 0x08048000;&lt;/p&gt;
+&lt;p&gt;p_paddr：段加载的物理地址，与虚拟地址相同;&lt;/p&gt;
+&lt;p&gt;p_filesz: 这个段在 ELF 文件中，占据的字节数，0x0744 = 1860 个字节;&lt;/p&gt;
+&lt;p&gt;p_memsz：这个段加载到内存中，需要占据的字节数，0x0744= 1860 个字节。注意：有些段是不需要加载到内存中的;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;经过上述分析，我们就知道：从 &lt;code&gt;ELF&lt;/code&gt; 文件的第 &lt;code&gt;1&lt;/code&gt; 到 第 &lt;code&gt;1860&lt;/code&gt; 个字节，都是属于这个 &lt;code&gt;LOAD&lt;/code&gt; 段的内容。&lt;/p&gt;
+&lt;p&gt;在被执行时，这个段需要被加载到内存中虚拟地址为 &lt;code&gt;0x08048000&lt;/code&gt; 这个地方，从这里开始，又是一个全新的故事了。&lt;/p&gt;
+&lt;p&gt;再回顾一下&lt;/p&gt;
+&lt;p&gt;其实只要抓住下面 &lt;code&gt;2&lt;/code&gt; 个重点即可：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;ELF header 描述了文件的总体信息，以及两个 table 的相关信息(偏移地址，表项个数，表项长度);&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;每一个 table 中，包括很多个表项 Entry，每一个表项都描述了一个 Section/Segment 的具体信息。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;链接器和加载器也都是按照这样的原理来解析 ELF 文件的，明白了这些道理，后面在学习具体的链接、加载过程时，就不会迷路啦！&lt;/p&gt;
+&lt;h2 id=&#34;1-简介&#34;&gt;1 简介&lt;/h2&gt;
+&lt;p&gt;  可执行与可链接格式 （Executable and Linkable Format，ELF），常被称为 ELF格式，是一种用于可执行文件、目标代码、共享库和核心转储（core dump）的标准文件格式，一般用于类Unix系统，比如Linux，Macox等。ELF 格式灵活性高、可扩展，并且跨平台。比如它支持不同的字节序和地址范围，所以它不会不兼容某一特别的 CPU 或指令架构。这也使得 ELF 格式能够被运行于众多不同平台的各种操作系统所广泛采纳。&lt;br&gt;
+  ELF文件一般由三种类型的文件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可重定向文件：文件保存着代码和适当的数据，用来和其他的目标文件一起来创建一个可执行文件或者是一个共享目标文件。比如编译的中间产物&lt;code&gt;.o&lt;/code&gt;文件；&lt;/li&gt;
+&lt;li&gt;可执行文件：一个可执行文件；&lt;/li&gt;
+&lt;li&gt;共享目标文件：共享库。文件保存着代码和合适的数据，用来被下连接编辑器和动态链接器链接。比如linux下的&lt;code&gt;.so&lt;/code&gt;文件。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2-elf文件格式&#34;&gt;2 ELF文件格式&lt;/h2&gt;
+&lt;p&gt;  在编译过程中ELF文件格式在链接和程序的运行阶段的格式不同。链接阶段每个&lt;code&gt;.o&lt;/code&gt;文件都是一个独立的ELF文件，为了效率和便利性他们的段需要进行合并才能生成对应的可执行文件。&lt;br&gt;
+&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/c6ba247f1ef3709102f4848528207059.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;在这里插入图片描述&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;  ELF文件包含一个Header描述文件的基本信息；程序头表告诉徐彤如何构建进程的内存镜像，因此只有可执行文件由程序头表；Sections描述了链接过程中的需要的符号表、数据、指令等信息，而在可执行文件中是Segments，是经过合并的Secitons；节/段头表指明了对应section/segment在文件中的偏移，链接阶段的ELF文件必须包含该表头；而每个节/段头描述了对应的section/segment的大小，入口等基本信息。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;  下图是32bit系统下面使用的字段的数大小，64bit系统类似，之后不在赘述。&lt;br&gt;
+&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/d859964533f5987e42bfcad8b94cfb83.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;在这里插入图片描述&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;21-elf-header&#34;&gt;2.1 ELF Header&lt;/h3&gt;
+&lt;p&gt;  ELF文件头描述了ELF文件的基本类型，地址偏移等信息，分为32bit和64bit两个版本，定义于linux源码的&lt;code&gt;/usr/include/elf.h&lt;/code&gt;文件中。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#define EI_NIDENT	16
+
+typedef struct elf32_hdr{
+  unsigned char	e_ident[EI_NIDENT];
+  Elf32_Half	e_type;
+  Elf32_Half	e_machine;
+  Elf32_Word	e_version;
+  Elf32_Addr	e_entry;  /* Entry point */
+  Elf32_Off	e_phoff;
+  Elf32_Off	e_shoff;
+  Elf32_Word	e_flags;
+  Elf32_Half	e_ehsize;
+  Elf32_Half	e_phentsize;
+  Elf32_Half	e_phnum;
+  Elf32_Half	e_shentsize;
+  Elf32_Half	e_shnum;
+  Elf32_Half	e_shstrndx;
+} Elf32_Ehdr;
+
+
+typedef struct elf64_hdr {
+  unsigned char	e_ident[EI_NIDENT];	/* ELF &amp;quot;magic number&amp;quot; */
+  Elf64_Half e_type;
+  Elf64_Half e_machine;
+  Elf64_Word e_version;
+  Elf64_Addr e_entry;		/* Entry point virtual address */
+  Elf64_Off e_phoff;		/* Program header table file offset */
+  Elf64_Off e_shoff;		/* Section header table file offset */
+  Elf64_Word e_flags;
+  Elf64_Half e_ehsize;
+  Elf64_Half e_phentsize;
+  Elf64_Half e_phnum;
+  Elf64_Half e_shentsize;
+  Elf64_Half e_shnum;
+  Elf64_Half e_shstrndx;
+} Elf64_Ehdr;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;  从上面的结构中能够看出32bit和64bit的区别仅仅是字长的区别，字段上没有实际上的差别。每个字段的含义如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;e_ident&lt;/code&gt;：ELF文件的描述，是一个16字节的标识，表明当前文件的数据格式，位数等：
+&lt;ul&gt;
+&lt;li&gt;[0,3]字节为魔数，即&lt;code&gt;e_ident[EI_MAG0-EI_MAG3]&lt;/code&gt;，取值为固定的&lt;code&gt;0x7f E L F&lt;/code&gt;，标记当前文件为一个ELF文件；&lt;/li&gt;
+&lt;li&gt;[4,4]字节为&lt;code&gt;EI_CLASS&lt;/code&gt;即&lt;code&gt;e_ident[EI_CLASS]&lt;/code&gt;，表明当前文件的类别：
+&lt;ul&gt;
+&lt;li&gt;0：表示非法的类别；&lt;/li&gt;
+&lt;li&gt;1：表示32bit；&lt;/li&gt;
+&lt;li&gt;2：表示64bit；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;[5,5]字节为&lt;code&gt;EI_DATA&lt;/code&gt;即&lt;code&gt;e_ident[EI_DATA]&lt;/code&gt;,表明当期那文件的数据排列方式：
+&lt;ul&gt;
+&lt;li&gt;0表示非法；&lt;/li&gt;
+&lt;li&gt;1表示小端；&lt;/li&gt;
+&lt;li&gt;2表示大端；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;[6,6]字节为&lt;code&gt;EI_VERSION&lt;/code&gt;即&lt;code&gt;e_ident[EI_VERSION]&lt;/code&gt;，表明当前文件的版本，目前该取值必须为&lt;code&gt;EV_CURRENT&lt;/code&gt;即1；&lt;/li&gt;
+&lt;li&gt;[7,7]字节为&lt;code&gt;EI_PAD&lt;/code&gt;即&lt;code&gt;e_ident[EI_PAD]&lt;/code&gt;表明&lt;code&gt;e_ident&lt;/code&gt;中未使用的字节的起点（值是相对于&lt;code&gt;e_ident[EI_PAD+1]&lt;/code&gt;的偏移），未使用的字节会被初始化为0，解析ELF文件时需要忽略对应的字段；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;  EI_MAG0,EI_MAG1,EI_MAG2,EI_MAG3,EI_CLASS,EI_DATA,EI_VERSION，EI_OSABI,EI_PAD是linux源码中定义的宏，取值分别为0-7，分别对应各个字段的下标；下面的&lt;a class=&#34;link&#34; href=&#34;https://so.csdn.net/so/search?q=%E5%AE%8F%E5%AE%9A%E4%B9%89&amp;amp;spm=1001.2101.3001.7020&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;宏定义&lt;/a&gt;将采用类似EI_MAG0(0)的方式，表示EI_MAG0的值为0。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;e_type&lt;/code&gt;：文件的标识字段标识文件的类型；
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ET_NONE(0)&lt;/code&gt;：未知的文件格式；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ET_REL(1)&lt;/code&gt;：可重定位文件，比如目标文件；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ET_EXEC(2)&lt;/code&gt;：可执行文件；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ET_DYN(3)&lt;/code&gt;：共享目标文件；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ET_CORE(4)&lt;/code&gt;：Core转储文件，比如程序crash之后的转储文件；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ET_LOPROC(0xff00)&lt;/code&gt;：特定处理器的文件标识；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ET_HIPROC(0xffff)&lt;/code&gt;：特定处理器的文件标识;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[ET_LOPROC,ET_HIPROC]&lt;/code&gt;之间的值用来表示特定处理器的文件格式；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;e_machine&lt;/code&gt;：目标文件的体系结构（下面列举了少数处理器架构，具体ELF文件支持的架构在对应的文件中查看即可）；
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ET_NONE(0)&lt;/code&gt;：未知的处理器架构；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;EM_M32(1)&lt;/code&gt;：AT&amp;amp;T WE 32100；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;EM_SPARC(2)&lt;/code&gt;：SPARC；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;EM_386(3)&lt;/code&gt;：Intel 80386；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;EM_68K(4)&lt;/code&gt;：Motorola 68000；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;EM_88K(5)&lt;/code&gt;：Motorola 88000；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;EM_860(6)&lt;/code&gt;：Intel 80860；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;EM_MIPS(7)&lt;/code&gt;：MIPS RS3000大端；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;EM_MIPS_RS4_BE(10)&lt;/code&gt;：MIPS RS4000大端；&lt;/li&gt;
+&lt;li&gt;其他，预留；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;e_version&lt;/code&gt;：当前文件的版本；
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;EV_NONE(0)&lt;/code&gt;：非法的版本；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;EV_CURRENT(`)&lt;/code&gt;：当前版本；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;e_entry&lt;/code&gt;：程序的虚拟入口地址，如果文件没有对应的入口可以为0；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;e_phoff&lt;/code&gt;：文件中程序头表的偏移（bytes），如果文件没有该项，则应该为0；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;e_shoff&lt;/code&gt;：文件中段表/节表的偏移（bytes），如果文件没有该项，则应该为0；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;e_flags&lt;/code&gt;：处理器相关的标志位，宏格式为&lt;code&gt;EF_machine_flag&lt;/code&gt;比如&lt;code&gt;EF_MIPS_PIC&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;e_ehsize&lt;/code&gt;：ELF文件头的大小（bytes）；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;e_phentsize&lt;/code&gt;：程序头表中单项的大小，表中每一项的大小相同；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;e_phnum&lt;/code&gt;：程序头表中的项数，也就是说程序头表的实际大小为&lt;code&gt;ephentsize x e_phnum&lt;/code&gt;，如果文件中没有程序头表该项为0；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;e_shentsize&lt;/code&gt;：节表中单项的大小，表中每一项的大小相同；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;e_shnum&lt;/code&gt;：节表中项的数量；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;e_shstrndx&lt;/code&gt;：节表中节名的索引，如果文件没有该表则该项为&lt;code&gt;SHN_UNDEF(0)&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;22-程序头表program-header-table&#34;&gt;2.2 程序头表（Program Header Table）&lt;/h3&gt;
+&lt;p&gt;  可执行文件或者共享目标文件的程序头部是一个结构数组，每个结构描述了一个段 或者系统准备程序执行所必需的其它信息。程序头表描述了ELF文件中Segment在文件中的布局，描述了OS该如何装载可执行文件到内存。程序头表的表项的描述如下，类似于ELF Header也有32和64位两个版本。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;typedef struct elf32_phdr {
+	Elf32_Word p_type;
+	Elf32_Off p_offset;
+	Elf32_Addr p_vaddr;
+	Elf32_Addr p_paddr;
+	Elf32_Word p_filesz;
+	Elf32_Word p_memsz;
+	Elf32_Word p_flags;
+	Elf32_Word p_align;
+} Elf32_Phdr;
+
+
+typedef struct elf64_phdr {
+	Elf64_Word p_type;
+	Elf64_Word p_flags;
+	Elf64_Off p_offset;	/* Segment file offset */
+	Elf64_Addr p_vaddr;	/* Segment virtual address */
+	Elf64_Addr p_paddr;	/* Segment physical address */
+	Elf64_Xword p_filesz;	/* Segment size in file */
+	Elf64_Xword p_memsz;	/* Segment size in memory */
+	Elf64_Xword p_align;	/* Segment alignment, file &amp;amp; memory */
+} Elf64_Phdr;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;p_type&lt;/code&gt;：当前Segment的类型；
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;PT_NULL(0)&lt;/code&gt;：当前项未使用，项中的成员是未定义的，需要忽略当前项；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PT_LOAD(1)&lt;/code&gt;：当前Segment是一个可装载的Segment，即可以被装载映射到内存中，其大小由&lt;code&gt;p_filesz&lt;/code&gt;和&lt;code&gt;p_memsz&lt;/code&gt;描述。如果&lt;code&gt;p_memsz&amp;gt;p_filesz&lt;/code&gt;则剩余的字节被置零，但是&lt;code&gt;p_filesz&amp;gt;p_memsz&lt;/code&gt;是非法的。动态库一般包含两个该类型的段：代码段和数据段；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PT_DYNAMIC(2)&lt;/code&gt;：动态段，动态库特有的段，包含了动态链接必须的一些信息，比如需要链接的共享库列表、GOT等等；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PT_INTERP(3)&lt;/code&gt;：当前段用于存储一段以NULL为结尾的字符串，该字符串表明了程序解释器的位置。且当前段仅仅对于可执行文件有实际意义，一个可执行文件中不能出现两个当前段，如果一个文件中包含当前段。比如&lt;code&gt;/lib64/ld-linux-x86-64.so.2&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PT_NOTE(4)&lt;/code&gt;：用于保存与特定供应商或者系统相关的附加信息以便于兼容性、一致性检查，但是实际上只保存了操作系统的规范信息；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PT_SHLIB(5)&lt;/code&gt;：保留段；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PT_PHDR(6)&lt;/code&gt;：保存程序头表本身的位置和大小，当前段不能在文件中出现一次以上，且仅仅当程序表头为内存映像的一部分时起作用，它必须在所有加载项目之前；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[PT_LPROC(0x70000000),PT_HIPROC(0x7fffffff)]&lt;/code&gt;：该范围内的值用作预留；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;p_offset&lt;/code&gt;：当前段相对于文件起始位置的偏移量；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;p_vaddr&lt;/code&gt;：段的第一个字节将被映射到到内存中的虚拟地址；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;p_paddr&lt;/code&gt;：此成员仅用于与物理地址相关的系统中。因为 System V 忽略所有应用程序的物理地址信息，此字段对与可执行文件和共享目标文件而言具体内容是指定的；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;p_filesz&lt;/code&gt;：段在文件映像中所占的字节数，可能为 0；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;p_memsz&lt;/code&gt;：段在内存映像中占用的字节数，可能为 0；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;p_flags&lt;/code&gt;：段相关的标志；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;p_align&lt;/code&gt;：段在文件中和内存中如何对齐。可加载的进程段的&lt;code&gt;p_vaddr&lt;/code&gt;和- &lt;code&gt;p_offset&lt;/code&gt;取值必须合适，相对于对页面大小的取模而言；
+&lt;ul&gt;
+&lt;li&gt;0和1表示不需要对齐；&lt;/li&gt;
+&lt;li&gt;其他值必须为2的幂次方，且必须 p _ a d d r ∣ p _ a l i g n = = p _ o f f s e t ∣ p a l i g n p\_addr|p\_align==p\_offset| p_align p_addr∣p_align==p_offset∣pa​lign。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;23-节头表section-header-table&#34;&gt;2.3 节头表（Section Header Table）&lt;/h3&gt;
+&lt;p&gt;  节头表描述了ELF文件中的节的基本信息。可执行文件不一定由节头表但是一定有节，节头表可利用特殊的方式去除。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;  段和节的区别是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;段包含了程序装载可执行的基本信息，段告诉OS如何装载当前段到虚拟内存以及当前段的权限等和执行相关的信息，一个段可以包含0个或多个节；&lt;/li&gt;
+&lt;li&gt;节包含了程序的代码和数据等内容，链接器会将多个节合并为一个段。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;typedef struct elf32_shdr {
+  Elf32_Word	sh_name;
+  Elf32_Word	sh_type;
+  Elf32_Word	sh_flags;
+  Elf32_Addr	sh_addr;
+  Elf32_Off	sh_offset;
+  Elf32_Word	sh_size;
+  Elf32_Word	sh_link;
+  Elf32_Word	sh_info;
+  Elf32_Word	sh_addralign;
+  Elf32_Word	sh_entsize;
+} Elf32_Shdr;
+
+
+typedef struct elf64_shdr {
+  Elf64_Word sh_name;		/* Section name, index in string tbl */
+  Elf64_Word sh_type;		/* Type of section */
+  Elf64_Xword sh_flags;		/* Miscellaneous section attributes */
+  Elf64_Addr sh_addr;		/* Section virtual addr at execution */
+  Elf64_Off sh_offset;		/* Section file offset */
+  Elf64_Xword sh_size;		/* Size of section in bytes */
+  Elf64_Word sh_link;		/* Index of another section */
+  Elf64_Word sh_info;		/* Additional section information */
+  Elf64_Xword sh_addralign;	/* Section alignment */
+  Elf64_Xword sh_entsize;	/* Entry size if section holds table */
+} Elf64_Shdr;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;sh_name&lt;/code&gt;：值是节名称在字符串表中的索引；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sh_type&lt;/code&gt;：描述节的类型和语义；
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;SHT_NULL(0)&lt;/code&gt;：当前节是非活跃的，没有一个对应的具体的节内存；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SHT_PROGBITS(1)&lt;/code&gt;：包含了程序的指令信息、数据等程序运行相关的信息；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SHT_SYMTAB(2)&lt;/code&gt;：保存了符号信息，用于重定位；
+&lt;ul&gt;
+&lt;li&gt;此种类型节的&lt;code&gt;sh_link&lt;/code&gt;存储相关字符串表的节索引，&lt;code&gt;sh_info&lt;/code&gt;存储最后一个局部符号的符号表索引+1；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SHT_DYNSYM(11)&lt;/code&gt;：保存共享库导入动态符号信息；
+&lt;ul&gt;
+&lt;li&gt;此种类型节的&lt;code&gt;sh_link&lt;/code&gt;存储相关字符串表的节索引，&lt;code&gt;sh_info&lt;/code&gt;存储最后一个局部符号的符号表索引+1；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SHT_STRTAB(3)&lt;/code&gt;：一个字符串表，保存了每个节的节名称；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SHT_RELA(4)&lt;/code&gt;：存储可重定位表项，可能会有附加内容，目标文件可能有多个可重定位表项；
+&lt;ul&gt;
+&lt;li&gt;此种类型节的&lt;code&gt;sh_link&lt;/code&gt;存储相关符号表的节索引，&lt;code&gt;sh_info&lt;/code&gt;存储重定位所使用节的索引；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SHT_HASH(5)&lt;/code&gt;：存储符号哈希表，所有参与动态链接的目标只能包含一个哈希表，一个目标文件只能包含一个哈希表；
+&lt;ul&gt;
+&lt;li&gt;此种类型节的&lt;code&gt;sh_link&lt;/code&gt;存储哈希表所使用的符号表的节索引,&lt;code&gt;sh_info&lt;/code&gt;为0；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SHT_DYAMIC(6)&lt;/code&gt;：存储包含动态链接的信息，一个目标文件只能包含一个；
+&lt;ul&gt;
+&lt;li&gt;此种类型的节的&lt;code&gt;sh_link&lt;/code&gt;存储当前节中使用到的字符串表格的节的索引，&lt;code&gt;sh_info&lt;/code&gt;为0；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SHT_NOTE(7)&lt;/code&gt;：存储以某种形式标记文件的信息；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SHT_NOBITS(8)&lt;/code&gt;：这种类型的节不占据文件空间，但是成员&lt;code&gt;sh_offset&lt;/code&gt;依然会包含对应的偏移；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SHT_REL(9)&lt;/code&gt;：包含可重定位表项，无附加内容，目标文件可能有多个可重定位表项；
+&lt;ul&gt;
+&lt;li&gt;此种类型节的&lt;code&gt;sh_link&lt;/code&gt;存储相关符号表的节索引，&lt;code&gt;sh_info&lt;/code&gt;存储重定位所使用节的索引；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SHT_SHLIB(10)&lt;/code&gt;：保留区，包含此节的程序与ABI不兼容；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[SHT_LOPROC(0x70000000),SHT_HIPROC(0x7fffffff)]&lt;/code&gt;：留给处理器专用语义；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[SHT_LOUSER(0x80000000),SHT_HIUSER(0xffffffff)]&lt;/code&gt;：预留；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sh_flags&lt;/code&gt;：1bit位的标志位；
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;SHF_WRITE(0x1)&lt;/code&gt;：当前节包含进程执行过程中可写的数据；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SHF_ALLOC(0x2)&lt;/code&gt;：当前节在运行阶段占据内存；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SHF_EXECINSTR(0x4)&lt;/code&gt;：当前节包含可执行的机器指令；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SHF_MASKPROC(0xf0000000)&lt;/code&gt;：所有包含当前掩码都表示预留给特定处理器的；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sh_addr&lt;/code&gt;：如果当前节需要被装载到内存，则当前项存储当前节映射到内存的首地址，否则应该为0；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sh_offset&lt;/code&gt;：当前节的首地址相对于文件的偏移；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sh_size&lt;/code&gt;：节的大小。但是对于类型为&lt;code&gt;SHT_NOBITS&lt;/code&gt;的节，当前值可能不为0但是在文件中不占据任何空间；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sh_link&lt;/code&gt;：存储节投标中的索引，表示当前节依赖于对应的节。对于特定的节有特定的含义，其他为&lt;code&gt;SHN_UNDEF&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sh_info&lt;/code&gt;：节的附加信息。对于特定的节有特定的含义，其他为&lt;code&gt;0&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sh_addralign&lt;/code&gt;：地址约束对齐，值应该为0或者2的幂次方，0和1表示未进行对齐；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sh_entsize&lt;/code&gt;：某些节是一个数组，对于这类节当前字段给出数组中每个项的字节数，比如符号表。如果节并不包含对应的数组，值应该为0。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;23-一些特殊的节&#34;&gt;2.3 一些特殊的节&lt;/h3&gt;
+&lt;p&gt;  ELF文件中有一些预定义的节来保存程序、数据和一些控制信息，这些节被用来链接或者装载程序。每个操作系统都支持一组链接模式，主要分为两类（也就是常说的动态库和静态库）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Static：静态绑定的一组目标文件、系统库和库档案（比如静态库），解析包含的符号引用并创建一个完全自包含的可执行文件；&lt;/li&gt;
+&lt;li&gt;Dynamic：一组目标文件、库、系统共享资源和其他共享库链接在一起创建可执行文件。当加载此可执行文件时必须使系统中其他共享资源和动态库可用，程序才能正常运行。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;  库文件无论是动态库还是静态库在其文件中都包含对应的节，一些特殊的节其功能如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;.bss&lt;/code&gt;，类型&lt;code&gt;SHT_NOBITS&lt;/code&gt;，属性&lt;code&gt;SHF_ALLOC|SHF_WRITE&lt;/code&gt;：存储未经初始化的数据。根据定义程序开始执行时，系统会将这些数据初始化为0，且此节不占用文件空间；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.comment&lt;/code&gt;，类型&lt;code&gt;SHT_PROGBITS&lt;/code&gt;，属性&lt;code&gt;none&lt;/code&gt;：存储版本控制信息；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.data&lt;/code&gt;，类型&lt;code&gt;SHT_PROGBITS&lt;/code&gt;，属性&lt;code&gt;SHF_ALLOC|SHF_WRITE&lt;/code&gt;：存放初始化的数据；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.data1&lt;/code&gt;，类型&lt;code&gt;SHT_PROGBITS&lt;/code&gt;，属性&lt;code&gt;SHF_ALLOC|SHF_WRITE&lt;/code&gt;：存放初始化的数据；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.debug&lt;/code&gt;，类型&lt;code&gt;SHT_PROGBITS&lt;/code&gt;，属性&lt;code&gt;none&lt;/code&gt;：存放用于符号调试的信息；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.dynamic&lt;/code&gt;，类型&lt;code&gt;SHT_DYNAMIC&lt;/code&gt;，属性&lt;code&gt;SHF_ALLOC&lt;/code&gt;，是否有属性&lt;code&gt;SHF_WRITE&lt;/code&gt;屈居于处理器：包含动态链接的信息，&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.hash&lt;/code&gt;，类型&lt;code&gt;SHT_HASH&lt;/code&gt;，属性&lt;code&gt;SHF_ALLOC&lt;/code&gt;：&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.line&lt;/code&gt;，类型&lt;code&gt;SHT_PROGBITS&lt;/code&gt;，属性&lt;code&gt;none&lt;/code&gt;：存储调试的行号信息，描述源代码和机器码之间的对应关系；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.note&lt;/code&gt;，类型&lt;code&gt;SHT_NOTE&lt;/code&gt;，属性&lt;code&gt;none&lt;/code&gt;：&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.rodata&lt;/code&gt;，类型&lt;code&gt;SHT_PROGBITS&lt;/code&gt;，属性&lt;code&gt;SHF_ALLOC&lt;/code&gt;：存储只读数据；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.rodata1&lt;/code&gt;，类型&lt;code&gt;SHT_PROGBITS&lt;/code&gt;，属性&lt;code&gt;SHF_ALLOC&lt;/code&gt;：存储只读数据；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.shstrtab&lt;/code&gt;，类型&lt;code&gt;SHT_STRTAB&lt;/code&gt;，属性&lt;code&gt;none&lt;/code&gt;：存储节的名称；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.strtab&lt;/code&gt;，类型&lt;code&gt;SHT_STRTAB&lt;/code&gt;：存储常见的与符号表关联的字符串。如果文件有一个包含符号字符串表的可加载段，则该段的属性将包括 SHF_ALLOC 位； 否则，该位将关闭；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.symtab&lt;/code&gt;，类型&lt;code&gt;SHT_SYMTAB&lt;/code&gt;，属性``````：存储一个符号表。如果文件具有包含符号表的可加载段，则该节的属性将包括 SHF_ALLOC 位；否则，该位将关闭；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.text&lt;/code&gt;，类型&lt;code&gt;SHT_PROGBITS&lt;/code&gt;，属性&lt;code&gt;SHF_ALLOC|SHF_EXECINSTR&lt;/code&gt;：存储程序的代码指令；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.dynstr&lt;/code&gt;，类型&lt;code&gt;SHT_STRTAB&lt;/code&gt;，属性&lt;code&gt;SHF_ALLOC&lt;/code&gt;：存储动态链接所需的字符串，最常见的是表示与符号表条目关联的名称的字符串；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.dynsym&lt;/code&gt;，类型&lt;code&gt;SHT_DYNSYM&lt;/code&gt;，属性&lt;code&gt;SHF_ALLOC&lt;/code&gt;：存储动态链接符号表；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.fini&lt;/code&gt;，类型&lt;code&gt;SHT_PROGBITS&lt;/code&gt;，属性&lt;code&gt;SHF_ALLOC|SHF_EXECINSTR&lt;/code&gt;：存储有助于进程终止代码的可执行指令。 当程序正常退出时，系统执行本节代码；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.init&lt;/code&gt;，类型&lt;code&gt;SHT_PROGBITS&lt;/code&gt;，属性&lt;code&gt;SHF_ALLOC|SHF_EXECINSTR&lt;/code&gt;：存储有助于进程初始化代码的可执行指令。 当程序开始运行时，系统会在调用主程序入口点（C 程序称为 main）之前执行本节中的代码；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.interp&lt;/code&gt;，类型&lt;code&gt;SHT_PROGBITS&lt;/code&gt;：保存程序解释器的路径名。 如果文件有一个包含该节的可加载段，则该节的属性将包括 SHF_ALLOC 位； 否则，该位将关闭；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.relname&lt;/code&gt;，类型&lt;code&gt;SHT_REL&lt;/code&gt;：包含重定位信息。如果文件具有包含重定位的可加载段，则这些部分的属性将包括 SHF_ALLOC 位；否则，该位将关闭。通常，名称由 重定位适用的部分。因此&lt;code&gt;.text&lt;/code&gt;的重定位部分通常具有名称.&lt;code&gt;rel.text&lt;/code&gt;或&lt;code&gt;.rela.text&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.relaname&lt;/code&gt;，类型&lt;code&gt;SHT_RELA&lt;/code&gt;：同&lt;code&gt;relname&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;其他：对于C++程序有些版本会有&lt;code&gt;.ctors&lt;/code&gt;（有时也会是&lt;code&gt;.init_array&lt;/code&gt;，见&lt;a class=&#34;link&#34; href=&#34;https://stackoverflow.com/questions/16569495/cant-find-dtors-and-ctors-in-binary&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Can’t find .dtors and .ctors in binary&lt;/a&gt;）和&lt;code&gt;dtors&lt;/code&gt;两个节存储构造和析构相关的代码。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;  带有点 (.) 前缀的部分名称是为系统保留的，但如果它们的现有含义令人满意，应用程序可以使用这些部分。 应用程序可以使用不带前缀的名称以避免与系统部分冲突。 目标文件格式允许定义不在上面列表中的部分。 一个目标文件可能有多个同名的部分。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;24-字符串表&#34;&gt;2.4 字符串表&lt;/h3&gt;
+&lt;p&gt;  字符串表是一个存储字符串的表格，而每个字符串是以NULL也就是&lt;code&gt;\0&lt;/code&gt;为结尾的。字符串表格中索引为0处的字符串被定义为空字符串。符号表中保存的字符串是节名和目标文件中使用到的符号。而需要使用对应字符串时，只需要在需要使用的地方指明对应字符在字符串表中的索引即可，使用的字符串就是索引处到第一个&lt;code&gt;\0&lt;/code&gt;之间的字符串。&lt;br&gt;
+&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/8f02a8b727582533ec9c17cd7ed17492.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;在这里插入图片描述&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;25-符号表&#34;&gt;2.5 符号表&lt;/h3&gt;
+&lt;p&gt;  目标文件的符号表包含定位和重定位程序的符号定义和引用所需的信息。符号表索引是该数组的下标。索引0既指定表中的第一个条目，又用作未定义的符号索引。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;typedef struct elf32_sym{
+  Elf32_Word	st_name;
+  Elf32_Addr	st_value;
+  Elf32_Word	st_size;
+  unsigned char	st_info;
+  unsigned char	st_other;
+  Elf32_Half	st_shndx;
+} Elf32_Sym;
+
+
+typedef struct elf64_sym {
+  Elf64_Word st_name;		/* Symbol name, index in string tbl */
+  unsigned char	st_info;	/* Type and binding attributes */
+  unsigned char	st_other;	/* No defined meaning, 0 */
+  Elf64_Half st_shndx;		/* Associated section index */
+  Elf64_Addr st_value;		/* Value of the symbol */
+  Elf64_Xword st_size;		/* Associated symbol size */
+} Elf64_Sym;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;st_name&lt;/code&gt;：存储一个指向字符串表的索引来表示对应符号的名称；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;st_value&lt;/code&gt;：存储对应符号的取值，具体值依赖于上下文，可能是一个指针地址，立即数等。另外，不同对象文件类型的符号表条目对 st_value 成员的解释略有不同：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在重定位文件中在可重定位文件中，&lt;code&gt;st_value&lt;/code&gt;保存节索引为&lt;code&gt;SHN_COMMON&lt;/code&gt;的符号的对齐约束；&lt;/li&gt;
+&lt;li&gt;在可重定位文件中，&lt;code&gt;st_value&lt;/code&gt;保存已定义符号的节偏移量。 也就是说，&lt;code&gt;st_value&lt;/code&gt;是从&lt;code&gt;st_shndx&lt;/code&gt;标识的部分的开头的偏移量；&lt;/li&gt;
+&lt;li&gt;在可执行文件和共享对象文件中，&lt;code&gt;st_value&lt;/code&gt;保存一个虚拟地址。 为了使这些文件的符号对动态链接器更有用，节偏移（文件解释）让位于与节号无关的虚拟地址（内存解释）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;st_size&lt;/code&gt;：符号的大小，具体指为&lt;code&gt;sizeof(instance)&lt;/code&gt;，如果未知则为0；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;st_info&lt;/code&gt;：指定符号的类型和绑定属性。可以用下面的代码分别解析出&lt;code&gt;bind,type,info&lt;/code&gt;三个属性：&lt;/p&gt;
+&lt;p&gt;#define ELF32_ST_BIND(i) ((i)&amp;raquo;4)
+#define ELF32_ST_TYPE(i) ((i)&amp;amp;0xf)
+#define ELF32_ST_INFO(b,t) (((b)&amp;laquo;4)+((t)&amp;amp;0xf))&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;BIND&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;STB_LOCAL(0)&lt;/code&gt;：局部符号在包含其定义的目标文件之外是不可见的。 同名的本地符号可以存在于多个文件中，互不干扰；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;STB_GLOBAL(1)&lt;/code&gt;：全局符号对所有正在组合的目标文件都是可见的。 一个文件对全局符号的定义将满足另一个文件对同一全局符号的未定义引用；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;STB_WEAK(2)&lt;/code&gt;：弱符号类似于全局符号，但它们的定义具有较低的优先级；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[STB_LOPROC(13),STB_HIPROC(15)]&lt;/code&gt;：预留位，用于特殊处理器的特定含义；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;TYPE&lt;/code&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;STT_NOTYPE(0)&lt;/code&gt;：符号的类型未指定；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;STT_OBJECT(1)&lt;/code&gt;：符号与数据对象相关联，例如变量、数组等；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;STT_FUNC(2)&lt;/code&gt;：符号与函数或其他可执行代码相关联；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;STT_SECTION(3)&lt;/code&gt;：该符号与一个节相关联。 这种类型的符号表条目主要用于重定位，通常具有&lt;code&gt;STB_LOCAL&lt;/code&gt;BIND属性；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;STT_FILE(4)&lt;/code&gt;：一个有&lt;code&gt;STB_LOCAL&lt;/code&gt;的BIND属性的文件符号的节索引为&lt;code&gt;SHN_ABS&lt;/code&gt;。并且如果存在其他&lt;code&gt;STB_LOCAL&lt;/code&gt;属性的符号，则当前符号应该在其之前；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[STT_LOPROC(13),STT_HIPROC(15)]&lt;/code&gt;：预留位，用于特殊处理器的特定含义；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;INFO&lt;/code&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;SHN_ABS&lt;/code&gt;：符号有一个绝对值，不会因为重定位而改变；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SHN_COMMON&lt;/code&gt;：该符号标记尚未分配的公共块。 符号的值给出了对齐约束，类似于节的 sh_addralign 成员。 也就是说，链接编辑器将为符号分配存储空间，该地址是 st_value 的倍数。 符号的大小表明需要多少字节；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SHN_UNDEF&lt;/code&gt;：此节表索引表示该符号未定义。 当链接编辑器将此对象文件与另一个定义指定符号的文件组合时，此文件对符号的引用将链接到实际定义；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;st_other&lt;/code&gt;：该成员当前持有 0 并且没有定义的含义；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;st_shndx&lt;/code&gt;：每个符号都有属于的节，当前成员存储的就是对应节的索引。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3-elf文件示例&#34;&gt;3 ELF文件示例&lt;/h2&gt;
+&lt;p&gt;  下面是使用下面的代码编译生成动态库&lt;code&gt;libadd.so&lt;/code&gt;作为示例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;//add.h
+int add(int a, int b);
+static int mult(int a, int b);
+
+
+//add.c
+//编译命令gcc add.c -shared -o libadd.so
+extern int extern_value;
+static int static_value = 1;
+static int static_value1;
+
+int add(int a, int b){
+    return 0;
+}
+
+static int mult(int a, int b){
+    return 1;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;31-elf-header&#34;&gt;3.1 ELF Header&lt;/h3&gt;
+&lt;p&gt;  使用命令&lt;code&gt;readelf -h &amp;lt;ELF文件名&amp;gt;&lt;/code&gt;查看ELF文件的Header。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;//readelf -h libadd.so
+ELF Header:
+  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00
+  Class:                             ELF64
+  Data:                              2&#39;s complement, little endian
+  Version:                           1 (current)
+  OS/ABI:                            UNIX - System V
+  ABI Version:                       0
+  Type:                              DYN (Shared object file)
+  Machine:                           Advanced Micro Devices X86-64
+  Version:                           0x1
+  Entry point address:               0x4a0
+  Start of program headers:          64 (bytes into file)
+  Start of section headers:          6000 (bytes into file)
+  Flags:                             0x0
+  Size of this header:               64 (bytes)
+  Size of program headers:           56 (bytes)
+  Number of program headers:         7
+  Size of section headers:           64 (bytes)
+  Number of section headers:         24
+  Section header string table index: 23
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;  从上面的Magic Number中能够看出：当前文件类型为64bit的共享库，小端存储，版本为1，机器架构为x86-64，程序头表项有7项，节头表项有24项。&lt;/p&gt;
+&lt;h3 id=&#34;32-program-header-table&#34;&gt;3.2 Program Header Table&lt;/h3&gt;
+&lt;p&gt;  使用命令&lt;code&gt;readelf -l &amp;lt;ELF文件名&amp;gt;&lt;/code&gt;查看程序头表；&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;//readelf -l libadd.so
+Elf file type is DYN (Shared object file)
+Entry point 0x4a0
+There are 7 program headers, starting at offset 64
+Program Headers:
+  Type           Offset             VirtAddr           PhysAddr           FileSiz            MemSiz              Flags  Align 
+  LOAD           0x0000000000000000 0x0000000000000000 0x0000000000000000 0x0000000000000674 0x0000000000000674  R E    0x200000
+  LOAD           0x0000000000000e80 0x0000000000200e80 0x0000000000200e80 0x00000000000001a4 0x00000000000001b0  RW     0x200000
+  DYNAMIC        0x0000000000000e90 0x0000000000200e90 0x0000000000200e90 0x0000000000000150 0x0000000000000150  RW     0x8
+  NOTE           0x00000000000001c8 0x00000000000001c8 0x00000000000001c8 0x0000000000000024 0x0000000000000024  R      0x4
+  GNU_EH_FRAME   0x00000000000005a8 0x00000000000005a8 0x00000000000005a8 0x000000000000002c 0x000000000000002c  R      0x4
+  GNU_STACK      0x0000000000000000 0x0000000000000000 0x0000000000000000 0x0000000000000000 0x0000000000000000  RW     0x10
+  GNU_RELRO      0x0000000000000e80 0x0000000000200e80 0x0000000000200e80 0x0000000000000180 0x0000000000000180  R      0x1
+
+ Section to Segment mapping:
+  Segment Sections...
+   00     .note.gnu.build-id .gnu.hash .dynsym .dynstr .rela.dyn .init .plt .plt.got .text .fini .eh_frame_hdr .eh_frame
+   01     .init_array .fini_array .dynamic .got .got.plt .data .bss
+   02     .dynamic
+   03     .note.gnu.build-id
+   04     .eh_frame_hdr
+   05
+   06     .init_array .fini_array .dynamic .got
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;  从上面看出上半部分的内容基本和程序头表项的每个字段基本对应。从下面的Segment Sections可以看出一个Segment是多个Section的集合。&lt;/p&gt;
+&lt;h3 id=&#34;33-section-header-table&#34;&gt;3.3 Section Header Table&lt;/h3&gt;
+&lt;p&gt;  使用命令&lt;code&gt;readelf -S &amp;lt;ELF文件名&amp;gt;&lt;/code&gt;查看节头表的内容。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;➜  tmp readelf -S libadd.so
+There are 24 section headers, starting at offset 0x1770:
+
+Section Headers:
+  [Nr] Name              Type             Address           Offset   Size              EntSize          Flags  Link  Info  Align
+  [ 0]                   NULL             0000000000000000  00000000 0000000000000000  0000000000000000           0     0     0
+  [ 1] .note.gnu.build-i NOTE             00000000000001c8  000001c8 0000000000000024  0000000000000000   A       0     0     4
+  [ 2] .gnu.hash         GNU_HASH         00000000000001f0  000001f0 000000000000003c  0000000000000000   A       3     0     8
+  [ 3] .dynsym           DYNSYM           0000000000000230  00000230 0000000000000108  0000000000000018   A       4     1     8
+  [ 4] .dynstr           STRTAB           0000000000000338  00000338 000000000000007d  0000000000000000   A       0     0     1
+  [ 5] .rela.dyn         RELA             00000000000003b8  000003b8 00000000000000a8  0000000000000018   A       3     0     8
+  [ 6] .init             PROGBITS         0000000000000460  00000460 0000000000000017  0000000000000000  AX       0     0     4
+  [ 7] .plt              PROGBITS         0000000000000480  00000480 0000000000000010  0000000000000010  AX       0     0     16
+  [ 8] .plt.got          PROGBITS         0000000000000490  00000490 0000000000000008  0000000000000008  AX       0     0     8
+  [ 9] .text             PROGBITS         00000000000004a0  000004a0 00000000000000fc  0000000000000000  AX       0     0     16
+  [10] .fini             PROGBITS         000000000000059c  0000059c 0000000000000009  0000000000000000  AX       0     0     4
+  [11] .eh_frame_hdr     PROGBITS         00000000000005a8  000005a8 000000000000002c  0000000000000000   A       0     0     4
+  [12] .eh_frame         PROGBITS         00000000000005d8  000005d8 000000000000009c  0000000000000000   A       0     0     8
+  [13] .init_array       INIT_ARRAY       0000000000200e80  00000e80 0000000000000008  0000000000000008  WA       0     0     8
+  [14] .fini_array       FINI_ARRAY       0000000000200e88  00000e88 0000000000000008  0000000000000008  WA       0     0     8
+  [15] .dynamic          DYNAMIC          0000000000200e90  00000e90 0000000000000150  0000000000000010  WA       4     0     8
+  [16] .got              PROGBITS         0000000000200fe0  00000fe0 0000000000000020  0000000000000008  WA       0     0     8
+  [17] .got.plt          PROGBITS         0000000000201000  00001000 0000000000000018  0000000000000008  WA       0     0     8
+  [18] .data             PROGBITS         0000000000201018  00001018 000000000000000c  0000000000000000  WA       0     0     8
+  [19] .bss              NOBITS           0000000000201024  00001024 000000000000000c  0000000000000000  WA       0     0     4
+  [20] .comment          PROGBITS         0000000000000000  00001024 0000000000000029  0000000000000001  MS       0     0     1
+  [21] .symtab           SYMTAB           0000000000000000  00001050 00000000000004c8  0000000000000018          22    41     8
+  [22] .strtab           STRTAB           0000000000000000  00001518 0000000000000193  0000000000000000           0     0     1
+  [23] .shstrtab         STRTAB           0000000000000000  000016ab 00000000000000c3  0000000000000000           0     0     1
+Key to Flags:
+  W (write), A (alloc), X (execute), M (merge), S (strings), I (info),
+  L (link order), O (extra OS processing required), G (group), T (TLS),
+  C (compressed), x (unknown), o (OS specific), E (exclude),
+  l (large), p (processor specific)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;  从上面看出内容基本和程序头表项的每个字段基本对应。除了上面提到的特殊的节也有一些额外的节，比如&lt;code&gt;.got.plt&lt;/code&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;34-符号表&#34;&gt;3.4 符号表&lt;/h3&gt;
+&lt;p&gt;  &lt;code&gt;readelf -s &amp;lt;ELF文件名&amp;gt;&lt;/code&gt;查看符号表。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;//readelf -s libadd.so
+Symbol table &#39;.dynsym&#39; contains 11 entries:
+   Num:    Value          Size Type    Bind   Vis      Ndx Name
+     0: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT  UND
+     1: 0000000000000000     0 NOTYPE  WEAK   DEFAULT  UND __cxa_finalize
+     2: 0000000000000000     0 NOTYPE  WEAK   DEFAULT  UND _ITM_registerTMCloneTable
+     3: 0000000000000000     0 NOTYPE  WEAK   DEFAULT  UND _ITM_deregisterTMCloneTab
+     4: 0000000000000000     0 NOTYPE  WEAK   DEFAULT  UND __gmon_start__
+     5: 0000000000201024     0 NOTYPE  GLOBAL DEFAULT   18 _edata
+     6: 0000000000201030     0 NOTYPE  GLOBAL DEFAULT   19 _end
+     7: 0000000000000460     0 FUNC    GLOBAL DEFAULT    6 _init
+     8: 000000000000057a    17 FUNC    GLOBAL DEFAULT    9 add
+     9: 0000000000201024     0 NOTYPE  GLOBAL DEFAULT   19 __bss_start
+    10: 000000000000059c     0 FUNC    GLOBAL DEFAULT   10 _fini
+
+Symbol table &#39;.symtab&#39; contains 51 entries:
+   Num:    Value          Size Type    Bind   Vis      Ndx Name
+     0: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT  UND
+     1: 00000000000001c8     0 SECTION LOCAL  DEFAULT    1
+     2: 00000000000001f0     0 SECTION LOCAL  DEFAULT    2
+     3: 0000000000000230     0 SECTION LOCAL  DEFAULT    3
+     4: 0000000000000338     0 SECTION LOCAL  DEFAULT    4
+     5: 00000000000003b8     0 SECTION LOCAL  DEFAULT    5
+     6: 0000000000000460     0 SECTION LOCAL  DEFAULT    6
+     7: 0000000000000480     0 SECTION LOCAL  DEFAULT    7
+     8: 0000000000000490     0 SECTION LOCAL  DEFAULT    8
+     9: 00000000000004a0     0 SECTION LOCAL  DEFAULT    9
+    10: 000000000000059c     0 SECTION LOCAL  DEFAULT   10
+    11: 00000000000005a8     0 SECTION LOCAL  DEFAULT   11
+    12: 00000000000005d8     0 SECTION LOCAL  DEFAULT   12
+    13: 0000000000200e80     0 SECTION LOCAL  DEFAULT   13
+    14: 0000000000200e88     0 SECTION LOCAL  DEFAULT   14
+    15: 0000000000200e90     0 SECTION LOCAL  DEFAULT   15
+    16: 0000000000200fe0     0 SECTION LOCAL  DEFAULT   16
+    17: 0000000000201000     0 SECTION LOCAL  DEFAULT   17
+    18: 0000000000201018     0 SECTION LOCAL  DEFAULT   18
+    19: 0000000000201024     0 SECTION LOCAL  DEFAULT   19
+    20: 0000000000000000     0 SECTION LOCAL  DEFAULT   20
+    21: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c
+    22: 00000000000004a0     0 FUNC    LOCAL  DEFAULT    9 deregister_tm_clones
+    23: 00000000000004e0     0 FUNC    LOCAL  DEFAULT    9 register_tm_clones
+    24: 0000000000000530     0 FUNC    LOCAL  DEFAULT    9 __do_global_dtors_aux
+    25: 0000000000201024     1 OBJECT  LOCAL  DEFAULT   19 completed.7698
+    26: 0000000000200e88     0 OBJECT  LOCAL  DEFAULT   14 __do_global_dtors_aux_fin
+    27: 0000000000000570     0 FUNC    LOCAL  DEFAULT    9 frame_dummy
+    28: 0000000000200e80     0 OBJECT  LOCAL  DEFAULT   13 __frame_dummy_init_array_
+    29: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS add.c
+    30: 0000000000201020     4 OBJECT  LOCAL  DEFAULT   18 static_value
+    31: 0000000000201028     4 OBJECT  LOCAL  DEFAULT   19 static_value1
+    32: 000000000000058b    17 FUNC    LOCAL  DEFAULT    9 mult
+    33: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c
+    34: 0000000000000670     0 OBJECT  LOCAL  DEFAULT   12 __FRAME_END__
+    35: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS
+    36: 0000000000200e90     0 OBJECT  LOCAL  DEFAULT   15 _DYNAMIC
+    37: 0000000000201028     0 OBJECT  LOCAL  DEFAULT   18 __TMC_END__
+    38: 0000000000201018     0 OBJECT  LOCAL  DEFAULT   18 __dso_handle
+    39: 00000000000005a8     0 NOTYPE  LOCAL  DEFAULT   11 __GNU_EH_FRAME_HDR
+    40: 0000000000201000     0 OBJECT  LOCAL  DEFAULT   17 _GLOBAL_OFFSET_TABLE_
+    41: 0000000000000000     0 NOTYPE  WEAK   DEFAULT  UND __cxa_finalize
+    42: 0000000000000460     0 FUNC    GLOBAL DEFAULT    6 _init
+    43: 000000000000057a    17 FUNC    GLOBAL DEFAULT    9 add
+    44: 0000000000000000     0 NOTYPE  WEAK   DEFAULT  UND _ITM_registerTMCloneTable
+    45: 0000000000000000     0 NOTYPE  WEAK   DEFAULT  UND _ITM_deregisterTMCloneTab
+    46: 0000000000201024     0 NOTYPE  GLOBAL DEFAULT   19 __bss_start
+    47: 000000000000059c     0 FUNC    GLOBAL DEFAULT   10 _fini
+    48: 0000000000201024     0 NOTYPE  GLOBAL DEFAULT   18 _edata
+    49: 0000000000201030     0 NOTYPE  GLOBAL DEFAULT   19 _end
+    50: 0000000000000000     0 NOTYPE  WEAK   DEFAULT  UND __gmon_start__
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;  符号表可以看出有两个分别为&lt;code&gt;dynsym&lt;/code&gt;和&lt;code&gt;symtab&lt;/code&gt;，&lt;code&gt;symtab&lt;/code&gt;中包含所有在程序中出现的符号以及一些库函数的符号，而&lt;code&gt;dynsym&lt;/code&gt;中的符号是&lt;code&gt;symtab&lt;/code&gt;中符号的子集，仅仅出现了外部可以看到的符号（静态函数&lt;code&gt;mult&lt;/code&gt;的符号在&lt;code&gt;dynsym&lt;/code&gt;就看不到）。这是因为&lt;code&gt;dynsym&lt;/code&gt;中的符号只有在动态链接时也就是运行时才能被解析。&lt;/p&gt;
+&lt;h2 id=&#34;4-参考文献&#34;&gt;4 参考文献&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://en.wikipedia.org/wiki/Executable_and_Linkable_Format&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Executable and Linkable Format&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;http://refspecs.linuxbase.org/elf/elf.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Tool Interface Standard (TIS) Executable and Linking Format (ELF)Specification Version 1.2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://stackoverflow.com/questions/14361248/whats-the-difference-of-section-and-segment-in-elf-file-format&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;What’s the difference of section and segment in ELF file format&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://xinqiu.gitbooks.io/linux-inside-zh/content/Theory/linux-theory-2.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ELF文件格式&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>Linux：ELF文件&amp;&amp;动静态库的加载和形成（转载）</title>
+        <link>https://joker0ops.github.io/p/linuxelf%E6%96%87%E4%BB%B6%E5%8A%A8%E9%9D%99%E6%80%81%E5%BA%93%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%92%8C%E5%BD%A2%E6%88%90%E8%BD%AC%E8%BD%BD/</link>
+        <pubDate>Fri, 05 Sep 2025 09:54:19 +0800</pubDate>
+        
+        <guid>https://joker0ops.github.io/p/linuxelf%E6%96%87%E4%BB%B6%E5%8A%A8%E9%9D%99%E6%80%81%E5%BA%93%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%92%8C%E5%BD%A2%E6%88%90%E8%BD%AC%E8%BD%BD/</guid>
+        <description>&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;ELF是一种文件格式的名称&lt;/code&gt;&lt;br&gt;
+ELF（Executable and Linkable Format）是Linux和其他类Unix系统中用于可执行文件、目标文件、共享库（动态链接库）和核心转储（core dumps）的标准&lt;a class=&#34;link&#34; href=&#34;https://so.csdn.net/so/search?q=%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F&amp;amp;spm=1001.2101.3001.7020&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;文件格式&lt;/a&gt;。它定义了程序在存储和运行时的结构，是理解程序编译、链接和加载过程的关键。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;一elf文件的类型及其组成的格式&#34;&gt;一、ELF文件的类型及其组成的格式&lt;/h2&gt;
+&lt;h3 id=&#34;11-类型&#34;&gt;1.1 类型&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;可执行文件（Executable）：可直接运行的程序（如 /bin/ls）。&lt;/li&gt;
+&lt;li&gt;目标文件（Relocatable Object File）：编译后的 .o 文件，需链接生成可执行文件。&lt;/li&gt;
+&lt;li&gt;共享库（Shared Object）：动态链接库 .so，运行时被加载到进程内存。&lt;/li&gt;
+&lt;li&gt;核心转储（Core Dump）：程序崩溃时的内存快照，用于调试。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;12-组成格式&#34;&gt;1.2 组成格式&lt;/h3&gt;
+&lt;p&gt;ELF文件由以下四部分组成：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;组成部分&lt;/th&gt;
+&lt;th&gt;作用&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;ELF Header&lt;/td&gt;
+&lt;td&gt;描述文件的基本信息（架构、入口地址、段表和节表的位置等）。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Program Headers&lt;/td&gt;
+&lt;td&gt;描述程序在运行时的内存布局（如代码段、数据段、栈等），用于加载和执行程序。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Section Headers&lt;/td&gt;
+&lt;td&gt;描述文件的节（section）信息（如代码、数据、符号表等），用于链接和调试。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Data Sections&lt;/td&gt;
+&lt;td&gt;实际的代码、数据、字符串表、符号表等内容。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/direct/30d8450ffb91440c8a1b3f259c5db49c.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;在这里插入图片描述&#34;
+	
+	
+&gt;&lt;br&gt;
+常见的节&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;代码节（.text）：⽤于保存机器指令，是程序的主要执⾏部分。&lt;/li&gt;
+&lt;li&gt;数据节（.data）：保存已初始化的全局变量和局部静态变量。&lt;/li&gt;
+&lt;li&gt;Block Started by Symbol(.bss):是程序内存布局中的一个重要部分，主要用于存储未初始化的全局变量和静态变量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;二elf文件从形成到加载轮廓&#34;&gt;二、ELF文件从形成到加载轮廓&lt;/h2&gt;
+&lt;h3 id=&#34;21-elf可执行文件形成过程&#34;&gt;2.1 ELF可执行文件形成过程&lt;/h3&gt;
+&lt;p&gt;- step-1：将多份 C/C++ 源代码，翻译成为⽬标 .o ⽂件&lt;br&gt;
+- step-2：将多份 .o ⽂件section进⾏合并&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/direct/b73b5e987bb449aa8dde5ea56cc22f6c.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;在这里插入图片描述&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;22-elf可执行文件从磁盘加载到内存中section的变化&#34;&gt;2.2 ELF可执行文件从磁盘加载到内存中section的变化&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;⼀个ELF会有多种不同的Section，在加载到内存的时候，也会进⾏Section合并，形成segment&lt;br&gt;
+目的是为了节省从磁盘加载到内存过程中的内存空间，一个页大小是4kb（4096字节），如果不合并前.text大小为4097字节，.data是1字节，那么它们会占3个页面，但是合并过后总大小为4098字节，那么只需要两个页，section在链接时起作用而segment在执行时起作用，segment其实就是往下合并section，两者的关系是segment包含section&lt;/li&gt;
+&lt;li&gt;合并原则：相同属性，⽐如：可读，可写，可执⾏，需要加载时申请空间等.&lt;/li&gt;
+&lt;li&gt;这样，即便是不同的Section，在加载到内存中，可能会以segment的形式，加载到⼀起&lt;/li&gt;
+&lt;li&gt;很显然，这个合并⼯作也已经在形成ELF的时候，合并⽅式已经确定了，具体合并原则被记录在了ELF的 程序头表(Program header table) 中&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;三理解链接和加载&#34;&gt;三、理解链接和加载&lt;/h2&gt;
+&lt;h3 id=&#34;31-静态链接&#34;&gt;3.1 静态链接&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;研究静态链接其实就是研究不同的.o文件是如何链接到一起的，.o类型文件也叫做可重定位目标文件&lt;/code&gt;&lt;br&gt;
+以下是样例代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// hello.c
+#include&amp;lt;stdio.h&amp;gt;
+void run();
+int main() {
+ printf(&amp;quot;hello world!\n&amp;quot;);
+ run();
+ return 0;
+}
+
+// code.c
+#include&amp;lt;stdio.h&amp;gt;
+void run() {
+ printf(&amp;quot;running...\n&amp;quot;);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;objdump -d 命令：将代码段（.text）进⾏反汇编查看&lt;br&gt;
+以下图片是反汇编后的hello.o文件的汇编码&lt;br&gt;
+其中蓝色圈中的e8代表的就是callq的加载到内存的机械码，而后面跟着的一串0代表访问的函数地址，在链接中才会填充地址，也叫做地址重定位&lt;img src=&#34;https://i-blog.csdnimg.cn/direct/f3c27bca5f68468cba93f5f1123d3af1.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;在这里插入图片描述&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;静态链接就是把库中的.o进⾏合并，和上述过程⼀样&lt;br&gt;
+所以链接其实就是将编译之后的所有⽬标⽂件连同⽤到的⼀些静态库运⾏时库组合，拼装成⼀个独⽴的可执⾏⽂件。其中就包括我们之前提到的地址修正，当所有模块组合在⼀起之后，链接器会根据我们的.o⽂件或者静态库中的重定位表找到那些需要被重定位的函数全局变量，从⽽修正它们的地址。这其实就是静态链接的过程&lt;br&gt;
+&lt;img src=&#34;https://i-blog.csdnimg.cn/direct/315c20069b9841878788d1072a92c351.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;在这里插入图片描述&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;32-动态链接&#34;&gt;3.2 动态链接&lt;/h3&gt;
+&lt;p&gt;首先交代一个结论：动态链接实际上将链接的整个过程推迟到了程序加载的时候。⽐如我们去运⾏⼀个程序，操作系统会⾸先将程序的数据代码连同它⽤到的⼀系列动态库先加载到内存，其中每个动态库的加载地址都是不固定的，操作系统会根据当前地址空间的使⽤情况为它们动态分配⼀段内存。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;动态库想要和运行程序关联起来需要进行两个步骤&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;被程序相关的进程看到：动态库地址映射到进程的地址空间&lt;/li&gt;
+&lt;li&gt;被进程调用：在地址空间中进行跳转&lt;br&gt;
+&lt;img src=&#34;https://i-blog.csdnimg.cn/direct/d89970f1c0c944e6b218d44ce0242b7c.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;在这里插入图片描述&#34;
+	
+	
+&gt;&lt;br&gt;
+动态库（也能被叫做共享库）的意义就是将所有能重复用到的代码在程序需要时放到内存的一片区域中然后不需要再出现重复的代码。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;—在C/C++程序中，当程序开始执⾏时，它⾸先并不会直接跳转到 main 函数。实际上，程序的⼊⼝点&lt;br&gt;
+是 _start ，这是⼀个由C运⾏时库（通常是glibc）或链接器（如ld）提供的特殊函数。&lt;br&gt;
+在 _start 函数中，会执⾏⼀系列初始化操作，这些操作包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;设置堆栈：为程序创建⼀个初始的堆栈环境。&lt;/li&gt;
+&lt;li&gt;初始化数据段：将程序的数据段（如全局变量和静态变量）从初始化数据段复制到相应的内存位置，并清零未初始化的数据段。&lt;/li&gt;
+&lt;li&gt;动态链接：这是关键的⼀步， _start 函数会调⽤动态链接器的代码来解析和加载程序所依赖的动态库（shared_libraries）。动态链接器会处理所有的符号解析和重定位，确保程序中的函数调⽤和变量访问能够正确地映射到动态库中的实际地址。&lt;/li&gt;
+&lt;li&gt;调⽤ __libc_start_main ：⼀旦动态链接完成， _start 函数会调⽤__libc_start_main （这是glibc提供的⼀个函数）。 __libc_start_main 函数负责执⾏⼀些额外的初始化⼯作，⽐如设置信号处理函数、初始化线程库（如果使⽤了线程）等。&lt;/li&gt;
+&lt;li&gt;调⽤ main 函数：最后， __libc_start_main 函数会调⽤程序的 main 函数，此时程序的执⾏控制权才正式交给⽤⼾编写的代码。&lt;/li&gt;
+&lt;li&gt;处理 main 函数的返回值：当 main 函数返回时， __libc_start_main 会负责处理这个返回值，并最终调⽤ _exit 函数来终⽌程序。&lt;br&gt;
+上述过程描述了C/C++程序在 main 函数之前执⾏的⼀系列操作，但这些操作对于⼤多数程序员来说是透明的。程序员通常只需要关注 main 函数中的代码，⽽不需要关⼼底层的初始化过程。然⽽，了解这些底层细节有助于更好地理解程序的执⾏流程和调试问题。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;动态链接器：&lt;br&gt;
+◦ 动态链接器（如ld-linux.so）负责在程序运⾏时加载动态库。&lt;br&gt;
+◦ 当程序启动时，动态链接器会解析程序中的动态库依赖，并加载这些库到内存中。&lt;br&gt;
+环境变量和配置⽂件：&lt;br&gt;
+◦ &lt;a class=&#34;link&#34; href=&#34;https://so.csdn.net/so/search?q=Linux%E7%B3%BB%E7%BB%9F&amp;amp;spm=1001.2101.3001.7020&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Linux系统&lt;/a&gt;通过环境变量（如LD_LIBRARY_PATH）和配置⽂件（如/etc/ld.so.conf及其⼦配置⽂件）来指定动态库的搜索路径。&lt;br&gt;
+◦ 这些路径会被动态链接器在加载动态库时搜索。&lt;br&gt;
+缓存⽂件：&lt;br&gt;
+◦ 为了提⾼动态库的加载效率，Linux系统会维护⼀个名为/etc/ld.so.cache的缓存⽂件。&lt;br&gt;
+◦ 该⽂件包含了系统中所有已知动态库的路径和相关信息，动态链接器在加载动态库时会⾸先&lt;br&gt;
+搜索这个缓存⽂件&lt;br&gt;
+&lt;img src=&#34;https://i-blog.csdnimg.cn/direct/16692c764f7a4ce2ab7c808b08dffc72.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;在这里插入图片描述&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;321-动态库中的相对地址&#34;&gt;3.2.1 动态库中的相对地址&lt;/h4&gt;
+&lt;p&gt;动态库也是elf类型的文件，当文件链接动态库的时候，发生以下过程&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;通过mm_struct中的变量找到有关共享区的结构体，根据里面的成员指针变量找到路径&lt;/li&gt;
+&lt;li&gt;根据路径找到磁盘中的数据块加载到内存&lt;/li&gt;
+&lt;li&gt;发生映射关系关联起来&lt;/li&gt;
+&lt;li&gt;得到库的起始虚拟地址&lt;/li&gt;
+&lt;li&gt;数据区会有一个名为.GOT的表记录库函数的偏移量，映射过后，表会根据库的起始虚拟地址进行修改得到完整的访问共享区的地址&lt;br&gt;
+&lt;img src=&#34;https://i-blog.csdnimg.cn/direct/142333df493341d6ac9a68ad7db933e9.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;在这里插入图片描述&#34;
+	
+	
+&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
+&lt;p&gt;这篇博客是博主时隔三个多月再次恢复的博客写作，仍有诸多欠缺，希望看到这篇博客的小伙伴能一起坚持下学习和进步&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Clang到底是什么?(转载)</title>
+        <link>https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/</link>
+        <pubDate>Thu, 04 Sep 2025 17:45:36 +0800</pubDate>
+        
+        <guid>https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/</guid>
+        <description>&lt;p&gt;最近发现自己对 &lt;a class=&#34;link&#34; href=&#34;https://so.csdn.net/so/search?q=GNU&amp;amp;spm=1001.2101.3001.7020&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GNU&lt;/a&gt; GCC 和 Clang 的区别不太清楚，影响到一些实现和学习，所以趁这两天有空好好研究了一下。&lt;/p&gt;
+&lt;p&gt;在这个研究过程中，我发现很多问题其实源自于语言（不是指编程语言，而是中文和英文翻译的失真）和概念理解不严谨。&lt;/p&gt;
+&lt;p&gt;如果你上网去查&lt;code&gt;clang&lt;/code&gt;，有些人会告诉你这是一个前端（frontend），然后从书上摘抄一些编译器的介绍，然后列出了一堆表格进行对比，并没有对原理和机制进行详尽的解释和介绍。所以这时候会有更多的问题冒出来：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;为什么&lt;code&gt;clang&lt;/code&gt;是一个前端？难道它不是完整的编译器吗？如果&lt;code&gt;clang&lt;/code&gt;是完整的编译器的话，那么为什么叫前端呢？如果它不是完整的，那么后端是什么呢？&lt;/li&gt;
+&lt;li&gt;编译器的定义到底是什么？感觉书上编译器的定义和实际的&lt;code&gt;gcc&lt;/code&gt;有所不同。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;这里说明一下：这里的&lt;code&gt;gcc&lt;/code&gt;指的是你在 Ubuntu 等 Linux 发行版里可以直接使用的命令（来自于 GNU 软件组），如果是指项目则会写作“GNU GCC”。如果是指&lt;code&gt;llvm-gcc&lt;/code&gt;，则不会简写成&lt;code&gt;gcc&lt;/code&gt;。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;本文将会逐步解答这一系列的问题，在这个过程中，不光会让你搞明白&lt;code&gt;clang&lt;/code&gt;到底是什么，也会让你对编译过程、编译器和&lt;code&gt;gcc&lt;/code&gt;，以及 LLVM 更加了解。&lt;/p&gt;
+&lt;h3 id=&#34;像gcc这种现代叫做编译器的程序是一个工具集合&#34;&gt;像&lt;code&gt;gcc&lt;/code&gt;这种现代叫做“编译器”的程序是一个工具集合&lt;/h3&gt;
+&lt;p&gt;需要先理解一件事，也算是上面绝大部分问题的答案或者误解源头：&lt;strong&gt;像&lt;code&gt;gcc&lt;/code&gt;这种现代“编译器”是一个工具集合，包含了预处理器、编译器，而且会自己调用汇编器、连接器或加载器等多种工具，而不是单单的一个编译器&lt;/strong&gt;（话说这种术语和名词的冲突也是误导的重要原因之一）。&lt;/p&gt;
+&lt;p&gt;先说出答案是为了让读者带着答案去看解释，这样能理解的更好。&lt;/p&gt;
+&lt;h3 id=&#34;编译器到底是什么或者说编译流程是什么&#34;&gt;编译器到底是什么（或者说编译流程是什么）&lt;/h3&gt;
+&lt;p&gt;上文提到，“编译器”是一个时常表达有冲突的术语：&lt;strong&gt;在很多言论、博客、教科书和专业书中，编译器被描述成“将源代码转换成可执行程序的程序”（比如&lt;code&gt;gcc&lt;/code&gt;这个“编译器”就可以直接将源代码变成可执行程序）&lt;/strong&gt;。这句话简洁、准确地描述了使用&lt;code&gt;gcc&lt;/code&gt;命令会发生什么，但是这并不是编译器的定义。&lt;/p&gt;
+&lt;p&gt;我们来看看最经典的编译相关的著作《编译原理》（也就是龙书）里对于编译器的介绍，这也算是编译器最经典的含义：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;简单来说，编译器就是一个程序能读取某种语言的一个程序（这个语言是_源_语言），然后将其翻译转换成另一种语言的等价程序（这个语言被称为_目标_语言）。编译器最重要的一个规定就是报告在翻译过程中发现“源”程序的错误。&lt;br&gt;
+如果这个目标程序是机器语言，那么这个目标程序就是可执行程序。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;说人话其实就是：我们写的源代码经过编译器转换之后得到了另一种语言的代码（目标代码），而转换之后的代码如果是机器语言，那么这个目标代码就是可执行程序。但是如果多源代码文件或者有外连接的库，那么可能是共享对象（shared object）。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“code”在英语中是指一堆数字、字母、符号，中文翻译成“代码”或“码”&lt;br&gt;
+应用程序本质就是一堆机器语言拼成的二进制文件。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;也就是说，编译器实际上是将一种语言转换成另一种语言的程序&lt;/strong&gt;，也就是用来翻译的程序。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;不过按照近几十年的标准编译流程来说，编译器指的是从将&lt;code&gt;.c&lt;/code&gt;等文件转换成&lt;code&gt;.s&lt;/code&gt;文件的程序。为了方便解释，除非特地说明，下文中的“编译器”都是按这个定义。&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;2024年6月4日更新：&lt;br&gt;
+下面这个编译流程是从 FORTRAN I 开始的。FORTRAN 作为最古老的编程语言，自然也有着世界上第一个编译器。FORTRAN 的名称其实就是“Formula Translated（公式翻译）”，名称中就表达了“翻译”这一含义。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在这个定义下，编译器内部的工作流程大致如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E4%BC%98%E5%8C%96%E5%99%A8.png&#34;
+	width=&#34;1300&#34;
+	height=&#34;384&#34;
+	srcset=&#34;https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E4%BC%98%E5%8C%96%E5%99%A8_hu6f316253eab163c34c22e9828f4df9bd_60927_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E4%BC%98%E5%8C%96%E5%99%A8_hu6f316253eab163c34c22e9828f4df9bd_60927_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;338&#34;
+		data-flex-basis=&#34;812px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;编译器可以生成指定平台的汇编代码。然后再由汇编器来将汇编代码转成机器语言，最后由连接器连接成可执行程序。&lt;/p&gt;
+&lt;p&gt;此外有几点需要补充一下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;这里的各种语言代码是经过预处理过的；&lt;/li&gt;
+&lt;li&gt;某语言的前端一般指词汇解析器（Lexer）和语法分析程序（Parser），前端会将源代码一步一步（从高级到低级）转换成优化器需要的中间表达（IR），这是多个分析器实现的的。&lt;/li&gt;
+&lt;li&gt;一般在优化器前面会单独列出一个“AST（Abstract Syntax Trees）”，这是一个层级很高的中间表达，基本上就是源代码的重组。&lt;/li&gt;
+&lt;li&gt;优化器（Optimizer）有时也被称为中端（Middle end），优化器不仅提升性能，而且作为中端可以让前后端分离的更好，增加了交叉编译的可能性。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;从源代码到高级中间表达，再从中级到低级的流程大致如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E6%B5%81%E7%A8%8B1.png&#34;
+	width=&#34;2120&#34;
+	height=&#34;562&#34;
+	srcset=&#34;https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E6%B5%81%E7%A8%8B1_hu340a3874129649b827180554cc52488b_112160_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E6%B5%81%E7%A8%8B1_hu340a3874129649b827180554cc52488b_112160_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;377&#34;
+		data-flex-basis=&#34;905px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这里有篇文章做了更详细的介绍：&lt;a class=&#34;link&#34; href=&#34;https://web.stanford.edu/class/archive/cs/cs143/cs143.1128/handouts/230%20Intermediate%20Rep.pdf#:~:text=gcc%27s%20Intermediate%20Representation%20The%20gcc/g&amp;#43;&amp;#43;%20compiler%20uses%20an,pointer%20to%20a%20structure%20with%20a%20tag%20field&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;《Intermediate Representation》&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;从源代码转换成可执行程序的过程&#34;&gt;从源代码转换成可执行程序的过程&lt;/h3&gt;
+&lt;p&gt;从源代码转换成可执行程序的完整过程，也就是我们平时所说的“编译过程”。在过去的几十年里，这个标准流程大致如下（圆角矩形表示代码，矩形表示各种处理器）：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E7%BC%96%E8%AF%91%E6%B5%81%E7%A8%8B.png&#34;
+	width=&#34;2316&#34;
+	height=&#34;138&#34;
+	srcset=&#34;https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E7%BC%96%E8%AF%91%E6%B5%81%E7%A8%8B_hu28537725652cb3df2e39bc44e03ea91b_51949_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E7%BC%96%E8%AF%91%E6%B5%81%E7%A8%8B_hu28537725652cb3df2e39bc44e03ea91b_51949_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;1678&#34;
+		data-flex-basis=&#34;4027px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;可以看到从源代码到可执行程序要经过预处理器（preprocessor）、编译器（compiler）、汇编器（assembler）和连接器（linker）或加载器（loader），而编译器只是负责将源代码转换成对应的汇编代码的功能。&lt;/p&gt;
+&lt;h4 id=&#34;过程展示gcc和配套的cppasld处理转换程序&#34;&gt;过程展示：gcc和配套的cpp、as、ld处理转换程序&lt;/h4&gt;
+&lt;p&gt;上文提到的的几种处理转换程序除了编译器和汇编器，其他三个估计都很很少听到。下面就用最经典的 C 语言和&lt;code&gt;gcc&lt;/code&gt;来介绍这个过程，&lt;code&gt;gcc&lt;/code&gt;包含的预处理器为&lt;code&gt;cpp&lt;/code&gt;，还会调用汇编器&lt;code&gt;as&lt;/code&gt;、连接器&lt;code&gt;ld&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;关于三者的介绍，以及编译过程中，每一步时如何进行的详细过程，可以看看我的另一篇文章&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/qq_33919450/article/details/131099518&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;《使用gcc展示完整的编译过程》&lt;/a&gt;，这篇文章也通过实际操作，介绍了一些&lt;code&gt;gcc&lt;/code&gt;操作方法。&lt;strong&gt;这篇文章非常建议读到这里就看一看，不然可能只理解字面的内容，文章内容原本是打算放在这里的，但是会让字数到 2 万字，这样阅读时间太长了&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;gcc内部工作流程&#34;&gt;gcc内部工作流程&lt;/h3&gt;
+&lt;p&gt;gcc内部工作流程如下，这里忽略了预处理过程：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E4%BC%98%E5%8C%96%E5%99%A82.png&#34;
+	width=&#34;2068&#34;
+	height=&#34;472&#34;
+	srcset=&#34;https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E4%BC%98%E5%8C%96%E5%99%A82_hu3616b95c14e57b3cdad4500822ee2778_84496_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E4%BC%98%E5%8C%96%E5%99%A82_hu3616b95c14e57b3cdad4500822ee2778_84496_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;438&#34;
+		data-flex-basis=&#34;1051px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;clang内部的工作流程&#34;&gt;Clang内部的工作流程&lt;/h3&gt;
+&lt;p&gt;随着时代的发展和进步，老式的编译流程已经不够用了：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;性能优化需要的人力、物力过大（现在的汇编语言要比以前的复杂太多了，经典的 PDP-11 手册里关于指令的只有 30 页不到，但是现在 Intel X86 指令手册就 2500 页）；&lt;/li&gt;
+&lt;li&gt;针对每种机器的开发消耗多（比如说在 ARM 和 X86 编译同一个程序）；&lt;/li&gt;
+&lt;li&gt;编译器的“插件”不够（有时候需要新的优化或者处理）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;看到这里你便明白，这里的前端是指整个 C 语言家族的编译流程的前端，而不是一个编译器的前端。所以 clang 是一个完整的编译器，可以将&lt;code&gt;.c&lt;/code&gt;转换成&lt;code&gt;.s&lt;/code&gt;文件，但是可以调用汇编器和编译器生成最终的可执行文件。&lt;/p&gt;
+&lt;p&gt;clang 作为编译器可以将你写的 C 家族的语言转换成 LLVM IR（一种低级语言），然后转换输出一个&lt;code&gt;.s&lt;/code&gt;文件，然后调用 LLVM 项目中的汇编器（或者其他汇编器）将其汇编成一个&lt;code&gt;.o&lt;/code&gt;对象文件（也就是前文中提到的“汇编阶段”），最后调用连接器进行连接，输出一个可执行程序。&lt;/p&gt;
+&lt;p&gt;也就是之前描述的编译器内部流程变成如下流程，同样这里的省略了预处理过程：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/direct/04b18061bb7442b0bda68d822ccfe9b3.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;2024年3月27日更新：&lt;br&gt;
+之前没注意这个图，直接复制gcc的，忘记修改语言前端后面的内容了。在这个编译管线层级下，LLVM 的优化是对 LLVM IR 进行的，而且不止一次，这取决于你使用&lt;code&gt;-O几&lt;/code&gt;，每一级优化的内容也是不同的。所以这里的优化器并不是指“只优化一次”。额外需要说明一点，&lt;code&gt;-O3&lt;/code&gt;这个选项并不只在“优化器”部分优化，还会在连接的时候进行一些优化。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;而&lt;code&gt;clang&lt;/code&gt;后面使用的的汇编器和连接器，既可以使用 LLVM 集成，也可以使用 GNU 的，比如连接器可以使用 LLVM 集成的的&lt;code&gt;lld&lt;/code&gt;，也可以使用 GNU 的&lt;code&gt;ld&lt;/code&gt;或&lt;code&gt;gold&lt;/code&gt;，以及 MSVC的&lt;code&gt;link.exe&lt;/code&gt;。不过默认情况下是使用 LLVM 集成的。&lt;/p&gt;
+&lt;p&gt;如果你好奇更详细 Clang 工作流程，和每一步的操作，比如说什么选项对应的是编译过程的某一步，可以看看这篇文档&lt;a class=&#34;link&#34; href=&#34;https://llvm.org/devmtg/2019-10/slides/ClangTutorial-Stulova-vanHaastregt.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;《An Overview of Clang》&lt;/a&gt;，我就不单独写博客了。&lt;/p&gt;
+&lt;p&gt;这种编译方式对于适配不同平台来说非常方便。当出现一个新的平台，只要将指令与 LLVM IR 对应即可，完全不用开发者去写一个全新的优化器和代码生成器去将源代码转换成汇编代码，省时省力。&lt;/p&gt;
+&lt;h3 id=&#34;为什么clang是一个前端难道它不是完整的编译器吗如果clang是完整的编译器的话那么为什么叫前端呢如果它不是完整的那么后端是什么呢&#34;&gt;为什么&lt;code&gt;clang&lt;/code&gt;是一个前端？难道它不是完整的编译器吗？如果&lt;code&gt;clang&lt;/code&gt;是完整的编译器的话，那么为什么叫前端呢？如果它不是完整的，那么后端是什么呢？&lt;/h3&gt;
+&lt;p&gt;Clang 是一个完整的编译器，也是一个前端。不过是将源代码转换成可执行程序流程的前端，而不是编译器的前端。如果说是编译器的前端，那是预处理器、词义分析器（Lexer）和语法分析器（Parser）等部分构成的。&lt;/p&gt;
+&lt;p&gt;和&lt;code&gt;clang&lt;/code&gt;对应的后端指的是 LLVM 内含的，或者 GNU 等软件组的连接器、编译器等工具，这些工具负责将汇编代码汇编、连接成最后的可执行文件。&lt;/p&gt;
+&lt;h3 id=&#34;编译器的定义到底是什么感觉书上编译器的定义和实际的gcc有所不同&#34;&gt;编译器的定义到底是什么？感觉书上编译器的定义和实际的&lt;code&gt;gcc&lt;/code&gt;有所不同&lt;/h3&gt;
+&lt;p&gt;关于编译器的定义前文有详细的解释，现在一般情况下“编译器”指的是从将&lt;code&gt;.c&lt;/code&gt;等文件转换成&lt;code&gt;.s&lt;/code&gt;文件的程序。&lt;/p&gt;
+&lt;p&gt;实际上编译器，比如&lt;code&gt;gcc&lt;/code&gt;包含了一些工具（比如预处理器），也会去调用其他的工具（汇编器和连接器），所以与定义有所不同。&lt;/p&gt;
+&lt;h3 id=&#34;llvm-项目是干什么项目&#34;&gt;LLVM 项目是干什么项目？&lt;/h3&gt;
+&lt;p&gt;前文提到，很多编译器是需要多个中间表达（IR）的，这些中间表达可能是词汇分析器生成的，也可能是语义分析器生成的，就很不统一，这就导致更新指令和优化性能随着数量的大幅提升成为了一件很困难的事情。&lt;/p&gt;
+&lt;p&gt;LLVM 全名“Low-Level Virtual Machine”，是一架构和中间表达的实现。而 LLVM 项目最初是一套围绕着 LLVM 代码的工具，C 语言和对应的 LLVM 代码如下（源自&lt;a class=&#34;link&#34; href=&#34;https://llvm.org/pubs/2003-05-01-GCCSummit2003.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Chris Lattner 的《Architecture for a Next-Generation GCC》&lt;/a&gt;）：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E4%BC%AA%E4%BB%A3%E7%A0%811.png&#34;
+	width=&#34;2390&#34;
+	height=&#34;1148&#34;
+	srcset=&#34;https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E4%BC%AA%E4%BB%A3%E7%A0%811_huf5ac2cfd1b04aac5d71ff03fb08cdfe3_482946_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E4%BC%AA%E4%BB%A3%E7%A0%811_huf5ac2cfd1b04aac5d71ff03fb08cdfe3_482946_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;208&#34;
+		data-flex-basis=&#34;499px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;LLVM 代码有三种用途：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;编译器的中间表达；&lt;/li&gt;
+&lt;li&gt;存放在硬盘里的位码（bitcode）；&lt;/li&gt;
+&lt;li&gt;人类可读的汇编语言表达&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这三种用途实际上都是等价的，要么能共用，要么有工具可以很轻松的转换，这点就让 LLVM 兼容新的机器、优化性能、开发新的语言，甚至是反汇编都是很容易的。&lt;/p&gt;
+&lt;p&gt;整个项目最核心内容其实就是 LLVM IR。LLVM IR 旨在成为某种“通用IR”，希望足够低级，可以将高级代码干净地映射到 LLVM IR（类似于处理器使用的指令是“通用IR”，允许将许多种不同的语言映射到这些汇编语言）。这给使用 LLVM IR 的编译器带来了性能很不错提升。&lt;/p&gt;
+&lt;p&gt;关于 LLVM 设计更详细的介绍还是请看文档：&lt;a class=&#34;link&#34; href=&#34;https://llvm.org/docs/LangRef.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;《LLVM Language Reference Manual》&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;关于 LLVM 带来的性能提升可以看 Intel 的这篇文章：&lt;a class=&#34;link&#34; href=&#34;https://www.intel.com/content/www/us/en/developer/articles/technical/adoption-of-llvm-complete-icx.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;《Intel® C/C++ Compilers Complete Adoption of LLVM》&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E6%95%B0%E6%8D%AE%E5%9B%BE1.png&#34;
+	width=&#34;1932&#34;
+	height=&#34;1530&#34;
+	srcset=&#34;https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E6%95%B0%E6%8D%AE%E5%9B%BE1_hu20ab777ce7cd4a2075949b64e6c3e501_237172_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E6%95%B0%E6%8D%AE%E5%9B%BE1_hu20ab777ce7cd4a2075949b64e6c3e501_237172_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;126&#34;
+		data-flex-basis=&#34;303px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;gcc和clang有什么区别&#34;&gt;gcc和clang有什么区别？&lt;/h3&gt;
+&lt;p&gt;LLVM 早期有一个名为&lt;code&gt;llvm-gcc&lt;/code&gt;的项目，它和 GNU GCC 的最大区别就在于：&lt;strong&gt;&lt;code&gt;llvm-gcc&lt;/code&gt;在编译器最后使用的是 LLVM 作为最低一级的中间表达，而不是 GNU GCC 使用的的 RTL 作为最低一级的中间表达，所以&lt;code&gt;llvm-gcc&lt;/code&gt;编译器的最后一部分是处理 LLVM IR，而不是处理 RTL（Register Transfer Language）。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;其他方面，&lt;code&gt;llvm-gcc&lt;/code&gt;和&lt;code&gt;gcc&lt;/code&gt;一样将会输出一个汇编文件，工作原理也一样。不过可以通过使用&lt;code&gt;-emit-llvm&lt;/code&gt;选项来让&lt;code&gt;llvm-gcc&lt;/code&gt;输出 LLVM 字节码。&lt;/p&gt;
+&lt;p&gt;后来 LLVM 创始人 Chris Lattner 在苹果的时候就开创了一个中间表达全部使用 LLVM 作为中间表达的 C 语言家族的编译器，也就是 Clang。&lt;/p&gt;
+&lt;p&gt;虽然&lt;code&gt;clang&lt;/code&gt;淘汰了&lt;code&gt;llvm-gcc&lt;/code&gt;，虽然现在还是有&lt;code&gt;llvm-gcc&lt;/code&gt;，但是使用率和性能都不如&lt;code&gt;clang&lt;/code&gt;。也正是因为 LLVM IR，&lt;code&gt;Clang&lt;/code&gt;进行反汇编也很方便。&lt;/p&gt;
+&lt;p&gt;下面是 Chris Lattner 简历中提到 Clang 诞生的部分（&lt;a class=&#34;link&#34; href=&#34;https://www.nondot.org/sabre/Resume.html#Apple&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.nondot.org/sabre/Resume.html#Apple&lt;/a&gt;）：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E7%AE%80%E5%8E%86%E6%88%AA%E5%9B%BE.png&#34;
+	width=&#34;2806&#34;
+	height=&#34;422&#34;
+	srcset=&#34;https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E7%AE%80%E5%8E%86%E6%88%AA%E5%9B%BE_hua6506c80c0d30e213886d39968c9a331_260486_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E7%AE%80%E5%8E%86%E6%88%AA%E5%9B%BE_hua6506c80c0d30e213886d39968c9a331_260486_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;664&#34;
+		data-flex-basis=&#34;1595px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这里字太小了，机翻一下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E6%9C%BA%E7%BF%BB.png&#34;
+	width=&#34;2806&#34;
+	height=&#34;426&#34;
+	srcset=&#34;https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E6%9C%BA%E7%BF%BB_huae73285ec2a2b07fc106d186231f26fc_256622_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E6%9C%BA%E7%BF%BB_huae73285ec2a2b07fc106d186231f26fc_256622_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;658&#34;
+		data-flex-basis=&#34;1580px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;总结一下，&lt;code&gt;gcc&lt;/code&gt;和&lt;code&gt;clang&lt;/code&gt;的区别在于：&lt;code&gt;clang&lt;/code&gt;的各个中间层均为 LLVM IR，而&lt;code&gt;gcc&lt;/code&gt;的各个中间层为 RTL 或其他一些事物。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;这里需要注意一点，&lt;code&gt;llvm-gcc&lt;/code&gt;和 LLVM 创始人 Chris Lattner 在&lt;a class=&#34;link&#34; href=&#34;https://llvm.org/pubs/2003-05-01-GCCSummit2003.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;《Architecture for a Next-Generation GCC》&lt;/a&gt;中描述的 LLVM 编译器不是一个东西。这个 LLVM 编译器与后来的 Clang 也不是一个东西&lt;/strong&gt;。论文中对 LLVM 编译器的示意图如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/LLVM%E7%A4%BA%E6%84%8F%E5%9B%BE.png&#34;
+	width=&#34;2500&#34;
+	height=&#34;714&#34;
+	srcset=&#34;https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/LLVM%E7%A4%BA%E6%84%8F%E5%9B%BE_hu92fddb0b2470c81b82b31ea164fd5e4c_242916_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/LLVM%E7%A4%BA%E6%84%8F%E5%9B%BE_hu92fddb0b2470c81b82b31ea164fd5e4c_242916_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;350&#34;
+		data-flex-basis=&#34;840px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;区别在于中间加了一个连接层，整个编译器中进行了两次连接。不过很明显，根据 Intel 的数据来看， LLVM 编译器的性能和效果相比 GNU GCC 差不多。不过现在你还是可以在 GitHub 上下到它，目前最新版本为 16：&lt;a class=&#34;link&#34; href=&#34;https://github.com/llvm/llvm-project/releases/tag/llvmorg-16.0.0&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/llvm/llvm-project/releases/tag/llvmorg-16.0.0&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;你可以选择和&lt;code&gt;clang&lt;/code&gt;一起下载：&lt;br&gt;
+&lt;img src=&#34;https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/clang1.png&#34;
+	width=&#34;2506&#34;
+	height=&#34;706&#34;
+	srcset=&#34;https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/clang1_hu1b6046d5aeee4b76a3c8b7d45bfe5f18_224992_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/clang1_hu1b6046d5aeee4b76a3c8b7d45bfe5f18_224992_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;354&#34;
+		data-flex-basis=&#34;851px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;也可以单独下载：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/clang2.png&#34;
+	width=&#34;2386&#34;
+	height=&#34;358&#34;
+	srcset=&#34;https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/clang2_hu521bbc25a70ff18611a6a43e078e211d_82274_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/clang2_hu521bbc25a70ff18611a6a43e078e211d_82274_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;666&#34;
+		data-flex-basis=&#34;1599px&#34;
+	
+&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>GNU/GCC编译器及其编译流程详解</title>
+        <link>https://joker0ops.github.io/p/gnu/gcc%E7%BC%96%E8%AF%91%E5%99%A8%E5%8F%8A%E5%85%B6%E7%BC%96%E8%AF%91%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3/</link>
+        <pubDate>Thu, 04 Sep 2025 14:16:50 +0800</pubDate>
+        
+        <guid>https://joker0ops.github.io/p/gnu/gcc%E7%BC%96%E8%AF%91%E5%99%A8%E5%8F%8A%E5%85%B6%E7%BC%96%E8%AF%91%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3/</guid>
+        <description>&lt;h1 id=&#34;gnu介绍&#34;&gt;GNU介绍&lt;/h1&gt;
+&lt;p&gt;GNU是一个由理查德·斯托曼发起的自由软件项目，其全称是“GNU&amp;rsquo;s Not Unix!”。GNU项目的目标是创建一个完全自由的操作系统，包括一整套完全自由的软件工具，以取代Unix系统。这里的“自由”指的是自由软件（Free Software）的概念，即用户有使用、复制、修改和分发软件的自由。&lt;/p&gt;
+&lt;h2 id=&#34;gnu关键组件&#34;&gt;GNU关键组件&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;GNU操作系统：包括内核、shell、编程语言编译器、文本编辑器、文件系统等组件。&lt;/li&gt;
+&lt;li&gt;软件自由性：用户有权自由地运行、学习、分享和改进软件。&lt;/li&gt;
+&lt;li&gt;GNU通用公共许可证（GPL）：GNU项目开发了一种许可证，即GNU通用公共许可证，它允许软件以自由软件的形式分发和使用。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;gnu重要软件&#34;&gt;GNU重要软件&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Bash：Bourne Again Shell，一个Unix shell和命令语言。&lt;/li&gt;
+&lt;li&gt;GCC：GNU编译器集合（GNU Compiler Collection），支持多种编程语言的编译器。&lt;/li&gt;
+&lt;li&gt;GDB：GNU调试器（GNU Debugger），用于调试程序。&lt;/li&gt;
+&lt;li&gt;GNU Hurd：GNU项目开发了自己的内核，称为Hurd，它是GNU系统的一部分，但Hurd的开发进度较慢，并没有广泛部署。&lt;/li&gt;
+&lt;li&gt;GNU/Linux：虽然GNU Hurd的开发没有达到预期，但GNU项目开发的许多组件被用于Linux操作系统中。Linux内核与GNU工具集合合，形成了广泛使用的操作系统，通常被称为GNU/Linux。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;编译器介绍&#34;&gt;编译器介绍&lt;/h1&gt;
+&lt;p&gt;编译器是一种将高级语言编写的源代码转换为计算机可执行的机器语言或低级语言的程序，其本质是一种翻译程序，核心功能包括词法分析、语法分析、代码优化及目标代码生成等。&lt;/p&gt;
+&lt;h2 id=&#34;编译器的一般构成&#34;&gt;编译器的一般构成&lt;/h2&gt;
+&lt;p&gt;传统的编译器通常分为三个部分，前端(frontEnd)，优化器(Optimizer)和后端(backEnd)。在编译过程中，前端主要负责词法和语法分析，将源代码转化为抽象语法树；优化器则是在前端的基础上，对得到的中间代码进行优化，使代码更加高效；后端则是将已经优化的中间代码转化为针对各自平台的机器代码。&lt;/p&gt;
+&lt;h2 id=&#34;几种常见的编译器&#34;&gt;几种常见的编译器&lt;/h2&gt;
+&lt;h3 id=&#34;gcc&#34;&gt;GCC&lt;/h3&gt;
+&lt;p&gt;GCC（GNU Compiler Collection，GNU编译器套装），是一套由 GNU 开发的跨平台编程语言编译器。GCC 原名为 GNU C 语言编译器，因为它原本只能处理 C语言。GCC 快速演进，变得可处理 C++、Fortran、Pascal、Objective-C、Java, 以及 Ada、Go 等他语言。常用于嵌入式系统和高性能计算领域。&lt;/p&gt;
+&lt;h3 id=&#34;llvm&#34;&gt;LLVM&lt;/h3&gt;
+&lt;p&gt;LLVM（Low Level Virtual Machine，底层虚拟机）提供了与编译器相关的支持，能够进行程序语言的编译期优化、链接优化、在线编译优化、代码生成等。可以作为多种编译器的后端使用。在LLVM项目开发的初期，主要使用GCC作为前端；后期由Apple主导开发的Clang作为前端将源代码翻译成LLVM IR这一中间代码，然后由LLVM将这一中间代码转换成机器语言。&lt;/p&gt;
+&lt;h3 id=&#34;clang&#34;&gt;Clang&lt;/h3&gt;
+&lt;p&gt;Clang是LLVM项目的前端编译器，专注于C、C++和Objective-C等语言的编译。Clang由Apple公司主导编写，并逐渐成为了业界知名的编译器之一。Clang以其快速编译速度、较小内存占用和清晰的诊断信息，赢得了广大开发者的喜爱。此外，Clang还提供了静态分析功能，有助于开发者在编译阶段就发现潜在的问题，如内存泄漏、未初始化变量等。&lt;/p&gt;
+&lt;h3 id=&#34;msvc&#34;&gt;MSVC&lt;/h3&gt;
+&lt;p&gt;MSVC，全称Microsoft Visual C++，是微软开发的编译器工具链。它主要用于Windows平台应用程序的开发，并通常与Visual Studio IDE集成在一起。MSVC提供了从编写代码到调试、部署的完整开发环境，是Windows应用开发者的首选编译器之一。MSVC主要用于Windows平台的应用程序开发。它是Visual Studio IDE的默认编译器之一，支持C++、C#等多种编程语言。此外，MSVC还被用于游戏开发、桌面应用开发等领域。&lt;/p&gt;
+&lt;h1 id=&#34;从源代码到可执行程序&#34;&gt;从源代码到可执行程序&lt;/h1&gt;
+&lt;h2 id=&#34;编译流程&#34;&gt;编译流程&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;源代码&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;预处理器&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;--&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;调整之后的代码&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;编译器&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;--&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;汇编语言代码&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;汇编器&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;--&amp;gt;&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;可调整的机器语言代码&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;连接器或加载器&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;--&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;可执行程序&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;可以看到从源代码到可执行程序要经过预处理器（preprocessor）、编译器（compiler）、汇编器（assembler）和连接器（linker）或加载器（loader），而编译器只是负责将源代码转换成对应的汇编代码的功能。&lt;/p&gt;
+&lt;h2 id=&#34;gcc的各种处理转换程序&#34;&gt;gcc的各种处理转换程序&lt;/h2&gt;
+&lt;p&gt;在gcc的编译过程中，除了调用其本身包含的编译器和预处理器cpp，还会调用外部程序提供的汇编器as和连接器ld&lt;/p&gt;
+&lt;h3 id=&#34;预处理阶段&#34;&gt;预处理阶段&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;gcc&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;E&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;源代码&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;o&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;XXX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;注意：如果需要在预处理之后停止需要使用选项-E，-o用于指定输出文件的名称。（gcc调用的预处理器cpp会将源文件处理后直接输出到标准输出，而不是生成某个文件！）&lt;/p&gt;
+&lt;h3 id=&#34;编译阶段&#34;&gt;编译阶段&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;gcc&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;S&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;XXX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如果你想编译但不进行汇编，那么使用-S选项，编译后会生成一个新的.s汇编文件&lt;/p&gt;
+&lt;h3 id=&#34;汇编阶段&#34;&gt;汇编阶段&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;gcc&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;XXX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;汇编阶段使用选项-c来进行编译和汇编，但是不进行连接。刚才是进行了编译，但是没有汇编，所以这里使用-c相当于只使用了汇编器。汇编阶段完成后，会自动生成新的对象文件（object file），文件后缀为.o。&lt;/p&gt;
+&lt;h3 id=&#34;连接阶段&#34;&gt;连接阶段&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;gcc&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;o&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;XXX&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;XXX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;o&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;最后的连接阶段，使用-o直接输出可执行文件即可，因为从汇编之后的对象文件到可执行程序和从源代码到可执行程序这个结果是一样的，gcc这些选项只是限定“终点”。注意：绝大多数编译器的使用几乎等价gcc+选项，除了一些小细节。唯一大不同的是连接器。&lt;/p&gt;
+&lt;h2 id=&#34;gcc与g的区别&#34;&gt;gcc与g++的区别&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;gcc 是 GCC 编译器的通用编译指令，因为根据程序文件的后缀名，gcc 指令可以自行判断出当前程序所用编程语言的类别。gcc 指令也为用户提供了“手动指定代表编译方式”的接口，即使用 -x 选项
+&lt;ul&gt;
+&lt;li&gt;xxx.c：默认以编译 C 语言程序的方式编译此文件；&lt;/li&gt;
+&lt;li&gt;xxx.cpp：默认以编译 C++ 程序的方式编译此文件。&lt;/li&gt;
+&lt;li&gt;xxx.m：默认以编译 Objective-C 程序的方式编译此文件；&lt;/li&gt;
+&lt;li&gt;xxx.go：默认以编译 Go 语言程序的方式编译此文件；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;g++ 指令，则无论目标文件的后缀名是什么，该指令都一律按照编译 C++ 代码的方式编译该文件。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>Linux的信号</title>
+        <link>https://joker0ops.github.io/p/linux%E7%9A%84%E4%BF%A1%E5%8F%B7/</link>
+        <pubDate>Mon, 18 Aug 2025 09:47:50 +0800</pubDate>
+        
+        <guid>https://joker0ops.github.io/p/linux%E7%9A%84%E4%BF%A1%E5%8F%B7/</guid>
+        <description>&lt;h1 id=&#34;信号的基本概念&#34;&gt;信号的基本概念&lt;/h1&gt;
+&lt;p&gt;信号（&lt;strong&gt;signal&lt;/strong&gt;）是软件中断，是进程之间相互传递消息的一种方法，用于通知进程发生了事件。但是，不能使用信号给进程传递任何数据。
+信号产生的原因有很多，在&lt;strong&gt;Shell&lt;/strong&gt;中，可以用&lt;strong&gt;kill&lt;/strong&gt;和&lt;strong&gt;killall&lt;/strong&gt;命令发送信号：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;kill -信号类型 进程编号&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;killall -信号类型 进程名&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;信号的类型以下仅列出最需要关注的信号类型&#34;&gt;信号的类型(以下仅列出最需要关注的信号类型)&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;信号名&lt;/th&gt;
+&lt;th&gt;信号值&lt;/th&gt;
+&lt;th&gt;默认处理动作&lt;/th&gt;
+&lt;th&gt;发出信号的原因&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;SIGINT&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;A&lt;/td&gt;
+&lt;td&gt;键盘中断 &lt;code&gt;Ctrl+c&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SIGKILL&lt;/td&gt;
+&lt;td&gt;9&lt;/td&gt;
+&lt;td&gt;AEF&lt;/td&gt;
+&lt;td&gt;采用 &lt;code&gt;kill -9 进程编号&lt;/code&gt; 强制杀死程序&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SIGSEGV&lt;/td&gt;
+&lt;td&gt;11&lt;/td&gt;
+&lt;td&gt;CEF&lt;/td&gt;
+&lt;td&gt;无效的内存引用（数组越界、操作空指针和野指针等）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SIGALRM&lt;/td&gt;
+&lt;td&gt;14&lt;/td&gt;
+&lt;td&gt;A&lt;/td&gt;
+&lt;td&gt;由闹钟 &lt;code&gt;alarm()&lt;/code&gt; 函数发出的信号&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SIGTERM&lt;/td&gt;
+&lt;td&gt;15&lt;/td&gt;
+&lt;td&gt;A&lt;/td&gt;
+&lt;td&gt;采用 &lt;code&gt;kill 进程编号&lt;/code&gt; 或 &lt;code&gt;killall 进程名&lt;/code&gt; 通知程序&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SIGCHLD&lt;/td&gt;
+&lt;td&gt;17&lt;/td&gt;
+&lt;td&gt;B&lt;/td&gt;
+&lt;td&gt;子进程结束信号&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;其他&lt;/td&gt;
+&lt;td&gt;≤64&lt;/td&gt;
+&lt;td&gt;A&lt;/td&gt;
+&lt;td&gt;自定义信号&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;默认处理动作的含义如下:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A 终止进程。&lt;/li&gt;
+&lt;li&gt;B 忽略此信号，将该信号丢弃，不做处理。&lt;/li&gt;
+&lt;li&gt;C 终止进程并进行内核映像转储（core dump）。&lt;/li&gt;
+&lt;li&gt;D 停止进程，进入停止状态的程序还能重新继续，一般是在调试的过程中。&lt;/li&gt;
+&lt;li&gt;E 信号不能被捕获。&lt;/li&gt;
+&lt;li&gt;F 信号不能被忽略。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;信号的作用&#34;&gt;信号的作用&lt;/h2&gt;
+&lt;p&gt;当服务程序运行时，使用信号直接杀掉该进程可能会导致一些资源未能来得及释放从而造成内存占用等一系列问题。如果向服务程序发送一个信号，服务程序收到信号后能够去主动调用退出处理函数，就能使进程有计划地退出。如果向进程发送0信号，可以检测进程是否存活。&lt;/p&gt;
+&lt;h2 id=&#34;发送信号&#34;&gt;发送信号&lt;/h2&gt;
+&lt;p&gt;在程序中，可以使用&lt;code&gt;kill()&lt;/code&gt;函数向其他进程发送信号。
+函数声明：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;kill&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pid_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sig&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// kill 函数可以将信号sig发送给指定的进程pid
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;参数&lt;code&gt;pid&lt;/code&gt;的几种情况：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;pid&amp;gt;0&lt;/code&gt; 将信号传递给进程号为pid的进程&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;pid=0&lt;/code&gt; 将信号传递给和当前进程同进程组的所有进程，常用于父进程给子进程发送信号。（&lt;strong&gt;信号发送进程也会收到自己发出的信号&lt;/strong&gt;）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;pid=-1&lt;/code&gt; 将信号广播给系统内的所有进程。（示例：关机）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;参数&lt;code&gt;sig&lt;/code&gt;说明：准备发送的信号代码，若sig=0不发出任何信号，但系统会执行错误检查，通常会利用&lt;code&gt;sig&lt;/code&gt;值为零来检查某个进程是否仍在运行。
+返回值说明：成功执行时，返回0；失败返回-1，errno被设置。&lt;/p&gt;
+&lt;h2 id=&#34;进程终止&#34;&gt;进程终止&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;正常终止&lt;/th&gt;
+&lt;th&gt;异常终止&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;main&lt;/code&gt;函数&lt;code&gt;return&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;调用&lt;code&gt;abort&lt;/code&gt;函数中止&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;exit()&lt;/code&gt;函数调用&lt;/td&gt;
+&lt;td&gt;接收到中止信号&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;_exit()/Exit()&lt;/code&gt;函数调用&lt;/td&gt;
+&lt;td&gt;在最后一个线程中对取消请求做出响应&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;最后一个线程从其启动例程中&lt;code&gt;return&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;在最后一个线程中调用&lt;code&gt;pthread exit()&lt;/code&gt;返回&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;进程终止状态&#34;&gt;进程终止状态&lt;/h2&gt;
+&lt;p&gt;在&lt;code&gt;main()&lt;/code&gt;函数中，&lt;code&gt;return&lt;/code&gt;的返回值即终止状态，如果没有&lt;code&gt;return&lt;/code&gt;语句或调用&lt;code&gt;exit()&lt;/code&gt;，那么该进程的终止状态是0。该性质常用于服务程序的调度、日志和监控。在&lt;code&gt;Shell&lt;/code&gt;中，程序运行结束时可以使用&lt;code&gt;echo $?&lt;/code&gt;查看进程终止的状态。
+正常进程终止的三个函数：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;exit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;status&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;_exit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;status&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;_Exit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;status&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// status 表示进程终止状态
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;其中，&lt;code&gt;exit()&lt;/code&gt;和&lt;code&gt;_Exit()&lt;/code&gt;是由&lt;code&gt;ISO C&lt;/code&gt;说明的，&lt;code&gt;_exit()&lt;/code&gt;是由&lt;code&gt;POSIX&lt;/code&gt;说明的。&lt;/p&gt;
+&lt;h2 id=&#34;资源释放的问题&#34;&gt;资源释放的问题&lt;/h2&gt;
+&lt;p&gt;当进程使用&lt;code&gt;return&lt;/code&gt;语句返回时，会调用局部对象的析构函数。&lt;code&gt;main()&lt;/code&gt;函数中的&lt;code&gt;return&lt;/code&gt;还会调用全局对象的析构函数。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;exit()&lt;/code&gt;表示终止进程，不会调用局部对象的析构函数，只调用全局对象的析构函数。&lt;code&gt;exit()&lt;/code&gt;会执行清理工作然后退出，&lt;code&gt;_exit()&lt;/code&gt;和&lt;code&gt;_Exit()&lt;/code&gt;则不执行清理工作直接退出。&lt;/p&gt;
+&lt;h2 id=&#34;进程的终止函数&#34;&gt;进程的终止函数&lt;/h2&gt;
+&lt;p&gt;进程可以使用atexit()函数登记终止函数（最多32个），这些函数将由exit()自动调用。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;atexit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;));&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;exit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;调用终止函数的顺序的顺序与登记时相反。进程退出前的收尾工作。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+        </item>
+        <item>
         <title>Python数据分析基础——Numpy入门</title>
         <link>https://joker0ops.github.io/p/python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80numpy%E5%85%A5%E9%97%A8/</link>
         <pubDate>Sun, 18 Aug 2024 21:25:54 +0800</pubDate>

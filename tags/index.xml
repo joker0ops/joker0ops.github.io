@@ -7,7 +7,31 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>木木龙的个人博客</copyright>
-        <lastBuildDate>Sun, 18 Aug 2024 21:25:54 +0800</lastBuildDate><atom:link href="https://joker0ops.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 05 Sep 2025 11:32:02 +0800</lastBuildDate><atom:link href="https://joker0ops.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Linux</title>
+        <link>https://joker0ops.github.io/tags/linux/</link>
+        <pubDate>Fri, 05 Sep 2025 11:32:02 +0800</pubDate>
+        
+        <guid>https://joker0ops.github.io/tags/linux/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>C&#43;&#43;</title>
+        <link>https://joker0ops.github.io/tags/c&#43;&#43;/</link>
+        <pubDate>Thu, 04 Sep 2025 17:45:36 +0800</pubDate>
+        
+        <guid>https://joker0ops.github.io/tags/c&#43;&#43;/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>OS</title>
+        <link>https://joker0ops.github.io/tags/os/</link>
+        <pubDate>Mon, 18 Aug 2025 09:47:50 +0800</pubDate>
+        
+        <guid>https://joker0ops.github.io/tags/os/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>Deep Learning</title>
         <link>https://joker0ops.github.io/tags/deep-learning/</link>
         <pubDate>Sun, 18 Aug 2024 21:25:54 +0800</pubDate>
@@ -29,14 +53,6 @@
         <pubDate>Tue, 05 Mar 2024 17:08:38 +0800</pubDate>
         
         <guid>https://joker0ops.github.io/tags/git/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>C&#43;&#43;</title>
-        <link>https://joker0ops.github.io/tags/c&#43;&#43;/</link>
-        <pubDate>Sat, 17 Feb 2024 16:02:44 +0800</pubDate>
-        
-        <guid>https://joker0ops.github.io/tags/c&#43;&#43;/</guid>
         <description></description>
         </item>
         <item>
