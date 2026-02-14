@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://joker0ops.github.io/p/linuxelf%E6%96%87%E4%BB%B6%E5%8A%A8%E9%9D%99%E6%80%81%E5%BA%93%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%92%8C%E5%BD%A2%E6%88%90%E8%BD%AC%E8%BD%BD/'>
 
-<link rel="stylesheet" href="/scss/style.min.f90684374236feedf6aa17462335fb4e2094b96b61a02ec8807fc5df3a135c5d.css"><meta property='og:title' content='Linux：ELF文件&amp;&amp;动静态库的加载和形成（转载）'>
+<link rel="stylesheet" href="/scss/style.min.281d61a7f18551897752370d6d6be99bfa8d049e9ccb27a3ef34ec42d1ba7e47.css"><meta property='og:title' content='Linux：ELF文件&amp;&amp;动静态库的加载和形成（转载）'>
 <meta property='og:description' content='前言 ELF是一种文件格式的名称 ELF（Executable and Linkable Format）是Linux和其他类Unix系统中用于可执行文件、目标文件、共享'>
 <meta property='og:url' content='https://joker0ops.github.io/p/linuxelf%E6%96%87%E4%BB%B6%E5%8A%A8%E9%9D%99%E6%80%81%E5%BA%93%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%92%8C%E5%BD%A2%E6%88%90%E8%BD%AC%E8%BD%BD/'>
 <meta property='og:site_name' content='木木龙的个人博客'>
@@ -1087,16 +1087,13 @@ void run() {
     let s1 = '2023-3-18'; 
     s1 = new Date(s1.replace(/-/g, "/"));
     let s2 = new Date();
-
     
     let diffInMilliseconds = s2.getTime() - s1.getTime();
     let totalDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
-
     
     let years = s2.getFullYear() - s1.getFullYear();
     let months = s2.getMonth() - s1.getMonth();
     let days = s2.getDate() - s1.getDate();
-
     
     if (days < 0) {
       months -= 1;
@@ -1107,7 +1104,6 @@ void run() {
       years -= 1;
       months += 12;
     }
-
     
     let result = `${years}年${months}月${days}天`;
     document.getElementById('runningdays').innerHTML = result;

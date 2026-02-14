@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://joker0ops.github.io/p/elf%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%BC%E5%BC%8F%E5%89%96%E6%9E%90/'>
 
-<link rel="stylesheet" href="/scss/style.min.f90684374236feedf6aa17462335fb4e2094b96b61a02ec8807fc5df3a135c5d.css"><meta property='og:title' content='ELF文件结构与格式剖析'>
+<link rel="stylesheet" href="/scss/style.min.281d61a7f18551897752370d6d6be99bfa8d049e9ccb27a3ef34ec42d1ba7e47.css"><meta property='og:title' content='ELF文件结构与格式剖析'>
 <meta property='og:description' content='ELF 文件，大名叫 Executable and Linkable Format。 作为一种文件，那么肯定就需要遵守一定的格式。 从宏观上看，可以分成四个部分： 图中的这几个概念，如果不明白的话'>
 <meta property='og:url' content='https://joker0ops.github.io/p/elf%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%BC%E5%BC%8F%E5%89%96%E6%9E%90/'>
 <meta property='og:site_name' content='木木龙的个人博客'>
@@ -2010,16 +2010,13 @@ Symbol table '.symtab' contains 51 entries:
     let s1 = '2023-3-18'; 
     s1 = new Date(s1.replace(/-/g, "/"));
     let s2 = new Date();
-
     
     let diffInMilliseconds = s2.getTime() - s1.getTime();
     let totalDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
-
     
     let years = s2.getFullYear() - s1.getFullYear();
     let months = s2.getMonth() - s1.getMonth();
     let days = s2.getDate() - s1.getDate();
-
     
     if (days < 0) {
       months -= 1;
@@ -2030,7 +2027,6 @@ Symbol table '.symtab' contains 51 entries:
       years -= 1;
       months += 12;
     }
-
     
     let result = `${years}年${months}月${days}天`;
     document.getElementById('runningdays').innerHTML = result;

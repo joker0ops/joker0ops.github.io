@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://joker0ops.github.io/p/gnu/gcc%E7%BC%96%E8%AF%91%E5%99%A8%E5%8F%8A%E5%85%B6%E7%BC%96%E8%AF%91%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3/'>
 
-<link rel="stylesheet" href="/scss/style.min.f90684374236feedf6aa17462335fb4e2094b96b61a02ec8807fc5df3a135c5d.css"><meta property='og:title' content='GNU/GCC编译器及其编译流程详解'>
+<link rel="stylesheet" href="/scss/style.min.281d61a7f18551897752370d6d6be99bfa8d049e9ccb27a3ef34ec42d1ba7e47.css"><meta property='og:title' content='GNU/GCC编译器及其编译流程详解'>
 <meta property='og:description' content='GNU介绍 GNU是一个由理查德·斯托曼发起的自由软件项目，其全称是“GNU&amp;rsquo;s Not Unix!”。GNU项目的目标是创建一个完全自由'>
 <meta property='og:url' content='https://joker0ops.github.io/p/gnu/gcc%E7%BC%96%E8%AF%91%E5%99%A8%E5%8F%8A%E5%85%B6%E7%BC%96%E8%AF%91%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3/'>
 <meta property='og:site_name' content='木木龙的个人博客'>
@@ -986,16 +986,13 @@ unicode: "f7eb"
     let s1 = '2023-3-18'; 
     s1 = new Date(s1.replace(/-/g, "/"));
     let s2 = new Date();
-
     
     let diffInMilliseconds = s2.getTime() - s1.getTime();
     let totalDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
-
     
     let years = s2.getFullYear() - s1.getFullYear();
     let months = s2.getMonth() - s1.getMonth();
     let days = s2.getDate() - s1.getDate();
-
     
     if (days < 0) {
       months -= 1;
@@ -1006,7 +1003,6 @@ unicode: "f7eb"
       years -= 1;
       months += 12;
     }
-
     
     let result = `${years}年${months}月${days}天`;
     document.getElementById('runningdays').innerHTML = result;
