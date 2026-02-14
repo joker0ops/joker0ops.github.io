@@ -25,8 +25,8 @@ live2d_settings['tipsMessage']          = 'waifu-tips.json';            // 同�
 live2d_settings['hitokotoAPI']          = 'lwl12.com';                  // 一言 API，可选 'lwl12.com', 'hitokoto.cn', 'jinrishici.com'(古诗词)
 
 // 默认模型
-live2d_settings['modelId']              = 1;            // 默认模型 ID，可在 F12 控制台找到
-live2d_settings['modelTexturesId']      = 53;           // 默认材质 ID，可在 F12 控制台找到
+live2d_settings['modelId']              = 6;            // 默认模型 ID，可在 F12 控制台找到
+live2d_settings['modelTexturesId']      = 8;           // 默认材质 ID，可在 F12 控制台找到
 
 // 工具栏设置
 live2d_settings['showToolMenu']         = true;         // 显示 工具栏          ，可选 true(真), false(假)
@@ -44,7 +44,7 @@ live2d_settings['modelRandMode']        = 'switch';     // 模型切换，可选
 live2d_settings['modelTexturesRandMode']= 'switch';       // 材质切换，可选 'rand'(随机), 'switch'(顺序)
 
 // 提示消息选项
-live2d_settings['showHitokoto']         = false;         // 显示一言
+live2d_settings['showHitokoto']         = false;        // 显示一言
 live2d_settings['showF12Status']        = true;         // 显示加载状态
 live2d_settings['showF12Message']       = false;        // 显示看板娘消息
 live2d_settings['showF12OpenMsg']       = true;         // 显示控制台打开提示
@@ -55,20 +55,20 @@ live2d_settings['showWelcomeMessage']   = true;         // 显示进入面页欢
 live2d_settings['waifuSize']            = '280x250';    // 看板娘大小，例如 '280x250', '600x535'
 live2d_settings['waifuTipsSize']        = '250x70';     // 提示框大小，例如 '250x70', '570x150'
 live2d_settings['waifuFontSize']        = '12px';       // 提示框字体，例如 '12px', '30px'
-live2d_settings['waifuToolFont']        = '14px';       // 工具栏字体，例如 '14px', '36px'
+live2d_settings['waifuToolFont']        = '18px';       // 工具栏字体，例如 '14px', '36px'
 live2d_settings['waifuToolLine']        = '20px';       // 工具栏行高，例如 '20px', '36px'
 live2d_settings['waifuToolTop']         = '0px'         // 工具栏顶部边距，例如 '0px', '-60px'
 live2d_settings['waifuMinWidth']        = '768px';      // 面页小于 指定宽度 隐藏看板娘，例如 'disable'(禁用), '768px'
-live2d_settings['waifuEdgeSide']        = 'right:30';     // 看板娘贴边方向，例如 'left:0'(靠左 0px), 'right:30'(靠右 30px)
-live2d_settings['waifuDraggable']       = 'disable';    // 拖拽样式，例如 'disable'(禁用), 'axis-x'(只能水平拖拽), 'unlimited'(自由拖拽)
+live2d_settings['waifuEdgeSide']        = 'right:80';   // 看板娘贴边方向，例如 'left:0'(靠左 0px), 'right:30'(靠右 30px)
+live2d_settings['waifuDraggable']       = 'axis-x';     // 拖拽样式，例如 'disable'(禁用), 'axis-x'(只能水平拖拽), 'unlimited'(自由拖拽)
 live2d_settings['waifuDraggableRevert'] = true;         // 松开鼠标还原拖拽位置，可选 true(真), false(假)
 
 // 其他杂项设置
-live2d_settings['l2dVersion']           = '1.4.2';        // 当前版本
-live2d_settings['l2dVerDate']           = '2018.11.12'; // 版本更新日期
-live2d_settings['homePageUrl']          = 'https://joker0ops.github.io';       // 主页地址，可选 'auto'(自动), '{URL 网址}'
+live2d_settings['l2dVersion']           = '1.4.2';                          // 当前版本
+live2d_settings['l2dVerDate']           = '2018.11.12';                     // 版本更新日期
+live2d_settings['homePageUrl']          = 'https://joker0ops.github.io';    // 主页地址，可选 'auto'(自动), '{URL 网址}'
 live2d_settings['aboutPageUrl']         = 'https://github.com/joker0ops';   // 关于页地址, '{URL 网址}'
-live2d_settings['screenshotCaptureName']= 'live2d.png'; // 看板娘截图文件名，例如 'live2d.png'
+live2d_settings['screenshotCaptureName']= 'live2d.png';                     // 看板娘截图文件名，例如 'live2d.png'
 
 /****************************************************************************************************/
 
@@ -332,74 +332,7 @@ function loadTipsMessage(result) {
     
     function modelStorageGetItem(key) { return live2d_settings.modelStorage ? localStorage.getItem(key) : sessionStorage.getItem(key); }
     
-    /* 检测用户活动状态，并在空闲时显示一言 */
-    if (live2d_settings.showHitokoto) {
-        window.getActed = false; window.hitokotoTimer = 0; window.hitokotoInterval = false;
-        $(document).mousemove(function(e){getActed = true;}).keydown(function(){getActed = true;});
-        setInterval(function(){ if (!getActed) ifActed(); else elseActed(); }, 1000);
-    }
-    
-    function ifActed() {
-        if (!hitokotoInterval) {
-            hitokotoInterval = true;
-            hitokotoTimer = window.setInterval(showHitokotoActed, 30000);
-        }
-    }
-    
-    function elseActed() {
-        getActed = hitokotoInterval = false;
-        window.clearInterval(hitokotoTimer);
-    }
-    
-    function showHitokotoActed() {
-        if ($(document)[0].visibilityState == 'visible') showHitokoto();
-    }
-    
-    function showHitokoto() {
-    	switch(live2d_settings.hitokotoAPI) {
-    	    case 'lwl12.com':
-    	        $.getJSON('https://api.lwl12.com/hitokoto/v1?encode=realjson',function(result){
-        	        if (!empty(result.source)) {
-                        var text = waifu_tips.hitokoto_api_message['lwl12.com'][0];
-                        if (!empty(result.author)) text += waifu_tips.hitokoto_api_message['lwl12.com'][1];
-                        text = text.render({source: result.source, creator: result.author});
-                        window.setTimeout(function() {showMessage(text+waifu_tips.hitokoto_api_message['lwl12.com'][2], 3000, true);}, 5000);
-                    } showMessage(result.text, 5000, true);
-                });break;
-    	    case 'fghrsh.net':
-    	        $.getJSON('https://api.fghrsh.net/hitokoto/rand/?encode=jsc&uid=3335',function(result){
-            	    if (!empty(result.source)) {
-                        var text = waifu_tips.hitokoto_api_message['fghrsh.net'][0];
-                        text = text.render({source: result.source, date: result.date});
-                        window.setTimeout(function() {showMessage(text, 3000, true);}, 5000);
-                        showMessage(result.hitokoto, 5000, true);
-            	    }
-                });break;
-            case 'jinrishici.com':
-                $.ajax({
-                    url: 'https://v2.jinrishici.com/one.json',
-                    xhrFields: {withCredentials: true},
-                    success: function (result, status) {
-                        if (!empty(result.data.origin.title)) {
-                            var text = waifu_tips.hitokoto_api_message['jinrishici.com'][0];
-                            text = text.render({title: result.data.origin.title, dynasty: result.data.origin.dynasty, author:result.data.origin.author});
-                            window.setTimeout(function() {showMessage(text, 3000, true);}, 5000);
-                        } showMessage(result.data.content, 5000, true);
-                    }
-                });break;
-    	    default:
-    	        $.getJSON('https://v1.hitokoto.cn',function(result){
-            	    if (!empty(result.from)) {
-                        var text = waifu_tips.hitokoto_api_message['hitokoto.cn'][0];
-                        text = text.render({source: result.from, creator: result.creator});
-                        window.setTimeout(function() {showMessage(text, 3000, true);}, 5000);
-            	    }
-                    showMessage(result.hitokoto, 5000, true);
-                });
-    	}
-    }
-    
     $('.waifu-tool .fui-eye').click(function (){loadOtherModel()});
     $('.waifu-tool .fui-user').click(function (){loadRandTextures()});
-    $('.waifu-tool .fui-chat').click(function (){showHitokoto()});
+    // $('.waifu-tool .fui-chat').click(function (){showHitokoto()});
 }

@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/'>
 
-<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='Clang到底是什么?(转载)'>
+<link rel="stylesheet" href="/scss/style.min.f90684374236feedf6aa17462335fb4e2094b96b61a02ec8807fc5df3a135c5d.css"><meta property='og:title' content='Clang到底是什么?(转载)'>
 <meta property='og:description' content='最近发现自己对 GNU GCC 和 Clang 的区别不太清楚，影响到一些实现和学习，所以趁这两天有空好好研究了一下。 在这个研究过程中，我发现很多问题其实源自于语言（'>
 <meta property='og:url' content='https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/'>
 <meta property='og:site_name' content='木木龙的个人博客'>
@@ -119,9 +119,26 @@
             
                 <li>
                     <a 
+                        href='https://space.bilibili.com/375616854'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <path d="M488.6 104.1C505.3 122.2 513 143.8 511.9 169.8V372.2C511.5 398.6 502.7 420.3 485.4 437.3C468.2 454.3 446.3 463.2 419.9 464H92.02C65.57 463.2 43.81 454.2 26.74 436.8C9.682 419.4 .7667 396.5 0 368.2V169.8C.7667 143.8 9.682 122.2 26.74 104.1C43.81 87.75 65.57 78.77 92.02 78H121.4L96.05 52.19C90.3 46.46 87.42 39.19 87.42 30.4C87.42 21.6 90.3 14.34 96.05 8.603C101.8 2.868 109.1 0 117.9 0C126.7 0 134 2.868 139.8 8.603L213.1 78H301.1L375.6 8.603C381.7 2.868 389.2 0 398 0C406.8 0 414.1 2.868 419.9 8.603C425.6 14.34 428.5 21.6 428.5 30.4C428.5 39.19 425.6 46.46 419.9 52.19L394.6 78L423.9 78C450.3 78.77 471.9 87.75 488.6 104.1H488.6zM449.8 173.8C449.4 164.2 446.1 156.4 439.1 150.3C433.9 144.2 425.1 140.9 416.4 140.5H96.05C86.46 140.9 78.6 144.2 72.47 150.3C66.33 156.4 63.07 164.2 62.69 173.8V368.2C62.69 377.4 65.95 385.2 72.47 391.7C78.99 398.2 86.85 401.5 96.05 401.5H416.4C425.6 401.5 433.4 398.2 439.7 391.7C446 385.2 449.4 377.4 449.8 368.2L449.8 173.8zM185.5 216.5C191.8 222.8 195.2 230.6 195.6 239.7V273C195.2 282.2 191.9 289.9 185.8 296.2C179.6 302.5 171.8 305.7 162.2 305.7C152.6 305.7 144.7 302.5 138.6 296.2C132.5 289.9 129.2 282.2 128.8 273V239.7C129.2 230.6 132.6 222.8 138.9 216.5C145.2 210.2 152.1 206.9 162.2 206.5C171.4 206.9 179.2 210.2 185.5 216.5H185.5zM377 216.5C383.3 222.8 386.7 230.6 387.1 239.7V273C386.7 282.2 383.4 289.9 377.3 296.2C371.2 302.5 363.3 305.7 353.7 305.7C344.1 305.7 336.3 302.5 330.1 296.2C323.1 289.9 320.7 282.2 320.4 273V239.7C320.7 230.6 324.1 222.8 330.4 216.5C336.7 210.2 344.5 206.9 353.7 206.5C362.9 206.9 370.7 210.2 377 216.5H377z"/>
+</svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
                         href='https://github.com/joker0ops'
                         target="_blank"
-                        title="1"
+                        title="Github"
                         rel="me"
                     >
                         
@@ -136,48 +153,28 @@
             
                 <li>
                     <a 
-                        href='https://www.zhihu.com/people/cutey-protectobei-mang'
-                        target="_blank"
-                        title="2"
-                        rel="me"
-                    >
-                        
-                        
-                            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1723986608698" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1462" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M940.35 795.875c0 78.652-63.771 142.422-142.421 142.422H228.226c-78.655 0-142.427-63.772-142.427-142.422v-569.7c0-78.658 63.772-142.432 142.427-142.432H797.93c78.658 0 142.432 63.772 142.432 142.431l-0.01 569.701zM415.621 543.356h125.593c0-29.528-13.923-46.824-13.923-46.824H418.295c2.59-53.493 4.91-122.15 5.739-147.65h103.677s-0.561-43.871-12.091-43.871H333.378s10.971-57.374 25.594-82.7c0 0-54.417-2.938-72.98 69.622-18.562 72.56-46.404 116.43-49.356 124.446-2.953 8.013 16.031 3.795 24.044 0 8.015-3.797 44.294-16.876 54.84-67.496h56.35c0.76 32.082 2.99 130.397 2.287 147.649H258.15c-16.45 11.81-21.936 46.824-21.936 46.824h132.592c-5.53 36.615-15.239 83.813-28.817 108.835-21.513 39.655-32.904 75.934-110.525 138.368 0 0-12.657 9.28 26.576 5.906 39.231-3.372 76.356-13.498 102.087-64.963 13.378-26.756 27.213-60.697 38.006-95.121l-0.04 0.12 109.26 125.795s14.343-33.747 3.798-70.87l-80.994-90.698-27.42 20.279-0.031 0.099c7.615-26.7 13.092-53.095 14.795-76.061 0.042-0.553 0.084-1.119 0.121-1.689zM567.366 295.73v435.35h45.77l18.753 52.405 79.328-52.405h99.978V295.73H567.366zM764.09 684.253h-51.968l-64.817 42.817-15.319-42.817H615.81v-339.94h148.28v339.94z m0 0" fill="#2c2c2c" p-id="1463"></path></svg>
-                        
-                    </a>
-                </li>
-            
-                <li>
-                    <a 
                         href='https://x.com/Joker0ops'
                         target="_blank"
-                        title="3"
+                        title="Twitter"
                         rel="me"
                     >
                         
                         
-                            <?xml version="1.0" encoding="utf-8"?>
-<svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 50 50">
-    <path d="M 11 4 C 7.134 4 4 7.134 4 11 L 4 39 C 4 42.866 7.134 46 11 46 L 39 46 C 42.866 46 46 42.866 46 39 L 46 11 C 46 7.134 42.866 4 39 4 L 11 4 z M 13.085938 13 L 21.023438 13 L 26.660156 21.009766 L 33.5 13 L 36 13 L 27.789062 22.613281 L 37.914062 37 L 29.978516 37 L 23.4375 27.707031 L 15.5 37 L 13 37 L 22.308594 26.103516 L 13.085938 13 z M 16.914062 15 L 31.021484 35 L 34.085938 35 L 19.978516 15 L 16.914062 15 z"/>
+                            <!--
+version: "2.9"
+unicode: "f7eb"
+-->
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon icon-tabler icon-tabler-brand-github" 
+    width="24"
+    height="24"
+    viewBox="0 0 24 24" 
+    fill="black" 
+>
+  <path d="M14.058 3.41c-1.807 .767 -2.995 2.453 -3.056 4.38l-.002 .182l-.243 -.023c-2.392 -.269 -4.498 -1.512 -5.944 -3.531a1 1 0 0 0 -1.685 .092l-.097 .186l-.049 .099c-.719 1.485 -1.19 3.29 -1.017 5.203l.03 .273c.283 2.263 1.5 4.215 3.779 5.679l.173 .107l-.081 .043c-1.315 .663 -2.518 .952 -3.827 .9c-1.056 -.04 -1.446 1.372 -.518 1.878c3.598 1.961 7.461 2.566 10.792 1.6c4.06 -1.18 7.152 -4.223 8.335 -8.433l.127 -.495c.238 -.993 .372 -2.006 .401 -3.024l.003 -.332l.393 -.779l.44 -.862l.214 -.434l.118 -.247c.265 -.565 .456 -1.033 .574 -1.43l.014 -.056l.008 -.018c.22 -.593 -.166 -1.358 -.941 -1.358l-.122 .007a.997 .997 0 0 0 -.231 .057l-.086 .038a7.46 7.46 0 0 1 -.88 .36l-.356 .115l-.271 .08l-.772 .214c-1.336 -1.118 -3.144 -1.254 -5.012 -.554l-.211 .084z" />
 </svg>
-                        
-                    </a>
-                </li>
-            
-                <li>
-                    <a 
-                        href='https://space.bilibili.com/375616854'
-                        target="_blank"
-                        title="4"
-                        rel="me"
-                    >
-                        
-                        
-                            <?xml version="1.0" encoding="utf-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <path d="M488.6 104.1C505.3 122.2 513 143.8 511.9 169.8V372.2C511.5 398.6 502.7 420.3 485.4 437.3C468.2 454.3 446.3 463.2 419.9 464H92.02C65.57 463.2 43.81 454.2 26.74 436.8C9.682 419.4 .7667 396.5 0 368.2V169.8C.7667 143.8 9.682 122.2 26.74 104.1C43.81 87.75 65.57 78.77 92.02 78H121.4L96.05 52.19C90.3 46.46 87.42 39.19 87.42 30.4C87.42 21.6 90.3 14.34 96.05 8.603C101.8 2.868 109.1 0 117.9 0C126.7 0 134 2.868 139.8 8.603L213.1 78H301.1L375.6 8.603C381.7 2.868 389.2 0 398 0C406.8 0 414.1 2.868 419.9 8.603C425.6 14.34 428.5 21.6 428.5 30.4C428.5 39.19 425.6 46.46 419.9 52.19L394.6 78L423.9 78C450.3 78.77 471.9 87.75 488.6 104.1H488.6zM449.8 173.8C449.4 164.2 446.1 156.4 439.1 150.3C433.9 144.2 425.1 140.9 416.4 140.5H96.05C86.46 140.9 78.6 144.2 72.47 150.3C66.33 156.4 63.07 164.2 62.69 173.8V368.2C62.69 377.4 65.95 385.2 72.47 391.7C78.99 398.2 86.85 401.5 96.05 401.5H416.4C425.6 401.5 433.4 398.2 439.7 391.7C446 385.2 449.4 377.4 449.8 368.2L449.8 173.8zM185.5 216.5C191.8 222.8 195.2 230.6 195.6 239.7V273C195.2 282.2 191.9 289.9 185.8 296.2C179.6 302.5 171.8 305.7 162.2 305.7C152.6 305.7 144.7 302.5 138.6 296.2C132.5 289.9 129.2 282.2 128.8 273V239.7C129.2 230.6 132.6 222.8 138.9 216.5C145.2 210.2 152.1 206.9 162.2 206.5C171.4 206.9 179.2 210.2 185.5 216.5H185.5zM377 216.5C383.3 222.8 386.7 230.6 387.1 239.7V273C386.7 282.2 383.4 289.9 377.3 296.2C371.2 302.5 363.3 305.7 353.7 305.7C344.1 305.7 336.3 302.5 330.1 296.2C323.1 289.9 320.7 282.2 320.4 273V239.7C320.7 230.6 324.1 222.8 330.4 216.5C336.7 210.2 344.5 206.9 353.7 206.5C362.9 206.9 370.7 210.2 377 216.5H377z"/>
-</svg>
+
                         
                     </a>
                 </li>
@@ -429,7 +426,15 @@
     
     
     <p>最近发现自己对 <a class="link" href="https://so.csdn.net/so/search?q=GNU&amp;spm=1001.2101.3001.7020"  target="_blank" rel="noopener"
-    >GNU</a> GCC 和 Clang 的区别不太清楚，影响到一些实现和学习，所以趁这两天有空好好研究了一下。</p>
+    >GNU
+<span style="white-space: nowrap;"><svg width=".7em"
+    height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+    <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+    <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+        fill="currentColor">
+</svg></span>
+
+</a> GCC 和 Clang 的区别不太清楚，影响到一些实现和学习，所以趁这两天有空好好研究了一下。</p>
 <p>在这个研究过程中，我发现很多问题其实源自于语言（不是指编程语言，而是中文和英文翻译的失真）和概念理解不严谨。</p>
 <p>如果你上网去查<code>clang</code>，有些人会告诉你这是一个前端（frontend），然后从书上摘抄一些编译器的介绍，然后列出了一堆表格进行对比，并没有对原理和机制进行详尽的解释和介绍。所以这时候会有更多的问题冒出来：</p>
 <ul>
@@ -498,7 +503,15 @@
 	
 ></p>
 <p>这里有篇文章做了更详细的介绍：<a class="link" href="https://web.stanford.edu/class/archive/cs/cs143/cs143.1128/handouts/230%20Intermediate%20Rep.pdf#:~:text=gcc%27s%20Intermediate%20Representation%20The%20gcc/g&#43;&#43;%20compiler%20uses%20an,pointer%20to%20a%20structure%20with%20a%20tag%20field"  target="_blank" rel="noopener"
-    >《Intermediate Representation》</a></p>
+    >《Intermediate Representation》
+<span style="white-space: nowrap;"><svg width=".7em"
+    height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+    <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+    <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+        fill="currentColor">
+</svg></span>
+
+</a></p>
 <h3 id="从源代码转换成可执行程序的过程">从源代码转换成可执行程序的过程</h3>
 <p>从源代码转换成可执行程序的完整过程，也就是我们平时所说的“编译过程”。在过去的几十年里，这个标准流程大致如下（圆角矩形表示代码，矩形表示各种处理器）：</p>
 <p><img src="/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E7%BC%96%E8%AF%91%E6%B5%81%E7%A8%8B.png"
@@ -519,7 +532,15 @@
 <h4 id="过程展示gcc和配套的cppasld处理转换程序">过程展示：gcc和配套的cpp、as、ld处理转换程序</h4>
 <p>上文提到的的几种处理转换程序除了编译器和汇编器，其他三个估计都很很少听到。下面就用最经典的 C 语言和<code>gcc</code>来介绍这个过程，<code>gcc</code>包含的预处理器为<code>cpp</code>，还会调用汇编器<code>as</code>、连接器<code>ld</code>。</p>
 <p>关于三者的介绍，以及编译过程中，每一步时如何进行的详细过程，可以看看我的另一篇文章<a class="link" href="https://blog.csdn.net/qq_33919450/article/details/131099518"  target="_blank" rel="noopener"
-    >《使用gcc展示完整的编译过程》</a>，这篇文章也通过实际操作，介绍了一些<code>gcc</code>操作方法。<strong>这篇文章非常建议读到这里就看一看，不然可能只理解字面的内容，文章内容原本是打算放在这里的，但是会让字数到 2 万字，这样阅读时间太长了</strong>。</p>
+    >《使用gcc展示完整的编译过程》
+<span style="white-space: nowrap;"><svg width=".7em"
+    height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+    <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+    <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+        fill="currentColor">
+</svg></span>
+
+</a>，这篇文章也通过实际操作，介绍了一些<code>gcc</code>操作方法。<strong>这篇文章非常建议读到这里就看一看，不然可能只理解字面的内容，文章内容原本是打算放在这里的，但是会让字数到 2 万字，这样阅读时间太长了</strong>。</p>
 <h3 id="gcc内部工作流程">gcc内部工作流程</h3>
 <p>gcc内部工作流程如下，这里忽略了预处理过程：</p>
 <p><img src="/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E4%BC%98%E5%8C%96%E5%99%A82.png"
@@ -562,7 +583,15 @@
 </blockquote>
 <p>而<code>clang</code>后面使用的的汇编器和连接器，既可以使用 LLVM 集成，也可以使用 GNU 的，比如连接器可以使用 LLVM 集成的的<code>lld</code>，也可以使用 GNU 的<code>ld</code>或<code>gold</code>，以及 MSVC的<code>link.exe</code>。不过默认情况下是使用 LLVM 集成的。</p>
 <p>如果你好奇更详细 Clang 工作流程，和每一步的操作，比如说什么选项对应的是编译过程的某一步，可以看看这篇文档<a class="link" href="https://llvm.org/devmtg/2019-10/slides/ClangTutorial-Stulova-vanHaastregt.pdf"  target="_blank" rel="noopener"
-    >《An Overview of Clang》</a>，我就不单独写博客了。</p>
+    >《An Overview of Clang》
+<span style="white-space: nowrap;"><svg width=".7em"
+    height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+    <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+    <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+        fill="currentColor">
+</svg></span>
+
+</a>，我就不单独写博客了。</p>
 <p>这种编译方式对于适配不同平台来说非常方便。当出现一个新的平台，只要将指令与 LLVM IR 对应即可，完全不用开发者去写一个全新的优化器和代码生成器去将源代码转换成汇编代码，省时省力。</p>
 <h3 id="为什么clang是一个前端难道它不是完整的编译器吗如果clang是完整的编译器的话那么为什么叫前端呢如果它不是完整的那么后端是什么呢">为什么<code>clang</code>是一个前端？难道它不是完整的编译器吗？如果<code>clang</code>是完整的编译器的话，那么为什么叫前端呢？如果它不是完整的，那么后端是什么呢？</h3>
 <p>Clang 是一个完整的编译器，也是一个前端。不过是将源代码转换成可执行程序流程的前端，而不是编译器的前端。如果说是编译器的前端，那是预处理器、词义分析器（Lexer）和语法分析器（Parser）等部分构成的。</p>
@@ -573,7 +602,15 @@
 <h3 id="llvm-项目是干什么项目">LLVM 项目是干什么项目？</h3>
 <p>前文提到，很多编译器是需要多个中间表达（IR）的，这些中间表达可能是词汇分析器生成的，也可能是语义分析器生成的，就很不统一，这就导致更新指令和优化性能随着数量的大幅提升成为了一件很困难的事情。</p>
 <p>LLVM 全名“Low-Level Virtual Machine”，是一架构和中间表达的实现。而 LLVM 项目最初是一套围绕着 LLVM 代码的工具，C 语言和对应的 LLVM 代码如下（源自<a class="link" href="https://llvm.org/pubs/2003-05-01-GCCSummit2003.pdf"  target="_blank" rel="noopener"
-    >Chris Lattner 的《Architecture for a Next-Generation GCC》</a>）：</p>
+    >Chris Lattner 的《Architecture for a Next-Generation GCC》
+<span style="white-space: nowrap;"><svg width=".7em"
+    height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+    <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+    <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+        fill="currentColor">
+</svg></span>
+
+</a>）：</p>
 <p><img src="/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E4%BC%AA%E4%BB%A3%E7%A0%811.png"
 	width="2390"
 	height="1148"
@@ -597,9 +634,25 @@
 <p>这三种用途实际上都是等价的，要么能共用，要么有工具可以很轻松的转换，这点就让 LLVM 兼容新的机器、优化性能、开发新的语言，甚至是反汇编都是很容易的。</p>
 <p>整个项目最核心内容其实就是 LLVM IR。LLVM IR 旨在成为某种“通用IR”，希望足够低级，可以将高级代码干净地映射到 LLVM IR（类似于处理器使用的指令是“通用IR”，允许将许多种不同的语言映射到这些汇编语言）。这给使用 LLVM IR 的编译器带来了性能很不错提升。</p>
 <p>关于 LLVM 设计更详细的介绍还是请看文档：<a class="link" href="https://llvm.org/docs/LangRef.html"  target="_blank" rel="noopener"
-    >《LLVM Language Reference Manual》</a>。</p>
+    >《LLVM Language Reference Manual》
+<span style="white-space: nowrap;"><svg width=".7em"
+    height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+    <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+    <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+        fill="currentColor">
+</svg></span>
+
+</a>。</p>
 <p>关于 LLVM 带来的性能提升可以看 Intel 的这篇文章：<a class="link" href="https://www.intel.com/content/www/us/en/developer/articles/technical/adoption-of-llvm-complete-icx.html"  target="_blank" rel="noopener"
-    >《Intel® C/C++ Compilers Complete Adoption of LLVM》</a></p>
+    >《Intel® C/C++ Compilers Complete Adoption of LLVM》
+<span style="white-space: nowrap;"><svg width=".7em"
+    height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+    <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+    <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+        fill="currentColor">
+</svg></span>
+
+</a></p>
 <p><img src="/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E6%95%B0%E6%8D%AE%E5%9B%BE1.png"
 	width="1932"
 	height="1530"
@@ -620,7 +673,15 @@
 <p>后来 LLVM 创始人 Chris Lattner 在苹果的时候就开创了一个中间表达全部使用 LLVM 作为中间表达的 C 语言家族的编译器，也就是 Clang。</p>
 <p>虽然<code>clang</code>淘汰了<code>llvm-gcc</code>，虽然现在还是有<code>llvm-gcc</code>，但是使用率和性能都不如<code>clang</code>。也正是因为 LLVM IR，<code>Clang</code>进行反汇编也很方便。</p>
 <p>下面是 Chris Lattner 简历中提到 Clang 诞生的部分（<a class="link" href="https://www.nondot.org/sabre/Resume.html#Apple"  target="_blank" rel="noopener"
-    >https://www.nondot.org/sabre/Resume.html#Apple</a>）：</p>
+    >https://www.nondot.org/sabre/Resume.html#Apple
+<span style="white-space: nowrap;"><svg width=".7em"
+    height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+    <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+    <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+        fill="currentColor">
+</svg></span>
+
+</a>）：</p>
 <p><img src="/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E7%AE%80%E5%8E%86%E6%88%AA%E5%9B%BE.png"
 	width="2806"
 	height="422"
@@ -652,7 +713,15 @@
 ></p>
 <p>总结一下，<code>gcc</code>和<code>clang</code>的区别在于：<code>clang</code>的各个中间层均为 LLVM IR，而<code>gcc</code>的各个中间层为 RTL 或其他一些事物。</p>
 <p><strong>这里需要注意一点，<code>llvm-gcc</code>和 LLVM 创始人 Chris Lattner 在<a class="link" href="https://llvm.org/pubs/2003-05-01-GCCSummit2003.pdf"  target="_blank" rel="noopener"
-    >《Architecture for a Next-Generation GCC》</a>中描述的 LLVM 编译器不是一个东西。这个 LLVM 编译器与后来的 Clang 也不是一个东西</strong>。论文中对 LLVM 编译器的示意图如下：</p>
+    >《Architecture for a Next-Generation GCC》
+<span style="white-space: nowrap;"><svg width=".7em"
+    height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+    <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+    <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+        fill="currentColor">
+</svg></span>
+
+</a>中描述的 LLVM 编译器不是一个东西。这个 LLVM 编译器与后来的 Clang 也不是一个东西</strong>。论文中对 LLVM 编译器的示意图如下：</p>
 <p><img src="/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/LLVM%E7%A4%BA%E6%84%8F%E5%9B%BE.png"
 	width="2500"
 	height="714"
@@ -668,7 +737,15 @@
 	
 ></p>
 <p>区别在于中间加了一个连接层，整个编译器中进行了两次连接。不过很明显，根据 Intel 的数据来看， LLVM 编译器的性能和效果相比 GNU GCC 差不多。不过现在你还是可以在 GitHub 上下到它，目前最新版本为 16：<a class="link" href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-16.0.0"  target="_blank" rel="noopener"
-    >https://github.com/llvm/llvm-project/releases/tag/llvmorg-16.0.0</a></p>
+    >https://github.com/llvm/llvm-project/releases/tag/llvmorg-16.0.0
+<span style="white-space: nowrap;"><svg width=".7em"
+    height=".7em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+    <path d="m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z" fill="currentColor" />
+    <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"
+        fill="currentColor">
+</svg></span>
+
+</a></p>
 <p>你可以选择和<code>clang</code>一起下载：<br>
 <img src="/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/clang1.png"
 	width="2506"
@@ -924,14 +1001,80 @@
         
             2023 - 
         
-        2025 木木龙的个人博客
+        2026 木木龙的个人博客. 引用请注明文章链接哦~
     </section>
+
     
-    <section class="powerby">
+    <section class="running-time">
+        本博客已稳定运行
+        <span id="runningdays" class="running-days"></span>
+    </section>
+
+    
+    <section class="totalcount">
         
-            热爱可抵岁月漫长，温柔可挡艰难时光。 <br/>
-        Nothing but enthusiasm brightens up the endless years. <br />
-        转载请注明主页网址哦~
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        发表了19篇文章 ·
+        总计4万5千字
+        <br>
     </section>
 </footer>
 
@@ -1022,6 +1165,37 @@
                 >
             </script><script type="text/javascript" src="/ts/main.js" defer></script>
 <script>
+    function backToTop() {
+        document.documentElement.scrollIntoView({
+        behavior: 'smooth',
+        })
+    }
+
+    window.onload = function () {
+        let scrollTop =
+        this.document.documentElement.scrollTop || this.document.body.scrollTop
+        let totopBtn = this.document.getElementById('back-to-top')
+        if (scrollTop > 0) {
+        totopBtn.style.display = 'inline'
+        } else {
+        totopBtn.style.display = 'none'
+        }
+    }
+    
+    window.onscroll = function () {
+        let scrollTop =
+        this.document.documentElement.scrollTop || this.document.body.scrollTop
+        let totopBtn = this.document.getElementById('back-to-top')
+        if (scrollTop < 200) {
+        totopBtn.style.display = 'none'
+        } else {
+        totopBtn.style.display = 'inline'
+        totopBtn.addEventListener('click', backToTop, false)
+        }
+    }
+</script>
+
+<script>
     (function () {
         const customFont = document.createElement('link');
         customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
@@ -1048,7 +1222,118 @@
     
 <script src="/js/waifu-tips.js?v=1.4.2"></script>
 <script src="/js/live2d.js?v=1.0.5"></script>
-<script pointColor="48,48,48" color="255,182,193" opacity='1' zIndex="-1" count="800" src="https://cdn.bootcss.com/canvas-nest.js/2.0.4/canvas-nest.js" type="text/javascript"></script>
+
+<script zIndex="-9999" src="/js/sakura.js" type="text/javascript"></script>
+
+<script>
+    let s1 = '2023-3-18'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+
+    
+    let diffInMilliseconds = s2.getTime() - s1.getTime();
+    let totalDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
+
+    
+    let years = s2.getFullYear() - s1.getFullYear();
+    let months = s2.getMonth() - s1.getMonth();
+    let days = s2.getDate() - s1.getDate();
+
+    
+    if (days < 0) {
+      months -= 1;
+      let prevMonth = new Date(s2.getFullYear(), s2.getMonth(), 0); 
+      days += prevMonth.getDate();
+    }
+    if (months < 0) {
+      years -= 1;
+      months += 12;
+    }
+
+    
+    let result = `${years}年${months}月${days}天`;
+    document.getElementById('runningdays').innerHTML = result;
+</script>
+
+<a href="#" id="back-to-top" title="返回顶部"></a>
+
+
+<style>
+  #back-to-top {
+    display: none;
+    position: fixed;
+    bottom: 5px;
+    right: 15px;
+    width: 40px;  
+    height: 40px;  
+    border-radius: 50%;  
+    background-color: var(--body-background);
+    box-shadow: var(--shadow-l2);
+    font-size: 20px;  
+    text-align: center;
+    line-height: 38px;  
+    cursor: pointer;
+    transition:
+      transform 0.3s ease,
+      background-color 0.3s ease;  
+  }
+
+  #back-to-top:before {
+    content: "";
+    display: inline-block;
+    position: relative;
+    transform: rotate(135deg);
+    height: 8px;  
+    width: 8px;  
+    border-width: 0 0 2px 2px;
+    border-color: var(--back-to-top-color);
+    border-style: solid;
+  }
+
+  #back-to-top:hover {
+    transform: scale(1.1);  
+    background-color: var(--accent-background);  
+  }
+
+  #back-to-top:hover:before {
+    border-color: var(--accent-color);  
+  }
+
+   
+  @media screen and (max-width: 768px) {
+    #back-to-top {
+      bottom: 5px;
+      right: var(--container-padding);
+      width: 30px;  
+      height: 30px;
+      font-size: 16px;
+      line-height: 32px;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    #back-to-top {
+      bottom: 10px;
+      right: 20px;
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    #back-to-top {
+      bottom: 15px;
+      right: 25px;
+    }
+  }
+
+  @media screen and (min-width: 1536px) {
+    #back-to-top {
+      bottom: 15px;
+      right: 25px;
+       
+    }
+  }
+</style>
+
 <script type="text/javascript">
      
     live2d_settings['modelId'] = 6;                 
@@ -1064,7 +1349,7 @@
     live2d_settings['waifuToolFont'] = '18px';      
     live2d_settings['waifuToolLine'] = '20px';      
     live2d_settings['waifuToolTop'] = '0px';        
-    live2d_settings['waifuEdgeSide'] = 'right:30';  
+    live2d_settings['waifuEdgeSide'] = 'right:80';  
     live2d_settings['waifuDraggable'] = 'axis-x';   
     live2d_settings['homePageUrl'] = 'https://joker0ops.github.io';     
     live2d_settings['aboutPageUrl'] = 'https://github.com/joker0ops';   

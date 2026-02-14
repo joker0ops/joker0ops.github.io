@@ -6,7 +6,7 @@
         <description>Recent content in C&#43;&#43; on 木木龙的个人博客</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <copyright>木木龙的个人博客</copyright>
+        <copyright>木木龙的个人博客. 引用请注明文章链接哦~</copyright>
         <lastBuildDate>Thu, 04 Sep 2025 17:45:36 +0800</lastBuildDate><atom:link href="https://joker0ops.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Clang到底是什么?(转载)</title>
         <link>https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/</link>
@@ -14,7 +14,15 @@
         
         <guid>https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/</guid>
         <description>&lt;p&gt;最近发现自己对 &lt;a class=&#34;link&#34; href=&#34;https://so.csdn.net/so/search?q=GNU&amp;amp;spm=1001.2101.3001.7020&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;GNU&lt;/a&gt; GCC 和 Clang 的区别不太清楚，影响到一些实现和学习，所以趁这两天有空好好研究了一下。&lt;/p&gt;
+    &gt;GNU
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt; GCC 和 Clang 的区别不太清楚，影响到一些实现和学习，所以趁这两天有空好好研究了一下。&lt;/p&gt;
 &lt;p&gt;在这个研究过程中，我发现很多问题其实源自于语言（不是指编程语言，而是中文和英文翻译的失真）和概念理解不严谨。&lt;/p&gt;
 &lt;p&gt;如果你上网去查&lt;code&gt;clang&lt;/code&gt;，有些人会告诉你这是一个前端（frontend），然后从书上摘抄一些编译器的介绍，然后列出了一堆表格进行对比，并没有对原理和机制进行详尽的解释和介绍。所以这时候会有更多的问题冒出来：&lt;/p&gt;
 &lt;ul&gt;
@@ -83,7 +91,15 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;这里有篇文章做了更详细的介绍：&lt;a class=&#34;link&#34; href=&#34;https://web.stanford.edu/class/archive/cs/cs143/cs143.1128/handouts/230%20Intermediate%20Rep.pdf#:~:text=gcc%27s%20Intermediate%20Representation%20The%20gcc/g&amp;#43;&amp;#43;%20compiler%20uses%20an,pointer%20to%20a%20structure%20with%20a%20tag%20field&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;《Intermediate Representation》&lt;/a&gt;&lt;/p&gt;
+    &gt;《Intermediate Representation》
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;从源代码转换成可执行程序的过程&#34;&gt;从源代码转换成可执行程序的过程&lt;/h3&gt;
 &lt;p&gt;从源代码转换成可执行程序的完整过程，也就是我们平时所说的“编译过程”。在过去的几十年里，这个标准流程大致如下（圆角矩形表示代码，矩形表示各种处理器）：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E7%BC%96%E8%AF%91%E6%B5%81%E7%A8%8B.png&#34;
@@ -104,7 +120,15 @@
 &lt;h4 id=&#34;过程展示gcc和配套的cppasld处理转换程序&#34;&gt;过程展示：gcc和配套的cpp、as、ld处理转换程序&lt;/h4&gt;
 &lt;p&gt;上文提到的的几种处理转换程序除了编译器和汇编器，其他三个估计都很很少听到。下面就用最经典的 C 语言和&lt;code&gt;gcc&lt;/code&gt;来介绍这个过程，&lt;code&gt;gcc&lt;/code&gt;包含的预处理器为&lt;code&gt;cpp&lt;/code&gt;，还会调用汇编器&lt;code&gt;as&lt;/code&gt;、连接器&lt;code&gt;ld&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;关于三者的介绍，以及编译过程中，每一步时如何进行的详细过程，可以看看我的另一篇文章&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/qq_33919450/article/details/131099518&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;《使用gcc展示完整的编译过程》&lt;/a&gt;，这篇文章也通过实际操作，介绍了一些&lt;code&gt;gcc&lt;/code&gt;操作方法。&lt;strong&gt;这篇文章非常建议读到这里就看一看，不然可能只理解字面的内容，文章内容原本是打算放在这里的，但是会让字数到 2 万字，这样阅读时间太长了&lt;/strong&gt;。&lt;/p&gt;
+    &gt;《使用gcc展示完整的编译过程》
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;，这篇文章也通过实际操作，介绍了一些&lt;code&gt;gcc&lt;/code&gt;操作方法。&lt;strong&gt;这篇文章非常建议读到这里就看一看，不然可能只理解字面的内容，文章内容原本是打算放在这里的，但是会让字数到 2 万字，这样阅读时间太长了&lt;/strong&gt;。&lt;/p&gt;
 &lt;h3 id=&#34;gcc内部工作流程&#34;&gt;gcc内部工作流程&lt;/h3&gt;
 &lt;p&gt;gcc内部工作流程如下，这里忽略了预处理过程：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E4%BC%98%E5%8C%96%E5%99%A82.png&#34;
@@ -147,7 +171,15 @@
 &lt;/blockquote&gt;
 &lt;p&gt;而&lt;code&gt;clang&lt;/code&gt;后面使用的的汇编器和连接器，既可以使用 LLVM 集成，也可以使用 GNU 的，比如连接器可以使用 LLVM 集成的的&lt;code&gt;lld&lt;/code&gt;，也可以使用 GNU 的&lt;code&gt;ld&lt;/code&gt;或&lt;code&gt;gold&lt;/code&gt;，以及 MSVC的&lt;code&gt;link.exe&lt;/code&gt;。不过默认情况下是使用 LLVM 集成的。&lt;/p&gt;
 &lt;p&gt;如果你好奇更详细 Clang 工作流程，和每一步的操作，比如说什么选项对应的是编译过程的某一步，可以看看这篇文档&lt;a class=&#34;link&#34; href=&#34;https://llvm.org/devmtg/2019-10/slides/ClangTutorial-Stulova-vanHaastregt.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;《An Overview of Clang》&lt;/a&gt;，我就不单独写博客了。&lt;/p&gt;
+    &gt;《An Overview of Clang》
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;，我就不单独写博客了。&lt;/p&gt;
 &lt;p&gt;这种编译方式对于适配不同平台来说非常方便。当出现一个新的平台，只要将指令与 LLVM IR 对应即可，完全不用开发者去写一个全新的优化器和代码生成器去将源代码转换成汇编代码，省时省力。&lt;/p&gt;
 &lt;h3 id=&#34;为什么clang是一个前端难道它不是完整的编译器吗如果clang是完整的编译器的话那么为什么叫前端呢如果它不是完整的那么后端是什么呢&#34;&gt;为什么&lt;code&gt;clang&lt;/code&gt;是一个前端？难道它不是完整的编译器吗？如果&lt;code&gt;clang&lt;/code&gt;是完整的编译器的话，那么为什么叫前端呢？如果它不是完整的，那么后端是什么呢？&lt;/h3&gt;
 &lt;p&gt;Clang 是一个完整的编译器，也是一个前端。不过是将源代码转换成可执行程序流程的前端，而不是编译器的前端。如果说是编译器的前端，那是预处理器、词义分析器（Lexer）和语法分析器（Parser）等部分构成的。&lt;/p&gt;
@@ -158,7 +190,15 @@
 &lt;h3 id=&#34;llvm-项目是干什么项目&#34;&gt;LLVM 项目是干什么项目？&lt;/h3&gt;
 &lt;p&gt;前文提到，很多编译器是需要多个中间表达（IR）的，这些中间表达可能是词汇分析器生成的，也可能是语义分析器生成的，就很不统一，这就导致更新指令和优化性能随着数量的大幅提升成为了一件很困难的事情。&lt;/p&gt;
 &lt;p&gt;LLVM 全名“Low-Level Virtual Machine”，是一架构和中间表达的实现。而 LLVM 项目最初是一套围绕着 LLVM 代码的工具，C 语言和对应的 LLVM 代码如下（源自&lt;a class=&#34;link&#34; href=&#34;https://llvm.org/pubs/2003-05-01-GCCSummit2003.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Chris Lattner 的《Architecture for a Next-Generation GCC》&lt;/a&gt;）：&lt;/p&gt;
+    &gt;Chris Lattner 的《Architecture for a Next-Generation GCC》
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;）：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E4%BC%AA%E4%BB%A3%E7%A0%811.png&#34;
 	width=&#34;2390&#34;
 	height=&#34;1148&#34;
@@ -182,9 +222,25 @@
 &lt;p&gt;这三种用途实际上都是等价的，要么能共用，要么有工具可以很轻松的转换，这点就让 LLVM 兼容新的机器、优化性能、开发新的语言，甚至是反汇编都是很容易的。&lt;/p&gt;
 &lt;p&gt;整个项目最核心内容其实就是 LLVM IR。LLVM IR 旨在成为某种“通用IR”，希望足够低级，可以将高级代码干净地映射到 LLVM IR（类似于处理器使用的指令是“通用IR”，允许将许多种不同的语言映射到这些汇编语言）。这给使用 LLVM IR 的编译器带来了性能很不错提升。&lt;/p&gt;
 &lt;p&gt;关于 LLVM 设计更详细的介绍还是请看文档：&lt;a class=&#34;link&#34; href=&#34;https://llvm.org/docs/LangRef.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;《LLVM Language Reference Manual》&lt;/a&gt;。&lt;/p&gt;
+    &gt;《LLVM Language Reference Manual》
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;关于 LLVM 带来的性能提升可以看 Intel 的这篇文章：&lt;a class=&#34;link&#34; href=&#34;https://www.intel.com/content/www/us/en/developer/articles/technical/adoption-of-llvm-complete-icx.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;《Intel® C/C++ Compilers Complete Adoption of LLVM》&lt;/a&gt;&lt;/p&gt;
+    &gt;《Intel® C/C++ Compilers Complete Adoption of LLVM》
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E6%95%B0%E6%8D%AE%E5%9B%BE1.png&#34;
 	width=&#34;1932&#34;
 	height=&#34;1530&#34;
@@ -205,7 +261,15 @@
 &lt;p&gt;后来 LLVM 创始人 Chris Lattner 在苹果的时候就开创了一个中间表达全部使用 LLVM 作为中间表达的 C 语言家族的编译器，也就是 Clang。&lt;/p&gt;
 &lt;p&gt;虽然&lt;code&gt;clang&lt;/code&gt;淘汰了&lt;code&gt;llvm-gcc&lt;/code&gt;，虽然现在还是有&lt;code&gt;llvm-gcc&lt;/code&gt;，但是使用率和性能都不如&lt;code&gt;clang&lt;/code&gt;。也正是因为 LLVM IR，&lt;code&gt;Clang&lt;/code&gt;进行反汇编也很方便。&lt;/p&gt;
 &lt;p&gt;下面是 Chris Lattner 简历中提到 Clang 诞生的部分（&lt;a class=&#34;link&#34; href=&#34;https://www.nondot.org/sabre/Resume.html#Apple&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://www.nondot.org/sabre/Resume.html#Apple&lt;/a&gt;）：&lt;/p&gt;
+    &gt;https://www.nondot.org/sabre/Resume.html#Apple
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;）：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/%E7%AE%80%E5%8E%86%E6%88%AA%E5%9B%BE.png&#34;
 	width=&#34;2806&#34;
 	height=&#34;422&#34;
@@ -237,7 +301,15 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;总结一下，&lt;code&gt;gcc&lt;/code&gt;和&lt;code&gt;clang&lt;/code&gt;的区别在于：&lt;code&gt;clang&lt;/code&gt;的各个中间层均为 LLVM IR，而&lt;code&gt;gcc&lt;/code&gt;的各个中间层为 RTL 或其他一些事物。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;这里需要注意一点，&lt;code&gt;llvm-gcc&lt;/code&gt;和 LLVM 创始人 Chris Lattner 在&lt;a class=&#34;link&#34; href=&#34;https://llvm.org/pubs/2003-05-01-GCCSummit2003.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;《Architecture for a Next-Generation GCC》&lt;/a&gt;中描述的 LLVM 编译器不是一个东西。这个 LLVM 编译器与后来的 Clang 也不是一个东西&lt;/strong&gt;。论文中对 LLVM 编译器的示意图如下：&lt;/p&gt;
+    &gt;《Architecture for a Next-Generation GCC》
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;中描述的 LLVM 编译器不是一个东西。这个 LLVM 编译器与后来的 Clang 也不是一个东西&lt;/strong&gt;。论文中对 LLVM 编译器的示意图如下：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/LLVM%E7%A4%BA%E6%84%8F%E5%9B%BE.png&#34;
 	width=&#34;2500&#34;
 	height=&#34;714&#34;
@@ -253,7 +325,15 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;区别在于中间加了一个连接层，整个编译器中进行了两次连接。不过很明显，根据 Intel 的数据来看， LLVM 编译器的性能和效果相比 GNU GCC 差不多。不过现在你还是可以在 GitHub 上下到它，目前最新版本为 16：&lt;a class=&#34;link&#34; href=&#34;https://github.com/llvm/llvm-project/releases/tag/llvmorg-16.0.0&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://github.com/llvm/llvm-project/releases/tag/llvmorg-16.0.0&lt;/a&gt;&lt;/p&gt;
+    &gt;https://github.com/llvm/llvm-project/releases/tag/llvmorg-16.0.0
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;你可以选择和&lt;code&gt;clang&lt;/code&gt;一起下载：&lt;br&gt;
 &lt;img src=&#34;https://joker0ops.github.io/p/clang%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%BD%AC%E8%BD%BD/clang1.png&#34;
 	width=&#34;2506&#34;
@@ -1904,111 +1984,280 @@
 &lt;tr&gt;
 &lt;td&gt;qtcn&lt;/td&gt;
 &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.qtcn.org&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;http://www.qtcn.org&lt;/a&gt;&lt;/td&gt;
+    &gt;http://www.qtcn.org
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;豆子的空间&lt;/td&gt;
 &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.devbean.net&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;[DevBean Tech World](DevBean Tech World)&lt;/a&gt;&lt;/td&gt;
+    &gt;[DevBean Tech World](DevBean Tech World)
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;yafeilinux&lt;/td&gt;
 &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.qter.org&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;qt qml linux 嵌入式 教程!&lt;/a&gt;&lt;/td&gt;
+    &gt;qt qml linux 嵌入式 教程!
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;一去二三里&lt;/td&gt;
 &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;http://blog.csdn.net/liang19890820&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;http://blog.csdn.net/liang19890820&lt;/a&gt;&lt;/td&gt;
+    &gt;http://blog.csdn.net/liang19890820
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;乌托邦2号&lt;/td&gt;
 &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;http://blog.csdn.net/taiyang1987912&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;http://blog.csdn.net/taiyang1987912&lt;/a&gt;&lt;/td&gt;
+    &gt;http://blog.csdn.net/taiyang1987912
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;foruok&lt;/td&gt;
 &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;http://blog.csdn.net/foruok&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;http://blog.csdn.net/foruok&lt;/a&gt;&lt;/td&gt;
+    &gt;http://blog.csdn.net/foruok
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;jason&lt;/td&gt;
 &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;http://blog.csdn.net/wsj18808050&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;http://blog.csdn.net/wsj18808050&lt;/a&gt;&lt;/td&gt;
+    &gt;http://blog.csdn.net/wsj18808050
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;朝十晚八&lt;/td&gt;
 &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.cnblogs.com/swarmbees&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;[朝十晚八 - 博客园](朝十晚八 - 博客园)&lt;/a&gt;&lt;/td&gt;
+    &gt;[朝十晚八 - 博客园](朝十晚八 - 博客园)
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;BIG_C_GOD&lt;/td&gt;
 &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;http://blog.csdn.net/big_c_god&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;http://blog.csdn.net/big_c_god&lt;/a&gt;&lt;/td&gt;
+    &gt;http://blog.csdn.net/big_c_god
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;公孙二狗&lt;/td&gt;
 &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://qtdebug.com/qtbook&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://qtdebug.com/qtbook&lt;/a&gt;&lt;/td&gt;
+    &gt;https://qtdebug.com/qtbook
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;雨田哥&lt;/td&gt;
 &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/ly305750665&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://blog.csdn.net/ly305750665&lt;/a&gt;&lt;/td&gt;
+    &gt;https://blog.csdn.net/ly305750665
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;郑天佐&lt;/td&gt;
 &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/zhengtianzuo06&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://blog.csdn.net/zhengtianzuo06&lt;/a&gt;&lt;/td&gt;
+    &gt;https://blog.csdn.net/zhengtianzuo06
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;寒山-居士&lt;/td&gt;
 &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/esonpo&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://blog.csdn.net/esonpo&lt;/a&gt;&lt;/td&gt;
+    &gt;https://blog.csdn.net/esonpo
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;feiyangqingyun&lt;/td&gt;
 &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/feiyangqingyun&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://blog.csdn.net/feiyangqingyun&lt;/a&gt;&lt;/td&gt;
+    &gt;https://blog.csdn.net/feiyangqingyun
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;前行中小猪&lt;/td&gt;
 &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;http://blog.csdn.net/goforwardtostep&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;http://blog.csdn.net/goforwardtostep&lt;/a&gt;&lt;/td&gt;
+    &gt;http://blog.csdn.net/goforwardtostep
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;涛哥的知乎专栏&lt;/td&gt;
-&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;Qt%e8%bf%9b%e9%98%b6%e4%b9%8b%e8%b7%af&#34; &gt;Qt进阶之路&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;Qt%e8%bf%9b%e9%98%b6%e4%b9%8b%e8%b7%af&#34; &gt;Qt进阶之路
+&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Qt君&lt;/td&gt;
 &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/nicai_xiaoqinxi&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://blog.csdn.net/nicai_xiaoqinxi&lt;/a&gt;&lt;/td&gt;
+    &gt;https://blog.csdn.net/nicai_xiaoqinxi
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Qt老外视频教程&lt;/td&gt;
 &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;http://space.bilibili.com/2592237/#!/index&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;[哔哩哔哩 ( ゜- ゜)つロ 乾杯~ Bilibili](哔哩哔哩 ( ゜- ゜)つロ 乾杯~ Bilibili)&lt;/a&gt;&lt;/td&gt;
+    &gt;[哔哩哔哩 ( ゜- ゜)つロ 乾杯~ Bilibili](哔哩哔哩 ( ゜- ゜)つロ 乾杯~ Bilibili)
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Qt维基补充文档&lt;/td&gt;
 &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://wiki.qt.io/Main&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Qt Wiki&lt;/a&gt;&lt;/td&gt;
+    &gt;Qt Wiki
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Qt源码查看网站&lt;/td&gt;
 &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://code.woboq.org/qt5&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;qt5/ Source Tree - Woboq Code Browser&lt;/a&gt;&lt;/td&gt;
+    &gt;qt5/ Source Tree - Woboq Code Browser
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Qt官方下载地址&lt;/td&gt;
 &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://download.qt.io&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Index of /&lt;/a&gt;&lt;/td&gt;
+    &gt;Index of /
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Qt国内镜像下载地址&lt;/td&gt;
 &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://mirrors.cloud.tencent.com/qt&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;[Index of /qt/](Index of /qt/)&lt;/a&gt;&lt;/td&gt;
+    &gt;[Index of /qt/](Index of /qt/)
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;

@@ -6,7 +6,7 @@
         <description>Recent content in Linux on 木木龙的个人博客</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <copyright>木木龙的个人博客</copyright>
+        <copyright>木木龙的个人博客. 引用请注明文章链接哦~</copyright>
         <lastBuildDate>Fri, 05 Sep 2025 11:32:02 +0800</lastBuildDate><atom:link href="https://joker0ops.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>ELF文件结构与格式剖析</title>
         <link>https://joker0ops.github.io/p/elf%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%BC%E5%BC%8F%E5%89%96%E6%9E%90/</link>
@@ -14,7 +14,15 @@
         
         <guid>https://joker0ops.github.io/p/elf%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%BC%E5%BC%8F%E5%89%96%E6%9E%90/</guid>
         <description>&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://so.csdn.net/so/search?q=ELF&amp;amp;spm=1001.2101.3001.7020&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;ELF&lt;/a&gt; 文件，大名叫 Executable and Linkable Format。&lt;/p&gt;
+    &gt;ELF
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt; 文件，大名叫 Executable and Linkable Format。&lt;/p&gt;
 &lt;p&gt;作为一种文件，那么肯定就需要遵守一定的格式。&lt;/p&gt;
 &lt;p&gt;从宏观上看，可以分成四个部分：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/787e2d4fb2c93eb963a21ce8c19af972.png&#34;
@@ -43,7 +51,15 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;共享库文件：在&lt;a class=&#34;link&#34; href=&#34;https://so.csdn.net/so/search?q=%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5&amp;amp;spm=1001.2101.3001.7020&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;动态链接&lt;/a&gt;的时候，由 ld-linux.so 来读取;&lt;/p&gt;
+    &gt;动态链接
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;的时候，由 ld-linux.so 来读取;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/blockquote&gt;
@@ -584,7 +600,15 @@ typedef struct elf64_hdr {
 &lt;/ul&gt;
 &lt;blockquote&gt;
 &lt;p&gt;  EI_MAG0,EI_MAG1,EI_MAG2,EI_MAG3,EI_CLASS,EI_DATA,EI_VERSION，EI_OSABI,EI_PAD是linux源码中定义的宏，取值分别为0-7，分别对应各个字段的下标；下面的&lt;a class=&#34;link&#34; href=&#34;https://so.csdn.net/so/search?q=%E5%AE%8F%E5%AE%9A%E4%B9%89&amp;amp;spm=1001.2101.3001.7020&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;宏定义&lt;/a&gt;将采用类似EI_MAG0(0)的方式，表示EI_MAG0的值为0。&lt;/p&gt;
+    &gt;宏定义
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;将采用类似EI_MAG0(0)的方式，表示EI_MAG0的值为0。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;e_type&lt;/code&gt;：文件的标识字段标识文件的类型；
@@ -808,7 +832,15 @@ typedef struct elf64_shdr {
 &lt;li&gt;&lt;code&gt;.relname&lt;/code&gt;，类型&lt;code&gt;SHT_REL&lt;/code&gt;：包含重定位信息。如果文件具有包含重定位的可加载段，则这些部分的属性将包括 SHF_ALLOC 位；否则，该位将关闭。通常，名称由 重定位适用的部分。因此&lt;code&gt;.text&lt;/code&gt;的重定位部分通常具有名称.&lt;code&gt;rel.text&lt;/code&gt;或&lt;code&gt;.rela.text&lt;/code&gt;；&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;.relaname&lt;/code&gt;，类型&lt;code&gt;SHT_RELA&lt;/code&gt;：同&lt;code&gt;relname&lt;/code&gt;。&lt;/li&gt;
 &lt;li&gt;其他：对于C++程序有些版本会有&lt;code&gt;.ctors&lt;/code&gt;（有时也会是&lt;code&gt;.init_array&lt;/code&gt;，见&lt;a class=&#34;link&#34; href=&#34;https://stackoverflow.com/questions/16569495/cant-find-dtors-and-ctors-in-binary&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Can’t find .dtors and .ctors in binary&lt;/a&gt;）和&lt;code&gt;dtors&lt;/code&gt;两个节存储构造和析构相关的代码。&lt;/li&gt;
+    &gt;Can’t find .dtors and .ctors in binary
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;）和&lt;code&gt;dtors&lt;/code&gt;两个节存储构造和析构相关的代码。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
 &lt;p&gt;  带有点 (.) 前缀的部分名称是为系统保留的，但如果它们的现有含义令人满意，应用程序可以使用这些部分。 应用程序可以使用不带前缀的名称以避免与系统部分冲突。 目标文件格式允许定义不在上面列表中的部分。 一个目标文件可能有多个同名的部分。&lt;/p&gt;
@@ -1088,13 +1120,45 @@ Symbol table &#39;.symtab&#39; contains 51 entries:
 &lt;h2 id=&#34;4-参考文献&#34;&gt;4 参考文献&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://en.wikipedia.org/wiki/Executable_and_Linkable_Format&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Executable and Linkable Format&lt;/a&gt;&lt;/li&gt;
+    &gt;Executable and Linkable Format
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;http://refspecs.linuxbase.org/elf/elf.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Tool Interface Standard (TIS) Executable and Linking Format (ELF)Specification Version 1.2&lt;/a&gt;&lt;/li&gt;
+    &gt;Tool Interface Standard (TIS) Executable and Linking Format (ELF)Specification Version 1.2
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://stackoverflow.com/questions/14361248/whats-the-difference-of-section-and-segment-in-elf-file-format&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;What’s the difference of section and segment in ELF file format&lt;/a&gt;&lt;/li&gt;
+    &gt;What’s the difference of section and segment in ELF file format
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://xinqiu.gitbooks.io/linux-inside-zh/content/Theory/linux-theory-2.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;ELF文件格式&lt;/a&gt;&lt;/li&gt;
+    &gt;ELF文件格式
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         </item>
@@ -1107,7 +1171,15 @@ Symbol table &#39;.symtab&#39; contains 51 entries:
         <description>&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;ELF是一种文件格式的名称&lt;/code&gt;&lt;br&gt;
 ELF（Executable and Linkable Format）是Linux和其他类Unix系统中用于可执行文件、目标文件、共享库（动态链接库）和核心转储（core dumps）的标准&lt;a class=&#34;link&#34; href=&#34;https://so.csdn.net/so/search?q=%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F&amp;amp;spm=1001.2101.3001.7020&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;文件格式&lt;/a&gt;。它定义了程序在存储和运行时的结构，是理解程序编译、链接和加载过程的关键。&lt;/p&gt;
+    &gt;文件格式
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;。它定义了程序在存储和运行时的结构，是理解程序编译、链接和加载过程的关键。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;一elf文件的类型及其组成的格式&#34;&gt;一、ELF文件的类型及其组成的格式&lt;/h2&gt;
 &lt;h3 id=&#34;11-类型&#34;&gt;1.1 类型&lt;/h3&gt;
@@ -1272,7 +1344,15 @@ void run() {
 ◦ 当程序启动时，动态链接器会解析程序中的动态库依赖，并加载这些库到内存中。&lt;br&gt;
 环境变量和配置⽂件：&lt;br&gt;
 ◦ &lt;a class=&#34;link&#34; href=&#34;https://so.csdn.net/so/search?q=Linux%E7%B3%BB%E7%BB%9F&amp;amp;spm=1001.2101.3001.7020&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Linux系统&lt;/a&gt;通过环境变量（如LD_LIBRARY_PATH）和配置⽂件（如/etc/ld.so.conf及其⼦配置⽂件）来指定动态库的搜索路径。&lt;br&gt;
+    &gt;Linux系统
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;通过环境变量（如LD_LIBRARY_PATH）和配置⽂件（如/etc/ld.so.conf及其⼦配置⽂件）来指定动态库的搜索路径。&lt;br&gt;
 ◦ 这些路径会被动态链接器在加载动态库时搜索。&lt;br&gt;
 缓存⽂件：&lt;br&gt;
 ◦ 为了提⾼动态库的加载效率，Linux系统会维护⼀个名为/etc/ld.so.cache的缓存⽂件。&lt;br&gt;

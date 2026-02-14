@@ -6,7 +6,7 @@
         <description>Recent content in Blog on 木木龙的个人博客</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <copyright>木木龙的个人博客</copyright>
+        <copyright>木木龙的个人博客. 引用请注明文章链接哦~</copyright>
         <lastBuildDate>Sat, 17 Feb 2024 16:01:18 +0800</lastBuildDate><atom:link href="https://joker0ops.github.io/categories/blog/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Hugo建站指南——Day2</title>
         <link>https://joker0ops.github.io/p/hugo-development-day2/</link>
@@ -49,7 +49,15 @@
 	
 &gt;
 可以看到Your site is live at &lt;a class=&#34;link&#34; href=&#34;https://codingxiaoma.github.io/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://codingxiaoma.github.io/&lt;/a&gt;
+    &gt;https://codingxiaoma.github.io/
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;
 此时Github Pages就自动部署好了。点击Visit Site就可以看到你的网站了（因为我们的仓库是空的，所以网站也是空的）&lt;/p&gt;
 &lt;h2 id=&#34;hugo站点和目标文件&#34;&gt;Hugo站点和目标文件&lt;/h2&gt;
 &lt;p&gt;现在我们有了Hugo个人站点，有了Github Pages，那么下一步就是把Hugo博客发布到github。这样我们才能在互联网的任何地方访问我们的博客。&lt;br&gt;
@@ -108,7 +116,15 @@
 &lt;/div&gt;&lt;p&gt;然后在&lt;strong&gt;hugo根目录&lt;/strong&gt;下使用&lt;strong&gt;hugo&lt;/strong&gt;指令，就会自动在&lt;strong&gt;public&lt;/strong&gt;软链接也就是&lt;strong&gt;git repo&lt;/strong&gt;下生成目标文件。
 最终执行&lt;strong&gt;git add/commit/push&lt;/strong&gt;之后，打开
 &lt;a class=&#34;link&#34; href=&#34;https://codingxiaoma.github.io/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://codingxiaoma.github.io/&lt;/a&gt;
+    &gt;https://codingxiaoma.github.io/
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;
 就能看到博客内容。(可能有几分钟延迟，耐心等待)。
 如果git push提示没有权限&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -216,7 +232,15 @@
 &lt;/ul&gt;
 &lt;ol&gt;
 &lt;li&gt;删除旧版本的Go，一般是在 &lt;strong&gt;/usr/local/go&lt;/strong&gt; 中，然后下载&lt;a class=&#34;link&#34; href=&#34;https://go.dev/doc/install&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;官方&lt;/a&gt;的tar包并解压到 &lt;strong&gt;/usr/local&lt;/strong&gt; 中:&lt;/li&gt;
+    &gt;官方
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;的tar包并解压到 &lt;strong&gt;/usr/local&lt;/strong&gt; 中:&lt;/li&gt;
 &lt;/ol&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -286,7 +310,15 @@
 &lt;/ul&gt;
 &lt;ol&gt;
 &lt;li&gt;进入&lt;a class=&#34;link&#34; href=&#34;https://github.com/sass/dart-sass/releases/tag/1.70.0&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Dart-Sass Release&lt;/a&gt;下载相应的安装包&lt;/li&gt;
+    &gt;Dart-Sass Release
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;下载相应的安装包&lt;/li&gt;
 &lt;li&gt;解压到 &lt;strong&gt;/usr/local&lt;/strong&gt; 中&lt;/li&gt;
 &lt;/ol&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -324,7 +356,15 @@
 &lt;/div&gt;&lt;h2 id=&#34;安装hugo&#34;&gt;安装Hugo&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;进入&lt;a class=&#34;link&#34; href=&#34;https://github.com/gohugoio/hugo/releases/tag/v0.122.0&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Hugo Release&lt;/a&gt;的下载页面，下载对应的&lt;strong&gt;Hugo-extended&lt;/strong&gt;版本的deb包(&lt;strong&gt;注意！！！一定要安装hugo-extended版本，否则有些主题会出现不支持的问题&lt;/strong&gt;)&lt;/li&gt;
+    &gt;Hugo Release
+&lt;span style=&#34;white-space: nowrap;&#34;&gt;&lt;svg width=&#34;.7em&#34;
+    height=&#34;.7em&#34; viewBox=&#34;0 0 21 21&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+    &lt;path d=&#34;m13 3l3.293 3.293l-7 7l1.414 1.414l7-7L21 11V3z&#34; fill=&#34;currentColor&#34; /&gt;
+    &lt;path d=&#34;M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z&#34;
+        fill=&#34;currentColor&#34;&gt;
+&lt;/svg&gt;&lt;/span&gt;
+
+&lt;/a&gt;的下载页面，下载对应的&lt;strong&gt;Hugo-extended&lt;/strong&gt;版本的deb包(&lt;strong&gt;注意！！！一定要安装hugo-extended版本，否则有些主题会出现不支持的问题&lt;/strong&gt;)&lt;/li&gt;
 &lt;li&gt;输入以下命令进行安装和验证&lt;/li&gt;
 &lt;/ol&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
