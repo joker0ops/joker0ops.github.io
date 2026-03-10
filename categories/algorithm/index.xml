@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Algorithm on 木木龙的个人博客</title>
+        <link>https://joker0ops.github.io/categories/algorithm/</link>
+        <description>Recent content in Algorithm on 木木龙的个人博客</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>木木龙的个人博客. 引用请注明文章链接哦~</copyright>
+        <lastBuildDate>Thu, 19 Feb 2026 22:33:44 +0800</lastBuildDate><atom:link href="https://joker0ops.github.io/categories/algorithm/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>算法笔记——回溯算法基本原理</title>
+        <link>https://joker0ops.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/</link>
+        <pubDate>Thu, 19 Feb 2026 22:33:44 +0800</pubDate>
+        
+        <guid>https://joker0ops.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/</guid>
+        <description>&lt;img src="https://joker0ops.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/front_picture.jpg" alt="Featured image of post 算法笔记——回溯算法基本原理" /&gt;&lt;h2 id=&#34;什么是回溯算法&#34;&gt;什么是回溯算法&lt;/h2&gt;
+&lt;p&gt;回溯法也称回溯搜索法，它是一种搜索的方式。在递归中我们常听到回溯这个操作，其实回溯就是递归中的一个子过程，只要有递归就会有回溯。回溯法并不是什么高效的算法，而是对于一些暴力算法都无法解决的问题，就必须使用回溯法对所有可能的结果进行穷举。因此，回溯算法本身的效率是不高的，顶多使用剪枝对其一些不必要的子过程进行修剪。&lt;/p&gt;
+&lt;h2 id=&#34;回溯算法能够解决的问题&#34;&gt;回溯算法能够解决的问题&lt;/h2&gt;
+&lt;p&gt;一般来说，主要使用回溯算法解决如下几类问题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;组合问题：N个元素中按一定规则找出K个元素的集合（不考虑顺序）&lt;/li&gt;
+&lt;li&gt;切割问题：一个字符串按一定规则有多少种切割的方式&lt;/li&gt;
+&lt;li&gt;子集问题：一个N个元素的集合有多少符合条件的子集（不考虑顺序）&lt;/li&gt;
+&lt;li&gt;排列问题：N个元素按一定规则全排列，有几种排列方式（考虑顺序）&lt;/li&gt;
+&lt;li&gt;棋盘问题：N皇后，解数独等等
+由此可知，回溯法解决的问题都可以抽象为树形结构。因为回溯法解决的都是在集合中递归查找子集，集合的大小就构成了树的宽度，递归的深度，都构成的树的深度。而递归就要有终止条件，所以必然是⼀棵高度有限的树（N叉树）。
+&lt;img src=&#34;https://joker0ops.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/image.png&#34;
+	width=&#34;1558&#34;
+	height=&#34;736&#34;
+	srcset=&#34;https://joker0ops.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/image_huc110365460839a8b3d70e25a7a15487f_138943_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/image_huc110365460839a8b3d70e25a7a15487f_138943_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;alt text&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;211&#34;
+		data-flex-basis=&#34;508px&#34;
+	
+&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;回溯算法模板&#34;&gt;回溯算法模板&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;back_tracking&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;参数&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;终⽌条件&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;err&#34;&gt;存放结果&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;选择：本层集合中元素（树中节点孩⼦的数量就是集合的⼤⼩）&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;err&#34;&gt;处理节点&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;backtracking&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;路径，选择列表&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 递归
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;err&#34;&gt;回溯，撤销处理结果&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;在回溯算法中一般包含两个主要模块，首先是当回溯算法搜索到叶子结点时，就找到了满足条件的一个答案，需要把这个答案存放起来结束本层递归。其次，在前文中提到集合的大小决定了树的宽度。因此for循环就是在遍历当前集合中有多少个子集合（子结点）。后面将结合具体题目对以上模板进行详细解释。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>算法笔记——二叉树基础理论</title>
+        <link>https://joker0ops.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA/</link>
+        <pubDate>Thu, 19 Feb 2026 11:29:33 +0800</pubDate>
+        
+        <guid>https://joker0ops.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA/</guid>
+        <description>&lt;img src="https://joker0ops.github.io/p/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA/83.jpg" alt="Featured image of post 算法笔记——二叉树基础理论" /&gt;&lt;h2 id=&#34;二叉树的种类&#34;&gt;二叉树的种类&lt;/h2&gt;
+&lt;p&gt;从结构上来说，二叉树主要分为完全二叉树和非完全二叉树，其中以完全二叉树的应用最为广泛。&lt;/p&gt;
+&lt;h3 id=&#34;满二叉树&#34;&gt;满二叉树&lt;/h3&gt;
+&lt;p&gt;满二叉树是指除最后一层无任何子结点外，每一层上的所有结点都有两个子结点的二叉树。若满二叉树的高度（深度）为K，则它的结点总数一定是$2^{k}-1$，这个原理也可以用于证明一棵二叉树是否是满二叉树。国际上的定义为：若一棵二叉树的结点要么是叶子结点，要么有两个子结点，那么这样的树就是满二叉树。如下图所示可看出国内对满二叉树的定义和国际版本的不同，在国际版本的定义中，霍夫曼树仍然是一个满二叉树，但是这却不符合国内的定义。&lt;/p&gt;
+&lt;pre class=&#34;mermaid&#34; style=&#34;text-align:center; margin: 0 auto; width: auto;&#34;&gt;
+graph TD
+    %% 第一个子图：国内定义的满二叉树
+    subgraph 国内定义的满二叉树
+        A((1))
+        A --&gt; B((2))
+        A --&gt; C((3))
+        B --&gt; D((4))
+        B --&gt; E((5))
+        C --&gt; F((6))
+        C --&gt; G((7))
+    end
+    %% 第二个子图：国际标准的满二叉树
+    subgraph 国际标准的满二叉树
+        A1((1))
+        A1 --&gt; B1((2))
+        A1 --&gt; C1((3))
+        C1 --&gt; F1((4))
+        C1 --&gt; G1((5))
+        G1 --&gt; H1((6))
+        G1 --&gt; I1((7))
+    end
+&lt;/pre&gt;
+&lt;h3 id=&#34;完全二叉树&#34;&gt;完全二叉树&lt;/h3&gt;
+&lt;p&gt;完全二叉树（Complete Binary Tree）是指深度为k、有n个结点的二叉树，其结点编号与相同深度的满二叉树对应位置一致，是效率极高的一种数据结构。满二叉树每一层的结点数达到最大值时即为完全二叉树的特殊形态。完全二叉树的叶子结点仅出现在最下层和次下层，且最下层叶子结点连续出现在最下层左部。具有n个结点的完全二叉树的深度为${\lfloor\log_{2}n\rfloor+1}$（其中$\lfloor\rfloor$表示向下取整）&lt;/p&gt;
+&lt;pre class=&#34;mermaid&#34; style=&#34;text-align:center; margin: 0 auto; width: auto;&#34;&gt;
+graph TD
+    A((1))
+    A --&gt; B((2))
+    A --&gt; C((3))
+    
+    B --&gt; D((4))
+    B --&gt; E((5))
+    C --&gt; F((6))
+    C --&gt; G((7))
+    
+    D --&gt; H((8))
+    D --&gt; I((9))
+&lt;/pre&gt;
+&lt;h3 id=&#34;搜索二叉树&#34;&gt;搜索二叉树&lt;/h3&gt;
+&lt;p&gt;搜索二叉树是一种在递归结构上满足结点值从小到大的二叉树。即对于搜索二叉树的任意一个子树，其节点值均满足左子树的所有结点小于当前结点，而右子树的所有节点大于当前结点。搜索二叉树的平均搜索时间复杂度和平均插入删除时间复杂度都是O(logn)。但是搜索二叉树容易在构造过程中出现右子树过长的情况变成链表，此时搜索和插入删除的时间复杂度就会达到O(n)，因此需要重新调整搜索二叉树的结构，使其左右子树高度&amp;quot;平衡&amp;quot;。&lt;/p&gt;
+&lt;pre class=&#34;mermaid&#34; style=&#34;text-align:center; margin: 0 auto; width: auto;&#34;&gt;
+graph TD
+    subgraph 平衡的搜索二叉树
+        A((4))
+        A --&gt; B((6))
+        A --&gt; C((2))
+        B --&gt; D((7))
+        B --&gt; E((5))
+        C --&gt; F((3))
+        C --&gt; G((1))
+    end
+
+    subgraph 不平衡的搜索二叉树
+        A1((1))
+        A1 --&gt; B1((2))
+        B1 --&gt; C1((3))
+        C1 --&gt; D1((4))
+        D1 --&gt; F1((5))
+    end
+&lt;/pre&gt;
+&lt;h3 id=&#34;平衡搜索二叉树&#34;&gt;平衡搜索二叉树&lt;/h3&gt;
+&lt;p&gt;平衡二叉搜索树又被称为AVL（Adelson-Velsky and Landis）树，且具有以下性质：它是⼀棵空树或它的左右两
+个⼦树的⾼度差的绝对值不超过1，并且左右两个⼦树都是⼀棵平衡⼆叉树。在C++中，map、set、multiset、multimap的底层数据结构是红黑树（一种特殊的自平衡二叉树&amp;lt;并非严格平衡&amp;gt;）、而unordered系列的容器底层数据结构是哈希表。基于红黑树构造的STL容器是有序的且操作效率稳定，而基于哈希表构造的STL容器是无序的，并且使用拉链法解决哈希冲突，其访问效率更高。&lt;/p&gt;
+&lt;h2 id=&#34;二叉树的存储方式&#34;&gt;二叉树的存储方式&lt;/h2&gt;
+&lt;p&gt;二叉树的存储方式分为链式存储和顺序存储两种，链式存储方式通过递归或迭代地访问当前结点的left和right指针对二叉树进行遍历。而顺序存储往往无法对二叉树的结构进行直观的判断，在操作时需要提前知道二叉树的结点关系，常用于存储完全二叉树（其实也不太常用）。目前最常用的二叉树存储方式还是链式存储，这种方式虽然不能做到对结点的随机存取，但是可以直观地显示当前结点的左右子树，并且方便结点的添加和删除。&lt;/p&gt;
+&lt;h2 id=&#34;二叉树的遍历&#34;&gt;二叉树的遍历&lt;/h2&gt;
+&lt;p&gt;对于使用顺序存储方式存储的二叉树，若父结点的下标是i，那么其左孩子的下标就是2i+1，右孩子的下标就是2i+2。对于链式存储的二叉树，其遍历方式主要分为深度优先遍历（DFS）和广度优先遍历（BFS）两种。其中，深度优先遍历又可分为前序遍历（根左右）、中序遍历（左根右）和后序遍历（左右根），这三种遍历方式常使用递归或迭代的方式结合栈来实现。而广度优先遍历又称层序遍历，常使用迭代的方式结合队列实现。&lt;/p&gt;
+&lt;h2 id=&#34;二叉树定义&#34;&gt;二叉树定义&lt;/h2&gt;
+&lt;p&gt;一般情况下不会使用顺序存储方式定义二叉树，此处只给出C++版本的链式存储方式的二叉树定义：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;TreeNode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;val&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;TreeNode&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;left&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;TreeNode&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;right&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;TreeNode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;val&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;left&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;nullptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;right&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;nullptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;TreeNode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;num&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;val&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;num&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;left&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;nullptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;right&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;nullptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+        </item>
+        
+    </channel>
+</rss>

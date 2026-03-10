@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>技术分享 on 木木龙的个人博客</title>
+        <link>https://joker0ops.github.io/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/</link>
+        <description>Recent content in 技术分享 on 木木龙的个人博客</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>木木龙的个人博客. 引用请注明文章链接哦~</copyright>
+        <lastBuildDate>Sun, 01 Mar 2026 12:48:31 +0800</lastBuildDate><atom:link href="https://joker0ops.github.io/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>MCP原理到实战——基础篇</title>
+        <link>https://joker0ops.github.io/p/mcp%E5%8E%9F%E7%90%86%E5%88%B0%E5%AE%9E%E6%88%98%E5%9F%BA%E7%A1%80%E7%AF%87/</link>
+        <pubDate>Sun, 01 Mar 2026 12:48:31 +0800</pubDate>
+        
+        <guid>https://joker0ops.github.io/p/mcp%E5%8E%9F%E7%90%86%E5%88%B0%E5%AE%9E%E6%88%98%E5%9F%BA%E7%A1%80%E7%AF%87/</guid>
+        <description>&lt;img src="https://joker0ops.github.io/p/mcp%E5%8E%9F%E7%90%86%E5%88%B0%E5%AE%9E%E6%88%98%E5%9F%BA%E7%A1%80%E7%AF%87/YaeMiko&amp;RaidenShugen.jpg" alt="Featured image of post MCP原理到实战——基础篇" /&gt;</description>
+        </item>
+        <item>
+        <title>IPython与Jupyter的使用</title>
+        <link>https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+        <pubDate>Fri, 22 Mar 2024 22:04:01 +0800</pubDate>
+        
+        <guid>https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+        <description>&lt;img src="https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/10.jpg" alt="Featured image of post IPython与Jupyter的使用" /&gt;&lt;h1 id=&#34;ipython与jupiter是什么&#34;&gt;IPython与Jupiter是什么？&lt;/h1&gt;
+&lt;p&gt;IPython是Python的一个交互式解释器，可以提供交互式命令行，支持自动补全、历史记录等功能。Jupyter是IPython的一个扩展，可以提供交互式命令行、Markdown文档、代码块等功能。当你使用%run命令时，IPython会在同一个进程内执行指定文件中的代码，确保你能够在执行完成时立即探索结果。
+&lt;img src=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython01.png&#34;
+	width=&#34;979&#34;
+	height=&#34;511&#34;
+	srcset=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython01_huec1346ff16f088a1c9bb1cd0467e5677_16073_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython01_huec1346ff16f088a1c9bb1cd0467e5677_16073_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;191&#34;
+		data-flex-basis=&#34;459px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;ipython的使用&#34;&gt;IPython的使用&lt;/h2&gt;
+&lt;h3 id=&#34;启动ipython&#34;&gt;启动IPython&lt;/h3&gt;
+&lt;p&gt;像启动标准Python解释器一样，你可以ipython命令启动IPython命令行。
+&lt;img src=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython02.png&#34;
+	width=&#34;979&#34;
+	height=&#34;511&#34;
+	srcset=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython02_hu7072543c0c8b562782fa441533c8ee93_18334_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython02_hu7072543c0c8b562782fa441533c8ee93_18334_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;191&#34;
+		data-flex-basis=&#34;459px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;ipython的交互式命令行&#34;&gt;IPython的交互式命令行&lt;/h3&gt;
+&lt;p&gt;你可以将Python语句输入命令行，然后按下回车键运行。当你在IPython命令行中仅仅输入一个变量名后，它会返回一个表示该对象的字符串：
+&lt;img src=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython03.png&#34;
+	width=&#34;769&#34;
+	height=&#34;188&#34;
+	srcset=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython03_hu9ee9c0e91171cfd25b017fcad1594b89_19730_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/IPython03_hu9ee9c0e91171cfd25b017fcad1594b89_19730_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;409&#34;
+		data-flex-basis=&#34;981px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;ipython输出风格&#34;&gt;IPython输出风格&lt;/h3&gt;
+&lt;p&gt;与常见的print打印语句不同，IPython会将输出格式化为一个更易读的格式。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Python&#34; data-lang=&#34;Python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;numpy&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;np&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;np&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;random&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;randn&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.4046457180241955&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;2.27136111318475&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;1.7273107463935018&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;1.364839504945707&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;1.957277837917039&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     &lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.5369751270845555&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     &lt;span class=&#34;mi&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;0.9250198022472945&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;ipython的tab补全功能&#34;&gt;IPython的Tab补全功能&lt;/h3&gt;
+&lt;p&gt;相较于标准Python命令行，IPython增添了Tab补全功能。通常这种功能只在IDE或者其他交互式计算分析环境中提供。当在命令行中输入一个表达式时，按下Tab键可以自动搜索能够匹配当前表达式的&lt;strong&gt;自定义变量、关键字、内建函数、方法、属性、名称、关键字参数&lt;/strong&gt;等。另外需要导入的模块也可以通过相同的方式进行补全。并且在新版的IPython中，自动补全是在下拉列表中进行的，需要在补全列表中选择一个选项，然后按回车键执行。&lt;br&gt;
+&lt;kbd&gt; 请注意IPython默认情况下隐藏了以下划线开始的方法和属性，诸如魔术方法，内部“私有”方法和属性以防止新手混淆，这些属性必须先输入下划线才可以看到&lt;/kbd&gt;&lt;br&gt;
+此外，Tab补全功能还可以用于对计算机文件系统的搜索，当输入任意路径（甚至是Python字符串）时，按下Tab键可以自动补全文件和目录名。这与%run命令搭配使用能够节省大量的输入时间（%run + Tab补全文件路径）。&lt;/p&gt;
+&lt;h3 id=&#34;内省&#34;&gt;内省&lt;/h3&gt;
+&lt;p&gt;在一个变量名前后使用问号(?)可以显示一些关于该对象的概要信息：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Python&#34; data-lang=&#34;Python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;array&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;?&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_03.png&#34;
+	width=&#34;1920&#34;
+	height=&#34;880&#34;
+	srcset=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_03_hue97b7933a90e36455e70786400928036_46631_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_03_hue97b7933a90e36455e70786400928036_46631_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;218&#34;
+		data-flex-basis=&#34;523px&#34;
+	
+&gt;
+这就是对象内省。如果对象是一个函数或实例方法且文档字符串已经写好，则文档字符串就会显示出来。例如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Python&#34; data-lang=&#34;Python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;exchange_numbers&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;    Exchange two numbers without a temp variable
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;    Returns
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;    --------
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;    b, a
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;    &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;然后使用?显示对象的完整文档字符串：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Python&#34; data-lang=&#34;Python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;exchange_numbers&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;?&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_01.png&#34;
+	width=&#34;1920&#34;
+	height=&#34;880&#34;
+	srcset=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_01_hu818e7a13ad335ca326b9179cc658fd35_52967_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_01_hu818e7a13ad335ca326b9179cc658fd35_52967_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;218&#34;
+		data-flex-basis=&#34;523px&#34;
+	
+&gt;
+使用双问号??可以显示函数源代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;exchange_numbers&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;??&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_02.png&#34;
+	width=&#34;1920&#34;
+	height=&#34;880&#34;
+	srcset=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_02_hucd8dc3fe5e6a0819245f28b98cd564d4_47765_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_02_hucd8dc3fe5e6a0819245f28b98cd564d4_47765_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;218&#34;
+		data-flex-basis=&#34;523px&#34;
+	
+&gt;
+此外?操作符还有一个终极用途，可以结合通配符*使用，例如我们可以得到Numpy顶层函数中包含load的函数名列表：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;np&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;load&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;?&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;np&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;__loader__&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;np&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;load&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;np&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;loads&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;np&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;loadtxt&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;np&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pkgload&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;run命令&#34;&gt;%run命令&lt;/h3&gt;
+&lt;p&gt;在Juypter中可以使用&lt;kbd&gt;%run&lt;/kbd&gt;命令运行任意的Python程序文件，并且Jupyter提供了良好的用户输入接口。&lt;/p&gt;
+&lt;p&gt;在&lt;kbd&gt;%run FileName.py&lt;/kbd&gt;这行命令中，脚本是在一个独立的空白命名空间中运行的，之前导入的模块或定义的变量对其不会造成影响。（类似于在一个单独的命令行中执行&lt;kbd&gt;python FileName.py&lt;/kbd&gt;）。&lt;/p&gt;
+&lt;p&gt;在程序执行期间，按下&lt;kbd&gt;Ctrl+C&lt;/kbd&gt;可以中断程序。除了某些特殊情况，这将导致所有的Python程序立即停止运行。但需要注意的是，当一段Python代码被其他已经编译的扩展模块调用时，按下&lt;kbd&gt;Ctrl+C&lt;/kbd&gt;将不会中断程序。在这些情况下，你需要等到控制流重新返回Python解释器，甚至有时还需要强制结束Python进程。&lt;/p&gt;
+&lt;h3 id=&#34;关于魔术命令&#34;&gt;关于魔术命令&lt;/h3&gt;
+&lt;p&gt;IPython中存在一些特殊的内置命令称为魔术命令，它们以%开头，用于简化常见任务。例如：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;指令&lt;/th&gt;
+&lt;th&gt;功能&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;%time statement&lt;/td&gt;
+&lt;td&gt;命令可以测量一段代码的执行时间&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;%timeit statement&lt;/td&gt;
+&lt;td&gt;命令多次运行单个语句计算平均时间&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;%pwd&lt;/td&gt;
+&lt;td&gt;命令可以显示当前工作目录&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;%cd&lt;/td&gt;
+&lt;td&gt;命令可以改变当前工作目录&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;%ls&lt;/td&gt;
+&lt;td&gt;命令可以列出当前工作目录下的文件&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;%matplotlib&lt;/td&gt;
+&lt;td&gt;命令可以启用matplotlib绘图功能&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;%edit&lt;/td&gt;
+&lt;td&gt;命令可以打开一个Python程序文件的编辑器&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;%debug&lt;/td&gt;
+&lt;td&gt;命令可以启动调试器&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;%hist&lt;/td&gt;
+&lt;td&gt;命令可以显示命令历史记录&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;%pdb&lt;/td&gt;
+&lt;td&gt;命令可以启用Python调试器&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;%who, %who_ls, %whos&lt;/td&gt;
+&lt;td&gt;命令可以显示当前工作空间中的变量&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;%quickref&lt;/td&gt;
+&lt;td&gt;命令可以打开一个快速参考手册&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;%magic&lt;/td&gt;
+&lt;td&gt;命令可以列出所有魔术命令的详细文档&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;%paste&lt;/td&gt;
+&lt;td&gt;命令可以从剪贴板中执行已经预先格式化的Python代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;%cpaste&lt;/td&gt;
+&lt;td&gt;命令可以打开一个特殊提示符，然后手动粘贴待执行的Python代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;%reset&lt;/td&gt;
+&lt;td&gt;命令可以重置当前工作空间，删除当前工作空间中的所有变量和函数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;%page OBJECT&lt;/td&gt;
+&lt;td&gt;通过分页器更美观地打印显示一个对象&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;%xdel variable&lt;/td&gt;
+&lt;td&gt;命令可以删除一个变量并清除相关的引用&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Tips:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;魔术命令可以看作IPython系统内部的命令行程序，大多数魔术命令都可以在其后追加?操作符来显示更加详细的文档&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;In&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]:&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;time&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;?&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;只要没有变量定义为与魔术命令相同的名字，魔术命令即可不加%使用，这种特性可以通过%automagic命令来启用或禁用&lt;/li&gt;
+&lt;li&gt;一些魔术命令（例如%pwd）也像Python函数一样，其输出可以赋值给一个变量。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;In&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pwd&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pwd&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;In&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pwd&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;matplotlib集成&#34;&gt;matplotlib集成&lt;/h3&gt;
+&lt;p&gt;IPython良好得集成了matplotlib，在IPython中，运行%matplotlib命令可以生成多个绘图窗口而不会干扰控制台的会话。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;In&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]:&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;matplotlib&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;In&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]:&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;plt&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;In&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]:&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;numpy&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;np&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;In&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;plt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;plot&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;np&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;random&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;randn&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;50&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cumsum&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;k--&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;在Jupyter中，命令会有所不同：
+&lt;img src=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_04.png&#34;
+	width=&#34;1141&#34;
+	height=&#34;593&#34;
+	srcset=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_04_hu33b12d9252e36f4cf9c967bb9611b149_103072_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_04_hu33b12d9252e36f4cf9c967bb9611b149_103072_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;192&#34;
+		data-flex-basis=&#34;461px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;jupyter的使用&#34;&gt;Jupyter的使用&lt;/h2&gt;
+&lt;p&gt;Jupyter是一个基于Web的交互式计算分析环境，可以运行多种数据分析语言。一般安装Anaconda时，已经安装了Jupyter。
+在使用Jupyter时，需要打开命令行输入jupyter notebook命令，然后打开浏览器访问localhost:8888。一般情况下，Jupyter会自动打开一个浏览器窗口（除非你使用了 &amp;ndash;no-browser 选项）同时，你可以在jupyter notebook命令后面追加目录来指定Jupyter的默认打开地址。
+&lt;img src=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_05.png&#34;
+	width=&#34;978&#34;
+	height=&#34;511&#34;
+	srcset=&#34;https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_05_hu2d26dcd763840aef4e52c93416ec1892_257104_480x0_resize_box_3.png 480w, https://joker0ops.github.io/p/ipython%E4%B8%8Ejupyter%E7%9A%84%E4%BD%BF%E7%94%A8/jupyter_05_hu2d26dcd763840aef4e52c93416ec1892_257104_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Picture&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;191&#34;
+		data-flex-basis=&#34;459px&#34;
+	
+&gt;&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
